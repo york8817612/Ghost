@@ -1,0 +1,12 @@
+D:\新增資料夾\Ghost\Server\MessageServer\obj\Debug\MessageServer.csprojResolveAssemblyReference.cache
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\MessageServer.exe.config
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\MessageServer.exe
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\MessageServer.pdb
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\Common.dll
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\MySql.Data.dll
+D:\新增資料夾\Ghost\Server\MessageServer\bin\Debug\Common.pdb
+D:\新增資料夾\Ghost\Server\MessageServer\obj\Debug\MessageServer.exe
+D:\新增資料夾\Ghost\Server\MessageServer\obj\Debug\MessageServer.pdb
+D:\新增資料夾\Ghost\Server\bin\Debug\MessageServer.exe.config
+D:\新增資料夾\Ghost\Server\bin\Debug\MessageServer.exe
+D:\新增資料夾\Ghost\Server\bin\Debug\MessageServer.pdb
