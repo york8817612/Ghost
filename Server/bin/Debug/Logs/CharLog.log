@@ -11,3 +11,13 @@
    於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
    於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
 2016/4/15 上午 03:16:16 Warning: Server stopped.
+2016/4/16 上午 01:04:47 Char Server v.10.10
+2016/4/16 上午 01:06:12 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 上午 01:06:12 Warning: Server stopped.
+2016/4/16 上午 01:07:25 Char Server v.10.10
+2016/4/16 上午 01:08:22 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 上午 01:08:22 Warning: Server stopped.

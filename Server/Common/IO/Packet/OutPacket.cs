@@ -53,6 +53,14 @@ namespace Server.Common.IO.Packet
             this._disposed = false;
         }
 
+        public OutPacket(byte operationCode, int size = OutPacket.DefaultBufferSize)
+            : this(size)
+        {
+            this.OperationCode = operationCode;
+
+            this.WriteByte(operationCode);
+        }
+
         public OutPacket(ushort operationCode, int size = OutPacket.DefaultBufferSize)
             : this(size)
         {
@@ -62,6 +70,7 @@ namespace Server.Common.IO.Packet
         }
 
         public OutPacket(ServerMessage operationCode) : this((ushort)operationCode) { }
+        public OutPacket(LoginServerMessage operationCode) : this((byte)operationCode) { }
         public OutPacket(InteroperabilityMessage operationCode) : this((ushort)operationCode) { }
 
         private void Append(long value, int count)

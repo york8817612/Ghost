@@ -1,0 +1,7 @@
+D:\新增資料夾\Ghost\Server\GameServer\obj\Debug\GameServer.csprojResolveAssemblyReference.cache
+G:\搞鬼私服\Ghost\Server\GameServer\obj\Debug\GameServer.csprojResolveAssemblyReference.cache
+G:\搞鬼私服\Ghost\Server\bin\Debug\GameServer.exe.config
+G:\搞鬼私服\Ghost\Server\bin\Debug\GameServer.exe
+G:\搞鬼私服\Ghost\Server\bin\Debug\GameServer.pdb
+G:\搞鬼私服\Ghost\Server\GameServer\obj\Debug\GameServer.exe
+G:\搞鬼私服\Ghost\Server\GameServer\obj\Debug\GameServer.pdb

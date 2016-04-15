@@ -9,13 +9,13 @@ namespace Server.Net
         /* NetCafe
          * 會員於特約網咖連線
          */
-        public static void Login_Ack(Client c, ServerState.LoginState state, bool NetCafe)
+        public static void Login_Ack(Client c, ServerState.LoginState state, short key = 0, bool NetCafe = false)
         {
-            using (var plew = new OutPacket(ServerMessage.LOGIN_ACK))
+            using (var plew = new OutPacket(LoginServerMessage.LOGIN_ACK))
             {
-                plew.WriteByte((byte) state);
+                plew.WriteByte((byte)state);
                 plew.WriteBool(NetCafe);
-                plew.WriteShort(0);
+                plew.WriteShort(key);
 
                 c.Send(plew);
             }
@@ -23,15 +23,15 @@ namespace Server.Net
 
         public static void ServerList_Ack(Client c)
         {
-            using (var plew = new OutPacket(ServerMessage.SERVERLIST_ACK))
+            using (var plew = new OutPacket(LoginServerMessage.SERVERLIST_ACK))
             {
+                for (int i = 0; i < 13; i++)
+                {
+                    plew.WriteByte(0xFF);
+                }
+                plew.WriteInt(LoginServer.Worlds.Count); // 伺服器數量
                 foreach (World world in LoginServer.Worlds)
                 {
-                    for (int i = 0; i < 13; i++)
-                    {
-                        plew.WriteByte(0xFF);
-                    }
-                    plew.WriteInt(LoginServer.Worlds.Count); // 伺服器數量
                     plew.WriteShort(world.ID); // 伺服器順序
                     plew.WriteInt(world.Games); // 頻道數量
 
@@ -46,24 +46,11 @@ namespace Server.Net
                         plew.WriteInt(14101 + game.ExternalID);
                         plew.WriteInt(game.LoadProportionPool.Count); // 玩家數量
                         plew.WriteInt(1200); // 頻道人數上限
-                        plew.WriteInt((int) world.Flag); // 標章類型
+                        plew.WriteInt(12); // 標章類型
                         plew.WriteInt(0);
-                        plew.WriteByte((byte)(game.LoadProportionPool.Count != 0 ? 1 : 2));
-                        plew.WriteInt(14199);
+                        plew.WriteByte(1);
+                        plew.WriteInt(15199);
                         id++;
-                        if (id < 18)
-                        {
-                            plew.WriteShort((short)(id + 1));
-                            plew.WriteShort((short)(id + 1));
-                            plew.WriteString("127.0.0.1");
-                            plew.WriteInt(14101 + (id + 1));
-                            plew.WriteInt(1); // 玩家數量
-                            plew.WriteInt(1200); // 頻道人數上限
-                            plew.WriteInt((int)world.Flag); // 標章類型
-                            plew.WriteInt(0);
-                            plew.WriteByte((byte) 2);
-                            plew.WriteInt(14199);
-                        }
                     }
                 }
 
@@ -73,12 +60,12 @@ namespace Server.Net
 
         public static void Game_Ack(Client c, ServerState.ChannelState state)
         {
-            using (var plew = new OutPacket(ServerMessage.GAME_ACK))
+            using (var plew = new OutPacket(LoginServerMessage.GAME_ACK))
             {
                 plew.WriteByte((byte)state);
                 plew.WriteString("127.0.0.1");
                 plew.WriteInt(14101 + c.World.ID);
-                plew.WriteInt(14199);
+                plew.WriteInt(15199);
 
                 c.Send(plew);
             }

@@ -53,6 +53,7 @@
     <Compile Include="Data\Datum.cs" />
     <Compile Include="Data\Meta.cs" />
     <Compile Include="Data\RowNotUniqueException.cs" />
+    <Compile Include="IO\HackException.cs" />
     <Compile Include="IO\Log.cs" />
     <Compile Include="IO\LogLevel.cs" />
     <Compile Include="IO\Packet\InPacket.cs" />

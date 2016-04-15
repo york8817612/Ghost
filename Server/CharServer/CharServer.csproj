@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\Character.cs" />
-    <Compile Include="Characters\HackException.cs" />
     <Compile Include="CharServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Net\Client.cs" />

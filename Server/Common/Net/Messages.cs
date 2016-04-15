@@ -37,13 +37,16 @@ namespace Server.Common.Net
         WhisperFindResult
     }
 
-    public enum ClientMessage : ushort
+    public enum LoginClientMessage : byte
     {
-        // Login
-        LOGIN_SERVER = 0x55AA,
         LOGIN_REQ = 0x30,
         SERVERLIST_REQ = 0x32,
-        GAME_REQ = 0x34,
+        GAME_REQ = 0x34
+    }
+
+    public enum ClientMessage : ushort
+    {
+        LOGIN_SERVER = 0x55AA,
 
         // Char
         MYCHAR_INFO_REQ = 0x8,
@@ -52,13 +55,16 @@ namespace Server.Common.Net
         DELETE_MYCHAR_REQ = 0xE
     }
 
-    public enum ServerMessage : ushort
+    public enum LoginServerMessage : byte
     {
         // Login
         LOGIN_ACK = 0x31,
         SERVERLIST_ACK = 0x33,
         GAME_ACK = 0x35,
+    }
 
+    public enum ServerMessage : ushort
+    {
         // Char
         MYCHAR_INFO_ACK = 0x9,
         CREATE_MYCHAR_ACK = 0xB,

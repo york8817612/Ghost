@@ -10,3 +10,9 @@ D:\新增資料夾\Ghost\Server\LoginServer\obj\Debug\LoginServer.pdb
 D:\新增資料夾\Ghost\Server\bin\Debug\LoginServer.exe.config
 D:\新增資料夾\Ghost\Server\bin\Debug\LoginServer.exe
 D:\新增資料夾\Ghost\Server\bin\Debug\LoginServer.pdb
+G:\搞鬼私服\Ghost\Server\bin\Debug\LoginServer.exe.config
+G:\搞鬼私服\Ghost\Server\LoginServer\obj\Debug\LoginServer.exe
+G:\搞鬼私服\Ghost\Server\LoginServer\obj\Debug\LoginServer.pdb
+G:\搞鬼私服\Ghost\Server\LoginServer\obj\Debug\LoginServer.csprojResolveAssemblyReference.cache
+G:\搞鬼私服\Ghost\Server\bin\Debug\LoginServer.exe
+G:\搞鬼私服\Ghost\Server\bin\Debug\LoginServer.pdb

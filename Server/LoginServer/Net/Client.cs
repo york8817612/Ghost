@@ -73,22 +73,22 @@ namespace Server.Net
         {
             try
             {
-                if (inPacket.OperationCode == (ushort) ClientMessage.LOGIN_SERVER)
+                if (inPacket.OperationCode == (ushort)ClientMessage.LOGIN_SERVER)
                 {
                     inPacket.ReadUShort(); // 原始長度
                     var hand = inPacket.ReadByte(); // 讀取包頭
 
                     Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, hand, this.Title);
 
-                    switch ((ClientMessage)hand)
+                    switch ((LoginClientMessage)hand)
                     {
-                        case ClientMessage.LOGIN_REQ:
+                        case LoginClientMessage.LOGIN_REQ:
                             LoginHandler.Login_Req(inPacket, this);
                             break;
-                        case ClientMessage.SERVERLIST_REQ:
+                        case LoginClientMessage.SERVERLIST_REQ:
                             LoginHandler.ServerList_Req(inPacket, this);
                             break;
-                        case ClientMessage.GAME_REQ:
+                        case LoginClientMessage.GAME_REQ:
                             LoginHandler.Game_Req(inPacket, this);
                             break;
                     }

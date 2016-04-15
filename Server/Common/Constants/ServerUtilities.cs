@@ -57,6 +57,15 @@ namespace Server.Common.Constants
             }
         }
 
+        public enum HackAction : byte
+        {
+            None,
+            Disconnection,
+            ThirthyDays,
+            NinetyDays,
+            Permanent
+        }
+
         public enum ServerType
         {
             Login,
