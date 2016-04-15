@@ -23,7 +23,6 @@ namespace Server.Accounts
         public int Banned { get; set; }
         public int Master { get; set; }
         public int CashPoint { get; set; }
-        public string HWID { get; set; }
 
         private bool Assigned { get; set; }
 
@@ -90,19 +89,6 @@ namespace Server.Accounts
             }
 
             Log.Inform("Saved account '{0}' to database.", this.Username);
-        }
-
-        public void SaveHWID()
-        {
-            dynamic datum = new Datum("hwids");
-
-            datum.AccountID = this.ID;
-            datum.HWID = this.HWID;
-
-            if (!Database.Exists("hwids", "AccountID = '{0}' AND HWID = '{1}'", this.ID, this.HWID))
-            {
-                datum.Insert();
-            }
         }
     }
 }

@@ -1,1 +1,5 @@
 ﻿2016/4/14 下午 07:36:58 Message Server v.10.10
+2016/4/14 下午 10:04:45 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/14 下午 10:04:45 Warning: Server stopped.

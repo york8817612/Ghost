@@ -114,24 +114,24 @@ namespace Server.Common.Net
         {
             while (m_offset >= 4 && m_disposed == false)
             {
-                int size = 0;//MapleAes.GetLength(m_buffer);
+                int size = m_offset;//MapleAes.GetLength(m_buffer);
 
-                if (m_offset < size + 4)
+                if (m_offset > 262144)
                 {
                     break;
                 }
 
                 var packetBuffer = new byte[size];
-                Buffer.BlockCopy(m_buffer, 4, packetBuffer, 0, size);
+                Buffer.BlockCopy(m_buffer, 0, packetBuffer, 0, size);
 
                 //MapleAes.Transform(packetBuffer, m_riv);
 
-                m_offset -= size + 4;
+                m_offset = 0;
 
-                if (m_offset > 0)
+                /*if (m_offset > 0)
                 {
                     Buffer.BlockCopy(m_buffer, size + 4, m_buffer, 0, m_offset);
-                }
+                }*/
 
                 this.Dispatch(new InPacket(packetBuffer));
             }
@@ -149,14 +149,27 @@ namespace Server.Common.Net
                     return;
 
                 byte[] packet = outPacket.Content;
-                byte[] final = new byte[packet.Length + 4];
+                //byte[] final = new byte[packet.Length + 4];
+
+                var ret = new byte[packet.Length + 6];
+                if (m_socket.LocalEndPoint.ToString().Split(':')[1] == "14001")
+                {
+                    var header = new byte[4] { 0xAA, 0x55, (byte)(packet.Length & 0xFF), (byte)((packet.Length >> 8) & 0xFF) };
+                    Buffer.BlockCopy(header, 0, ret, 0, 4); // copy header to ret
+                    Buffer.BlockCopy(packet, 0, ret, 4, packet.Length); // copy packet to ret
+                    Buffer.BlockCopy(new byte[2] { 0x55, 0xAA }, 0, ret, packet.Length + 4, 2); // copy end to ret
+                }
+                else
+                {
+                    Buffer.BlockCopy(packet, 0, ret, 0, packet.Length); // copy end to ret
+                }
 
                 //MapleAes.GetHeader(final, m_siv, Constants.Version.Major);
                 //MapleAes.Transform(packet, m_siv);
 
-                Buffer.BlockCopy(packet, 0, final, 4, packet.Length);
+                //Buffer.BlockCopy(packet, 0, final, 4, packet.Length);
 
-                SendRaw(final);
+                SendRaw(ret);
             }
         }
         private bool SendRaw(byte[] final)

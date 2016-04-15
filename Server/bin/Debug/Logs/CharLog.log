@@ -1,1 +1,13 @@
 ﻿2016/4/14 下午 07:36:50 Char Server v.10.10
+2016/4/14 下午 10:04:45 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/14 下午 10:04:45 Warning: Server stopped.
+2016/4/14 下午 10:12:20 Char Server v.10.10
+2016/4/15 上午 12:25:24 Char Server v.10.10
+2016/4/15 上午 12:30:38 Char Server v.10.10
+2016/4/15 上午 03:15:33 Char Server v.10.10
+2016/4/15 上午 03:16:16 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/15 上午 03:16:16 Warning: Server stopped.

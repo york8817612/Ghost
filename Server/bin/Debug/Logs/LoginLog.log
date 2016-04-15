@@ -1,1 +1,105 @@
 ﻿2016/4/14 下午 07:36:37 Login Server v.10.10
+2016/4/14 下午 10:12:17 Login Server v.10.10
+2016/4/14 下午 10:39:22 Warning: Unregistered Char Wrold01.
+2016/4/14 下午 10:46:36 Login Server v.10.10
+2016/4/15 上午 12:24:56 Login Server v.10.10
+2016/4/15 上午 12:25:20 Login Server v.10.10
+2016/4/15 上午 12:26:18 Warning: Unregistered Char Wrold01.
+2016/4/15 上午 12:30:36 Login Server v.10.10
+2016/4/15 上午 12:31:34 Warning: Unregistered Char Wrold01.
+2016/4/15 上午 12:32:37 Login Server v.10.10
+2016/4/15 上午 03:04:59 Login Server v.10.10
+2016/4/15 上午 03:12:12 Login Server v.10.10
+2016/4/15 上午 03:14:48 Login Server v.10.10
+2016/4/15 上午 03:15:03 Login Server v.10.10
+2016/4/15 上午 03:15:26 Login Server v.10.10
+2016/4/15 上午 03:16:06 Unhandled exception from Server: 
+Server.Common.IO.Packet.PacketException: Insufficient space.
+   於 Server.Common.IO.Packet.InPacket.CheckLength(Int32 length) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 78
+   於 Server.Common.IO.Packet.InPacket.ReadUShort() 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 125
+   於 Server.Common.IO.Packet.InPacket..ctor(Byte[] buffer, Boolean operationCode) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 70
+   於 Server.Common.Net.Session.ManipulateBuffer() 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 136
+   於 Server.Common.Net.Session.EndReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 91
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/15 上午 03:16:28 Login Server v.10.10
+2016/4/15 上午 03:16:54 Unhandled exception from Server: 
+Server.Common.IO.Packet.PacketException: Insufficient space.
+   於 Server.Common.IO.Packet.InPacket.CheckLength(Int32 length) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 78
+   於 Server.Common.IO.Packet.InPacket.ReadUShort() 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 125
+   於 Server.Common.IO.Packet.InPacket..ctor(Byte[] buffer, Boolean operationCode) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 70
+   於 Server.Common.Net.Session.ManipulateBuffer() 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 136
+   於 Server.Common.Net.Session.EndReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 91
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/15 上午 03:18:21 Login Server v.10.10
+2016/4/15 上午 03:18:44 Unhandled exception from Server: 
+Server.Common.IO.Packet.PacketException: Insufficient space.
+   於 Server.Common.IO.Packet.InPacket.CheckLength(Int32 length) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 78
+   於 Server.Common.IO.Packet.InPacket.ReadUShort() 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 125
+   於 Server.Common.IO.Packet.InPacket..ctor(Byte[] buffer, Boolean operationCode) 於 d:\新增資料夾\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 70
+   於 Server.Common.Net.Session.ManipulateBuffer() 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 136
+   於 Server.Common.Net.Session.EndReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 91
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/15 上午 03:20:19 Login Server v.10.10
+2016/4/15 上午 03:25:15 Login Server v.10.10
+2016/4/15 上午 03:37:54 Login Server v.10.10
+2016/4/15 上午 03:41:17 Login Server v.10.10
+2016/4/15 上午 03:44:50 Login Server v.10.10
+2016/4/15 上午 03:49:33 Login Server v.10.10
+2016/4/15 上午 03:52:31 Login Server v.10.10
+2016/4/15 上午 03:57:11 Login Server v.10.10
+2016/4/15 上午 04:02:24 Login Server v.10.10
+2016/4/15 上午 04:10:23 Login Server v.10.10
+2016/4/15 上午 04:11:32 Login Server v.10.10
+2016/4/15 上午 04:15:41 Login Server v.10.10
+2016/4/15 上午 04:16:09 Unhandled exception from Server: 
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'ghost.hwids' doesn't exist
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId)
+   於 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteReader(MySqlConnection connection, MySqlTransaction transaction, String commandText, MySqlParameter[] commandParameters, Boolean ExternalConn)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteReader(String connectionString, String commandText, MySqlParameter[] commandParameters)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteReader(String connectionString, String commandText)
+   於 Server.Common.Data.Database.Exists(String table, String constraints, Object[] args) 於 d:\新增資料夾\Ghost\Server\Common\Data\Database.cs: 行 132
+   於 Server.Accounts.Account.SaveHWID() 於 d:\新增資料夾\Ghost\Server\LoginServer\Accounts\Account.cs: 行 102
+   於 Server.Net.Client.Unregister() 於 d:\新增資料夾\Ghost\Server\LoginServer\Net\Client.cs: 行 64
+   於 Server.Common.Net.Session.Dispose() 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 216
+   於 Server.Common.Net.Session.EndReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\Session.cs: 行 86
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/15 上午 04:17:16 Login Server v.10.10
+2016/4/15 上午 04:18:24 Login Server v.10.10
+2016/4/15 上午 04:20:24 Login Server v.10.10

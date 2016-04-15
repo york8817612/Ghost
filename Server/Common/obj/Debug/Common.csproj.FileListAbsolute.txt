@@ -5,3 +5,4 @@ D:\新增資料夾\Ghost\Server\Common\obj\Debug\Common.dll
 D:\新增資料夾\Ghost\Server\Common\obj\Debug\Common.pdb
 D:\新增資料夾\Ghost\Server\bin\Debug\Common.dll
 D:\新增資料夾\Ghost\Server\bin\Debug\Common.pdb
+D:\新增資料夾\Ghost\Server\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

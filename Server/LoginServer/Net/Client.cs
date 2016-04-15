@@ -61,7 +61,6 @@ namespace Server.Net
                 this.Account.LoggedIn = 0;
 
                 this.Account.Save();
-                this.Account.SaveHWID();
             }
 
             LoginServer.Clients.Remove(this);
@@ -74,15 +73,36 @@ namespace Server.Net
         {
             try
             {
-                switch ((ClientMessage)inPacket.OperationCode)
+                if (inPacket.OperationCode == (ushort) ClientMessage.LOGIN_SERVER)
                 {
-                    
+                    inPacket.ReadUShort(); // 原始長度
+                    var hand = inPacket.ReadByte(); // 讀取包頭
+
+                    Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, hand, this.Title);
+
+                    switch ((ClientMessage)hand)
+                    {
+                        case ClientMessage.LOGIN_REQ:
+                            LoginHandler.Login_Req(inPacket, this);
+                            break;
+                        case ClientMessage.SERVERLIST_REQ:
+                            LoginHandler.ServerList_Req(inPacket, this);
+                            break;
+                        case ClientMessage.GAME_REQ:
+                            LoginHandler.Game_Req(inPacket, this);
+                            break;
+                    }
                 }
             }
             catch (Exception e)
             {
                 Log.Error("Unhandled Packet Exception from {0}: \n{1}", this.Title, e.ToString());
             }
+        }
+
+        public void SetAccount(Account Account)
+        {
+            this.Account = Account;
         }
     }
 }
