@@ -5,3 +5,9 @@ G:\搞鬼私服\Ghost\Server\bin\Debug\GameServer.exe
 G:\搞鬼私服\Ghost\Server\bin\Debug\GameServer.pdb
 G:\搞鬼私服\Ghost\Server\GameServer\obj\Debug\GameServer.exe
 G:\搞鬼私服\Ghost\Server\GameServer\obj\Debug\GameServer.pdb
+C:\GhostOnline\Server\bin\Debug\GameServer.exe.config
+C:\GhostOnline\Server\GameServer\obj\Debug\GameServer.exe
+C:\GhostOnline\Server\GameServer\obj\Debug\GameServer.pdb
+C:\GhostOnline\Server\bin\Debug\GameServer.exe
+C:\GhostOnline\Server\bin\Debug\GameServer.pdb
+C:\GhostOnline\Server\GameServer\obj\Debug\GameServer.csprojResolveAssemblyReference.cache

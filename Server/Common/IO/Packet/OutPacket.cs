@@ -97,6 +97,13 @@ namespace Server.Common.IO.Packet
             this._stream.WriteByte(value);
         }
 
+        public void WriteByte(int value)
+        {
+            this.ThrowIfDisposed();
+
+            this._stream.WriteByte((byte)value);
+        }
+
         public void WriteBytes(params byte[] value)
         {
             this.ThrowIfDisposed();

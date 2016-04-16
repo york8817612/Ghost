@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Net
 {
     public class PasswordEncrypt
     {
-        private char[] a2 = new char[256];
-        private int a4 = 0;
+        private char[] result = new char[14];
+        private int resultPosition = 0;
         private int ps;
 
         public PasswordEncrypt(int ps)
@@ -17,33 +13,30 @@ namespace Server.Net
             this.ps = ps;
         }
 
-        public string encrypt(string pass)
+        public string encrypt(string password)
         {
-            int v2 = 0;
-            int v5 = 0;
-            int value = 0;
-            int length = pass.Length;
-            char[] passwordArray = pass.ToCharArray();
+            int position = 0;
+            int encryptResult = 0;
+            int length = password.Length;
+            char[] passwordArray = password.ToCharArray();
+            Array.Reverse(passwordArray);
+            char[] passwordReverse = new char[256];
+            passwordArray.CopyTo(passwordReverse, 256 - length);
             if (length > 0)
             {
                 do
                 {
-                    v5 = encrypt1(ps + (int)(passwordArray[value]), 1);
-                    encrypt2(v5);
-                    v2 += 4;
-                    a4 += 7;
-                    value += 1;
-                } while (v2 < length);
+                    int data = passwordReverse[255 - position] | passwordReverse[254 - position] << 8 | passwordReverse[253 - position] << 16 | passwordReverse[252 - position] << 24;
+                    encryptResult = encrypt(ps + data, 1);
+                    encrypt2((uint)encryptResult);
+                    position += 4;
+                    resultPosition += 7;
+                } while (position < length);
             }
-            string resault = "";
-            foreach (char aa in a2)
-            {
-                resault += aa.ToString();
-            }
-            return resault;
+            return new string(result);
         }
 
-        private int encrypt1(int a1, int a2)
+        private int encrypt(int data, int mode)
         {
             byte[] key = {
                 0x1A, 0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x00, 0x11, 0x00,
@@ -74,50 +67,50 @@ namespace Server.Net
                 0x00, 0x00, 0x01, 0x00, 0x00, 0x00 };
             int result = 0;
             int v6 = 0;
-            if (a1 != 0)
+            if (data != 0)
             {
-                int v4 = 0;
+                int position = 0;
                 do
                 {
-                    int v5 = a1 - (int)((long)a1 & 0xFFFFFFFE);
-                    a1 = a1 >> 1;
+                    int v5 = data - (int)((long)data & 0xFFFFFFFE);
+                    data = data >> 1;
                     if (v5 != 0)
                     {
-                        if (a2 != 0)
+                        if (mode != 0)
                         {
-                            v6 = key[v4];
+                            v6 = key[position];
                         }
                         else {
-                            v6 = key[v4];
+                            v6 = key[position];
                         }
                         result = result + (v5 << v6);
                     }
-                    v4 += 4;
-                } while (a1 != 0);
+                    position += 4;
+                } while (data != 0);
             }
             return result;
         }
 
 
-        private void encrypt2(int a1)
+        private void encrypt2(uint a1)
         {
-            int v2, v3, v4, v5;
-            char[] v7 = new char[36];
-            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".CopyTo(0, v7, 0, 36);
-            a2[0 + a4] = v7[a1 % 0x24];
+            uint v2, temp, temp2, temp3;
+            char[] table = new char[36];
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".CopyTo(0, table, 0, 36);
+            result[0 + resultPosition] = table[a1 % 0x24];
             v2 = a1 / 0x24 / 0x24;
-            a2[1 + a4] = v7[a1 / 0x24 % 0x24];
-            v3 = v2;
+            result[1 + resultPosition] = table[a1 / 0x24 % 0x24];
+            temp = v2;
             v2 /= 0x24;
-            a2[2 + a4] = v7[v3 - 36 * v2];
-            v4 = v2;
+            result[2 + resultPosition] = table[temp - 36 * v2];
+            temp2 = v2;
             v2 /= 0x24;
-            a2[3 + a4] = v7[v4 - 36 * v2];
-            v5 = v2;
+            result[3 + resultPosition] = table[temp2 - 36 * v2];
+            temp3 = v2;
             v2 /= 0x24;
-            a2[4 + a4] = v7[v5 - 36 * v2];
-            a2[5 + a4] = v7[v2 % 0x24];
-            a2[6 + a4] = v7[v2 / 0x24 % 0x24];
+            result[4 + resultPosition] = table[temp3 - 36 * v2];
+            result[5 + resultPosition] = table[v2 % 0x24];
+            result[6 + resultPosition] = table[v2 / 0x24 % 0x24];
         }
     }
 }

@@ -1,26 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Server.Net
+﻿namespace Server.Net
 {
     public class ServerState
     {
-        /* state
-         * 28 = 此為有年齡限制的頻道，請使用其他頻道
-         * 04 = 此ID已連線，請稍後再試
-         * else = 網路狀態錯誤
-         */
-        public enum ChannelState
-        {
-            OK = 0,
-            OTHER = 1,
-            CONNECTED_WAITE = 4,
-            YEARS_OLD = 28
-        }
-
         /* state
          * 07 - 因使用Bug進行遊戲，帳號已凍結
          * 08 - 因不正當賺取金錢，帳號已凍結
@@ -44,6 +25,19 @@ namespace Server.Net
             NO_USERNAME = 13,
             PASSWORD_ERROR = 14,
             HACK_LOCK = 29
+        }
+
+        /* state
+         * 28 = 此為有年齡限制的頻道，請使用其他頻道
+         * 04 = 此ID已連線，請稍後再試
+         * else = 網路狀態錯誤
+         */
+        public enum ChannelState
+        {
+            OK = 0,
+            OTHER = 1,
+            CONNECTED_WAITE = 4,
+            YEARS_OLD = 28
         }
     }
 }

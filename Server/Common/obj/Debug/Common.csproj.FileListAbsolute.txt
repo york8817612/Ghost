@@ -10,3 +10,8 @@ G:\搞鬼私服\Ghost\Server\bin\Debug\Common.dll
 G:\搞鬼私服\Ghost\Server\bin\Debug\Common.pdb
 G:\搞鬼私服\Ghost\Server\Common\obj\Debug\Common.dll
 G:\搞鬼私服\Ghost\Server\Common\obj\Debug\Common.pdb
+C:\GhostOnline\Server\bin\Debug\Common.dll
+C:\GhostOnline\Server\bin\Debug\Common.pdb
+C:\GhostOnline\Server\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\GhostOnline\Server\Common\obj\Debug\Common.dll
+C:\GhostOnline\Server\Common\obj\Debug\Common.pdb

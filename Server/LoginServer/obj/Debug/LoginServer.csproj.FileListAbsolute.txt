@@ -16,3 +16,9 @@ G:\搞鬼私服\Ghost\Server\LoginServer\obj\Debug\LoginServer.pdb
 G:\搞鬼私服\Ghost\Server\LoginServer\obj\Debug\LoginServer.csprojResolveAssemblyReference.cache
 G:\搞鬼私服\Ghost\Server\bin\Debug\LoginServer.exe
 G:\搞鬼私服\Ghost\Server\bin\Debug\LoginServer.pdb
+C:\GhostOnline\Server\bin\Debug\LoginServer.exe.config
+C:\GhostOnline\Server\LoginServer\obj\Debug\LoginServer.exe
+C:\GhostOnline\Server\LoginServer\obj\Debug\LoginServer.pdb
+C:\GhostOnline\Server\bin\Debug\LoginServer.exe
+C:\GhostOnline\Server\bin\Debug\LoginServer.pdb
+C:\GhostOnline\Server\LoginServer\obj\Debug\LoginServer.csprojResolveAssemblyReference.cache

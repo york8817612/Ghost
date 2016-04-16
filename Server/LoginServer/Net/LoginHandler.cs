@@ -1,9 +1,8 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Accounts;
 using Server.Common;
-using Server.Accounts;
-using Server.Interoperability;
-using System.Collections.Generic;
+using Server.Common.IO.Packet;
 using System;
+using Server.Common.IO;
 
 namespace Server.Net
 {
@@ -13,7 +12,7 @@ namespace Server.Net
         {
             string username = lea.ReadString();
             string password = lea.ReadString();
-            short key = lea.ReadShort();
+            short encryptKey = lea.ReadShort();
 
             if (username.IsAlphaNumeric() == false)
             {
@@ -26,29 +25,26 @@ namespace Server.Net
             try
             {
                 c.Account.Load(username);
-                //var pe = new PasswordEncrypt(key);
-                //string encryptPassword = pe.encrypt(c.Account.Password);
-                if (password != c.Account.Password)
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(c.Account.Password);
+                if (!password.Equals(encryptPassword))
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
+                    Log.Error("Login Fail!");
                 }
-                else 
-                if (c.Account.Banned > 0)
+                else if (c.Account.Banned > 0)
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.USER_LOCK);
                 }
                 else
                 {
-                    if (c.Account.Master > 0)
-                    {
-                        LoginPacket.Login_Ack(c, ServerState.LoginState.OK, key, true);
-                    }
-                    else
-                    {
-                        LoginPacket.Login_Ack(c, ServerState.LoginState.OK, key, false);
-                    }
+                    LoginPacket.Login_Ack(c, ServerState.LoginState.OK, encryptKey, c.Account.Master > 0 ? true : false);
                     c.Account.LoggedIn = 1;
+                    Log.Success("Login Success!");
                 }
+                Log.Inform("Password = {0}", password);
+                Log.Inform("encryptKey = {0}", encryptKey);
+                Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {

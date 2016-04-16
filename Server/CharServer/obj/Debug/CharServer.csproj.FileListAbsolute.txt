@@ -16,3 +16,9 @@ G:\搞鬼私服\Ghost\Server\bin\Debug\CharServer.pdb
 G:\搞鬼私服\Ghost\Server\CharServer\obj\Debug\CharServer.csprojResolveAssemblyReference.cache
 G:\搞鬼私服\Ghost\Server\CharServer\obj\Debug\CharServer.exe
 G:\搞鬼私服\Ghost\Server\CharServer\obj\Debug\CharServer.pdb
+C:\GhostOnline\Server\bin\Debug\CharServer.exe.config
+C:\GhostOnline\Server\CharServer\obj\Debug\CharServer.exe
+C:\GhostOnline\Server\CharServer\obj\Debug\CharServer.pdb
+C:\GhostOnline\Server\bin\Debug\CharServer.exe
+C:\GhostOnline\Server\bin\Debug\CharServer.pdb
+C:\GhostOnline\Server\CharServer\obj\Debug\CharServer.csprojResolveAssemblyReference.cache

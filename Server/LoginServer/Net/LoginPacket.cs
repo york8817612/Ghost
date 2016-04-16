@@ -9,13 +9,13 @@ namespace Server.Net
         /* NetCafe
          * 會員於特約網咖連線
          */
-        public static void Login_Ack(Client c, ServerState.LoginState state, short key = 0, bool NetCafe = false)
+        public static void Login_Ack(Client c, ServerState.LoginState state, short encryptKey = 0, bool netCafe = false)
         {
             using (var plew = new OutPacket(LoginServerMessage.LOGIN_ACK))
             {
                 plew.WriteByte((byte)state);
-                plew.WriteBool(NetCafe);
-                plew.WriteShort(key);
+                plew.WriteBool(netCafe);
+                plew.WriteShort(encryptKey);
 
                 c.Send(plew);
             }
@@ -40,8 +40,8 @@ namespace Server.Net
                     {
                         if (id >= 18)
                             break;
-                        plew.WriteShort((short)game.ExternalID);
-                        plew.WriteShort((short)game.ExternalID);
+                        plew.WriteShort(game.ExternalID);
+                        plew.WriteShort(game.ExternalID);
                         plew.WriteString("127.0.0.1");
                         plew.WriteInt(14101 + game.ExternalID);
                         plew.WriteInt(game.LoadProportionPool.Count); // 玩家數量
