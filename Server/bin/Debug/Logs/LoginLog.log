@@ -180,3 +180,137 @@ System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典�
    於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
    於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 73
    於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:01:38 Login Server v.10.10
+2016/4/16 下午 06:03:43 Login Server v.10.10
+2016/4/16 下午 06:05:39 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:05:40 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:05:42 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:06:12 Login Fail!
+2016/4/16 下午 06:06:16 Login Fail!
+2016/4/16 下午 06:06:20 Login Fail!
+2016/4/16 下午 06:06:35 Login Fail!
+2016/4/16 下午 06:07:03 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:07:07 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:07:57 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/16 下午 06:07:57 Warning: Server registration failed.
+2016/4/16 下午 06:08:22 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/16 下午 06:08:22 Warning: Server registration failed.
+2016/4/16 下午 06:08:36 Login Server v.10.10
+2016/4/16 下午 06:09:19 Unhandled Packet Exception from 127.0.0.1: 
+System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典中。
+   於 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   於 System.Collections.ObjectModel.KeyedCollection`2.get_Item(TKey key)
+   於 Server.Net.Client.get_World() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 24
+   於 Server.Net.LoginPacket.Game_Ack(Client c, ChannelState state) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginPacket.cs: 行 67
+   於 Server.Net.LoginHandler.Game_Req(InPacket lea, Client c) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\LoginHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\LoginServer\Net\Client.cs: 行 92
+2016/4/16 下午 06:09:29 Warning: Unregistered Game Wrold02-3.
+2016/4/16 下午 06:09:30 Warning: Unregistered Game Wrold02-2.
+2016/4/16 下午 06:09:31 Warning: Unregistered Game Wrold02-1.
+2016/4/16 下午 06:10:45 Warning: Unregistered Game Wrold02-2.
+2016/4/16 下午 06:10:46 Warning: Unregistered Game Wrold02-1.
+2016/4/16 下午 06:10:49 Warning: Unregistered Char Wrold02.
+2016/4/16 下午 06:10:56 Login Server v.10.10
+2016/4/16 下午 06:11:17 Warning: Unregistered Game Wrold02-2.
+2016/4/16 下午 06:11:19 Warning: Unregistered Game Wrold02-1.
+2016/4/16 下午 06:11:20 Warning: Unregistered Char Wrold02.
+2016/4/16 下午 06:11:39 Login Server v.10.10
+2016/4/16 下午 06:12:12 Login Fail!
+2016/4/16 下午 06:12:17 Login Fail!
+2016/4/16 下午 06:12:29 Login Fail!
+2016/4/16 下午 06:15:48 Login Fail!
+2016/4/16 下午 06:15:50 Login Fail!
+2016/4/16 下午 06:15:52 Login Fail!
+2016/4/16 下午 06:15:55 Login Fail!
+2016/4/16 下午 06:15:58 Login Fail!
+2016/4/16 下午 06:16:05 Login Fail!
+2016/4/16 下午 06:16:09 Login Fail!
+2016/4/16 下午 06:16:51 Login Fail!
+2016/4/16 下午 06:27:25 Login Server v.10.10
+2016/4/16 下午 11:02:13 Login Server v.10.10
+2016/4/16 下午 11:03:58 Warning: Unregistered Game Wrold01-2.
+2016/4/16 下午 11:03:58 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:03:58 System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.RemoveAt(Int32 index)
+   於 System.Collections.ObjectModel.Collection`1.RemoveItem(Int32 index)
+   於 System.Collections.ObjectModel.Collection`1.Remove(T item)
+   於 Server.Interoperability.InteroperabilityClient.Terminate() 於 G:\搞鬼私服\Ghost\Server\LoginServer\Interoperability\InteroperabilityClient.cs: 行 102
+   於 Server.Common.Net.ClientHandler`3.Dispose() 於 G:\搞鬼私服\Ghost\Server\Common\Net\ClientHandler.cs: 行 161
+2016/4/16 下午 11:03:59 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:04:47 Login Server v.10.10
+2016/4/16 下午 11:07:32 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/16 下午 11:07:32 Warning: Server registration failed.
+2016/4/16 下午 11:07:47 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/16 下午 11:07:47 Warning: Server registration failed.
+2016/4/16 下午 11:07:59 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/16 下午 11:07:59 Warning: Server registration failed.
+2016/4/16 下午 11:08:29 Warning: Unregistered Game Wrold01-3.
+2016/4/16 下午 11:08:30 Warning: Unregistered Game Wrold01-2.
+2016/4/16 下午 11:08:33 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:10:07 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:10:09 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:11:51 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:11:54 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:12:54 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:12:56 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:14:07 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:14:14 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:14:20 Login Server v.10.10
+2016/4/16 下午 11:17:39 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:17:56 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:27:03 Login Server v.10.10
+2016/4/16 下午 11:28:18 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:28:21 Warning: Unregistered Game Wrold01-1.
+2016/4/16 下午 11:44:25 Login Server v.10.10
+2016/4/16 下午 11:46:28 Warning: Unregistered Char Wrold01.
+2016/4/16 下午 11:46:31 Warning: Unregistered Game Wrold01-1.
+2016/4/17 上午 10:22:20 Warning: Unregistered Char Wrold01.
+2016/4/17 上午 10:29:32 Warning: Unregistered Game Wrold01-1.
+2016/4/17 上午 10:34:15 Warning: Unregistered Char Wrold01.
+2016/4/17 上午 10:34:18 Warning: Unregistered Game Wrold01-1.
+2016/4/17 上午 10:42:53 Warning: Unregistered Game Wrold01-1.
+2016/4/17 上午 10:42:55 Warning: Unregistered Char Wrold01.
+2016/4/17 上午 10:44:48 Login Server v.10.10
+2016/4/17 上午 10:46:55 Warning: Unregistered Game Wrold01-1.
+2016/4/17 上午 10:46:56 Warning: Unregistered Char Wrold01.
+2016/4/17 上午 11:04:47 Login Server v.10.10
+2016/4/17 上午 11:07:02 Login Fail!
+2016/4/17 上午 11:07:28 Warning: Unregistered Char Wrold01.
+2016/4/17 上午 11:07:31 Warning: Unregistered Game Wrold01-1.

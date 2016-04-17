@@ -1,0 +1,160 @@
+﻿using Server.Accounts;
+using Server.Characters;
+using Server.Common.Constants;
+using Server.Common.Data;
+using Server.Common.IO;
+using Server.Common.IO.Packet;
+using Server.Common.Security;
+using System;
+using System.Collections.Generic;
+
+namespace Server.Net
+{
+    public static class CharHandler
+    {
+        public static void MyChar_Info_Req(InPacket lea, Client gc)
+        {
+            lea.ReadShort();
+            lea.ReadInt();
+            string[] data = lea.ReadString(lea.Available).Split(new[] { (char)0x20 }, StringSplitOptions.None);
+            int encryptKey = int.Parse(data[1]);
+            string username = data[2];
+            string password = data[4];
+
+            gc.SetAccount(new Account(gc));
+
+            try
+            {
+                gc.Account.Load(username);
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(gc.Account.Password);
+                if (!password.Equals(encryptPassword))
+                {
+                    gc.Dispose();
+                    Log.Error("Login Fail!");
+                }
+                else if (gc.Account.Banned > 0)
+                {
+                    gc.Dispose();
+                }
+                else
+                {
+                    gc.Account.Characters = new List<Character>();
+                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}'", gc.Account.ID, gc.WorldID))
+                    {
+                        Character character = new Character(datum.id, gc);
+                        character.Load(false);
+                        gc.Account.Characters.Add(character);
+                    }
+                    CharPacket.MyChar_Info_Ack(gc, gc.Account.Characters);
+                    Log.Success("Login Success!");
+                }
+                Log.Inform("Password = {0}", password);
+                Log.Inform("encryptKey = {0}", encryptKey);
+                Log.Inform("encryptPassword = {0}", encryptPassword);
+            }
+            catch (NoAccountException)
+            {
+                if (false)
+                {
+                    // TODO: Auto registration.
+                }
+                else
+                {
+                    gc.Dispose();
+                    Log.Error("Login Fail!");
+                }
+            }
+        }
+
+        public static void Create_MyChar_Req(InPacket lea, Client gc)
+        {
+            lea.ReadShort();
+            lea.ReadInt();
+            string name = lea.ReadString(20);
+            int gender = lea.ReadByte();
+            int value1 = lea.ReadByte();
+            int value2 = lea.ReadByte();
+            int value3 = lea.ReadByte();
+            int eyes = lea.ReadInt();
+            int hair = lea.ReadInt();
+            int weapon = lea.ReadInt();
+            int armor = lea.ReadInt();
+
+            Character chr = new Character();
+
+            chr.AccountID = gc.Account.ID;
+            chr.WorldID = gc.WorldID;
+            chr.Name = name;
+            chr.Title = "江湖人";
+            chr.Level = 1;
+            chr.Class = 0;
+            chr.ClassLV = 0xFF;
+            chr.Gender = (byte)gender;
+            chr.Eyes = eyes;
+            chr.Hair = hair;
+            chr.MapX = 1;
+            chr.MapY = 1;
+            chr.Str = 3;
+            chr.Dex = 3;
+            chr.Vit = 3;
+            chr.Int = 3;
+            chr.Hp = 75;
+            chr.MaxHp = 75;
+            chr.Sp = 25;
+            chr.MaxSp = 25;
+            chr.Position = (byte)(gc.Account.Characters.Count + 1);
+
+            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.equip1));
+            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.equip1));
+            chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.equip2));
+
+            int pos;
+            if ((gc.Account.Characters.Count + 1) <= 4)
+            {
+                chr.Save(); // 2015/07/20
+                gc.Account.Characters.Add(chr);
+                pos = (gc.Account.Characters.Count << 8) + 1;
+            }
+            else if (Database.Exists("Characters", "name = '{0}'", name))
+            {
+                pos = -1;
+            }
+            else if ((gc.Account.Characters.Count + 1) > 4)
+            {
+                pos = -2;
+            }
+            else
+            {
+                pos = 0;
+            }
+            CharPacket.Create_MyChar_Ack(gc, pos);
+        }
+
+        public static void Generate_CharLook_Req(InPacket lea, Client gc)
+        {
+            lea.ReadShort();
+            lea.ReadInt();
+            CharPacket.Generate_CharLook_Ack(gc);
+        }
+
+        public static void Check_SameName_Req(InPacket lea, Client gc)
+        {
+            lea.ReadShort();
+            lea.ReadInt();
+            string name = lea.ReadString(20);
+            CharPacket.Check_SameName_Ack(gc, (Database.Exists("Characters", "name = '{0}'", name) ? 0 : 1));
+        }
+
+        public static void Delete_MyChar_Req(InPacket lea, Client gc)
+        {
+            lea.ReadShort();
+            lea.ReadInt();
+            int position = lea.ReadInt();
+
+            gc.Account.Characters[position].Delete();
+
+            CharPacket.Delete_MyChar_Ack(gc, position + 1);
+        }
+    }
+}

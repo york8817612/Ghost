@@ -151,9 +151,10 @@ namespace Server.Common.Net
                 byte[] packet = outPacket.Content;
                 //byte[] final = new byte[packet.Length + 4];
 
-                var ret = new byte[packet.Length + 6];
+                var ret = new byte[packet.Length + 2];
                 if (m_socket.LocalEndPoint.ToString().Split(':')[1] == "14001")
                 {
+                    ret = new byte[packet.Length + 6];
                     var header = new byte[4] { 0xAA, 0x55, (byte)(packet.Length & 0xFF), (byte)((packet.Length >> 8) & 0xFF) };
                     Buffer.BlockCopy(header, 0, ret, 0, 4); // copy header to ret
                     Buffer.BlockCopy(packet, 0, ret, 4, packet.Length); // copy packet to ret
@@ -161,7 +162,18 @@ namespace Server.Common.Net
                 }
                 else
                 {
-                    Buffer.BlockCopy(packet, 0, ret, 0, packet.Length); // copy end to ret
+                    ret = new byte[packet.Length + 2];
+                    int a = 0x105;
+                    int b = (packet[0]) + (packet[1] << 8);
+                    int c = ret.Length;
+                    int crc = a + b + c;
+                    var header = new byte[8] { 0x05, 0x01,
+                            packet[0], packet[1],
+                            (byte)(ret.Length & 0xFF), (byte)((ret.Length >> 8) & 0xFF),
+                            (byte)(crc & 0xFF), (byte)((crc >> 8) & 0xFF)
+                        };
+                    Buffer.BlockCopy(header, 0, ret, 0, 8); // copy header to ret
+                    Buffer.BlockCopy(packet, 6, ret, 8, packet.Length - 6); // copy packet to ret
                 }
 
                 //MapleAes.GetHeader(final, m_siv, Constants.Version.Major);

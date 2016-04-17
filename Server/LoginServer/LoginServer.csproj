@@ -52,7 +52,6 @@
     <Compile Include="LoginServer.cs" />
     <Compile Include="Net\LoginHandler.cs" />
     <Compile Include="Net\LoginPacket.cs" />
-    <Compile Include="Net\PasswordEncrypt.cs" />
     <Compile Include="Net\ServerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

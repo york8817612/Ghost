@@ -38,11 +38,18 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\Account.cs" />
+    <Compile Include="Accounts\NoAccountException.cs" />
     <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\CharacterItems.cs" />
     <Compile Include="CharServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Net\CharHandler.cs" />
+    <Compile Include="Net\CharPacket.cs" />
     <Compile Include="Net\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

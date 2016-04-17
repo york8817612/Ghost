@@ -1,7 +1,9 @@
-﻿using Server.Common.Data;
+﻿using Server.Characters;
+using Server.Common.Data;
 using Server.Common.IO;
 using Server.Net;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Server.Accounts
@@ -9,6 +11,8 @@ namespace Server.Accounts
     public sealed class Account
     {
         public Client Client { get; private set; }
+
+        public List<Character> Characters { get; set; }
 
         public int ID { get; private set; }
         public string Username { get; set; }

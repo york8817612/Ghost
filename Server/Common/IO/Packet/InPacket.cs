@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 
 namespace Server.Common.IO.Packet
 {
@@ -193,14 +194,16 @@ namespace Server.Common.IO.Packet
 
             this.CheckLength(count);
 
-            char[] value = new char[count];
+            byte[] value = new byte[count];
 
             for (int i = 0; i < count; i++)
             {
-                value[i] = (char)this.ReadByte();
+                value[i] = this.ReadByte();
             }
+            var nullIndex = System.Array.IndexOf(value, (byte)0);
+            nullIndex = (nullIndex == -1) ? value.Length : nullIndex;
 
-            return new string(value);
+            return Encoding.GetEncoding("Big5").GetString(value, 0, nullIndex);
         }
 
         public IPAddress ReadIPAddress()

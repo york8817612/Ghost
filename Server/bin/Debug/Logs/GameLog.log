@@ -54,3 +54,169 @@ System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私�
    於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
    於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
    於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/16 下午 06:05:03 Game Server v.10.10
+2016/4/16 下午 06:05:51 Game Server v.10.10
+2016/4/16 下午 06:07:52 Game Server v.10.10
+2016/4/16 下午 06:07:57 Unhandled exception from Interoperability: 
+Server.Common.Net.NetworkException: Cannot register a new Server as all the Worlds spots are occupied.
+   於 Server.Interoperability.InteroperabilityClient.OnRegistrationResponse(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Interoperability\InteroperabilityClient.cs: 行 128
+   於 Server.Interoperability.InteroperabilityClient.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Interoperability\InteroperabilityClient.cs: 行 73
+2016/4/16 下午 06:07:57 Warning: Server stopped.
+2016/4/16 下午 06:08:18 Game Server v.10.10
+2016/4/16 下午 06:08:22 Unhandled exception from Interoperability: 
+Server.Common.Net.NetworkException: Cannot register a new Server as all the Worlds spots are occupied.
+   於 Server.Interoperability.InteroperabilityClient.OnRegistrationResponse(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Interoperability\InteroperabilityClient.cs: 行 128
+   於 Server.Interoperability.InteroperabilityClient.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Interoperability\InteroperabilityClient.cs: 行 73
+2016/4/16 下午 06:08:22 Warning: Server stopped.
+2016/4/16 下午 06:08:29 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 下午 06:08:29 Warning: Server stopped.
+2016/4/16 下午 06:08:29 Unhandled exception from Server: 
+System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私服\Ghost\Server\bin\Debug\Logs\GameLog.log'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   於 System.IO.File.InternalAppendAllText(String path, String contents, Encoding encoding)
+   於 System.IO.File.AppendAllText(String path, String contents)
+   於 Server.Common.IO.Log.WriteToFile(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 324
+   於 Server.Common.IO.Log.Error(String label, Exception exception, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 271
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 127
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/16 下午 06:08:45 Game Server v.10.10
+2016/4/16 下午 06:08:50 Game Server v.10.10
+2016/4/16 下午 06:08:54 Game Server v.10.10
+2016/4/16 下午 06:09:33 Game Server v.10.10
+2016/4/16 下午 06:09:56 Game Server v.10.10
+2016/4/16 下午 06:11:01 Game Server v.10.10
+2016/4/16 下午 06:11:11 Game Server v.10.10
+2016/4/16 下午 06:11:49 Game Server v.10.10
+2016/4/16 下午 06:11:53 Game Server v.10.10
+2016/4/16 下午 06:11:57 Game Server v.10.10
+2016/4/16 下午 06:18:32 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 下午 06:18:32 Warning: Server stopped.
+2016/4/16 下午 06:18:32 Unhandled exception from Server: 
+System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私服\Ghost\Server\bin\Debug\Logs\GameLog.log'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   於 System.IO.File.InternalAppendAllText(String path, String contents, Encoding encoding)
+   於 System.IO.File.AppendAllText(String path, String contents)
+   於 Server.Common.IO.Log.WriteToFile(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 324
+   於 Server.Common.IO.Log.Error(String label, Exception exception, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 271
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 127
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/16 下午 06:18:32 Unhandled exception from Server: 
+System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私服\Ghost\Server\bin\Debug\Logs\GameLog.log'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   於 System.IO.File.InternalAppendAllText(String path, String contents, Encoding encoding)
+   於 System.IO.File.AppendAllText(String path, String contents)
+   於 Server.Common.IO.Log.WriteToFile(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 324
+   於 Server.Common.IO.Log.Error(String label, Exception exception, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 271
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 127
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/16 下午 06:27:25 Game Server v.10.10
+2016/4/16 下午 06:28:00 Game Server v.10.10
+2016/4/16 下午 06:28:06 Game Server v.10.10
+2016/4/16 下午 06:29:29 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 下午 06:29:29 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/16 下午 06:29:29 Warning: Server stopped.
+2016/4/16 下午 06:29:29 Unhandled exception from Server: 
+System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私服\Ghost\Server\bin\Debug\Logs\GameLog.log'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   於 System.IO.File.InternalAppendAllText(String path, String contents, Encoding encoding)
+   於 System.IO.File.AppendAllText(String path, String contents)
+   於 Server.Common.IO.Log.WriteToFile(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 324
+   於 Server.Common.IO.Log.Error(String label, Exception exception, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 271
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 127
+   於 System.Net.LazyAsyncResult.Complete(IntPtr userToken)
+   於 System.Net.ContextAwareResult.CompleteCallback(Object state)
+   於 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   於 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   於 System.Net.ContextAwareResult.Complete(IntPtr userToken)
+   於 System.Net.LazyAsyncResult.ProtectedInvokeCallback(Object result, IntPtr userToken)
+   於 System.Net.Sockets.BaseOverlappedAsyncResult.CompletionPortCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* nativeOverlapped)
+   於 System.Threading._IOCompletionCallback.PerformIOCompletionCallback(UInt32 errorCode, UInt32 numBytes, NativeOverlapped* pOVERLAP)
+2016/4/16 下午 06:29:29 Unhandled exception from Server: 
+System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私服\Ghost\Server\bin\Debug\Logs\GameLog.log'，所以無法存取該檔案。
+   於 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   於 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   於 System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   於 System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   於 System.IO.File.InternalAppendAllText(String path, String contents, Encoding encoding)
+   於 System.IO.File.AppendAllText(String path, String contents)
+   於 Server.Common.IO.Log.WriteToFile(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 324
+   於 Server.Common.IO.Log.Warn(String value, Object[] args) 於 C:\GhostOnline\Server\Common\IO\Log.cs: 行 248
+   於 Server.GameServer.Main(String[] args) 於 C:\GhostOnline\Server\GameServer\GameServer.cs: 行 163
+2016/4/16 下午 11:02:50 Game Server v.10.10
+2016/4/16 下午 11:02:57 Game Server v.10.10
+2016/4/16 下午 11:03:03 Game Server v.10.10
+2016/4/16 下午 11:04:53 Game Server v.10.10
+2016/4/16 下午 11:04:59 Game Server v.10.10
+2016/4/16 下午 11:05:08 Game Server v.10.10
+2016/4/16 下午 11:08:55 Game Server v.10.10
+2016/4/16 下午 11:11:05 Game Server v.10.10
+2016/4/16 下午 11:12:16 Game Server v.10.10
+2016/4/16 下午 11:13:36 Game Server v.10.10
+2016/4/16 下午 11:14:28 Game Server v.10.10
+2016/4/16 下午 11:27:13 Game Server v.10.10
+2016/4/16 下午 11:44:45 Game Server v.10.10
+2016/4/16 下午 11:47:03 Game Server v.10.10
+2016/4/17 上午 10:29:54 Game Server v.10.10
+2016/4/17 上午 10:39:46 Game Server v.10.10
+2016/4/17 上午 10:44:20 Game Server v.10.10
+2016/4/17 上午 10:44:42 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 上午 10:44:42 Warning: Server stopped.
+2016/4/17 上午 10:45:00 Game Server v.10.10
+2016/4/17 上午 11:04:57 Game Server v.10.10

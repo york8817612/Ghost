@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Text;
 
 namespace Server.Common.IO.Packet
 {
@@ -150,9 +151,9 @@ namespace Server.Common.IO.Packet
         {
             this.ThrowIfDisposed();
 
-            this.WriteShort((short)value.Length);
+            this.WriteShort((short)Encoding.GetEncoding("Big5").GetBytes(value).Length);
 
-            foreach (char c in value)
+            foreach (byte c in Encoding.GetEncoding("Big5").GetBytes(value))
             {
                 this.WriteByte((byte)c);
             }
@@ -160,11 +161,12 @@ namespace Server.Common.IO.Packet
 
         public void WriteString(string value, int length)
         {
+            byte[] ret = Encoding.GetEncoding("Big5").GetBytes(value);
             for (int i = 0; i < length; i++)
             {
-                if (i < value.Length)
+                if (i < ret.Length)
                 {
-                    this.WriteByte((byte)value[i]);
+                    this.WriteByte((byte)ret[i]);
                 }
                 else
                 {

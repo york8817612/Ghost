@@ -44,7 +44,7 @@ namespace Server.Net
                         plew.WriteShort(game.ExternalID);
                         plew.WriteString("127.0.0.1");
                         plew.WriteInt(14101 + game.ExternalID);
-                        plew.WriteInt(game.LoadProportionPool.Count); // 玩家數量
+                        plew.WriteInt(game.LoadProportion); // 玩家數量
                         plew.WriteInt(1200); // 頻道人數上限
                         plew.WriteInt(12); // 標章類型
                         plew.WriteInt(0);

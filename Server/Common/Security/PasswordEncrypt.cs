@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Server.Net
+namespace Server.Common.Security
 {
     public class PasswordEncrypt
     {
