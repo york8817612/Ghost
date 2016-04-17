@@ -1,10 +1,6 @@
 ﻿using Server.Characters;
 using Server.Common.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server
 {
@@ -87,7 +83,7 @@ namespace Server
 
             this.ItemID = datum.itemId;
             this.MaxPerStack = 1;
-            this.Quantity = datum.quantity;
+            this.Quantity = (short)datum.quantity;
             this.slot = (byte)datum.slot;
             this.type = (byte)datum.type;
         }
@@ -110,7 +106,7 @@ namespace Server
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && slot = '{2}' && type = '{3}'", this.Character.ID, this.ItemID, this.slot, this.type);
+                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && quantity = '{2}' && slot = '{3}' && type = '{4}'", this.Character.ID, this.ItemID, this.quantity, this.slot, this.type);
 
                 this.Assigned = true;
             }

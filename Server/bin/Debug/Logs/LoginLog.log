@@ -314,3 +314,142 @@ System.Collections.Generic.KeyNotFoundException: 指定的索引鍵不在字典�
 2016/4/17 上午 11:07:02 Login Fail!
 2016/4/17 上午 11:07:28 Warning: Unregistered Char Wrold01.
 2016/4/17 上午 11:07:31 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 01:26:47 Login Server v.10.10
+2016/4/17 下午 01:26:48 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: YES)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/17 下午 01:27:14 Login Server v.10.10
+2016/4/17 下午 01:27:35 Login Server v.10.10
+2016/4/17 下午 01:30:31 Login Server v.10.10
+2016/4/17 下午 01:31:31 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 01:32:03 Login Server v.10.10
+2016/4/17 下午 01:42:26 Login Server v.10.10
+2016/4/17 下午 01:44:55 Login Server v.10.10
+2016/4/17 下午 01:46:32 Login Server v.10.10
+2016/4/17 下午 01:47:18 Login Server v.10.10
+2016/4/17 下午 01:48:21 Login Server v.10.10
+2016/4/17 下午 01:48:34 Login Server v.10.10
+2016/4/17 下午 01:49:16 Login Server v.10.10
+2016/4/17 下午 01:49:41 Login Server v.10.10
+2016/4/17 下午 01:50:20 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 02:00:41 Login Server v.10.10
+2016/4/17 下午 02:06:07 Login Server v.10.10
+2016/4/17 下午 02:07:04 Login Server v.10.10
+2016/4/17 下午 02:07:42 Login Server v.10.10
+2016/4/17 下午 02:08:13 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 02:08:15 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 02:12:59 Login Server v.10.10
+2016/4/17 下午 02:14:03 Login Server v.10.10
+2016/4/17 下午 02:15:07 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 02:15:14 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 02:15:15 Login Fail!
+2016/4/17 下午 02:20:16 Login Server v.10.10
+2016/4/17 下午 02:21:24 Login Server v.10.10
+2016/4/17 下午 02:24:12 Login Server v.10.10
+2016/4/17 下午 02:33:59 Login Server v.10.10
+2016/4/17 下午 02:40:01 Login Server v.10.10
+2016/4/17 下午 02:40:31 Login Server v.10.10
+2016/4/17 下午 02:41:26 Login Fail!
+2016/4/17 下午 02:42:20 Login Server v.10.10
+2016/4/17 下午 02:43:32 Login Server v.10.10
+2016/4/17 下午 02:43:47 Login Server v.10.10
+2016/4/17 下午 02:43:47 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 69
+2016/4/17 下午 02:44:53 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 02:45:56 Login Server v.10.10
+2016/4/17 下午 02:45:56 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 69
+2016/4/17 下午 02:46:01 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 02:46:06 Login Server v.10.10
+2016/4/17 下午 02:52:28 Login Server v.10.10
+2016/4/17 下午 02:55:22 Login Server v.10.10
+2016/4/17 下午 02:56:28 Login Server v.10.10
+2016/4/17 下午 02:56:47 Login Server v.10.10
+2016/4/17 下午 02:57:30 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 02:58:02 Login Server v.10.10
+2016/4/17 下午 02:58:31 Login Server v.10.10
+2016/4/17 下午 03:11:21 Login Server v.10.10
+2016/4/17 下午 03:14:49 Login Server v.10.10
+2016/4/17 下午 03:18:13 Login Server v.10.10
+2016/4/17 下午 03:26:30 Login Server v.10.10
+2016/4/17 下午 03:27:48 Login Server v.10.10
+2016/4/17 下午 03:28:43 Login Fail!
+2016/4/17 下午 03:29:30 Login Server v.10.10
+2016/4/17 下午 03:32:35 Login Server v.10.10
+2016/4/17 下午 03:34:35 Login Server v.10.10
+2016/4/17 下午 03:38:10 Login Server v.10.10
+2016/4/17 下午 03:44:51 Login Server v.10.10
+2016/4/17 下午 03:45:41 Login Fail!
+2016/4/17 下午 03:48:21 Login Server v.10.10
+2016/4/17 下午 03:49:09 Login Fail!
+2016/4/17 下午 03:49:19 Login Server v.10.10
+2016/4/17 下午 03:50:18 Login Fail!
+2016/4/17 下午 03:53:19 Login Server v.10.10
+2016/4/17 下午 03:53:51 Login Server v.10.10
+2016/4/17 下午 03:55:50 Login Server v.10.10
+2016/4/17 下午 03:56:51 Login Server v.10.10
+2016/4/17 下午 03:58:18 Login Server v.10.10
+2016/4/17 下午 04:02:07 Login Server v.10.10
+2016/4/17 下午 04:08:32 Login Server v.10.10
+2016/4/17 下午 04:09:32 Login Server v.10.10
+2016/4/17 下午 04:09:56 Login Server v.10.10
+2016/4/17 下午 04:12:31 Login Server v.10.10
+2016/4/17 下午 04:13:24 Login Server v.10.10
+2016/4/17 下午 04:21:22 Login Server v.10.10
+2016/4/17 下午 04:22:02 Login Server v.10.10
+2016/4/17 下午 04:23:22 Login Server v.10.10
+2016/4/17 下午 04:37:32 Login Server v.10.10
+2016/4/17 下午 04:43:14 Login Fail!
+2016/4/17 下午 04:48:27 Login Server v.10.10
+2016/4/17 下午 04:58:08 Login Server v.10.10
+2016/4/17 下午 05:03:23 Login Server v.10.10
+2016/4/17 下午 05:03:58 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 System.Collections.ObjectModel.Collection`1.get_Item(Int32 index)
+   於 Server.Net.LoginPacket.ServerList_Ack(Client c) 於 C:\GhostOnline\Server\LoginServer\Net\LoginPacket.cs: 行 49
+   於 Server.Net.LoginHandler.ServerList_Req(InPacket lea, Client c) 於 C:\GhostOnline\Server\LoginServer\Net\LoginHandler.cs: 行 64
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\LoginServer\Net\Client.cs: 行 89
+2016/4/17 下午 05:06:51 Login Server v.10.10
+2016/4/17 下午 05:15:58 Login Server v.10.10
+2016/4/17 下午 05:16:36 Login Server v.10.10
+2016/4/17 下午 05:23:24 Login Server v.10.10
+2016/4/17 下午 05:23:38 Login Server v.10.10
+2016/4/17 下午 05:24:00 Login Server v.10.10
+2016/4/17 下午 05:36:46 Login Server v.10.10
+2016/4/17 下午 05:37:00 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/17 下午 05:37:00 Warning: Server registration failed.
+2016/4/17 下午 05:37:15 Cannot register a new Server as all the Worlds spots are occupied.
+2016/4/17 下午 05:37:15 Warning: Server registration failed.
+2016/4/17 下午 05:37:32 Login Server v.10.10
+2016/4/17 下午 05:38:22 Login Server v.10.10
+2016/4/17 下午 05:39:16 Login Server v.10.10
+2016/4/17 下午 05:39:54 Login Server v.10.10
+2016/4/17 下午 05:40:28 Login Server v.10.10
+2016/4/17 下午 05:46:35 Login Server v.10.10
+2016/4/17 下午 05:48:59 Login Server v.10.10
+2016/4/17 下午 05:54:44 Login Server v.10.10
+2016/4/17 下午 05:55:40 Login Server v.10.10
+2016/4/17 下午 05:56:12 Login Server v.10.10
+2016/4/17 下午 05:58:05 Login Server v.10.10
+2016/4/17 下午 06:00:16 Login Server v.10.10

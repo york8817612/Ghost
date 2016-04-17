@@ -1,8 +1,8 @@
-﻿using Server.Common.IO;
+﻿using Server.Common.Constants;
+using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Common.Security;
-using Server.Common.Constants;
 using System;
 using System.Net;
 
@@ -49,7 +49,7 @@ namespace Server.Interoperability
         {
             using (OutPacket outPacket = new OutPacket(InteroperabilityMessage.RegistrationRequest))
             {
-                outPacket.WriteByte((byte) ServerUtilities.ServerType.Char);
+                outPacket.WriteByte((byte)ServerUtilities.ServerType.Char);
                 outPacket.WriteString((string)args[0]);
                 outPacket.WriteBytes(CharServer.RemoteEndPoint.Address.GetAddressBytes());
                 outPacket.WriteUShort((ushort)CharServer.RemoteEndPoint.Port);

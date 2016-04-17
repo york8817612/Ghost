@@ -2,11 +2,7 @@
 using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Net
 {
@@ -16,7 +12,6 @@ namespace Server.Net
         {
             using (OutPacket plew = new OutPacket(ServerMessage.MYCHAR_INFO_ACK))
             {
-
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chars.Count);
@@ -24,21 +19,23 @@ namespace Server.Net
                 {
                     getCharactersData(plew, (i < chars.Count) ? chars[i] : null);
                 }
-                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00");
-
                 gc.Send(plew);
             }
         }
 
-        public static void Generate_CharLook_Ack(Client gc)
+        /*
+         * 0 = 使用中的名字
+         * 1 = 此名稱可以使用
+         * 2 = 無法創立新角色，請先購買角色擴充道具，最多可同時創立4個角色。
+         * else = 未知的錯誤
+         */
+        public static void Check_SameName_Ack(Client gc, int state)
         {
-            using (OutPacket plew = new OutPacket(ServerMessage.CREATE_MYCHAR_ACK))
+            using (OutPacket plew = new OutPacket(ServerMessage.CHECK_SAMENAME_ACK))
             {
-
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("01 00 18 00");
-                plew.WriteInt(1);
+                plew.WriteInt(state);
 
                 gc.Send(plew);
             }
@@ -54,33 +51,13 @@ namespace Server.Net
          * 4 = 創建成功
          * else = 未知的錯誤
          */
-        public static void Create_MyChar_Ack(Client gc, int pos)
+        public static void Create_MyChar_Ack(Client gc, int position)
         {
             using (OutPacket plew = new OutPacket(ServerMessage.CREATE_MYCHAR_ACK))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("01 03 A6 FF");
-                plew.WriteInt(pos);
-
-                gc.Send(plew);
-            }
-        }
-
-
-        /*
-         * 0 = 使用中的名字
-         * 1 = 此名稱可以使用
-         * 2 = 無法創立新角色，請先購買角色擴充道具，最多可同時創立4個角色。
-         * else = 未知的錯誤
-         */
-        public static void Check_SameName_Ack(Client gc, int state)
-        {
-            using (OutPacket plew = new OutPacket(ServerMessage.CHECK_SAMENAME_ACK))
-            {
-                plew.WriteInt(0); // length + CRC
-                plew.WriteInt(0);
-                plew.WriteInt(state);
+                plew.WriteInt(position);
 
                 gc.Send(plew);
             }
@@ -102,8 +79,6 @@ namespace Server.Net
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(position);
-                plew.WriteInt(1);
-                plew.WriteInt(1);
 
                 gc.Send(plew);
             }
@@ -113,18 +88,16 @@ namespace Server.Net
         {
             plew.WriteString(chr != null ? chr.Name : "", 20);
             plew.WriteString(chr != null ? chr.Title : "", 20);
-            plew.WriteByte(1);
-            plew.WriteByte(chr != null ? chr.Gender : (byte)0);
-            plew.WriteByte(chr != null ? chr.Level : (byte)0);
-            plew.WriteByte(chr != null ? chr.Class : (byte)0);
-            plew.WriteByte(chr != null ? chr.ClassLV : (byte)0);
+            plew.WriteByte(chr != null ? chr.Gender : 0);
+            plew.WriteByte(chr != null ? chr.Level : 0);
+            plew.WriteByte(chr != null ? chr.Class : 0);
+            plew.WriteByte(chr != null ? chr.ClassLV : 0);
             plew.WriteByte(0);
-            plew.WriteByte(chr != null ? (byte)0xFF : (byte)0);
             plew.WriteByte(0);
-            plew.WriteShort(chr != null ? (short)1 : (short)0);
-            plew.WriteShort(chr != null ? (short)1 : (short)0);
-            plew.WriteShort(chr != null ? (short)1 : (short)0);
-            plew.WriteShort(chr != null ? (short)1 : (short)0);
+            plew.WriteByte(0);
+            plew.WriteByte(0);
+            plew.WriteShort(chr != null ? 1 : 0);
+            plew.WriteShort(chr != null ? 1 : 0);
 
             Dictionary<ItemTypeConstants.EquipType, int> eq = new Dictionary<ItemTypeConstants.EquipType, int>();
             if (chr != null)
@@ -166,11 +139,6 @@ namespace Server.Net
             plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Mantle) ? eq[ItemTypeConstants.EquipType.Mantle] : 0); // 服裝[outfit] 9510081
             plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Dress) ? eq[ItemTypeConstants.EquipType.Dress] : 0);   // 披風[mantle] 8493122
             plew.WriteInt(chr != null ? chr.Hair : 0);                                                                      // 頭髮[hair]   9010011
-            plew.WriteInt(0);
-            plew.WriteInt(0);
-            plew.WriteInt(chr != null ? chr.Position : 0);
-            plew.WriteInt(chr != null ? 1 : 0);
-            plew.WriteInt(0);
         }
     }
 }

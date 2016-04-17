@@ -163,11 +163,11 @@ namespace Server.Common.Net
                 else
                 {
                     ret = new byte[packet.Length + 2];
-                    int a = 0x105;
+                    int a = 0x4D;
                     int b = (packet[0]) + (packet[1] << 8);
                     int c = ret.Length;
                     int crc = a + b + c;
-                    var header = new byte[8] { 0x05, 0x01,
+                    var header = new byte[8] { 0x4D, 0x00,
                             packet[0], packet[1],
                             (byte)(ret.Length & 0xFF), (byte)((ret.Length >> 8) & 0xFF),
                             (byte)(crc & 0xFF), (byte)((crc >> 8) & 0xFF)

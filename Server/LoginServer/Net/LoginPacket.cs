@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Interoperability;
 
@@ -33,24 +34,20 @@ namespace Server.Net
                 foreach (World world in LoginServer.Worlds)
                 {
                     plew.WriteShort(world.ID); // 伺服器順序
-                    plew.WriteInt(world.Games); // 頻道數量
+                    plew.WriteInt(ServerConstants.CHANNEL_DEFAULT); // 頻道數量
 
-                    int id = 0;
-                    foreach (InteroperabilityClient game in world)
+                    for (int i = 0; i < 18; i++)
                     {
-                        if (id >= 18)
-                            break;
-                        plew.WriteShort(game.ExternalID);
-                        plew.WriteShort(game.ExternalID);
-                        plew.WriteString("127.0.0.1");
-                        plew.WriteInt(14101 + game.ExternalID);
-                        plew.WriteInt(game.LoadProportion); // 玩家數量
-                        plew.WriteInt(1200); // 頻道人數上限
+                        plew.WriteShort(i + 1);
+                        plew.WriteShort(i + 1);
+                        plew.WriteString(ServerConstants.SERVER_IP);
+                        plew.WriteInt(14101 + i);
+                        plew.WriteInt(i < world.Count ? world[i].LoadProportion : 0); // 玩家數量
+                        plew.WriteInt(ServerConstants.CHANNEL_LOAD); // 頻道人數上限
                         plew.WriteInt(12); // 標章類型
                         plew.WriteInt(0);
-                        plew.WriteByte(1);
-                        plew.WriteInt(15199);
-                        id++;
+                        plew.WriteByte(i < world.Channel ? 1 : 2);
+                        plew.WriteInt(14199);
                     }
                 }
 
@@ -63,9 +60,9 @@ namespace Server.Net
             using (var plew = new OutPacket(LoginServerMessage.GAME_ACK))
             {
                 plew.WriteByte((byte)state);
-                plew.WriteString("127.0.0.1");
+                plew.WriteString(ServerConstants.SERVER_IP);
                 plew.WriteInt(14101 + c.World.ID);
-                plew.WriteInt(15199);
+                plew.WriteInt(14199);
 
                 c.Send(plew);
             }

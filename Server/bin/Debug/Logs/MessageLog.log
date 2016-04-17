@@ -3,3 +3,121 @@
    於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
    於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 d:\新增資料夾\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
 2016/4/14 下午 10:04:45 Warning: Server stopped.
+2016/4/17 下午 01:27:35 Message Server v.10.10
+2016/4/17 下午 01:30:31 Message Server v.10.10
+2016/4/17 下午 01:31:33 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 01:31:33 Warning: Server stopped.
+2016/4/17 下午 01:32:03 Message Server v.10.10
+2016/4/17 下午 01:42:26 Message Server v.10.10
+2016/4/17 下午 01:44:55 Message Server v.10.10
+2016/4/17 下午 01:46:32 Message Server v.10.10
+2016/4/17 下午 01:47:18 Message Server v.10.10
+2016/4/17 下午 01:48:21 Message Server v.10.10
+2016/4/17 下午 01:48:34 Message Server v.10.10
+2016/4/17 下午 01:49:16 Message Server v.10.10
+2016/4/17 下午 01:49:41 Message Server v.10.10
+2016/4/17 下午 02:00:41 Message Server v.10.10
+2016/4/17 下午 02:06:07 Message Server v.10.10
+2016/4/17 下午 02:06:46 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 02:06:46 Warning: Server stopped.
+2016/4/17 下午 02:07:04 Message Server v.10.10
+2016/4/17 下午 02:07:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 02:07:28 Warning: Server stopped.
+2016/4/17 下午 02:07:42 Message Server v.10.10
+2016/4/17 下午 02:12:59 Message Server v.10.10
+2016/4/17 下午 02:14:03 Message Server v.10.10
+2016/4/17 下午 02:20:16 Message Server v.10.10
+2016/4/17 下午 02:21:24 Message Server v.10.10
+2016/4/17 下午 02:24:12 Message Server v.10.10
+2016/4/17 下午 02:33:58 Message Server v.10.10
+2016/4/17 下午 02:40:01 Message Server v.10.10
+2016/4/17 下午 02:40:31 Message Server v.10.10
+2016/4/17 下午 02:42:20 Message Server v.10.10
+2016/4/17 下午 02:43:47 Message Server v.10.10
+2016/4/17 下午 02:45:56 Message Server v.10.10
+2016/4/17 下午 02:46:06 Message Server v.10.10
+2016/4/17 下午 02:52:28 Message Server v.10.10
+2016/4/17 下午 02:55:22 Message Server v.10.10
+2016/4/17 下午 02:56:28 Message Server v.10.10
+2016/4/17 下午 02:56:47 Message Server v.10.10
+2016/4/17 下午 02:58:02 Message Server v.10.10
+2016/4/17 下午 02:58:31 Message Server v.10.10
+2016/4/17 下午 03:02:59 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:02:59 Warning: Server stopped.
+2016/4/17 下午 03:11:21 Message Server v.10.10
+2016/4/17 下午 03:14:49 Message Server v.10.10
+2016/4/17 下午 03:17:36 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:17:36 Warning: Server stopped.
+2016/4/17 下午 03:18:13 Message Server v.10.10
+2016/4/17 下午 03:26:30 Message Server v.10.10
+2016/4/17 下午 03:27:48 Message Server v.10.10
+2016/4/17 下午 03:29:30 Message Server v.10.10
+2016/4/17 下午 03:32:35 Message Server v.10.10
+2016/4/17 下午 03:34:35 Message Server v.10.10
+2016/4/17 下午 03:36:15 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:36:15 Warning: Server stopped.
+2016/4/17 下午 03:38:10 Message Server v.10.10
+2016/4/17 下午 03:44:51 Message Server v.10.10
+2016/4/17 下午 03:48:21 Message Server v.10.10
+2016/4/17 下午 03:49:19 Message Server v.10.10
+2016/4/17 下午 03:53:19 Message Server v.10.10
+2016/4/17 下午 03:53:51 Message Server v.10.10
+2016/4/17 下午 03:55:50 Message Server v.10.10
+2016/4/17 下午 03:56:51 Message Server v.10.10
+2016/4/17 下午 03:58:18 Message Server v.10.10
+2016/4/17 下午 04:02:07 Message Server v.10.10
+2016/4/17 下午 04:08:32 Message Server v.10.10
+2016/4/17 下午 04:09:32 Message Server v.10.10
+2016/4/17 下午 04:09:56 Message Server v.10.10
+2016/4/17 下午 04:12:31 Message Server v.10.10
+2016/4/17 下午 04:13:24 Message Server v.10.10
+2016/4/17 下午 04:21:22 Message Server v.10.10
+2016/4/17 下午 04:22:02 Message Server v.10.10
+2016/4/17 下午 04:23:22 Message Server v.10.10
+2016/4/17 下午 04:37:32 Message Server v.10.10
+2016/4/17 下午 04:48:27 Message Server v.10.10
+2016/4/17 下午 04:58:08 Message Server v.10.10
+2016/4/17 下午 05:03:23 Message Server v.10.10
+2016/4/17 下午 05:06:51 Message Server v.10.10
+2016/4/17 下午 05:15:58 Message Server v.10.10
+2016/4/17 下午 05:16:36 Message Server v.10.10
+2016/4/17 下午 05:23:24 Message Server v.10.10
+2016/4/17 下午 05:23:30 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:23:38 Message Server v.10.10
+2016/4/17 下午 05:24:00 Message Server v.10.10
+2016/4/17 下午 05:24:22 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:28 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:31 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:37 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:41 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:31:23 Server connection failed: 
+Server.Common.Net.NetworkException: Login server connection failed.
+   於 Server.Common.Net.ServerHandler`3..ctor(IPEndPoint remoteEP, String title, Object[] args) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 56
+   於 Server.Interoperability.InteroperabilityClient..ctor(IPEndPoint remoteEP, String code) 於 C:\GhostOnline\Server\MessageServer\Interoperability\InteroperabilityClient.cs: 行 13
+   於 Server.Interoperability.InteroperabilityClient.Main() 於 C:\GhostOnline\Server\MessageServer\Interoperability\InteroperabilityClient.cs: 行 33
+2016/4/17 下午 05:31:24 Warning: Server stopped.
+2016/4/17 下午 05:36:46 Message Server v.10.10
+2016/4/17 下午 05:37:32 Message Server v.10.10
+2016/4/17 下午 05:38:22 Message Server v.10.10
+2016/4/17 下午 05:39:16 Message Server v.10.10
+2016/4/17 下午 05:39:54 Message Server v.10.10
+2016/4/17 下午 05:40:28 Message Server v.10.10
+2016/4/17 下午 05:46:35 Message Server v.10.10
+2016/4/17 下午 05:48:59 Message Server v.10.10
+2016/4/17 下午 05:54:44 Message Server v.10.10
+2016/4/17 下午 05:55:40 Message Server v.10.10
+2016/4/17 下午 05:56:12 Message Server v.10.10
+2016/4/17 下午 05:58:05 Message Server v.10.10
+2016/4/17 下午 06:00:16 Message Server v.10.10

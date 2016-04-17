@@ -348,3 +348,309 @@ Server.Common.IO.Packet.PacketException: Insufficient space.
 2016/4/17 上午 11:04:39 Char Server v.10.10
 2016/4/17 上午 11:04:41 Warning: Could not connect to login server at 127.0.0.1:14000.
 2016/4/17 上午 11:04:49 Char Server v.10.10
+2016/4/17 下午 01:27:35 Char Server v.10.10
+2016/4/17 下午 01:28:37 Unhandled exception from 127.0.0.1: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Server.Common.Data.Datum' 不包含 'type' 的定義
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   於 Server.Item..ctor(Object datum) 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 92
+   於 CallSite.Target(Closure , CallSite , Type , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   於 Server.Characters.CharacterItems.Load() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 25
+   於 Server.Characters.Character.Load(Boolean IsFullLoad) 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 90
+   於 Server.Net.CharHandler.MyChar_Info_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 46
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 59
+2016/4/17 下午 01:30:31 Char Server v.10.10
+2016/4/17 下午 01:31:02 Unhandled exception from 127.0.0.1: 
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'type' in 'field list'
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId)
+   於 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(MySqlConnection connection, String commandText, MySqlParameter[] commandParameters)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(String connectionString, String commandText, MySqlParameter[] parms)
+   於 Server.Common.Data.Database.Execute(String nonQuery, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 94
+   於 Server.Common.Data.Datum.Insert() 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 210
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   於 Server.Item.Save() 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 111
+   於 Server.Characters.CharacterItems.Save() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 33
+   於 Server.Characters.Character.Save() 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 136
+   於 Server.Net.CharHandler.Create_MyChar_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 115
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 62
+2016/4/17 下午 01:31:33 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 01:31:33 Warning: Server stopped.
+2016/4/17 下午 01:32:03 Char Server v.10.10
+2016/4/17 下午 01:42:26 Char Server v.10.10
+2016/4/17 下午 01:44:55 Char Server v.10.10
+2016/4/17 下午 01:46:32 Char Server v.10.10
+2016/4/17 下午 01:47:18 Char Server v.10.10
+2016/4/17 下午 01:48:21 Char Server v.10.10
+2016/4/17 下午 01:48:34 Char Server v.10.10
+2016/4/17 下午 01:49:16 Char Server v.10.10
+2016/4/17 下午 01:49:41 Char Server v.10.10
+2016/4/17 下午 01:50:17 Unhandled exception from 127.0.0.1: 
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'type' in 'field list'
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId)
+   於 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(MySqlConnection connection, String commandText, MySqlParameter[] commandParameters)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(String connectionString, String commandText, MySqlParameter[] parms)
+   於 Server.Common.Data.Database.Execute(String nonQuery, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 94
+   於 Server.Common.Data.Datum.Insert() 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 210
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   於 Server.Item.Save() 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 111
+   於 Server.Characters.CharacterItems.Save() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 33
+   於 Server.Characters.Character.Save() 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 136
+   於 Server.Net.CharHandler.Create_MyChar_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 115
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 62
+2016/4/17 下午 02:00:41 Char Server v.10.10
+2016/4/17 下午 02:06:07 Char Server v.10.10
+2016/4/17 下午 02:07:04 Char Server v.10.10
+2016/4/17 下午 02:07:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 02:07:28 Warning: Server stopped.
+2016/4/17 下午 02:07:42 Char Server v.10.10
+2016/4/17 下午 02:12:59 Char Server v.10.10
+2016/4/17 下午 02:14:03 Char Server v.10.10
+2016/4/17 下午 02:20:16 Char Server v.10.10
+2016/4/17 下午 02:21:24 Char Server v.10.10
+2016/4/17 下午 02:24:12 Char Server v.10.10
+2016/4/17 下午 02:33:58 Char Server v.10.10
+2016/4/17 下午 02:40:01 Char Server v.10.10
+2016/4/17 下午 02:40:31 Char Server v.10.10
+2016/4/17 下午 02:42:20 Char Server v.10.10
+2016/4/17 下午 02:43:32 Char Server v.10.10
+2016/4/17 下午 02:43:47 Char Server v.10.10
+2016/4/17 下午 02:43:47 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 85
+2016/4/17 下午 02:43:47 Warning: Server stopped.
+2016/4/17 下午 02:44:02 Char Server v.10.10
+2016/4/17 下午 02:44:02 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 85
+2016/4/17 下午 02:44:02 Warning: Server stopped.
+2016/4/17 下午 02:44:17 Char Server v.10.10
+2016/4/17 下午 02:44:17 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 85
+2016/4/17 下午 02:44:17 Warning: Server stopped.
+2016/4/17 下午 02:44:32 Char Server v.10.10
+2016/4/17 下午 02:44:32 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 85
+2016/4/17 下午 02:44:32 Warning: Server stopped.
+2016/4/17 下午 02:45:56 Char Server v.10.10
+2016/4/17 下午 02:45:56 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 85
+2016/4/17 下午 02:45:56 Warning: Server stopped.
+2016/4/17 下午 02:46:03 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 02:46:03 Warning: Server stopped.
+2016/4/17 下午 02:46:06 Char Server v.10.10
+2016/4/17 下午 02:47:27 Unhandled exception from 127.0.0.1: 
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'type' in 'field list'
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId)
+   於 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(MySqlConnection connection, String commandText, MySqlParameter[] commandParameters)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(String connectionString, String commandText, MySqlParameter[] parms)
+   於 Server.Common.Data.Database.Execute(String nonQuery, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 94
+   於 Server.Common.Data.Datum.Insert() 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 210
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   於 Server.Item.Save() 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 111
+   於 Server.Characters.CharacterItems.Save() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 33
+   於 Server.Characters.Character.Save() 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 136
+   於 Server.Net.CharHandler.Create_MyChar_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 115
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 62
+2016/4/17 下午 02:52:28 Char Server v.10.10
+2016/4/17 下午 02:52:53 Unhandled exception from 127.0.0.1: 
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'quantity' in 'field list'
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   於 MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId)
+   於 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   於 MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(MySqlConnection connection, String commandText, MySqlParameter[] commandParameters)
+   於 MySql.Data.MySqlClient.MySqlHelper.ExecuteNonQuery(String connectionString, String commandText, MySqlParameter[] parms)
+   於 Server.Common.Data.Database.Execute(String nonQuery, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 94
+   於 Server.Common.Data.Datum.Insert() 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 210
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   於 Server.Item.Save() 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 107
+   於 Server.Characters.CharacterItems.Save() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 33
+   於 Server.Characters.Character.Save() 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 136
+   於 Server.Net.CharHandler.Create_MyChar_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 115
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 62
+2016/4/17 下午 02:55:22 Char Server v.10.10
+2016/4/17 下午 02:55:51 Unhandled exception from 127.0.0.1: 
+System.Data.RowNotInTableException: 資料表中找不到資料列。
+   於 Server.Common.Data.Datum.Populate(String query) 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 140
+   於 Server.Common.Data.Datum.PopulateWith(String fields, String constraints, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Datum.cs: 行 171
+   於 Server.Common.Data.Database.Fetch(String table, String field, String constraints, Object[] args) 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 140
+   於 Server.Item.Save() 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 109
+   於 Server.Characters.CharacterItems.Save() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 33
+   於 Server.Characters.Character.Save() 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 136
+   於 Server.Net.CharHandler.Create_MyChar_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 115
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 62
+2016/4/17 下午 02:56:28 Char Server v.10.10
+2016/4/17 下午 02:56:47 Char Server v.10.10
+2016/4/17 下午 02:57:08 Unhandled exception from 127.0.0.1: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 無法將類型 'int' 隱含轉換為 'short'。已有明確轉換存在 (您是否漏掉了轉型?)
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   於 Server.Item..ctor(Object datum) 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 86
+   於 CallSite.Target(Closure , CallSite , Type , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   於 Server.Characters.CharacterItems.Load() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 25
+   於 Server.Characters.Character.Load(Boolean IsFullLoad) 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 90
+   於 Server.Net.CharHandler.MyChar_Info_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 46
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 59
+2016/4/17 下午 02:58:02 Char Server v.10.10
+2016/4/17 下午 02:58:31 Char Server v.10.10
+2016/4/17 下午 03:00:03 Unhandled exception from 127.0.0.1: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 無法將類型 'int' 隱含轉換為 'short'。已有明確轉換存在 (您是否漏掉了轉型?)
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   於 Server.Item..ctor(Object datum) 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 86
+   於 CallSite.Target(Closure , CallSite , Type , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   於 Server.Characters.CharacterItems.Load() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 25
+   於 Server.Characters.Character.Load(Boolean IsFullLoad) 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 90
+   於 Server.Net.CharHandler.MyChar_Info_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 46
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 59
+2016/4/17 下午 03:02:59 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:02:59 Warning: Server stopped.
+2016/4/17 下午 03:11:21 Char Server v.10.10
+2016/4/17 下午 03:12:04 Unhandled exception from 127.0.0.1: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 無法將類型 'int' 隱含轉換為 'short'。已有明確轉換存在 (您是否漏掉了轉型?)
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   於 Server.Item..ctor(Object datum) 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 86
+   於 CallSite.Target(Closure , CallSite , Type , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   於 Server.Characters.CharacterItems.Load() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 25
+   於 Server.Characters.Character.Load(Boolean IsFullLoad) 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 90
+   於 Server.Net.CharHandler.MyChar_Info_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 46
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 59
+2016/4/17 下午 03:14:49 Char Server v.10.10
+2016/4/17 下午 03:17:36 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:17:36 Warning: Server stopped.
+2016/4/17 下午 03:18:13 Char Server v.10.10
+2016/4/17 下午 03:26:30 Char Server v.10.10
+2016/4/17 下午 03:27:48 Char Server v.10.10
+2016/4/17 下午 03:29:30 Char Server v.10.10
+2016/4/17 下午 03:32:35 Char Server v.10.10
+2016/4/17 下午 03:34:35 Char Server v.10.10
+2016/4/17 下午 03:36:15 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 03:36:15 Warning: Server stopped.
+2016/4/17 下午 03:38:10 Char Server v.10.10
+2016/4/17 下午 03:44:51 Char Server v.10.10
+2016/4/17 下午 03:48:21 Char Server v.10.10
+2016/4/17 下午 03:49:19 Char Server v.10.10
+2016/4/17 下午 03:53:19 Char Server v.10.10
+2016/4/17 下午 03:53:51 Char Server v.10.10
+2016/4/17 下午 03:55:50 Char Server v.10.10
+2016/4/17 下午 03:56:51 Char Server v.10.10
+2016/4/17 下午 03:58:18 Char Server v.10.10
+2016/4/17 下午 04:02:07 Char Server v.10.10
+2016/4/17 下午 04:08:32 Char Server v.10.10
+2016/4/17 下午 04:09:32 Char Server v.10.10
+2016/4/17 下午 04:09:56 Char Server v.10.10
+2016/4/17 下午 04:12:31 Char Server v.10.10
+2016/4/17 下午 04:13:24 Char Server v.10.10
+2016/4/17 下午 04:21:22 Char Server v.10.10
+2016/4/17 下午 04:22:02 Char Server v.10.10
+2016/4/17 下午 04:23:22 Char Server v.10.10
+2016/4/17 下午 04:37:32 Char Server v.10.10
+2016/4/17 下午 04:48:27 Char Server v.10.10
+2016/4/17 下午 04:58:08 Char Server v.10.10
+2016/4/17 下午 05:03:23 Char Server v.10.10
+2016/4/17 下午 05:06:51 Char Server v.10.10
+2016/4/17 下午 05:15:58 Char Server v.10.10
+2016/4/17 下午 05:16:36 Char Server v.10.10
+2016/4/17 下午 05:23:24 Char Server v.10.10
+2016/4/17 下午 05:23:29 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:23:38 Char Server v.10.10
+2016/4/17 下午 05:23:45 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:00 Char Server v.10.10
+2016/4/17 下午 05:24:23 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:28 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:31 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:37 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:41 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:24:42 Server connection failed: 
+Server.Common.Net.NetworkException: Login server connection failed.
+   於 Server.Common.Net.ServerHandler`3..ctor(IPEndPoint remoteEP, String title, Object[] args) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 56
+   於 Server.Interoperability.InteroperabilityClient..ctor(IPEndPoint remoteEP, String code) 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 13
+   於 Server.Interoperability.InteroperabilityClient.Main() 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 33
+2016/4/17 下午 05:24:42 Warning: Server stopped.
+2016/4/17 下午 05:31:23 Char Server v.10.10
+2016/4/17 下午 05:31:25 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:36:46 Char Server v.10.10
+2016/4/17 下午 05:36:58 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/17 下午 05:37:00 Server.Common.Net.NetworkException: Cannot register a new Server as all the Worlds spots are occupied.
+   於 Server.Interoperability.InteroperabilityClient.OnRegistrationResponse(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 86
+   於 Server.Interoperability.InteroperabilityClient.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 66
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 120
+2016/4/17 下午 05:37:00 Warning: Server stopped.
+2016/4/17 下午 05:37:15 Char Server v.10.10
+2016/4/17 下午 05:37:15 Server.Common.Net.NetworkException: Cannot register a new Server as all the Worlds spots are occupied.
+   於 Server.Interoperability.InteroperabilityClient.OnRegistrationResponse(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 86
+   於 Server.Interoperability.InteroperabilityClient.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Interoperability\InteroperabilityClient.cs: 行 66
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 120
+2016/4/17 下午 05:37:15 Warning: Server stopped.
+2016/4/17 下午 05:37:32 Char Server v.10.10
+2016/4/17 下午 05:38:22 Char Server v.10.10
+2016/4/17 下午 05:39:16 Char Server v.10.10
+2016/4/17 下午 05:39:54 Char Server v.10.10
+2016/4/17 下午 05:40:28 Char Server v.10.10
+2016/4/17 下午 05:46:35 Char Server v.10.10
+2016/4/17 下午 05:48:59 Char Server v.10.10
+2016/4/17 下午 05:54:44 Char Server v.10.10
+2016/4/17 下午 05:55:40 Char Server v.10.10
+2016/4/17 下午 05:56:12 Char Server v.10.10
+2016/4/17 下午 05:58:05 Char Server v.10.10
+2016/4/17 下午 06:00:16 Char Server v.10.10

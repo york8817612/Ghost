@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using Server.Common.IO;
+using System;
+using System.IO;
 
 namespace Server.Common.Data
 {
@@ -81,7 +81,7 @@ namespace Server.Common.Data
         {
             get
             {
-                return string.Format("server={0}; database={1}; uid={2}; password={3}; convertzerodatetime=yes;",
+                return string.Format("server={0}; database={1}; uid={2}; password={3}; convertzerodatetime=yes; CharSet=big5;",
                     Database.Host,
                     Database.Schema,
                     Database.Username,

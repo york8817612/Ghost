@@ -16,3 +16,9 @@ G:\搞鬼私服\Ghost\Server\MessageServer\obj\Debug\MessageServer.pdb
 G:\搞鬼私服\Ghost\Server\bin\Debug\MessageServer.exe.config
 G:\搞鬼私服\Ghost\Server\bin\Debug\MessageServer.exe
 G:\搞鬼私服\Ghost\Server\bin\Debug\MessageServer.pdb
+C:\GhostOnline\Server\bin\Debug\MessageServer.exe.config
+C:\GhostOnline\Server\MessageServer\obj\Debug\MessageServer.exe
+C:\GhostOnline\Server\MessageServer\obj\Debug\MessageServer.pdb
+C:\GhostOnline\Server\bin\Debug\MessageServer.exe
+C:\GhostOnline\Server\bin\Debug\MessageServer.pdb
+C:\GhostOnline\Server\MessageServer\obj\Debug\MessageServer.csprojResolveAssemblyReference.cache

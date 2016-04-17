@@ -1,7 +1,7 @@
-﻿using Server.Common.Data;
-using Server.Interoperability;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
-using Server.Common.Constants;
+using Server.Interoperability;
 using Server.Net;
 using System;
 using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace Server
                 Log.Inform("Cross-servers code '{0}' assigned.", Log.MaskString(LoginServer.SecurityCode));
 
                 RequireStaffIP = Settings.GetBool("RequireStaffIP", "Login");
-                Log.Inform("Staff will{0}be required to connect through a staff IP.", LoginServer.RequireStaffIP ? " " : " not "); 
+                Log.Inform("Staff will{0}be required to connect through a staff IP.", LoginServer.RequireStaffIP ? " " : " not ");
 
                 TcpListener Listener = new TcpListener(IPAddress.Any, Settings.GetInt("Port", "Login"));
                 Listener.Start();
@@ -73,17 +73,17 @@ namespace Server
                 LoginServer.Pinger.Start();
                 Log.Inform("Clients pinger set to {0}ms.", LoginServer.Pinger.Interval);
 
-                foreach (string worldName in Settings.GetBlocksFromBlock("Worlds", 1))
+                foreach (string world in Settings.GetBlocksFromBlock("Worlds", 1))
                 {
                     Worlds.Add(new World()
                     {
-                        ID = Settings.GetByte("ID", worldName),
-                        HostIP = Settings.GetIPAddress("Host", worldName),
-                        Flag = Settings.GetEnum<ServerUtilities.ServerFlag>("Flag", worldName),
-                        Games = Settings.GetByte("Games", worldName),
-                        EventMessage = Settings.GetString("EventMessage", worldName),
-                        DisableCreation = Settings.GetBool("DisableCreation", worldName),
-                        ScrollingHeader = Settings.GetString("ScrollingHeader", worldName),
+                        ID = Settings.GetByte("ID", world),
+                        HostIP = Settings.GetIPAddress("Host", world),
+                        Flag = Settings.GetEnum<ServerUtilities.ServerFlag>("Flag", world),
+                        Channel = Settings.GetByte("Channel", world),
+                        EventMessage = Settings.GetString("EventMessage", world),
+                        DisableCreation = Settings.GetBool("DisableCreation", world),
+                        ScrollingHeader = Settings.GetString("ScrollingHeader", world),
                         Rates = new ServerUtilities.Rates()
                         {
                             Experience = 6,

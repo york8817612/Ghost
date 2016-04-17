@@ -16,11 +16,11 @@
 
         public enum ItemType : byte
         {
-            equip1 = 1,     // [1]
-            equip2 = 2,     // [2]
-            use = 3,        // [3]
-            etc = 4,        // [4]
-            pet = 5         // [5]
+            Equip1 = 1,     // [1]
+            Equip2 = 2,     // [2]
+            Use = 3,        // [3]
+            Etc = 4,        // [4]
+            Pet = 5         // [5]
         }
     }
 }

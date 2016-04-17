@@ -1,8 +1,7 @@
 ﻿using Server.Accounts;
 using Server.Common;
-using Server.Common.IO.Packet;
-using System;
 using Server.Common.IO;
+using Server.Common.IO.Packet;
 using Server.Common.Security;
 
 namespace Server.Net

@@ -119,6 +119,13 @@ namespace Server.Common.IO.Packet
             this.Append(value, 2);
         }
 
+        public void WriteShort(int value)
+        {
+            this.ThrowIfDisposed();
+
+            this.Append((short) value, 2);
+        }
+
         public void WriteUShort(ushort value = 0)
         {
             this.ThrowIfDisposed();

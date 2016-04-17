@@ -12,7 +12,7 @@ namespace Server.Interoperability
     {
         public byte ID { get; set; }
         public IPAddress HostIP { get; set; }
-        public short Games { get; set; }
+        public short Channel { get; set; }
         public string EventMessage { get; set; }
         public ServerUtilities.Rates Rates { get; set; }
         public ServerUtilities.ServerFlag Flag { get; set; }
@@ -39,7 +39,7 @@ namespace Server.Interoperability
         {
             get
             {
-                return this.Count == this.Games;
+                return this.Count == this.Channel;
             }
         }
 

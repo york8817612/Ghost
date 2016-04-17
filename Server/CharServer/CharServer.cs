@@ -1,7 +1,7 @@
-﻿using Server.Common.Data;
-using Server.Interoperability;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
-using Server.Common.Constants;
+using Server.Interoperability;
 using Server.Net;
 using System;
 using System.Collections.Generic;
@@ -65,7 +65,7 @@ namespace Server
         start:
             CharServer.Clients = new List<Client>();
 
-        Log.Entitle("Char Server v.{0}.{1}", 10, 10);
+            Log.Entitle("Char Server v.{0}.{1}", 10, 10);
 
             try
             {

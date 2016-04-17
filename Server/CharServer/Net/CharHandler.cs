@@ -105,14 +105,14 @@ namespace Server.Net
             chr.MaxSp = 25;
             chr.Position = (byte)(gc.Account.Characters.Count + 1);
 
-            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.equip1));
-            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.equip1));
-            chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.equip2));
+            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip1));
+            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip1));
+            chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
 
             int pos;
             if ((gc.Account.Characters.Count + 1) <= 4)
             {
-                chr.Save(); // 2015/07/20
+                chr.Save();
                 gc.Account.Characters.Add(chr);
                 pos = (gc.Account.Characters.Count << 8) + 1;
             }
@@ -129,13 +129,6 @@ namespace Server.Net
                 pos = 0;
             }
             CharPacket.Create_MyChar_Ack(gc, pos);
-        }
-
-        public static void Generate_CharLook_Req(InPacket lea, Client gc)
-        {
-            lea.ReadShort();
-            lea.ReadInt();
-            CharPacket.Generate_CharLook_Ack(gc);
         }
 
         public static void Check_SameName_Req(InPacket lea, Client gc)
