@@ -7,7 +7,7 @@ using System;
 using System.Net;
 using Server.Common.Collections;
 using static Server.Common.Constants.ServerUtilities;
-using Server.Characters;
+using Server.Ghost.Characters;
 
 namespace Server.Interoperability
 {

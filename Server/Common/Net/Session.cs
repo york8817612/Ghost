@@ -180,7 +180,7 @@ namespace Server.Common.Net
                 //MapleAes.Transform(packet, m_siv);
 
                 //Buffer.BlockCopy(packet, 0, final, 4, packet.Length);
-
+                Log.Hex("Send Packet::", ret);
                 SendRaw(ret);
             }
         }

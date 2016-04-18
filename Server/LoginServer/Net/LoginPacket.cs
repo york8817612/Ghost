@@ -34,7 +34,7 @@ namespace Server.Net
                 foreach (World world in LoginServer.Worlds)
                 {
                     plew.WriteShort(world.ID); // 伺服器順序
-                    plew.WriteInt(ServerConstants.CHANNEL_DEFAULT); // 頻道數量
+                    plew.WriteInt(world.Channel); // 頻道數量
 
                     for (int i = 0; i < 18; i++)
                     {
@@ -46,7 +46,7 @@ namespace Server.Net
                         plew.WriteInt(ServerConstants.CHANNEL_LOAD); // 頻道人數上限
                         plew.WriteInt(12); // 標章類型
                         plew.WriteInt(0);
-                        plew.WriteByte(i < world.Channel ? 1 : 2);
+                        plew.WriteByte(i < world.Count ? 1 : 2);
                         plew.WriteInt(14199);
                     }
                 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Server.Accounts
+namespace Server.Ghost.Accounts
 {
     public class NoAccountException : Exception
     {

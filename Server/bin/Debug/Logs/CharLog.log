@@ -654,3 +654,27 @@ Server.Common.Net.NetworkException: Login server connection failed.
 2016/4/17 下午 05:56:12 Char Server v.10.10
 2016/4/17 下午 05:58:05 Char Server v.10.10
 2016/4/17 下午 06:00:16 Char Server v.10.10
+2016/4/17 下午 06:39:25 Char Server v.10.10
+2016/4/17 下午 06:56:49 Char Server v.10.10
+2016/4/17 下午 07:18:08 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 07:18:08 Warning: Server stopped.
+2016/4/17 下午 07:18:45 Char Server v.10.10
+2016/4/17 下午 07:35:57 Char Server v.10.10
+2016/4/17 下午 11:28:38 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/17 下午 11:28:38 Warning: Server stopped.
+2016/4/17 下午 11:28:55 Char Server v.10.10
+2016/4/18 上午 12:12:50 Char Server v.10.10
+2016/4/18 下午 02:09:56 Char Server v.10.10
+2016/4/18 下午 02:14:21 Char Server v.10.10
+2016/4/18 下午 03:28:41 Char Server v.10.10
+2016/4/18 下午 03:30:47 Char Server v.10.10
+2016/4/18 下午 03:30:49 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/18 下午 03:42:09 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/18 下午 03:42:09 Warning: Server stopped.
+2016/4/18 下午 03:44:49 Char Server v.10.10

@@ -41,12 +41,16 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\Account.cs" />
-    <Compile Include="Accounts\NoAccountException.cs" />
-    <Compile Include="Characters\Character.cs" />
+    <Compile Include="Ghost\Accounts\Account.cs" />
+    <Compile Include="Ghost\Accounts\NoAccountException.cs" />
+    <Compile Include="Ghost\Characters\Character.cs" />
+    <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
+    <Compile Include="Ghost\Item.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Net\Client.cs" />
+    <Compile Include="Net\GameHandler.cs" />
+    <Compile Include="Net\GamePacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

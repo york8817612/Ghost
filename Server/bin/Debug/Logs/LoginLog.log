@@ -453,3 +453,71 @@ System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且�
 2016/4/17 下午 05:56:12 Login Server v.10.10
 2016/4/17 下午 05:58:05 Login Server v.10.10
 2016/4/17 下午 06:00:16 Login Server v.10.10
+2016/4/17 下午 06:38:00 Login Server v.10.10
+2016/4/17 下午 06:38:00 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 G:\搞鬼私服\Ghost\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/17 下午 06:38:17 Login Server v.10.10
+2016/4/17 下午 06:38:17 Server.Common.IO.SettingReadException: Failed to read setting 'Games'.
+   於 Server.Common.IO.Settings.GetByte(String parameter, String block) 於 G:\搞鬼私服\Ghost\Server\Common\IO\Settings.cs: 行 151
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 78
+2016/4/17 下午 06:38:54 Login Server v.10.10
+2016/4/17 下午 06:39:33 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 06:40:50 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 06:40:56 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 06:56:22 Login Server v.10.10
+2016/4/17 下午 06:56:23 Server.Common.IO.SettingReadException: Failed to read setting 'Channel'.
+   於 Server.Common.IO.Settings.GetByte(String parameter, String block) 於 G:\搞鬼私服\Ghost\Server\Common\IO\Settings.cs: 行 151
+   於 Server.LoginServer.ServerLoop() 於 G:\搞鬼私服\Ghost\Server\LoginServer\LoginServer.cs: 行 78
+2016/4/17 下午 06:56:45 Login Server v.10.10
+2016/4/17 下午 07:18:06 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 07:18:40 Login Server v.10.10
+2016/4/17 下午 07:19:31 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 07:35:36 Warning: Unregistered Char Wrold01.
+2016/4/17 下午 07:35:55 Login Server v.10.10
+2016/4/17 下午 09:44:14 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 11:28:54 Login Server v.10.10
+2016/4/17 下午 11:31:15 Warning: Unregistered Game Wrold01-1.
+2016/4/17 下午 11:32:23 Warning: Unregistered Char Wrold01.
+2016/4/18 上午 12:12:49 Login Server v.10.10
+2016/4/18 上午 12:15:03 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 12:19:23 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 12:24:03 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 12:27:09 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 12:36:12 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 01:34:32 Warning: Unregistered Game Wrold01-1.
+2016/4/18 上午 11:04:44 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 12:36:30 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 12:36:31 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 02:09:53 Login Server v.10.10
+2016/4/18 下午 02:12:39 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 02:14:10 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 02:14:18 Login Server v.10.10
+2016/4/18 下午 02:16:52 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 02:19:30 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 02:21:58 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 02:25:01 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:27:30 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:28:26 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 03:28:39 Login Server v.10.10
+2016/4/18 下午 03:29:20 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:30:27 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:30:39 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 03:30:50 Login Server v.10.10
+2016/4/18 下午 03:32:17 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:35:54 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:38:44 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:41:14 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 03:44:47 Login Server v.10.10
+2016/4/18 下午 03:46:33 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 06:34:58 Warning: Unregistered Game Wrold01-1.

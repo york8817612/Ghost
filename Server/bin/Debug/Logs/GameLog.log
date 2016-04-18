@@ -334,3 +334,49 @@ System.IO.IOException: 由於另一個處理序正在使用檔案 'G:\搞鬼私�
 2016/4/17 下午 05:56:12 Game Server v.10.10
 2016/4/17 下午 05:58:05 Game Server v.10.10
 2016/4/17 下午 06:00:16 Game Server v.10.10
+2016/4/17 下午 06:38:15 Game Server v.10.10
+2016/4/17 下午 06:39:29 Game Server v.10.10
+2016/4/17 下午 06:39:35 Game Server v.10.10
+2016/4/17 下午 06:56:52 Game Server v.10.10
+2016/4/17 下午 07:18:49 Game Server v.10.10
+2016/4/17 下午 07:19:36 Game Server v.10.10
+2016/4/17 下午 07:36:01 Game Server v.10.10
+2016/4/17 下午 11:28:43 Game Server v.10.10
+2016/4/18 上午 12:13:40 Game Server v.10.10
+2016/4/18 上午 12:16:13 Game Server v.10.10
+2016/4/18 上午 12:20:36 Game Server v.10.10
+2016/4/18 上午 12:23:16 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 69
+2016/4/18 上午 12:24:38 Game Server v.10.10
+2016/4/18 上午 12:24:49 Game Server v.10.10
+2016/4/18 上午 12:35:32 Game Server v.10.10
+2016/4/18 上午 01:33:36 Game Server v.10.10
+2016/4/18 上午 09:49:29 Game Server v.10.10
+2016/4/18 上午 11:06:24 Game Server v.10.10
+2016/4/18 下午 02:10:36 Game Server v.10.10
+2016/4/18 下午 02:14:13 Game Server v.10.10
+2016/4/18 下午 02:14:29 Game Server v.10.10
+2016/4/18 下午 02:18:00 Game Server v.10.10
+2016/4/18 下午 02:19:54 Game Server v.10.10
+2016/4/18 下午 02:24:34 Game Server v.10.10
+2016/4/18 下午 02:24:56 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentException: 目的陣列不夠長。請檢查 destIndex 與長度，以及陣列的下限。
+   於 System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   於 System.Array.CopyTo(Array array, Int32 index)
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 58
+2016/4/18 下午 02:25:37 Game Server v.10.10
+2016/4/18 下午 03:28:32 Game Server v.10.10
+2016/4/18 下午 03:29:28 Game Server v.10.10
+2016/4/18 下午 03:30:42 Game Server v.10.10
+2016/4/18 下午 03:30:57 Game Server v.10.10
+2016/4/18 下午 03:31:59 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 43
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 64
+2016/4/18 下午 03:32:47 Game Server v.10.10
+2016/4/18 下午 03:37:37 Game Server v.10.10
+2016/4/18 下午 03:40:37 Game Server v.10.10
+2016/4/18 下午 03:44:40 Game Server v.10.10
+2016/4/18 下午 03:44:53 Game Server v.10.10
+2016/4/18 下午 03:46:48 Game Server v.10.10
