@@ -1,16 +1,12 @@
-﻿using Server.Ghost.Characters;
-using Server.Common.IO;
+﻿using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
+using Server.Common.Utilities;
+using Server.Ghost.Accounts;
+using Server.Ghost.Characters;
 using System;
 using System.Net.Sockets;
 using static Server.Common.Constants.ServerUtilities;
-using Server.Ghost.Accounts;
-using Server.Common.Security;
-using Server.Common.Utilities;
-using Server.Common.Data;
-using System.Collections.Generic;
-using System.Net;
 
 namespace Server.Net
 {
@@ -53,35 +49,31 @@ namespace Server.Net
         {
             try
             {
-                PacketDecrypt pd = new PacketDecrypt(1);
-                byte[] ii = pd.Decrypt(inPacket.Array);
+                //PacketDecrypt pd = new PacketDecrypt(1);
+                //byte[] ii = pd.Decrypt(inPacket.Array);
+                byte[] ii = inPacket.Array;
                 Log.Hex("Received packet from {0}: ", ii, this.Title);
 
-                if (ii[0] == (ushort)ClientMessage.GAME_SERVER)
+                if (inPacket.OperationCode == (ushort)ClientMessage.SERVER)
                 {
-                    var ip = new InPacket(ii);
-                    GameHandler.Game_Log_Req(ip, this);
+                    var hand = inPacket.ReadShort(); // 讀取包頭
+                    inPacket.ReadUShort(); // 原始長度
+                    inPacket.ReadUShort(); // CRC
+                    inPacket.ReadInt();
+
+                    switch ((ClientMessage)hand)
+                    {
+                        case ClientMessage.GAMELOG_REQ:
+                            GameHandler.Game_Log_Req(inPacket, this);
+                            break;
+                        case ClientMessage.ENTER_WARP_ACK_REQ:
+                            GameHandler.WarpToMap_Req(inPacket, this);
+                            break;
+                        case ClientMessage.CAN_WARP_ACK_REQ:
+                            GameHandler.WarpToMapAuth_Req(inPacket, this);
+                            break;
+                    }
                 }
-
-                //if (ip.OperationCode == (ushort)ClientMessage.SERVER)
-                //{
-                //    var hand = ip.ReadShort(); // 讀取包頭
-                //    ip.ReadUShort(); // 原始長度
-                //    if (this.Character != null)
-                //    {
-                //        switch ((ClientMessage)hand)
-                //        {
-
-                //        }
-                //    }
-                //    else
-                //    {
-                //        switch ((ClientMessage)hand)
-                //        {
-
-                //        }
-                //    }
-                //}
             }
             catch (HackException e)
             {

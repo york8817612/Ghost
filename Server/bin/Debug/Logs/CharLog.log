@@ -678,3 +678,63 @@ Server.Common.Net.NetworkException: Login server connection failed.
    於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
 2016/4/18 下午 03:42:09 Warning: Server stopped.
 2016/4/18 下午 03:44:49 Char Server v.10.10
+2016/4/18 下午 06:55:12 Char Server v.10.10
+2016/4/18 下午 06:55:12 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: YES)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.CharServer.Main(String[] args) 於 C:\GhostOnline\Server\CharServer\CharServer.cs: 行 77
+2016/4/18 下午 06:55:12 Warning: Server stopped.
+2016/4/18 下午 06:55:31 Char Server v.10.10
+2016/4/18 下午 06:55:49 Unhandled exception from 127.0.0.1: 
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Server.Common.Data.Datum' 不包含 'type' 的定義
+   於 CallSite.Target(Closure , CallSite , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   於 Server.Item..ctor(Object datum) 於 C:\GhostOnline\Server\CharServer\Item.cs: 行 88
+   於 CallSite.Target(Closure , CallSite , Type , Object )
+   於 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   於 Server.Characters.CharacterItems.Load() 於 C:\GhostOnline\Server\CharServer\Characters\CharacterItems.cs: 行 25
+   於 Server.Characters.Character.Load(Boolean IsFullLoad) 於 C:\GhostOnline\Server\CharServer\Characters\Character.cs: 行 90
+   於 Server.Net.CharHandler.MyChar_Info_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\CharServer\Net\CharHandler.cs: 行 46
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\CharServer\Net\Client.cs: 行 58
+2016/4/18 下午 06:56:12 Char Server v.10.10
+2016/4/18 下午 06:56:51 Char Server v.10.10
+2016/4/18 下午 06:57:00 Char Server v.10.10
+2016/4/18 下午 06:57:46 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/18 下午 06:57:46 Warning: Server stopped.
+2016/4/18 下午 07:05:29 Char Server v.10.10
+2016/4/18 下午 07:06:30 Char Server v.10.10
+2016/4/18 下午 07:12:34 Char Server v.10.10
+2016/4/18 下午 07:15:58 Char Server v.10.10
+2016/4/18 下午 07:17:13 Char Server v.10.10
+2016/4/18 下午 07:21:18 Char Server v.10.10
+2016/4/18 下午 07:27:09 Char Server v.10.10
+2016/4/18 下午 07:29:46 Char Server v.10.10
+2016/4/18 下午 07:34:54 Char Server v.10.10
+2016/4/18 下午 07:36:50 Char Server v.10.10
+2016/4/18 下午 07:40:04 Char Server v.10.10
+2016/4/18 下午 07:43:06 Char Server v.10.10
+2016/4/18 下午 07:48:41 Char Server v.10.10
+2016/4/18 下午 07:52:00 Char Server v.10.10
+2016/4/18 下午 07:52:08 Char Server v.10.10
+2016/4/18 下午 07:52:36 Char Server v.10.10
+2016/4/18 下午 07:54:52 Char Server v.10.10
+2016/4/19 下午 06:08:35 Char Server v.10.10
+2016/4/19 下午 06:12:57 Char Server v.10.10
+2016/4/19 下午 06:20:36 Char Server v.10.10
+2016/4/19 下午 06:22:00 Char Server v.10.10
+2016/4/19 下午 06:22:30 Char Server v.10.10
+2016/4/19 下午 06:36:15 Char Server v.10.10
+2016/4/19 下午 06:38:51 Char Server v.10.10
+2016/4/19 下午 07:15:45 Char Server v.10.10
+2016/4/19 下午 07:18:18 Char Server v.10.10

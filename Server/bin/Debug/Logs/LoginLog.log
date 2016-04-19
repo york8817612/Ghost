@@ -521,3 +521,59 @@ System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且�
 2016/4/18 下午 03:44:47 Login Server v.10.10
 2016/4/18 下午 03:46:33 Warning: Unregistered Game Wrold01-1.
 2016/4/18 下午 06:34:58 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 06:55:12 Login Server v.10.10
+2016/4/18 下午 06:55:12 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: YES)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 C:\GhostOnline\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/18 下午 06:55:31 Login Server v.10.10
+2016/4/18 下午 06:56:12 Login Server v.10.10
+2016/4/18 下午 06:56:51 Login Server v.10.10
+2016/4/18 下午 06:57:00 Login Server v.10.10
+2016/4/18 下午 06:57:41 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:05:29 Login Server v.10.10
+2016/4/18 下午 07:06:30 Login Server v.10.10
+2016/4/18 下午 07:12:06 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:12:34 Login Server v.10.10
+2016/4/18 下午 07:15:58 Login Server v.10.10
+2016/4/18 下午 07:17:13 Login Server v.10.10
+2016/4/18 下午 07:18:46 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 07:21:18 Login Server v.10.10
+2016/4/18 下午 07:27:09 Login Server v.10.10
+2016/4/18 下午 07:28:03 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:28:08 Warning: Unregistered Char Wrold01.
+2016/4/18 下午 07:29:46 Login Server v.10.10
+2016/4/18 下午 07:34:54 Login Server v.10.10
+2016/4/18 下午 07:35:21 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:36:50 Login Server v.10.10
+2016/4/18 下午 07:37:19 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:40:04 Login Server v.10.10
+2016/4/18 下午 07:40:18 Login Fail!
+2016/4/18 下午 07:40:20 Login Fail!
+2016/4/18 下午 07:40:46 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:43:06 Login Server v.10.10
+2016/4/18 下午 07:48:41 Login Server v.10.10
+2016/4/18 下午 07:52:00 Login Server v.10.10
+2016/4/18 下午 07:52:08 Login Server v.10.10
+2016/4/18 下午 07:52:36 Login Server v.10.10
+2016/4/18 下午 07:53:11 Warning: Unregistered Game Wrold01-1.
+2016/4/18 下午 07:54:52 Login Server v.10.10
+2016/4/19 下午 06:08:35 Login Server v.10.10
+2016/4/19 下午 06:12:57 Login Server v.10.10
+2016/4/19 下午 06:20:36 Login Server v.10.10
+2016/4/19 下午 06:22:00 Login Server v.10.10
+2016/4/19 下午 06:22:30 Login Server v.10.10
+2016/4/19 下午 06:36:15 Login Server v.10.10
+2016/4/19 下午 06:38:51 Login Server v.10.10
+2016/4/19 下午 07:15:45 Login Server v.10.10
+2016/4/19 下午 07:18:09 Login Fail!
+2016/4/19 下午 07:18:18 Login Server v.10.10

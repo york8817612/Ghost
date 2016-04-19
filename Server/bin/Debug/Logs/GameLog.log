@@ -380,3 +380,41 @@ System.IndexOutOfRangeException: 索引在陣列的界限之外。
 2016/4/18 下午 03:44:40 Game Server v.10.10
 2016/4/18 下午 03:44:53 Game Server v.10.10
 2016/4/18 下午 03:46:48 Game Server v.10.10
+2016/4/18 下午 06:55:12 Game Server v.10.10
+2016/4/18 下午 06:55:31 Game Server v.10.10
+2016/4/18 下午 06:56:12 Game Server v.10.10
+2016/4/18 下午 06:56:51 Game Server v.10.10
+2016/4/18 下午 06:57:01 Game Server v.10.10
+2016/4/18 下午 07:05:29 Game Server v.10.10
+2016/4/18 下午 07:06:30 Game Server v.10.10
+2016/4/18 下午 07:12:34 Game Server v.10.10
+2016/4/18 下午 07:15:58 Game Server v.10.10
+2016/4/18 下午 07:17:13 Game Server v.10.10
+2016/4/18 下午 07:21:18 Game Server v.10.10
+2016/4/18 下午 07:27:09 Game Server v.10.10
+2016/4/18 下午 07:29:46 Game Server v.10.10
+2016/4/18 下午 07:34:54 Game Server v.10.10
+2016/4/18 下午 07:36:50 Game Server v.10.10
+2016/4/18 下午 07:40:04 Game Server v.10.10
+2016/4/18 下午 07:43:06 Game Server v.10.10
+2016/4/18 下午 07:48:41 Game Server v.10.10
+2016/4/18 下午 07:52:00 Game Server v.10.10
+2016/4/18 下午 07:52:08 Game Server v.10.10
+2016/4/18 下午 07:52:35 Game Server v.10.10
+2016/4/18 下午 07:54:52 Game Server v.10.10
+2016/4/19 下午 06:08:35 Game Server v.10.10
+2016/4/19 下午 06:12:57 Game Server v.10.10
+2016/4/19 下午 06:20:36 Game Server v.10.10
+2016/4/19 下午 06:20:54 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 C:\GhostOnline\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 67
+2016/4/19 下午 06:22:00 Game Server v.10.10
+2016/4/19 下午 06:22:30 Game Server v.10.10
+2016/4/19 下午 06:36:15 Game Server v.10.10
+2016/4/19 下午 06:38:51 Game Server v.10.10
+2016/4/19 下午 07:15:45 Game Server v.10.10
+2016/4/19 下午 07:18:18 Game Server v.10.10

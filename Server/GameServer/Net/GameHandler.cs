@@ -6,10 +6,7 @@ using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server.Net
 {
@@ -35,16 +32,13 @@ namespace Server.Net
 
         public static void Game_Log_Req(InPacket lea, Client gc)
         {
-            lea.ReadShort();
-            lea.ReadUShort(); // 原始長度
-            lea.ReadLong();
             int re = SearchBytes(lea.Content, new byte[] { 0x0 });
             string[] data = lea.ReadString(re).Split(new[] { (char)0x20 }, StringSplitOptions.None);
             int encryptKey = int.Parse(data[1]);
             string username = data[2];
             string password = data[4].Replace("\v", "");
             lea.Skip(9);
-            int selectCharacter = lea.ReadByte() - 3;
+            int selectCharacter = lea.ReadByte();
             IPAddress hostid = lea.ReadIPAddress();
 
             gc.SetAccount(new Account(gc));
@@ -93,8 +87,8 @@ namespace Server.Net
 
             Character chr = gc.Character;
 
-            GamePacket.updateCharacterHpSp(gc,chr.Hp, chr.Sp, 0, 0);
-            //GamePacket.FW_DISCOUNTFACTION(gc);
+            GamePacket.updateCharacterHpSp(gc, chr.Hp, chr.Sp, 0, 0);
+            GamePacket.FW_DISCOUNTFACTION(gc);
             GamePacket.getQuestInfo(gc);
             GamePacket.getCharacterStatus(gc);
             GamePacket.getCharacterEquip(gc);
@@ -110,16 +104,14 @@ namespace Server.Net
             GamePacket.INVEN_CASH(gc);
             //GamePacket.INVEN_EQUIP(gc);
             GamePacket.getInvenEquip1(gc, 24, chr.Items.getItems());
-            GamePacket.getInvenEquip2(gc,24, chr.Items.getItems());
-            GamePacket.getInvenSpend3(gc,24, chr.Items.getItems());
-            GamePacket.getInvenOther4(gc,24, chr.Items.getItems());
+            GamePacket.getInvenEquip2(gc, 24, chr.Items.getItems());
+            GamePacket.getInvenSpend3(gc, 24, chr.Items.getItems());
+            GamePacket.getInvenOther4(gc, 24, chr.Items.getItems());
             GamePacket.INVEN_PET5(gc);
         }
 
         public static void Command_Req(InPacket lea, Client gc)
         {
-            lea.ReadInt();
-            lea.ReadInt();
             string[] data = lea.ReadString(30).Split(new[] { (char)0x20 }, StringSplitOptions.None);
 
             if (data.Length < 1)
@@ -130,12 +122,12 @@ namespace Server.Net
                 case "//gogo":
                     if (data.Length != 3)
                         break;
-                    GamePacket.warpToMapAuth(gc,true, Convert.ToInt16(data[1]), Convert.ToInt16(data[2]), -1, -1);
+                    GamePacket.warpToMapAuth(gc, true, Convert.ToInt16(data[1]), Convert.ToInt16(data[2]), -1, -1);
                     break;
                 case "//notice":
                     if (data.Length != 2)
                         break;
-                    GamePacket.getNotice(gc,3, data[1]);
+                    GamePacket.getNotice(gc, 3, data[1]);
                     break;
                 case "//item":
                     if (data.Length != 2)
@@ -158,8 +150,6 @@ namespace Server.Net
 
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {
-            lea.ReadInt();
-            lea.ReadInt();
             int playerId = lea.ReadInt();
             short mapX = lea.ReadShort();
             short mapY = lea.ReadShort();
@@ -179,8 +169,6 @@ namespace Server.Net
 
         public static void UseWater_Req(InPacket lea, Client gc)
         {
-            lea.ReadInt();
-            lea.ReadInt();
             int hp = lea.ReadInt();
             short mp = lea.ReadShort();
             short maxFury = lea.ReadShort();
@@ -190,8 +178,6 @@ namespace Server.Net
 
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)
         {
-            lea.ReadInt();
-            lea.ReadInt();
             short mapX = lea.ReadShort();
             short mapY = lea.ReadShort();
             short playerX = lea.ReadShort();

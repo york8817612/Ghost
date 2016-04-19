@@ -80,61 +80,45 @@ namespace Server.Net
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLV);
+                plew.WriteByte(0xFF);
                 plew.WriteByte(0);
-                plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF);
-                plew.WriteInt(0);
-                plew.WriteInt(chr.MaxHp);
-                plew.WriteInt(chr.Hp);
+                plew.WriteShort((short)chr.MaxHp);
+                plew.WriteShort((short)chr.Hp);
                 plew.WriteShort(chr.MaxSp);
                 plew.WriteShort(chr.Sp);
-                plew.WriteInt(0/*GameConstants.getExpNeededForLevel(chr.Level)*/);
+                plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteInt(chr.Exp);
                 plew.WriteInt(0);
-                plew.WriteInt(0); // 名聲值
-                plew.WriteShort(1200); // 憤怒值
-                plew.WriteShort(1200); // 憤怒值
-                plew.WriteByte(3);
-                plew.WriteByte(3);
+                plew.WriteInt(0);
+                plew.WriteShort(0); // MRage
+                plew.WriteShort(0); // Rage
+                plew.WriteByte(0);
+                plew.WriteByte(0);
                 plew.WriteShort(chr.Str);
                 plew.WriteShort(chr.Dex);
                 plew.WriteShort(chr.Vit);
                 plew.WriteShort(chr.Int);
-                plew.WriteShort(0); // 攻擊力(Max)
-                plew.WriteShort(0); // 攻擊力(Min)
-                plew.WriteShort(0); // 魔攻力(Max)
-                plew.WriteShort(0); // 魔攻力(Min)
-                plew.WriteShort(0); // 
-                plew.WriteShort(0); // 
-                plew.WriteShort(0); // 
-                plew.WriteShort(0); // 
-                plew.WriteShort(0); // 防禦力
-                plew.WriteByte(3);
-                plew.WriteByte(4);
-                plew.WriteByte(5);
+                plew.WriteShort(0); // AtkMax
+                plew.WriteShort(0); // Atk
+                plew.WriteShort(0); // MagicAtkMax
+                plew.WriteShort(0); // MagicAtk
+                plew.WriteShort(0); // Defence
                 plew.WriteByte(0);
-                plew.WriteShort(0); // 能力提升值
-                plew.WriteShort(0); // 技能上升值
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteShort(0); // AbiltyPoints
+                plew.WriteShort(0); // SkillPoints
                 plew.WriteShort(0); // 力量+
                 plew.WriteShort(0); // 敏捷+
                 plew.WriteShort(0); // 氣力+
                 plew.WriteShort(0); // 智力+
                 plew.WriteShort(0); // 攻擊力+
                 plew.WriteShort(0); // 魔攻力+
-                plew.WriteShort(0); // 防禦力+
+                plew.WriteShort(0); // 防禦力 +
                 plew.WriteShort(0);
                 plew.WriteShort(0);
-                plew.WriteShort(0);
-                plew.WriteInt(0);
-                plew.WriteInt(1000);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(-1);
 
                 c.Send(plew);
             }
@@ -327,6 +311,12 @@ namespace Server.Net
                 plew.WriteShort(chr.PlayerX);
                 plew.WriteShort(chr.PlayerY);
 
+                plew.WriteShort(chr.MapX);
+                plew.WriteShort(chr.MapY);
+                plew.WriteShort(chr.PlayerX);
+                plew.WriteShort(chr.PlayerY);
+                plew.WriteHexString("00 70 40 00 E8 03 B7 D9 E7 BB 00 00 BC 0D");
+
                 c.Send(plew);
             }
         }
@@ -478,18 +468,14 @@ namespace Server.Net
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLV);
-                plew.WriteByte(0);
-                plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF);
                 plew.WriteByte(0xFF);
                 plew.WriteByte(0);
+                plew.WriteByte(0); // 變身效果
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
-                plew.WriteByte(0x37);
-                plew.WriteByte(0x45);
-                plew.WriteByte(0x08);
+                plew.WriteByte(0);
 
                 Dictionary<ItemTypeConstants.EquipType, int> eq = new Dictionary<ItemTypeConstants.EquipType, int>();
                 foreach (Item item in chr.Items)
@@ -552,6 +538,12 @@ namespace Server.Net
                 plew.WriteShort(mapY);
                 plew.WriteShort(playerX);
                 plew.WriteShort(playerY);
+
+                plew.WriteShort(mapX);
+                plew.WriteShort(mapY);
+                plew.WriteShort(playerX);
+                plew.WriteShort(playerY);
+                plew.WriteHexString("00 00 00 10 40 00 E8 03 74 73 E6 52 C4 F0");
 
                 c.Send(plew);
             }
