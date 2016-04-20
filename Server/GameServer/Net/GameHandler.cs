@@ -38,7 +38,12 @@ namespace Server.Net
             string username = data[2];
             string password = data[4].Replace("\v", "");
             lea.Skip(9);
-            int selectCharacter = lea.ReadByte();
+            int ops = lea.ReadByte();
+            int selectCharacter = 0;
+            if (ops == 4)
+            {
+                selectCharacter = lea.ReadByte();
+            }
             IPAddress hostid = lea.ReadIPAddress();
 
             gc.SetAccount(new Account(gc));

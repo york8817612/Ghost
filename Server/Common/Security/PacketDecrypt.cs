@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Server.Common.IO.Packet;
+using System;
 
 namespace Server.Common.Security
 {
@@ -20,7 +17,7 @@ namespace Server.Common.Security
         public byte[] Decrypt(byte[] packet)
         {
             int length = packet[4], rsk = 0, lkey = 0;
-            byte[] packetOut = new byte[length];
+            byte[] packetOut = new byte[packet[0] + 5];
 
             for (int i = 0; i < 8; i++)
             {
@@ -31,7 +28,7 @@ namespace Server.Common.Security
             int rkey = 2157;
             lkey = (length * 157) & 0xFF;
 
-            for (int i = 0; i < length - 12; i++)
+            for (int i = 0; i < packet[0] + 5; i++)
             {
                 rsk = (rkey >> 8) & 0xFF;
                 packetOut[i] = (byte)(((packet[i + 12] ^ rsk) ^ pkey[(i % 8)]) ^ lkey);

@@ -418,3 +418,165 @@ System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且�
 2016/4/19 下午 06:38:51 Game Server v.10.10
 2016/4/19 下午 07:15:45 Game Server v.10.10
 2016/4/19 下午 07:18:18 Game Server v.10.10
+2016/4/20 下午 02:44:09 Game Server v.10.10
+2016/4/20 下午 02:44:34 Game Server v.10.10
+2016/4/20 下午 02:44:45 Game Server v.10.10
+2016/4/20 下午 02:45:10 Game Server v.10.10
+2016/4/20 下午 02:49:55 Game Server v.10.10
+2016/4/20 下午 02:53:20 Game Server v.10.10
+2016/4/20 下午 03:02:20 Game Server v.10.10
+2016/4/20 下午 03:03:29 Game Server v.10.10
+2016/4/20 下午 03:04:02 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentException: 目的陣列不夠長。請檢查 destIndex 與長度，以及陣列的下限。
+   於 System.Array.Copy(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)
+   於 System.Array.CopyTo(Array array, Int32 index)
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 58
+2016/4/20 下午 03:04:51 Game Server v.10.10
+2016/4/20 下午 03:06:35 Game Server v.10.10
+2016/4/20 下午 03:07:07 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:09:25 Game Server v.10.10
+2016/4/20 下午 03:10:04 Game Server v.10.10
+2016/4/20 下午 03:10:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:10:27 Warning: Server stopped.
+2016/4/20 下午 03:10:57 Game Server v.10.10
+2016/4/20 下午 03:11:07 Game Server v.10.10
+2016/4/20 下午 03:11:31 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:14:07 Game Server v.10.10
+2016/4/20 下午 03:14:50 Game Server v.10.10
+2016/4/20 下午 03:22:25 Game Server v.10.10
+2016/4/20 下午 03:22:47 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:34:29 Game Server v.10.10
+2016/4/20 下午 03:34:32 Game Server v.10.10
+2016/4/20 下午 03:34:39 Game Server v.10.10
+2016/4/20 下午 03:35:08 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:35:08 Warning: Server stopped.
+2016/4/20 下午 03:35:16 Game Server v.10.10
+2016/4/20 下午 03:35:34 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:36:13 Game Server v.10.10
+2016/4/20 下午 03:36:36 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:39:05 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:39:17 Game Server v.10.10
+2016/4/20 下午 03:39:37 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:40:55 Game Server v.10.10
+2016/4/20 下午 03:41:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:41:27 Warning: Server stopped.
+2016/4/20 下午 03:41:38 Game Server v.10.10
+2016/4/20 下午 03:41:59 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:42:09 Game Server v.10.10
+2016/4/20 下午 03:42:29 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:42:43 Game Server v.10.10
+2016/4/20 下午 03:43:16 Game Server v.10.10
+2016/4/20 下午 03:43:38 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:44:08 Game Server v.10.10
+2016/4/20 下午 03:44:26 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 69
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:46:11 Game Server v.10.10
+2016/4/20 下午 03:46:33 Unhandled Packet Exception from 127.0.0.1: 
+System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且小於集合的大小。
+參數名稱: index
+   於 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   於 System.Collections.Generic.List`1.get_Item(Int32 index)
+   於 Server.Net.GameHandler.Game_Log_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 78
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 74
+2016/4/20 下午 03:47:29 Game Server v.10.10
+2016/4/20 下午 03:48:29 Unhandled Packet Exception from 127.0.0.1: 
+Server.Common.IO.Packet.PacketException: Insufficient space.
+   於 Server.Common.IO.Packet.InPacket.CheckLength(Int32 length) 於 G:\搞鬼私服\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 79
+   於 Server.Common.IO.Packet.InPacket.ReadInt() 於 G:\搞鬼私服\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 142
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 69
+2016/4/20 下午 03:49:24 Unhandled Packet Exception from 127.0.0.1: 
+Server.Common.IO.Packet.PacketException: Insufficient space.
+   於 Server.Common.IO.Packet.InPacket.CheckLength(Int32 length) 於 G:\搞鬼私服\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 79
+   於 Server.Common.IO.Packet.InPacket.ReadShort() 於 G:\搞鬼私服\Ghost\Server\Common\IO\Packet\InPacket.cs: 行 110
+   於 Server.Net.GameHandler.WarpToMap_Req(InPacket lea, Client gc) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\GameHandler.cs: 行 160
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 G:\搞鬼私服\Ghost\Server\GameServer\Net\Client.cs: 行 77
+2016/4/20 下午 03:50:38 Game Server v.10.10
+2016/4/20 下午 03:50:42 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:50:45 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:50:48 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:51:12 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:51:12 Warning: Server stopped.
+2016/4/20 下午 03:51:28 Game Server v.10.10
+2016/4/20 下午 03:51:35 Game Server v.10.10
+2016/4/20 下午 03:57:41 Game Server v.10.10
+2016/4/20 下午 03:58:16 Game Server v.10.10
+2016/4/20 下午 03:58:54 Game Server v.10.10
+2016/4/20 下午 04:59:56 Game Server v.10.10
+2016/4/20 下午 05:03:34 Game Server v.10.10
+2016/4/20 下午 05:03:38 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 05:03:41 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 05:03:50 Game Server v.10.10
+2016/4/20 下午 05:04:15 Game Server v.10.10

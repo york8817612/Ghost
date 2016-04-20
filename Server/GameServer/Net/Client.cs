@@ -1,6 +1,7 @@
 ﻿using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
+using Server.Common.Security;
 using Server.Common.Utilities;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
@@ -49,28 +50,34 @@ namespace Server.Net
         {
             try
             {
-                //PacketDecrypt pd = new PacketDecrypt(1);
-                //byte[] ii = pd.Decrypt(inPacket.Array);
-                byte[] ii = inPacket.Array;
-                Log.Hex("Received packet from {0}: ", ii, this.Title);
+                Log.Hex("Received packet from {0}: ", inPacket.Array, this.Title);
+                PacketDecrypt pd = new PacketDecrypt(1);
 
-                if (inPacket.OperationCode == (ushort)ClientMessage.SERVER)
+                byte[] ii = pd.Decrypt(inPacket.Array);
+                byte[] pp = new byte[ii.Length + 1];
+                Buffer.BlockCopy(ii, 1, pp, 0, ii.Length-1);
+                InPacket ip = new InPacket(pp); 
+                //byte[] ii = inPacket.Array;
+
+                Log.Hex("Received packet from {0}: ", pp, this.Title);
+
+                if (ip.OperationCode == (ushort)ClientMessage.SERVER)
                 {
-                    var hand = inPacket.ReadShort(); // 讀取包頭
-                    inPacket.ReadUShort(); // 原始長度
-                    inPacket.ReadUShort(); // CRC
-                    inPacket.ReadInt();
+                    var hand = ip.ReadShort(); // 讀取包頭
+                    ip.ReadUShort(); // 原始長度
+                    ip.ReadUShort(); // CRC
+                    ip.ReadInt();
 
                     switch ((ClientMessage)hand)
                     {
                         case ClientMessage.GAMELOG_REQ:
-                            GameHandler.Game_Log_Req(inPacket, this);
+                            GameHandler.Game_Log_Req(ip, this);
                             break;
                         case ClientMessage.ENTER_WARP_ACK_REQ:
-                            GameHandler.WarpToMap_Req(inPacket, this);
+                            GameHandler.WarpToMap_Req(ip, this);
                             break;
                         case ClientMessage.CAN_WARP_ACK_REQ:
-                            GameHandler.WarpToMapAuth_Req(inPacket, this);
+                            GameHandler.WarpToMapAuth_Req(ip, this);
                             break;
                     }
                 }

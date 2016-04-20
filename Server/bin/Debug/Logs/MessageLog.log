@@ -170,3 +170,69 @@ Server.Common.Net.NetworkException: Login server connection failed.
 2016/4/19 下午 06:38:51 Message Server v.10.10
 2016/4/19 下午 07:15:45 Message Server v.10.10
 2016/4/19 下午 07:18:18 Message Server v.10.10
+2016/4/20 下午 02:44:09 Message Server v.10.10
+2016/4/20 下午 02:44:09 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.MessageServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\MessageServer\MessageServer.cs: 行 77
+2016/4/20 下午 02:44:09 Warning: Server stopped.
+2016/4/20 下午 02:44:34 Message Server v.10.10
+2016/4/20 下午 02:44:34 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.MessageServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\MessageServer\MessageServer.cs: 行 77
+2016/4/20 下午 02:44:34 Warning: Server stopped.
+2016/4/20 下午 02:44:45 Message Server v.10.10
+2016/4/20 下午 02:44:45 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.MessageServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\MessageServer\MessageServer.cs: 行 77
+2016/4/20 下午 02:44:45 Warning: Server stopped.
+2016/4/20 下午 02:45:10 Message Server v.10.10
+2016/4/20 下午 02:49:55 Message Server v.10.10
+2016/4/20 下午 02:53:20 Message Server v.10.10
+2016/4/20 下午 03:02:20 Message Server v.10.10
+2016/4/20 下午 03:03:29 Message Server v.10.10
+2016/4/20 下午 03:04:51 Message Server v.10.10
+2016/4/20 下午 03:06:35 Message Server v.10.10
+2016/4/20 下午 03:08:55 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:08:56 Warning: Server stopped.
+2016/4/20 下午 03:09:11 Message Server v.10.10
+2016/4/20 下午 03:09:12 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:09:15 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:09:18 Warning: Could not connect to login server at 127.0.0.1:14000.
+2016/4/20 下午 03:09:25 Message Server v.10.10
+2016/4/20 下午 03:10:04 Message Server v.10.10
+2016/4/20 下午 03:10:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:10:27 Warning: Server stopped.

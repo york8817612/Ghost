@@ -577,3 +577,123 @@ System.ArgumentOutOfRangeException: 索引超出範圍。必須為非負數且�
 2016/4/19 下午 07:15:45 Login Server v.10.10
 2016/4/19 下午 07:18:09 Login Fail!
 2016/4/19 下午 07:18:18 Login Server v.10.10
+2016/4/20 下午 02:44:09 Login Server v.10.10
+2016/4/20 下午 02:44:09 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 G:\搞鬼私服\Ghost\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/20 下午 02:44:34 Login Server v.10.10
+2016/4/20 下午 02:44:34 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 G:\搞鬼私服\Ghost\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/20 下午 02:44:45 Login Server v.10.10
+2016/4/20 下午 02:44:45 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.LoginServer.ServerLoop() 於 G:\搞鬼私服\Ghost\Server\LoginServer\LoginServer.cs: 行 59
+2016/4/20 下午 02:45:10 Login Server v.10.10
+2016/4/20 下午 02:45:19 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 02:47:52 Login Fail!
+2016/4/20 下午 02:48:40 Login Fail!
+2016/4/20 下午 02:49:19 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 02:49:55 Login Server v.10.10
+2016/4/20 下午 02:50:57 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 02:53:20 Login Server v.10.10
+2016/4/20 下午 03:02:20 Login Server v.10.10
+2016/4/20 下午 03:02:22 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:03:29 Login Server v.10.10
+2016/4/20 下午 03:04:18 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:04:23 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:04:51 Login Server v.10.10
+2016/4/20 下午 03:05:35 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:06:35 Login Server v.10.10
+2016/4/20 下午 03:08:55 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:09:25 Login Server v.10.10
+2016/4/20 下午 03:10:00 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:10:00 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.BeginReceive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags, AsyncCallback callback, Object state)
+   於 Server.Common.Net.ClientHandler`3..ctor(Socket socket, String title, Object[] args) 於 C:\GhostOnline\Server\Common\Net\ClientHandler.cs: 行 44
+2016/4/20 下午 03:10:04 Login Server v.10.10
+2016/4/20 下午 03:10:56 Login Server v.10.10
+2016/4/20 下午 03:13:59 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:14:35 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:14:40 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:14:45 Login Server v.10.10
+2016/4/20 下午 03:21:54 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:24:08 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:33:54 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:34:11 Login Server v.10.10
+2016/4/20 下午 03:34:24 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:34:36 Login Server v.10.10
+2016/4/20 下午 03:34:53 Login Fail!
+2016/4/20 下午 03:35:01 Login Fail!
+2016/4/20 下午 03:35:13 Login Server v.10.10
+2016/4/20 下午 03:35:48 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:39:12 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:40:50 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:41:09 Login Fail!
+2016/4/20 下午 03:41:13 Login Fail!
+2016/4/20 下午 03:41:19 Login Fail!
+2016/4/20 下午 03:41:35 Login Server v.10.10
+2016/4/20 下午 03:42:05 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:42:41 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:43:04 Login Fail!
+2016/4/20 下午 03:43:07 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:43:12 Login Server v.10.10
+2016/4/20 下午 03:44:04 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:44:51 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:46:57 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:49:42 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:50:34 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:50:50 Login Server v.10.10
+2016/4/20 下午 03:51:05 Login Fail!
+2016/4/20 下午 03:51:10 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:51:27 Login Server v.10.10
+2016/4/20 下午 03:54:07 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:57:32 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:57:48 Login Server v.10.10
+2016/4/20 下午 03:57:50 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:58:11 Login Server v.10.10
+2016/4/20 下午 03:58:33 Login Fail!
+2016/4/20 下午 03:58:37 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 03:58:38 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 03:58:49 Login Server v.10.10
+2016/4/20 下午 04:53:36 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 04:59:51 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 05:00:08 Login Server v.10.10
+2016/4/20 下午 05:02:49 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 05:03:44 Login Server v.10.10
+2016/4/20 下午 05:04:02 Login Fail!
+2016/4/20 下午 05:04:05 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 05:04:07 Warning: Unregistered Char Wrold01.
+2016/4/20 下午 05:04:13 Login Server v.10.10
+2016/4/20 下午 05:06:02 Warning: Unregistered Game Wrold01-1.
+2016/4/20 下午 05:06:05 Warning: Unregistered Char Wrold01.

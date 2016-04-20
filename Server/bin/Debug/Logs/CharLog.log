@@ -738,3 +738,353 @@ Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'Server.Common.Data.Datum
 2016/4/19 下午 06:38:51 Char Server v.10.10
 2016/4/19 下午 07:15:45 Char Server v.10.10
 2016/4/19 下午 07:18:18 Char Server v.10.10
+2016/4/20 下午 02:44:09 Char Server v.10.10
+2016/4/20 下午 02:44:09 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 77
+2016/4/20 下午 02:44:09 Warning: Server stopped.
+2016/4/20 下午 02:44:34 Char Server v.10.10
+2016/4/20 下午 02:44:34 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 77
+2016/4/20 下午 02:44:34 Warning: Server stopped.
+2016/4/20 下午 02:44:45 Char Server v.10.10
+2016/4/20 下午 02:44:45 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: NO)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 77
+2016/4/20 下午 02:44:45 Warning: Server stopped.
+2016/4/20 下午 02:45:10 Char Server v.10.10
+2016/4/20 下午 02:49:55 Char Server v.10.10
+2016/4/20 下午 02:50:58 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 02:50:58 Warning: Server stopped.
+2016/4/20 下午 02:53:20 Char Server v.10.10
+2016/4/20 下午 03:02:20 Char Server v.10.10
+2016/4/20 下午 03:03:29 Char Server v.10.10
+2016/4/20 下午 03:04:24 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:04:24 Warning: Server stopped.
+2016/4/20 下午 03:04:51 Char Server v.10.10
+2016/4/20 下午 03:06:35 Char Server v.10.10
+2016/4/20 下午 03:08:56 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:08:56 Warning: Server stopped.
+2016/4/20 下午 03:09:25 Char Server v.10.10
+2016/4/20 下午 03:10:04 Char Server v.10.10
+2016/4/20 下午 03:10:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:10:27 Warning: Server stopped.
+2016/4/20 下午 03:11:00 Char Server v.10.10
+2016/4/20 下午 03:14:47 Char Server v.10.10
+2016/4/20 下午 03:34:12 Char Server v.10.10
+2016/4/20 下午 03:34:37 Char Server v.10.10
+2016/4/20 下午 03:35:08 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:35:08 Warning: Server stopped.
+2016/4/20 下午 03:35:14 Char Server v.10.10
+2016/4/20 下午 03:35:23 Char Server v.10.10
+2016/4/20 下午 03:35:23 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:35:23 Warning: Server stopped.
+2016/4/20 下午 03:35:38 Char Server v.10.10
+2016/4/20 下午 03:35:38 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:35:38 Warning: Server stopped.
+2016/4/20 下午 03:35:53 Char Server v.10.10
+2016/4/20 下午 03:35:53 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:35:53 Warning: Server stopped.
+2016/4/20 下午 03:36:08 Char Server v.10.10
+2016/4/20 下午 03:36:08 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:36:08 Warning: Server stopped.
+2016/4/20 下午 03:36:23 Char Server v.10.10
+2016/4/20 下午 03:36:24 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:36:24 Warning: Server stopped.
+2016/4/20 下午 03:36:39 Char Server v.10.10
+2016/4/20 下午 03:36:39 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:36:39 Warning: Server stopped.
+2016/4/20 下午 03:36:54 Char Server v.10.10
+2016/4/20 下午 03:36:54 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:36:54 Warning: Server stopped.
+2016/4/20 下午 03:37:09 Char Server v.10.10
+2016/4/20 下午 03:37:09 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:37:09 Warning: Server stopped.
+2016/4/20 下午 03:37:24 Char Server v.10.10
+2016/4/20 下午 03:37:24 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:37:24 Warning: Server stopped.
+2016/4/20 下午 03:37:39 Char Server v.10.10
+2016/4/20 下午 03:37:39 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:37:39 Warning: Server stopped.
+2016/4/20 下午 03:37:54 Char Server v.10.10
+2016/4/20 下午 03:37:54 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:37:54 Warning: Server stopped.
+2016/4/20 下午 03:38:09 Char Server v.10.10
+2016/4/20 下午 03:38:09 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:38:09 Warning: Server stopped.
+2016/4/20 下午 03:38:24 Char Server v.10.10
+2016/4/20 下午 03:38:24 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:38:24 Warning: Server stopped.
+2016/4/20 下午 03:38:39 Char Server v.10.10
+2016/4/20 下午 03:38:39 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:38:39 Warning: Server stopped.
+2016/4/20 下午 03:38:54 Char Server v.10.10
+2016/4/20 下午 03:38:54 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:38:54 Warning: Server stopped.
+2016/4/20 下午 03:39:09 Char Server v.10.10
+2016/4/20 下午 03:39:09 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:39:09 Warning: Server stopped.
+2016/4/20 下午 03:39:24 Char Server v.10.10
+2016/4/20 下午 03:39:24 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:39:24 Warning: Server stopped.
+2016/4/20 下午 03:39:39 Char Server v.10.10
+2016/4/20 下午 03:39:39 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:39:39 Warning: Server stopped.
+2016/4/20 下午 03:39:54 Char Server v.10.10
+2016/4/20 下午 03:39:54 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:39:54 Warning: Server stopped.
+2016/4/20 下午 03:40:09 Char Server v.10.10
+2016/4/20 下午 03:40:09 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:40:09 Warning: Server stopped.
+2016/4/20 下午 03:40:24 Char Server v.10.10
+2016/4/20 下午 03:40:24 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:40:24 Warning: Server stopped.
+2016/4/20 下午 03:40:39 Char Server v.10.10
+2016/4/20 下午 03:40:39 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:40:39 Warning: Server stopped.
+2016/4/20 下午 03:40:54 Char Server v.10.10
+2016/4/20 下午 03:40:54 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:40:55 Warning: Server stopped.
+2016/4/20 下午 03:41:10 Char Server v.10.10
+2016/4/20 下午 03:41:10 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:41:10 Warning: Server stopped.
+2016/4/20 下午 03:41:25 Char Server v.10.10
+2016/4/20 下午 03:41:25 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:41:25 Warning: Server stopped.
+2016/4/20 下午 03:41:27 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:41:27 Warning: Server stopped.
+2016/4/20 下午 03:41:36 Char Server v.10.10
+2016/4/20 下午 03:41:40 Char Server v.10.10
+2016/4/20 下午 03:41:40 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:41:40 Warning: Server stopped.
+2016/4/20 下午 03:41:55 Char Server v.10.10
+2016/4/20 下午 03:41:55 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:41:55 Warning: Server stopped.
+2016/4/20 下午 03:42:10 Char Server v.10.10
+2016/4/20 下午 03:42:10 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:42:10 Warning: Server stopped.
+2016/4/20 下午 03:42:25 Char Server v.10.10
+2016/4/20 下午 03:42:25 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:42:25 Warning: Server stopped.
+2016/4/20 下午 03:42:40 Char Server v.10.10
+2016/4/20 下午 03:42:40 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:42:40 Warning: Server stopped.
+2016/4/20 下午 03:42:55 Char Server v.10.10
+2016/4/20 下午 03:42:55 System.Net.Sockets.SocketException (0x80004005): 一次只能用一個通訊端位址 (通訊協定/網路位址/連接埠)。
+   於 System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   於 System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   於 System.Net.Sockets.TcpListener.Start(Int32 backlog)
+   於 System.Net.Sockets.TcpListener.Start()
+   於 Server.CharServer.Main(String[] args) 於 G:\搞鬼私服\Ghost\Server\CharServer\CharServer.cs: 行 85
+2016/4/20 下午 03:42:55 Warning: Server stopped.
+2016/4/20 下午 03:43:09 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 03:43:09 Warning: Server stopped.
+2016/4/20 下午 03:43:10 Char Server v.10.10
+2016/4/20 下午 03:43:13 Char Server v.10.10
+2016/4/20 下午 03:50:51 Char Server v.10.10
+2016/4/20 下午 03:51:32 Char Server v.10.10
+2016/4/20 下午 03:57:48 Char Server v.10.10
+2016/4/20 下午 03:58:14 Char Server v.10.10
+2016/4/20 下午 03:58:51 Char Server v.10.10
+2016/4/20 下午 05:00:09 Char Server v.10.10
+2016/4/20 下午 05:02:56 System.Net.Sockets.SocketException (0x80004005): 遠端主機已強制關閉一個現存的連線。
+   於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 G:\搞鬼私服\Ghost\Server\Common\Net\ServerHandler.cs: 行 92
+2016/4/20 下午 05:02:56 Warning: Server stopped.
+2016/4/20 下午 05:03:47 Char Server v.10.10
+2016/4/20 下午 05:04:14 Char Server v.10.10
