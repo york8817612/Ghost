@@ -51,7 +51,7 @@ namespace Server.Net
             try
             {
                 Log.Hex("Received packet from {0}: ", inPacket.Array, this.Title);
-                PacketDecrypt pd = new PacketDecrypt(1);
+                PacketCrypt pd = new PacketCrypt(SessionID);
 
                 byte[] ii = pd.Decrypt(inPacket.Array);
                 byte[] pp = new byte[ii.Length + 1];

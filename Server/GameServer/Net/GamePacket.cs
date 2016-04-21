@@ -21,7 +21,7 @@ namespace Server.Net
                 plew.WriteInt(15199);
                 plew.WriteInt(12615854); // TimeLogin
                 plew.WriteBytes(new byte[] { 127, 0, 0, 1 });
-                plew.WriteLong(1); // Key
+                plew.WriteLong(c.SessionID); // Key
 
                 c.Send(plew);
             }
