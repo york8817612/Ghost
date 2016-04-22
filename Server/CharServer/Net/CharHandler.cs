@@ -146,6 +146,7 @@ namespace Server.Net
             int position = lea.ReadInt();
 
             gc.Account.Characters[position].Delete();
+            gc.Account.Characters.Remove(gc.Account.Characters[position]);
 
             CharPacket.Delete_MyChar_Ack(gc, position + 1);
         }

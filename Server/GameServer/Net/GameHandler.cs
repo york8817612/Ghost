@@ -36,14 +36,9 @@ namespace Server.Net
             string[] data = lea.ReadString(re).Split(new[] { (char)0x20 }, StringSplitOptions.None);
             int encryptKey = int.Parse(data[1]);
             string username = data[2];
-            string password = data[4].Replace("\v", "");
-            lea.Skip(9);
-            int ops = lea.ReadByte();
-            int selectCharacter = 0;
-            if (ops == 4)
-            {
-                selectCharacter = lea.ReadByte();
-            }
+            string password = data[4];
+            lea.Skip(206);
+            int selectCharacter = lea.ReadByte();
             IPAddress hostid = lea.ReadIPAddress();
 
             gc.SetAccount(new Account(gc));

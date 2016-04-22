@@ -53,11 +53,15 @@ namespace Server.Net
                 //Log.Hex("Received packet from {0}: ", inPacket.Array, this.Title);
                 PacketCrypt pd = new PacketCrypt(SessionID);
 
-                byte[] ii = pd.Decrypt(inPacket.Array);
-                //byte[] pp = new byte[ii.Length + 1];
-                //Buffer.BlockCopy(ii, 1, pp, 0, ii.Length-1);
-                InPacket ip = new InPacket(ii); 
-                //byte[] ii = inPacket.Array;
+                byte[] ii;
+                if (inPacket.Array[0] == 0x4D && inPacket.Array[1] == 0x0)
+                {
+                    ii = inPacket.Array;
+                }
+                else {
+                    ii = pd.Decrypt(inPacket.Array);
+                }
+                InPacket ip = new InPacket(ii);
 
                 Log.Hex("Received packet from {0}: ", ii, this.Title);
 
