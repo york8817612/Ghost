@@ -50,16 +50,16 @@ namespace Server.Net
         {
             try
             {
-                Log.Hex("Received packet from {0}: ", inPacket.Array, this.Title);
+                //Log.Hex("Received packet from {0}: ", inPacket.Array, this.Title);
                 PacketCrypt pd = new PacketCrypt(SessionID);
 
                 byte[] ii = pd.Decrypt(inPacket.Array);
-                byte[] pp = new byte[ii.Length + 1];
-                Buffer.BlockCopy(ii, 1, pp, 0, ii.Length-1);
-                InPacket ip = new InPacket(pp); 
+                //byte[] pp = new byte[ii.Length + 1];
+                //Buffer.BlockCopy(ii, 1, pp, 0, ii.Length-1);
+                InPacket ip = new InPacket(ii); 
                 //byte[] ii = inPacket.Array;
 
-                Log.Hex("Received packet from {0}: ", pp, this.Title);
+                Log.Hex("Received packet from {0}: ", ii, this.Title);
 
                 if (ip.OperationCode == (ushort)ClientMessage.SERVER)
                 {

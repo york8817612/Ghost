@@ -580,3 +580,194 @@ Server.Common.IO.Packet.PacketException: Insufficient space.
 2016/4/20 下午 05:03:41 Warning: Could not connect to login server at 127.0.0.1:14000.
 2016/4/20 下午 05:03:50 Game Server v.10.10
 2016/4/20 下午 05:04:15 Game Server v.10.10
+2016/4/22 下午 07:30:18 Game Server v.10.10
+2016/4/22 下午 07:30:20 MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root'@'localhost' (using password: YES)
+   於 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   於 MySql.Data.MySqlClient.NativeDriver.AuthenticateNew()
+   於 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   於 MySql.Data.MySqlClient.NativeDriver.Open()
+   於 MySql.Data.MySqlClient.Driver.Open()
+   於 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   於 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   於 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   於 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   於 MySql.Data.MySqlClient.MySqlConnection.Open()
+   於 Server.Common.Data.Database.Test() 於 C:\GhostOnline\Server\Common\Data\Database.cs: 行 109
+   於 Server.GameServer.Main(String[] args) 於 C:\GhostOnline\Server\GameServer\GameServer.cs: 行 111
+2016/4/22 下午 07:30:20 Warning: Server stopped.
+2016/4/22 下午 07:30:48 Game Server v.10.10
+2016/4/22 下午 07:31:14 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:19 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:24 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:29 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:34 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:39 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:44 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:31:48 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:32:43 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:32:48 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:32:53 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:32:58 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:33:04 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:33:09 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:33:13 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt2(Byte[] encryptPacket) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 99
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 65
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:33:14 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:33:15 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt2(Byte[] encryptPacket) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 99
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 65
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:36:19 Game Server v.10.10
+2016/4/22 下午 07:36:43 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:36:48 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:36:53 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:36:58 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:03 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:17 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:17 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:18 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:23 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:28 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:34 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:39 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:44 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:49 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:54 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:37:59 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:04 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:09 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:14 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:19 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:24 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:29 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:34 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:43 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:44 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56
+2016/4/22 下午 07:38:49 Unhandled Packet Exception from 127.0.0.1: 
+System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 Server.Common.Security.PacketCrypt.Decrypt(Byte[] buff) 於 C:\GhostOnline\Server\Common\Security\PacketCrypt.cs.cs: 行 61
+   於 Server.Net.Client.Dispatch(InPacket inPacket) 於 C:\GhostOnline\Server\GameServer\Net\Client.cs: 行 56

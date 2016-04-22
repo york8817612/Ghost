@@ -236,3 +236,5 @@ Server.Common.Net.NetworkException: Login server connection failed.
    於 System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
    於 Server.Common.Net.ServerHandler`3.OnReceive(IAsyncResult ar) 於 C:\GhostOnline\Server\Common\Net\ServerHandler.cs: 行 92
 2016/4/20 下午 03:10:27 Warning: Server stopped.
+2016/4/22 下午 07:30:48 Message Server v.10.10
+2016/4/22 下午 07:36:19 Message Server v.10.10
