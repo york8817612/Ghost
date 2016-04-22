@@ -80,43 +80,43 @@ namespace Server.Net
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLV);
-                plew.WriteByte(0xFF);
                 plew.WriteByte(0);
+                plew.WriteByte(0xFF);
                 plew.WriteShort((short)chr.MaxHp);
                 plew.WriteShort((short)chr.Hp);
                 plew.WriteShort(chr.MaxSp);
                 plew.WriteShort(chr.Sp);
-                plew.WriteInt(0);
+                plew.WriteInt(GameConstants.getExpNeededForLevel(chr.Level));
                 plew.WriteInt(0);
                 plew.WriteInt(chr.Exp);
                 plew.WriteInt(0);
                 plew.WriteInt(0);
-                plew.WriteShort(0); // MRage
-                plew.WriteShort(0); // Rage
+                plew.WriteShort(1200); // 憤怒值(Max)
+                plew.WriteShort(0);    // 憤怒值
+                plew.WriteByte(3);
+                plew.WriteByte(3);     // 跳躍高度
+                plew.WriteShort(chr.Str); // 力量
+                plew.WriteShort(chr.Dex); // 精力
+                plew.WriteShort(chr.Vit); // 氣力
+                plew.WriteShort(chr.Int); // 智力
+                plew.WriteShort(0); // 攻擊力(Max)
+                plew.WriteShort(0); // 攻擊力(Min)
+                plew.WriteShort(0); // 魔攻力(Max)
+                plew.WriteShort(0); // 魔攻力(Min)
+                plew.WriteShort(0); // 防禦力
                 plew.WriteByte(0);
                 plew.WriteByte(0);
-                plew.WriteShort(chr.Str);
-                plew.WriteShort(chr.Dex);
-                plew.WriteShort(chr.Vit);
-                plew.WriteShort(chr.Int);
-                plew.WriteShort(0); // AtkMax
-                plew.WriteShort(0); // Atk
-                plew.WriteShort(0); // MagicAtkMax
-                plew.WriteShort(0); // MagicAtk
-                plew.WriteShort(0); // Defence
                 plew.WriteByte(0);
                 plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteShort(0); // AbiltyPoints
-                plew.WriteShort(0); // SkillPoints
+                plew.WriteShort(0); // 能力上升值
+                plew.WriteShort(0); // 技能上升值
                 plew.WriteShort(0); // 力量+
                 plew.WriteShort(0); // 敏捷+
                 plew.WriteShort(0); // 氣力+
                 plew.WriteShort(0); // 智力+
                 plew.WriteShort(0); // 攻擊力+
                 plew.WriteShort(0); // 魔攻力+
-                plew.WriteShort(0); // 防禦力 +
+                plew.WriteShort(0); // 防禦力+
                 plew.WriteShort(0);
                 plew.WriteShort(0);
 
@@ -194,14 +194,14 @@ namespace Server.Net
                 plew.WriteShort(0); // 技能ID
                 plew.WriteShort(0); // 技能ID
                 plew.WriteShort(0); // 技能ID
-                                    // Point
+                // Point
                 for (int i = 0; i < 2; i++)
                 {
                     plew.WriteByte(5);      // 技能(1) Point
-                    plew.WriteByte(5);      // 技能(2) Point
-                    plew.WriteByte(6);      // 技能(3) Point
-                    plew.WriteByte(6);      // 技能(4) Point
-                    plew.WriteByte(2);      // 技能(5) Point
+                    plew.WriteByte(10);     // 技能(2) Point
+                    plew.WriteByte(20);     // 技能(3) Point
+                    plew.WriteByte(20);     // 技能(4) Point
+                    plew.WriteByte(0);      // 技能(5) Point
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);

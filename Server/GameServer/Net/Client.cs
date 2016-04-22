@@ -70,6 +70,9 @@ namespace Server.Net
 
                     switch ((ClientMessage)hand)
                     {
+                        case ClientMessage.COMMAND_REQ:
+                            GameHandler.Command_Req(ip, this);
+                            break;
                         case ClientMessage.GAMELOG_REQ:
                             GameHandler.Game_Log_Req(ip, this);
                             break;

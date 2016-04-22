@@ -117,7 +117,7 @@ namespace Server.Net
 
         public static void Command_Req(InPacket lea, Client gc)
         {
-            string[] data = lea.ReadString(30).Split(new[] { (char)0x20 }, StringSplitOptions.None);
+            string[] data = lea.ReadString(60).Split(new[] { (char)0x20 }, StringSplitOptions.None);
 
             if (data.Length < 1)
                 return;
@@ -134,10 +134,7 @@ namespace Server.Net
                         break;
                     GamePacket.getNotice(gc, 3, data[1]);
                     break;
-                case "//item":
-                    if (data.Length != 2)
-                        break;
-
+                default:
                     break;
             }
         }

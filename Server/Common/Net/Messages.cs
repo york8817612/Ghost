@@ -47,7 +47,6 @@ namespace Server.Common.Net
     public enum ClientMessage : ushort
     {
         LOGIN_SERVER = 0x55AA,
-        GAME_SERVER = 0x1F,
         SERVER = 0x4D,
 
         // Char
