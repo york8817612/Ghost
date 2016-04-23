@@ -60,7 +60,7 @@ namespace Server.Net
                 else
                 {
                     gc.Account.Characters = new List<Character>();
-                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}'", gc.Account.ID, GameServer.WorldID))
+                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}' ORDER BY position ASC", gc.Account.ID, gc.WorldID))
                     {
                         Character character = new Character(datum.id, gc);
                         character.Load(false);
@@ -159,8 +159,8 @@ namespace Server.Net
             GamePacket.warpToMap(gc, playerId, mapX, mapY, playerX, playerY);
             if (mapX == 3 && mapY == 1)
             {
-                //gc.SendPacket(Packet.Game.Monster.createAllMonster());
-                //gc.SendPacket(Packet.Game.Monster.spawnMonster());
+                MonsterPacket.createAllMonster(gc);
+                MonsterPacket.spawnMonster(gc);
             }
         }
 

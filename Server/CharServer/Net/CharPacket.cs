@@ -15,9 +15,26 @@ namespace Server.Net
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chars.Count);
+                //for (int i = 0; i < 4; i++)
+                //{
+                //    getCharactersData(plew, (i < chars.Count) ? chars[i] : null);
+                //}
                 for (int i = 0; i < 4; i++)
                 {
-                    getCharactersData(plew, (i < chars.Count) ? chars[i] : null);
+                    bool isCreate = false;
+                    foreach (Character chr in chars)
+                    {
+                        if (chr.Position == (i + 1))
+                        {
+                            getCharactersData(plew, chr);
+                            isCreate = true;
+                            break;
+                        }
+                    }
+                    if (!isCreate)
+                    {
+                        getCharactersData(plew, null);
+                    }
                 }
                 gc.Send(plew);
             }

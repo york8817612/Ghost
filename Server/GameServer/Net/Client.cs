@@ -63,14 +63,14 @@ namespace Server.Net
                 }
                 InPacket ip = new InPacket(ii);
 
-                Log.Hex("Received packet from {0}: ", ii, this.Title);
-
                 if (ip.OperationCode == (ushort)ClientMessage.SERVER)
                 {
                     var hand = ip.ReadShort(); // 讀取包頭
                     ip.ReadUShort(); // 原始長度
                     ip.ReadUShort(); // CRC
                     ip.ReadInt();
+
+                    Log.Hex("Received {0}({1}) packet from {2}: ", ii,((ClientMessage)hand).ToString(), hand, this.Title);
 
                     switch ((ClientMessage)hand)
                     {

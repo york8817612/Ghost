@@ -40,7 +40,7 @@ namespace Server.Net
                 else
                 {
                     gc.Account.Characters = new List<Character>();
-                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}'", gc.Account.ID, gc.WorldID))
+                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}' ORDER BY position ASC", gc.Account.ID, gc.WorldID))
                     {
                         Character character = new Character(datum.id, gc);
                         character.Load(false);
@@ -103,18 +103,29 @@ namespace Server.Net
             chr.MaxHp = 75;
             chr.Sp = 25;
             chr.MaxSp = 25;
-            chr.Position = (byte)(gc.Account.Characters.Count + 1);
+
+            int pos = 1;
+            foreach (Character cc in gc.Account.Characters)
+            {
+                if (cc.Position != pos)
+                {
+                    break;
+                }
+                pos++;
+            }
+
+            chr.Position = (byte)(pos);
 
             chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip1));
             chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip1));
             chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
 
-            int pos;
+            
             if ((gc.Account.Characters.Count + 1) <= 4)
             {
                 chr.Save();
-                gc.Account.Characters.Add(chr);
-                pos = (gc.Account.Characters.Count << 8) + 1;
+                gc.Account.Characters.Insert(pos-1, chr);
+                pos = (chr.Position << 8) + 1;
             }
             else if (Database.Exists("Characters", "name = '{0}'", name))
             {
@@ -147,7 +158,7 @@ namespace Server.Net
 
             gc.Account.Characters[position].Delete();
             gc.Account.Characters.Remove(gc.Account.Characters[position]);
-
+            
             CharPacket.Delete_MyChar_Ack(gc, position + 1);
         }
     }

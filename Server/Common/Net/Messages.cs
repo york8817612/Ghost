@@ -57,6 +57,7 @@ namespace Server.Common.Net
 
         // Game
         COMMAND_REQ = 0x10,
+        P_MOVE_C = 0x15,
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
         ENTER_WARP_ACK_REQ = 0x1D,
@@ -64,6 +65,7 @@ namespace Server.Common.Net
         USE_WATER = 0x6F,
         PLAYER_DAMAGE = 0x70,
         CAN_WARP_ACK_REQ = 0x85
+        
     }
 
     public enum LoginServerMessage : byte
