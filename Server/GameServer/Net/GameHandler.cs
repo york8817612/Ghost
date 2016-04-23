@@ -60,7 +60,7 @@ namespace Server.Net
                 else
                 {
                     gc.Account.Characters = new List<Character>();
-                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' && worldId = '{1}' ORDER BY position ASC", gc.Account.ID, gc.WorldID))
+                    foreach (dynamic datum in new Datums("Characters").PopulateWith("id", "accountId = '{0}' ORDER BY position ASC", gc.Account.ID))
                     {
                         Character character = new Character(datum.id, gc);
                         character.Load(false);
