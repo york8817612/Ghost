@@ -49,10 +49,11 @@ namespace Server.Net
 
                 if (inPacket.OperationCode == (ushort)ClientMessage.SERVER)
                 {
-                    var hand = inPacket.ReadShort(); // 讀取包頭
-                    inPacket.ReadUShort(); // 原始長度
+                    var Header = inPacket.ReadShort(); // 讀取包頭
+                    inPacket.ReadInt(); // 原始長度 + CRC
+                    inPacket.ReadInt();
 
-                    switch ((ClientMessage)hand)
+                    switch ((ClientMessage)Header)
                     {
                         case ClientMessage.MYCHAR_INFO_REQ:
                             CharHandler.MyChar_Info_Req(inPacket, this);

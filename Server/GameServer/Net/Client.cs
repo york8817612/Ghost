@@ -65,14 +65,13 @@ namespace Server.Net
 
                 if (ip.OperationCode == (ushort)ClientMessage.SERVER)
                 {
-                    var hand = ip.ReadShort(); // 讀取包頭
-                    ip.ReadUShort(); // 原始長度
-                    ip.ReadUShort(); // CRC
+                    var Header = ip.ReadShort(); // 讀取包頭
+                    ip.ReadInt(); // 原始長度 + CRC
                     ip.ReadInt();
 
-                    Log.Hex("Received {0}({1}) packet from {2}: ", ii,((ClientMessage)hand).ToString(), hand, this.Title);
+                    Log.Hex("Received {0}({1}) packet from {2}: ", ii,((ClientMessage)Header).ToString(), Header, this.Title);
 
-                    switch ((ClientMessage)hand)
+                    switch ((ClientMessage)Header)
                     {
                         case ClientMessage.COMMAND_REQ:
                             GameHandler.Command_Req(ip, this);

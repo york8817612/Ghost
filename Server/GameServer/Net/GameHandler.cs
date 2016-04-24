@@ -87,7 +87,7 @@ namespace Server.Net
 
             Character chr = gc.Character;
 
-            GamePacket.updateCharacterHpSp(gc, chr.Hp, chr.Sp, 0, 0);
+            GamePacket.updateCharacterHpSp(gc, chr.Hp, chr.Mp, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
             GamePacket.getQuestInfo(gc);
             GamePacket.getCharacterStatus(gc);
@@ -99,7 +99,7 @@ namespace Server.Net
             GamePacket.getStoreInfo(gc);
             //GamePacket.getStoreInfo(gc);
             //GamePacket.getStoreInfo(gc);
-            GamePacket.getStoreMoney(gc, 0);
+            GamePacket.getStoreMoney(gc, chr.Money);
             GamePacket.enterMapStart(gc);
             GamePacket.INVEN_CASH(gc);
             //GamePacket.INVEN_EQUIP(gc);
@@ -134,17 +134,6 @@ namespace Server.Net
             }
         }
 
-        public static void Chat_Req(InPacket lea, Client gc)
-        {
-            lea.ReadInt();
-            lea.ReadInt();
-            int charId = lea.ReadInt();
-            lea.ReadInt();
-            lea.ReadBytes(20);
-            string message = lea.ReadString(200);
-            GamePacket.CHAT(gc, message);
-        }
-
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {
             int playerId = lea.ReadInt();
@@ -164,15 +153,6 @@ namespace Server.Net
             }
         }
 
-        public static void UseWater_Req(InPacket lea, Client gc)
-        {
-            int hp = lea.ReadInt();
-            short mp = lea.ReadShort();
-            short maxFury = lea.ReadShort();
-            short fury = lea.ReadShort();
-            GamePacket.updateCharacterHpSp(gc, hp, mp, maxFury, fury);
-        }
-
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)
         {
             short mapX = lea.ReadShort();
@@ -181,6 +161,15 @@ namespace Server.Net
             short playerY = lea.ReadShort();
             bool mapExist = true;
             GamePacket.warpToMapAuth(gc, mapExist, mapX, mapY, playerX, playerY);
+        }
+
+        public static void UseWater_Req(InPacket lea, Client gc)
+        {
+            int hp = lea.ReadInt();
+            short mp = lea.ReadShort();
+            short maxFury = lea.ReadShort();
+            short fury = lea.ReadShort();
+            GamePacket.updateCharacterHpSp(gc, hp, mp, maxFury, fury);
         }
     }
 }

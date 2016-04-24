@@ -18,12 +18,16 @@ namespace Server.Characters
         public int Eyes { get; set; }
         public byte Level { get; set; }
         public byte Class { get; set; }
-        public byte ClassLV { get; set; }
+        public byte ClassLevel { get; set; }
         public int Hp { get; set; }
         public int MaxHp { get; set; }
-        public short Sp { get; set; }
-        public short MaxSp { get; set; }
+        public short Mp { get; set; }
+        public short MaxMp { get; set; }
+        public short Fury { get; set; }
+        public short MaxFury { get; set; }
         public int Exp { get; set; }
+        public int Fame { get; set; }
+        public int Money { get; set; }
         public int Rank { get; set; }
         public short MapX { get; set; }
         public short MapY { get; set; }
@@ -33,12 +37,22 @@ namespace Server.Characters
         public short Dex { get; set; }
         public short Vit { get; set; }
         public short Int { get; set; }
+        public short UpgradeStr { get; set; }
+        public short UpgradeDex { get; set; }
+        public short UpgradeVit { get; set; }
+        public short UpgradeInt { get; set; }
+        public short Attack { get; set; }
+        public short MaxAttack { get; set; }
+        public short UpgradeAttack { get; set; }
+        public short Magic { get; set; }
+        public short MaxMagic { get; set; }
+        public short UpgradeMagic { get; set; }
+        public short Defense { get; set; }
+        public short UpgradeDefense { get; set; }
+        public short AbilityBonus { get; set; }
+        public short SkillBonus { get; set; }
+        public byte JumpHeight { get; set; }
         public byte Position { get; set; }
-
-        public byte ip_1 { get; set; }
-        public byte ip_2 { get; set; }
-        public byte ip_3 { get; set; }
-        public byte ip_4 { get; set; }
 
         public CharacterItems Items { get; private set; }
 
@@ -70,17 +84,35 @@ namespace Server.Characters
             this.Eyes = datum.eyes;
             this.Level = (byte)datum.level;
             this.Class = (byte)datum.classId;
-            this.ClassLV = (byte)datum.classLv;
+            this.ClassLevel = (byte)datum.classLv;
             this.Hp = datum.hp;
             this.MaxHp = datum.maxHp;
-            this.Sp = (short)datum.sp;
-            this.MaxSp = (short)datum.maxSp;
+            this.Mp = (short)datum.mp;
+            this.MaxMp = (short)datum.maxMp;
+            this.Fury = (short)datum.fury;
+            this.MaxFury = (short)datum.maxFury;
             this.Exp = datum.exp;
+            this.Fame = datum.fame;
             this.Rank = datum.rank;
             this.Str = (short)datum.c_str;
             this.Dex = (short)datum.c_dex;
             this.Vit = (short)datum.c_vit;
             this.Int = (short)datum.c_int;
+            this.UpgradeStr = (short)datum.upgradeStr;
+            this.UpgradeDex = (short)datum.upgradeDex;
+            this.UpgradeVit = (short)datum.upgradeVit;
+            this.UpgradeInt = (short)datum.upgradeInt;
+            this.Attack = (short)datum.attack;
+            this.MaxAttack = (short)datum.maxAttack;
+            this.UpgradeAttack = (short)datum.upgradeAttack;
+            this.Magic = (short)datum.magic;
+            this.MaxMagic = (short)datum.maxMagic;
+            this.UpgradeMagic = (short)datum.upgradeMagic;
+            this.Defense = (short)datum.defense;
+            this.UpgradeDefense = (short)datum.upgradeDefense;
+            this.AbilityBonus = (short)datum.abilityBonus;
+            this.SkillBonus = (short)datum.skillBonus;
+            this.JumpHeight = (byte)datum.jumpHeight;
             this.MapX = (short)datum.mapX;
             this.MapY = (short)datum.mapY;
             this.PlayerX = (short)datum.playerX;
@@ -103,17 +135,35 @@ namespace Server.Characters
             datum.eyes = this.Eyes;
             datum.level = this.Level;
             datum.classId = this.Class;
-            datum.classLv = this.ClassLV;
+            datum.classLv = this.ClassLevel;
             datum.hp = this.Hp;
             datum.maxHp = this.MaxHp;
-            datum.sp = this.Sp;
-            datum.maxSp = this.MaxSp;
+            datum.mp = this.Mp;
+            datum.maxMp = this.MaxMp;
+            datum.fury = this.Fury;
+            datum.maxFury = this.MaxFury;
             datum.exp = this.Exp;
+            datum.fame = this.Fame;
             datum.rank = this.Rank;
             datum.c_str = this.Str;
             datum.c_dex = this.Dex;
             datum.c_vit = this.Vit;
             datum.c_int = this.Int;
+            datum.upgradeStr = this.UpgradeStr;
+            datum.upgradeDex = this.UpgradeDex;
+            datum.upgradeVit = this.UpgradeVit;
+            datum.upgradeInt = this.UpgradeInt;
+            datum.attack = this.Attack;
+            datum.maxAttack = this.MaxAttack;
+            datum.upgradeAttack = this.UpgradeAttack;
+            datum.magic = this.Magic;
+            datum.maxMagic = this.MaxMagic;
+            datum.upgradeMagic = this.UpgradeMagic;
+            datum.defense = this.Defense;
+            datum.upgradeDefense = this.UpgradeDefense;
+            datum.abilityBonus = this.AbilityBonus;
+            datum.skillBonus = this.SkillBonus;
+            datum.jumpHeight = this.JumpHeight;
             datum.mapX = this.MapX;
             datum.mapY = this.MapY;
             datum.playerX = this.PlayerX;

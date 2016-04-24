@@ -76,11 +76,11 @@ namespace Server.Net
                 if (inPacket.OperationCode == (ushort)ClientMessage.LOGIN_SERVER)
                 {
                     inPacket.ReadUShort(); // 原始長度
-                    var hand = inPacket.ReadByte(); // 讀取包頭
+                    var Header = inPacket.ReadByte(); // 讀取包頭
 
-                    Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, hand, this.Title);
+                    Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, Header, this.Title);
 
-                    switch ((LoginClientMessage)hand)
+                    switch ((LoginClientMessage)Header)
                     {
                         case LoginClientMessage.LOGIN_REQ:
                             LoginHandler.Login_Req(inPacket, this);

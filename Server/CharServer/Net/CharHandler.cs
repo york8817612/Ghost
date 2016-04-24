@@ -14,8 +14,6 @@ namespace Server.Net
     {
         public static void MyChar_Info_Req(InPacket lea, Client gc)
         {
-            lea.ReadShort();
-            lea.ReadInt();
             string[] data = lea.ReadString(lea.Available).Split(new[] { (char)0x20 }, StringSplitOptions.None);
             int encryptKey = int.Parse(data[1]);
             string username = data[2];
@@ -69,8 +67,6 @@ namespace Server.Net
 
         public static void Create_MyChar_Req(InPacket lea, Client gc)
         {
-            lea.ReadShort();
-            lea.ReadInt();
             string name = lea.ReadString(20);
             int gender = lea.ReadByte();
             int value1 = lea.ReadByte();
@@ -89,7 +85,7 @@ namespace Server.Net
             chr.Title = "江湖人";
             chr.Level = 1;
             chr.Class = 0;
-            chr.ClassLV = 0xFF;
+            chr.ClassLevel = 0xFF;
             chr.Gender = (byte)gender;
             chr.Eyes = eyes;
             chr.Hair = hair;
@@ -101,8 +97,18 @@ namespace Server.Net
             chr.Int = 3;
             chr.Hp = 75;
             chr.MaxHp = 75;
-            chr.Sp = 25;
-            chr.MaxSp = 25;
+            chr.Mp = 25;
+            chr.MaxMp = 25;
+            chr.Fury = 0;
+            chr.MaxFury = 1200;
+            chr.Exp = 0;
+            chr.Money = 0;
+            chr.Attack = 1;
+            chr.MaxAttack = 10;
+            chr.Magic = 1;
+            chr.MaxMagic = 3;
+            chr.Defense = 10;
+            chr.JumpHeight = 3;
 
             int pos = 1;
             foreach (Character cc in gc.Account.Characters)
@@ -120,11 +126,11 @@ namespace Server.Net
             chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip1));
             chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
 
-            
+
             if ((gc.Account.Characters.Count + 1) <= 4)
             {
                 chr.Save();
-                gc.Account.Characters.Insert(pos-1, chr);
+                gc.Account.Characters.Insert(pos - 1, chr);
                 pos = (chr.Position << 8) + 1;
             }
             else if (Database.Exists("Characters", "name = '{0}'", name))
@@ -144,21 +150,17 @@ namespace Server.Net
 
         public static void Check_SameName_Req(InPacket lea, Client gc)
         {
-            lea.ReadShort();
-            lea.ReadInt();
             string name = lea.ReadString(20);
             CharPacket.Check_SameName_Ack(gc, (Database.Exists("Characters", "name = '{0}'", name) ? 0 : 1));
         }
 
         public static void Delete_MyChar_Req(InPacket lea, Client gc)
         {
-            lea.ReadShort();
-            lea.ReadInt();
             int position = lea.ReadInt();
 
             gc.Account.Characters[position].Delete();
             gc.Account.Characters.Remove(gc.Account.Characters[position]);
-            
+
             CharPacket.Delete_MyChar_Ack(gc, position + 1);
         }
     }

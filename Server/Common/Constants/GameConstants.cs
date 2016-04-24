@@ -12,6 +12,10 @@
 
         public static int getExpNeededForLevel(byte level)
         {
+            if (level > 100)
+            {
+                return 20884600;
+            }
             return exp[level - 1];
         }
     }

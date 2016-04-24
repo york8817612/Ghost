@@ -108,7 +108,7 @@ namespace Server.Net
             plew.WriteByte(chr != null ? chr.Gender : 0);
             plew.WriteByte(chr != null ? chr.Level : 0);
             plew.WriteByte(chr != null ? chr.Class : 0);
-            plew.WriteByte(chr != null ? chr.ClassLV : 0);
+            plew.WriteByte(chr != null ? chr.ClassLevel : 0);
             plew.WriteByte(0);
             plew.WriteByte(0);
             plew.WriteByte(0);
