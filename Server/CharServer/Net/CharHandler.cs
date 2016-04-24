@@ -89,8 +89,8 @@ namespace Server.Net
             chr.Gender = (byte)gender;
             chr.Eyes = eyes;
             chr.Hair = hair;
-            chr.MapX = 1;
-            chr.MapY = 1;
+            chr.MapX = 0;
+            chr.MapY = 0;
             chr.Str = 3;
             chr.Dex = 3;
             chr.Vit = 3;
@@ -124,7 +124,7 @@ namespace Server.Net
 
             chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip1));
             chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip1));
-            chr.Items.Add(new Item(8510020, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
+            chr.Items.Add(new Item(8510011, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
 
 
             if ((gc.Account.Characters.Count + 1) <= 4)

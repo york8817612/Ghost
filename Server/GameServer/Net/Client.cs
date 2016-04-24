@@ -15,6 +15,7 @@ namespace Server.Net
     {
         public Account Account { get; private set; }
         public Character Character { get; private set; }
+        public int CharacterID { get; private set; }
         public long SessionID { get; private set; }
 
         public Client(Socket socket) : base(socket) { }
@@ -22,8 +23,9 @@ namespace Server.Net
         protected override void Register()
         {
             GameServer.Clients.Add(this);
+            this.CharacterID = GameServer.Clients.Count;
             this.SessionID = Randomizer.NextLong();
-            GamePacket.Game_Log_Ack(this, GameServer.Clients.Count);
+            GamePacket.Game_Log_Ack(this, CharacterID);
             Log.Inform("Accepted connection from {0}.", this.Title);
         }
 

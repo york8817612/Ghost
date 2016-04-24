@@ -11,6 +11,7 @@ namespace Server.Ghost.Characters
         public int AccountID { get; set; }
         public byte WorldID { get; set; }
 
+        public int CharacterID { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public byte Gender { get; set; }
