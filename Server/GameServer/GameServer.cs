@@ -1,7 +1,7 @@
 ﻿using Server.Common.Data;
 using Server.Common.IO;
 using Server.Interoperability;
-using Server.Net;
+using Server.Ghost;
 using System;
 using System.Collections.Generic;
 using System.Net;

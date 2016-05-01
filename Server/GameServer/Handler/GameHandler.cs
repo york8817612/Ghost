@@ -2,32 +2,17 @@
 using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Security;
+using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
 using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace Server.Net
+namespace Server.Handler
 {
     public static class GameHandler
     {
-        //private static int SearchBytes(byte[] haystack, byte[] needle)
-        //{
-        //    var len = needle.Length;
-        //    var limit = haystack.Length - len;
-        //    for (var i = 0; i <= limit; i++)
-        //    {
-        //        var k = 0;
-        //        for (; k < len; k++)
-        //        {
-        //            if (needle[k] != haystack[i + k]) break;
-        //        }
-        //        if (k == len) return i;
-        //    }
-        //    return -1;
-        //}
-
         public static void Game_Log_Req(InPacket lea, Client gc)
         {
             //int re = SearchBytes(lea.Content, new byte[] { 0x0 });
@@ -92,7 +77,7 @@ namespace Server.Net
             StatusPacket.getStatusInfo(gc);
             InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);
-            SkillPacket.getSkillInfo(gc);
+            SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
             QuestPacket.getQuickSlot(gc);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreInfo(gc);
@@ -121,56 +106,44 @@ namespace Server.Net
                         break;
                     GamePacket.getNotice(gc, 3, command[1]);
                     break;
-                case "//gogo":
-                    if (command.Length != 3)
+                case "//item":
+                    if (command.Length != 4 || Convert.ToByte(command[2]) < 0 || Convert.ToByte(command[2]) > 23 || Convert.ToByte(command[3]) == 0)
                         break;
-                    MapPacket.warpToMapAuth(gc, true, Convert.ToInt16(command[1]), Convert.ToInt16(command[2]), -1, -1);
+                    gc.Character.Items.Add(new Item(Convert.ToInt32(command[1]), Convert.ToByte(command[2]), Convert.ToByte(command[3])));
+                    InventoryPacket.getInvenEquip1(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip2(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenSpend3(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenOther4(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenPet5(gc);
                     break;
                 case "//levelup":
                     StatusPacket.levelUp(gc, gc.Character.Level++);
                     StatusPacket.getStatusInfo(gc);
+                    break;
+                case "//gogo":
+                    if (command.Length != 3)
+                        break;
+                    MapPacket.warpToMapAuth(gc, true, Convert.ToInt16(command[1]), Convert.ToInt16(command[2]), -1, -1);
                     break;
                 default:
                     break;
             }
         }
 
-        public static void WarpToMap_Req(InPacket lea, Client gc)
-        {
-            int playerId = lea.ReadInt();
-            short mapX = lea.ReadShort();
-            short mapY = lea.ReadShort();
-            short playerX = lea.ReadShort();
-            short playerY = lea.ReadShort();
-            gc.Character.MapX = mapX;
-            gc.Character.MapY = mapY;
-            gc.Character.PlayerX = playerX;
-            gc.Character.PlayerY = playerY;
-            MapPacket.warpToMap(gc, playerId, mapX, mapY, playerX, playerY);
-            if (mapX == 3 && mapY == 1)
-            {
-                MonsterPacket.createAllMonster(gc);
-                MonsterPacket.spawnMonster(gc);
-            }
-        }
-
-        public static void WarpToMapAuth_Req(InPacket lea, Client gc)
-        {
-            short mapX = lea.ReadShort();
-            short mapY = lea.ReadShort();
-            short positionX = lea.ReadShort();
-            short positionY = lea.ReadShort();
-            bool isAvailableMap = true;
-            MapPacket.warpToMapAuth(gc, isAvailableMap, mapX, mapY, positionX, positionY);
-        }
-
-        public static void UseWater_Req(InPacket lea, Client gc)
-        {
-            int hp = lea.ReadInt();
-            short mp = lea.ReadShort();
-            short maxFury = lea.ReadShort();
-            short fury = lea.ReadShort();
-            StatusPacket.updateHpMp(gc, hp, mp, maxFury, fury);
-        }
+        //private static int SearchBytes(byte[] haystack, byte[] needle)
+        //{
+        //    var len = needle.Length;
+        //    var limit = haystack.Length - len;
+        //    for (var i = 0; i <= limit; i++)
+        //    {
+        //        var k = 0;
+        //        for (; k < len; k++)
+        //        {
+        //            if (needle[k] != haystack[i + k]) break;
+        //        }
+        //        if (k == len) return i;
+        //    }
+        //    return -1;
+        //}
     }
 }

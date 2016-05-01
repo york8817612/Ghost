@@ -37,14 +37,14 @@ namespace Server.Common.Net
         WhisperFindResult
     }
 
-    public enum LoginClientMessage : byte
+    public enum LoginClientOpcode : byte
     {
         LOGIN_REQ = 0x30,
         SERVERLIST_REQ = 0x32,
         GAME_REQ = 0x34
     }
 
-    public enum ClientMessage : ushort
+    public enum ClientOpcode : ushort
     {
         LOGIN_SERVER = 0x55AA,
         SERVER = 0x4D,
@@ -61,14 +61,17 @@ namespace Server.Common.Net
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
         ENTER_WARP_ACK_REQ = 0x1D,
-        ATTACK_MONSTER = 0x69,
-        USE_WATER = 0x6F,
-        PLAYER_DAMAGE = 0x70,
-        CAN_WARP_ACK_REQ = 0x85
-        
+        ATTACK_MONSTER_REQ = 0x45,
+        MOVE_ITEM_REQ = 0x6C,
+        USE_WATER_REQ = 0x6F,
+        PLAYER_DAMAGE_REQ = 0x70,
+        SKILL_LEVELUP_REQ = 0x74,
+        CAN_WARP_ACK_REQ = 0x85,
+        INVEN_USESPEND_SHOUT_REQ = 0xFA,
+        INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
     }
 
-    public enum LoginServerMessage : byte
+    public enum LoginServerOpcode : byte
     {
         // Login
         LOGIN_ACK = 0x31,
@@ -76,7 +79,7 @@ namespace Server.Common.Net
         GAME_ACK = 0x35,
     }
 
-    public enum ServerMessage : ushort
+    public enum ServerOpcode : ushort
     {
         // Char
         MYCHAR_INFO_ACK = 0x9,

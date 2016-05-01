@@ -8,7 +8,7 @@ using Server.Common.Security;
 using System;
 using System.Collections.Generic;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public static class CharHandler
     {
@@ -76,6 +76,7 @@ namespace Server.Net
             int hair = lea.ReadInt();
             int weapon = lea.ReadInt();
             int armor = lea.ReadInt();
+            int seal = 8510011;
 
             Character chr = new Character();
 
@@ -122,9 +123,13 @@ namespace Server.Net
 
             chr.Position = (byte)(pos);
 
-            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip1));
-            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip1));
-            chr.Items.Add(new Item(8510011, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip2));
+            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip));
+            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip));
+            chr.Items.Add(new Item(seal, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip));
+            chr.Skills.Add(new Skill(1 , 1, 0));
+            chr.Skills.Add(new Skill(2, 1, 1));
+            chr.Skills.Add(new Skill(3, 1, 2));
+            chr.Skills.Add(new Skill(4, 1, 3));
 
 
             if ((gc.Account.Characters.Count + 1) <= 4)

@@ -1,6 +1,6 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Common.Net;
-using Server.Net;
+using Server.Ghost;
 
 namespace Server.Characters
 {

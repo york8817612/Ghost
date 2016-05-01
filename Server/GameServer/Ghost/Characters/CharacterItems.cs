@@ -51,6 +51,20 @@ namespace Server.Ghost.Characters
             }
         }
 
+        public void DeleteItem(List<Item> item, byte type, byte slot)
+        {
+            bool find = false;
+            foreach (Item im in item)
+            {
+                find = (im.type == type && im.slot == slot ? true : false);
+                if (find == true)
+                {
+                    this.Items.Remove(im);
+                    break;
+                }
+            }
+        }
+
         public List<Item> getItems()
         {
             return this.Items;

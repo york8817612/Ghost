@@ -5,7 +5,7 @@ using Server.Common.Net;
 using System;
 using System.Net.Sockets;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public sealed class Client : Session
     {
@@ -47,24 +47,24 @@ namespace Server.Net
             {
                 Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, inPacket.OperationCode, this.Title);
 
-                if (inPacket.OperationCode == (ushort)ClientMessage.SERVER)
+                if (inPacket.OperationCode == (ushort)ClientOpcode.SERVER)
                 {
                     var Header = inPacket.ReadShort(); // 讀取包頭
                     inPacket.ReadInt(); // 原始長度 + CRC
                     inPacket.ReadInt();
 
-                    switch ((ClientMessage)Header)
+                    switch ((ClientOpcode)Header)
                     {
-                        case ClientMessage.MYCHAR_INFO_REQ:
+                        case ClientOpcode.MYCHAR_INFO_REQ:
                             CharHandler.MyChar_Info_Req(inPacket, this);
                             break;
-                        case ClientMessage.CREATE_MYCHAR_REQ:
+                        case ClientOpcode.CREATE_MYCHAR_REQ:
                             CharHandler.Create_MyChar_Req(inPacket, this);
                             break;
-                        case ClientMessage.CHECK_SAMENAME_REQ:
+                        case ClientOpcode.CHECK_SAMENAME_REQ:
                             CharHandler.Check_SameName_Req(inPacket, this);
                             break;
-                        case ClientMessage.DELETE_MYCHAR_REQ:
+                        case ClientOpcode.DELETE_MYCHAR_REQ:
                             CharHandler.Delete_MyChar_Req(inPacket, this);
                             break;
                     }

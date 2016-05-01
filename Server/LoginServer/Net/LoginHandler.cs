@@ -4,7 +4,7 @@ using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Security;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public static class LoginHandler
     {

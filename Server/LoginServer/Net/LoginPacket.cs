@@ -3,7 +3,7 @@ using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Interoperability;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public static class LoginPacket
     {
@@ -12,7 +12,7 @@ namespace Server.Net
          */
         public static void Login_Ack(Client c, ServerState.LoginState state, short encryptKey = 0, bool netCafe = false)
         {
-            using (var plew = new OutPacket(LoginServerMessage.LOGIN_ACK))
+            using (var plew = new OutPacket(LoginServerOpcode.LOGIN_ACK))
             {
                 plew.WriteByte((byte)state);
                 plew.WriteBool(netCafe);
@@ -24,7 +24,7 @@ namespace Server.Net
 
         public static void ServerList_Ack(Client c)
         {
-            using (var plew = new OutPacket(LoginServerMessage.SERVERLIST_ACK))
+            using (var plew = new OutPacket(LoginServerOpcode.SERVERLIST_ACK))
             {
                 for (int i = 0; i < 13; i++)
                 {
@@ -57,7 +57,7 @@ namespace Server.Net
 
         public static void Game_Ack(Client c, ServerState.ChannelState state)
         {
-            using (var plew = new OutPacket(LoginServerMessage.GAME_ACK))
+            using (var plew = new OutPacket(LoginServerOpcode.GAME_ACK))
             {
                 plew.WriteByte((byte)state);
                 plew.WriteString(ServerConstants.SERVER_IP);

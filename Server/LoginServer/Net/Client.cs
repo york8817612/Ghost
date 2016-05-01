@@ -7,7 +7,7 @@ using Server.Interoperability;
 using System;
 using System.Net.Sockets;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public sealed class Client : Session
     {
@@ -73,22 +73,22 @@ namespace Server.Net
         {
             try
             {
-                if (inPacket.OperationCode == (ushort)ClientMessage.LOGIN_SERVER)
+                if (inPacket.OperationCode == (ushort)ClientOpcode.LOGIN_SERVER)
                 {
                     inPacket.ReadUShort(); // 原始長度
                     var Header = inPacket.ReadByte(); // 讀取包頭
 
                     Log.Hex("Received (0x{0:X2}) packet from {1}: ", inPacket.Content, Header, this.Title);
 
-                    switch ((LoginClientMessage)Header)
+                    switch ((LoginClientOpcode)Header)
                     {
-                        case LoginClientMessage.LOGIN_REQ:
+                        case LoginClientOpcode.LOGIN_REQ:
                             LoginHandler.Login_Req(inPacket, this);
                             break;
-                        case LoginClientMessage.SERVERLIST_REQ:
+                        case LoginClientOpcode.SERVERLIST_REQ:
                             LoginHandler.ServerList_Req(inPacket, this);
                             break;
-                        case LoginClientMessage.GAME_REQ:
+                        case LoginClientOpcode.GAME_REQ:
                             LoginHandler.Game_Req(inPacket, this);
                             break;
                     }

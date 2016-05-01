@@ -4,7 +4,7 @@ using Server.Common.Net;
 using System;
 using System.Net.Sockets;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public sealed class Client : Session
     {
@@ -34,7 +34,7 @@ namespace Server.Net
         {
             try
             {
-                switch ((ClientMessage)inPacket.OperationCode)
+                switch ((ClientOpcode)inPacket.OperationCode)
                 {
 
                 }

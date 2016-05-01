@@ -70,8 +70,8 @@ namespace Server.Common.IO.Packet
             this.WriteUShort(operationCode);
         }
 
-        public OutPacket(ServerMessage operationCode) : this((ushort)operationCode) { }
-        public OutPacket(LoginServerMessage operationCode) : this((byte)operationCode) { }
+        public OutPacket(ServerOpcode operationCode) : this((ushort)operationCode) { }
+        public OutPacket(LoginServerOpcode operationCode) : this((byte)operationCode) { }
         public OutPacket(InteroperabilityMessage operationCode) : this((ushort)operationCode) { }
 
         private void Append(long value, int count)

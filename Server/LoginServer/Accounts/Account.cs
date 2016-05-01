@@ -1,6 +1,6 @@
 ﻿using Server.Common.Data;
 using Server.Common.IO;
-using Server.Net;
+using Server.Ghost;
 using System;
 using System.Data;
 

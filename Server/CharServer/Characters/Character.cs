@@ -1,6 +1,6 @@
 ﻿using Server.Common.Data;
 using Server.Common.IO;
-using Server.Net;
+using Server.Ghost;
 
 namespace Server.Characters
 {
@@ -55,6 +55,7 @@ namespace Server.Characters
         public byte Position { get; set; }
 
         public CharacterItems Items { get; private set; }
+        public CharacterSkills Skills { get; private set; }
 
         private bool Assigned { get; set; }
 
@@ -64,6 +65,7 @@ namespace Server.Characters
             this.Client = gc;
 
             this.Items = new CharacterItems(this);
+            this.Skills = new CharacterSkills(this);
         }
 
         public void Load(bool IsFullLoad = true)
@@ -120,6 +122,7 @@ namespace Server.Characters
             this.Position = (byte)datum.position;
 
             this.Items.Load();
+            this.Skills.Load();
         }
 
         public void Save()
@@ -184,6 +187,7 @@ namespace Server.Characters
             }
 
             this.Items.Save();
+            this.Skills.Save();
 
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
@@ -191,6 +195,7 @@ namespace Server.Characters
         public void Delete()
         {
             this.Items.Delete();
+            this.Skills.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 

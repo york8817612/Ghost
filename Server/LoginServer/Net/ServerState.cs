@@ -1,4 +1,4 @@
-﻿namespace Server.Net
+﻿namespace Server.Ghost
 {
     public class ServerState
     {

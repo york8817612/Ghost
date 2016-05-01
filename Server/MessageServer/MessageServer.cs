@@ -2,7 +2,7 @@
 using Server.Interoperability;
 using Server.Common.IO;
 using Server.Common.Constants;
-using Server.Net;
+using Server.Ghost;
 using System;
 using System.Collections.Generic;
 using System.Net;

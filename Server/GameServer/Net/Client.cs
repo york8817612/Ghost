@@ -5,11 +5,12 @@ using Server.Common.Security;
 using Server.Common.Utilities;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
+using Server.Handler;
 using System;
 using System.Net.Sockets;
 using static Server.Common.Constants.ServerUtilities;
 
-namespace Server.Net
+namespace Server.Ghost
 {
     public sealed class Client : Session
     {
@@ -65,27 +66,45 @@ namespace Server.Net
                 }
                 InPacket ip = new InPacket(ii);
 
-                if (ip.OperationCode == (ushort)ClientMessage.SERVER)
+                if (ip.OperationCode == (ushort)ClientOpcode.SERVER)
                 {
                     var Header = ip.ReadShort(); // 讀取包頭
                     ip.ReadInt(); // 原始長度 + CRC
                     ip.ReadInt();
 
-                    Log.Hex("Received {0}({1}) packet from {2}: ", ii,((ClientMessage)Header).ToString(), Header, this.Title);
+                    Log.Hex("Received {0}({1}) packet from {2}: ", ii, ((ClientOpcode)Header).ToString(), Header, this.Title);
 
-                    switch ((ClientMessage)Header)
+                    switch ((ClientOpcode)Header)
                     {
-                        case ClientMessage.COMMAND_REQ:
+                        // Game
+                        case ClientOpcode.COMMAND_REQ:
                             GameHandler.Command_Req(ip, this);
                             break;
-                        case ClientMessage.GAMELOG_REQ:
+                        case ClientOpcode.GAMELOG_REQ:
                             GameHandler.Game_Log_Req(ip, this);
                             break;
-                        case ClientMessage.ENTER_WARP_ACK_REQ:
-                            GameHandler.WarpToMap_Req(ip, this);
+                        // Inventory
+                        case ClientOpcode.MOVE_ITEM_REQ:
+                            InventoryHandler.MoveItem_Req(ip, this);
                             break;
-                        case ClientMessage.CAN_WARP_ACK_REQ:
-                            GameHandler.WarpToMapAuth_Req(ip, this);
+                        case ClientOpcode.INVEN_USESPEND_SHOUT_REQ:
+                        case ClientOpcode.INVEN_USESPEND_SHOUT_ALL_REQ:
+                            InventoryHandler.InvenUseSpendShout_Req(ip, this);
+                            break;
+                        // Skill
+                        case ClientOpcode.SKILL_LEVELUP_REQ:
+                            SkillHandler.SkillLevelUp_Req(ip, this);
+                            break;
+                        // Map
+                        case ClientOpcode.ENTER_WARP_ACK_REQ:
+                            MapHandler.WarpToMap_Req(ip, this);
+                            break;
+                        case ClientOpcode.CAN_WARP_ACK_REQ:
+                            MapHandler.WarpToMapAuth_Req(ip, this);
+                            break;
+                        // Monster
+                        case ClientOpcode.ATTACK_MONSTER_REQ:
+                            MonsterHandler.AttackMonster_Req(ip, this);
                             break;
                     }
                 }
