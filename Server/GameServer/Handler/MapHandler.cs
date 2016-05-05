@@ -1,5 +1,6 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Ghost;
+using System;
 
 namespace Server.Handler
 {
@@ -19,8 +20,17 @@ namespace Server.Handler
             MapPacket.warpToMap(gc, playerId, mapX, mapY, playerX, playerY);
             if (mapX == 2 && mapY == 1)
             {
-                Monster monster = new Monster(1000301, 3, 37, 10, 2, 1, 6433, 917);
+                Random random = new Random();
+                Monster[] monster = new Monster[50];
+                for (int i = 0; i < 50; i++)
+                {
+                    monster[i] = new Monster(1000011, 3, 37, 10, 2, 1, random.Next(25, 4775), random.Next(436, 1045));
+                }
                 MonsterPacket.createAllMonster(gc, monster);
+                for (int i = 0; i < 50; i++)
+                {
+                    MonsterPacket.spawnMonster(gc);
+                }
             }
         }
 

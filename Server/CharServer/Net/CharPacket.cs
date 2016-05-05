@@ -115,49 +115,15 @@ namespace Server.Ghost
             plew.WriteByte(0);
             plew.WriteShort(chr != null ? 1 : 0);
             plew.WriteShort(chr != null ? 1 : 0);
-
-            Dictionary<ItemTypeConstants.EquipType, int> eq = new Dictionary<ItemTypeConstants.EquipType, int>();
-            if (chr != null)
-            {
-                foreach (Item im in chr.Items)
-                {
-                    if (im.type != (byte)ItemTypeConstants.ItemType.Equip)
-                        continue;
-                    switch (im.slot)
-                    {
-                        case (byte)ItemTypeConstants.EquipType.Weapon:
-                            eq.Add(ItemTypeConstants.EquipType.Weapon, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Outfit:
-                            eq.Add(ItemTypeConstants.EquipType.Outfit, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Mantle:
-                            eq.Add(ItemTypeConstants.EquipType.Mantle, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Hat:
-                            eq.Add(ItemTypeConstants.EquipType.Hat, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Face:
-                            eq.Add(ItemTypeConstants.EquipType.Face, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Dress:
-                            eq.Add(ItemTypeConstants.EquipType.Dress, im.ItemID);
-                            break;
-                        case (byte)ItemTypeConstants.EquipType.Face2:
-                            eq.Add(ItemTypeConstants.EquipType.Face2, im.ItemID);
-                            break;
-                    }
-                }
-            }
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Weapon) ? eq[ItemTypeConstants.EquipType.Weapon] : 0); // 武器[Weapon] 8010101
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Outfit) ? eq[ItemTypeConstants.EquipType.Outfit] : 0); // 衣服[Outfit] 8160351
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Face) ? eq[ItemTypeConstants.EquipType.Face] : 0);     // 臉下[Face2]  9410021
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Face2) ? eq[ItemTypeConstants.EquipType.Face2] : 0);   // 臉上[Face]   8710013
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Hat) ? eq[ItemTypeConstants.EquipType.Hat] : 0);       // 帽子[Hat]    8610011
-            plew.WriteInt(chr != null ? chr.Eyes : 0);                                                                      // 眼睛[Eye]    9110011
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Mantle) ? eq[ItemTypeConstants.EquipType.Mantle] : 0); // 服裝[Dress]  9510081
-            plew.WriteInt(eq.ContainsKey(ItemTypeConstants.EquipType.Dress) ? eq[ItemTypeConstants.EquipType.Dress] : 0);   // 披風[Mantle] 8493122
-            plew.WriteInt(chr != null ? chr.Hair : 0);                                                                      // 頭髮[Hair]   9010011
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(0) != null ? chr.Inventory[0].getItem(0).ItemID : 0) : 0);  // 武器[Weapon] 8010101
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(1) != null ? chr.Inventory[0].getItem(1).ItemID : 0) : 0);  // 衣服[Outfit] 8160351
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(9) != null ? chr.Inventory[0].getItem(9).ItemID : 0) : 0);  // 臉下[Face2]  9410021
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(12) != null ? chr.Inventory[0].getItem(12).ItemID : 0) : 0);// 臉上[Face]   8710013
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(6) != null ? chr.Inventory[0].getItem(6).ItemID : 0) : 0);  // 帽子[Hat]    8610011
+            plew.WriteInt(chr != null ? chr.Eyes : 0);                                                    // 眼睛[Eye]    9110011
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(4) != null ? chr.Inventory[0].getItem(4).ItemID : 0) : 0);  // 服裝[Dress]  9510081
+            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(11) != null ? chr.Inventory[0].getItem(11).ItemID : 0) : 0);// 披風[Mantle] 8493122
+            plew.WriteInt(chr != null ? chr.Hair : 0);                                                    // 頭髮[Hair]   9010011
         }
     }
 }

@@ -75,7 +75,7 @@ namespace Server.Ghost
             int eyes = lea.ReadInt();
             int hair = lea.ReadInt();
             int weapon = lea.ReadInt();
-            int armor = lea.ReadInt();
+            int outfit = lea.ReadInt();
             int seal = 8510011;
 
             Character chr = new Character();
@@ -123,9 +123,12 @@ namespace Server.Ghost
 
             chr.Position = (byte)(pos);
 
-            chr.Items.Add(new Item(weapon, (byte)ItemTypeConstants.EquipType.Weapon, (byte)ItemTypeConstants.ItemType.Equip));
-            chr.Items.Add(new Item(armor, (byte)ItemTypeConstants.EquipType.Outfit, (byte)ItemTypeConstants.ItemType.Equip));
-            chr.Items.Add(new Item(seal, (byte)ItemTypeConstants.EquipType.Seal, (byte)ItemTypeConstants.ItemType.Equip));
+            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Weapon, new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
+            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Outfit, new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
+            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Seal, new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
+            chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
+            chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
+            chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
             chr.Skills.Add(new Skill(1 , 1, 0));
             chr.Skills.Add(new Skill(2, 1, 1));
             chr.Skills.Add(new Skill(3, 1, 2));

@@ -84,10 +84,10 @@ namespace Server.Handler
             InventoryPacket.getStoreMoney(gc, chr.Money);
             MapPacket.enterMapStart(gc);
             InventoryPacket.getInvenEquip(gc);
-            InventoryPacket.getInvenEquip1(gc, chr.Items.getItems());
-            InventoryPacket.getInvenEquip2(gc, chr.Items.getItems());
-            InventoryPacket.getInvenSpend3(gc, chr.Items.getItems());
-            InventoryPacket.getInvenOther4(gc, chr.Items.getItems());
+            InventoryPacket.getInvenEquip1(gc);
+            InventoryPacket.getInvenEquip2(gc);
+            InventoryPacket.getInvenSpend3(gc);
+            InventoryPacket.getInvenOther4(gc);
             InventoryPacket.getInvenPet5(gc);
             InventoryPacket.getInvenCash(gc);
         }
@@ -110,10 +110,10 @@ namespace Server.Handler
                     if (command.Length != 4 || Convert.ToByte(command[2]) < 0 || Convert.ToByte(command[2]) > 23 || Convert.ToByte(command[3]) == 0)
                         break;
                     gc.Character.Items.Add(new Item(Convert.ToInt32(command[1]), Convert.ToByte(command[2]), Convert.ToByte(command[3])));
-                    InventoryPacket.getInvenEquip1(gc, gc.Character.Items.getItems());
-                    InventoryPacket.getInvenEquip2(gc, gc.Character.Items.getItems());
-                    InventoryPacket.getInvenSpend3(gc, gc.Character.Items.getItems());
-                    InventoryPacket.getInvenOther4(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip1(gc);
+                    InventoryPacket.getInvenEquip2(gc);
+                    InventoryPacket.getInvenSpend3(gc);
+                    InventoryPacket.getInvenOther4(gc);
                     InventoryPacket.getInvenPet5(gc);
                     break;
                 case "//levelup":

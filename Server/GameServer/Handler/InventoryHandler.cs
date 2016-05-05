@@ -13,34 +13,23 @@ namespace Server.Handler
             byte originalSlot = lea.ReadByte();
             byte moveToType = lea.ReadByte();
             byte moveToSlot = lea.ReadByte();
-            int itemId = 0;
-            List<Item> item = gc.Character.Items.getItems();
-            foreach (Item im in item)
-            {
-                itemId = (im.type == originalType && im.slot == originalSlot) ? im.ItemID : 0;
-                if (itemId != 0)
-                {
-                    im.type = moveToType;
-                    im.slot = moveToSlot;
-                    break;
-                }
-            }
+            gc.Character.Inventory[originalType].Move(originalSlot, moveToSlot, 1);
             switch (originalType)
             {
                 case 0:
                     InventoryPacket.getCharacterEquip(gc);
                     break;
                 case 1:
-                    InventoryPacket.getInvenEquip1(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip1(gc);
                     break;
                 case 2:
-                    InventoryPacket.getInvenEquip2(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip2(gc);
                     break;
                 case 3:
-                    InventoryPacket.getInvenSpend3(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenSpend3(gc);
                     break;
                 case 4:
-                    InventoryPacket.getInvenOther4(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenOther4(gc);
                     break;
                 case 5:
                     InventoryPacket.getInvenPet5(gc);
@@ -54,16 +43,16 @@ namespace Server.Handler
                     InventoryPacket.getCharacterEquip(gc);
                     break;
                 case 1:
-                    InventoryPacket.getInvenEquip1(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip1(gc);
                     break;
                 case 2:
-                    InventoryPacket.getInvenEquip2(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenEquip2(gc);
                     break;
                 case 3:
-                    InventoryPacket.getInvenSpend3(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenSpend3(gc);
                     break;
                 case 4:
-                    InventoryPacket.getInvenOther4(gc, gc.Character.Items.getItems());
+                    InventoryPacket.getInvenOther4(gc);
                     break;
                 case 5:
                     InventoryPacket.getInvenPet5(gc);
@@ -89,9 +78,9 @@ namespace Server.Handler
             lea.ReadByte();
             if (slot >= 0 && slot < 24 && message.Length < 60)
             {
-                gc.Character.Items.DeleteItem(gc.Character.Items.getItems(), (byte)ItemTypeConstants.ItemType.Use, slot);
+                gc.Character.Items.DeleteItem(gc.Character.Items.getItems(), (byte)InventoryType.ItemType.Spend3, slot);
                 MapPacket.InvenUseSpendShout(gc, message);
-                InventoryPacket.getInvenSpend3(gc, gc.Character.Items.getItems());
+                InventoryPacket.getInvenSpend3(gc);
             }
         }
     }

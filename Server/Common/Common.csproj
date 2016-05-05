@@ -49,7 +49,7 @@
     <Compile Include="Collections\PendingKeyedQueue.cs" />
     <Compile Include="Collections\PendingQueue.cs" />
     <Compile Include="Constants\GameConstants.cs" />
-    <Compile Include="Constants\ItemTypeConstants.cs" />
+    <Compile Include="Constants\InventoryType.cs" />
     <Compile Include="Constants\ServerConstants.cs" />
     <Compile Include="Constants\ServerUtilities.cs" />
     <Compile Include="Data\Database.cs" />

@@ -46,6 +46,7 @@
     <Compile Include="Ghost\Characters\Character.cs" />
     <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
+    <Compile Include="Ghost\Inventory.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\Skill.cs" />

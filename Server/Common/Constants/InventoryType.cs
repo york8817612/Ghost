@@ -1,6 +1,6 @@
 ﻿namespace Server.Common.Constants
 {
-    public class ItemTypeConstants
+    public class InventoryType
     {
         public enum EquipType : byte
         {
@@ -24,12 +24,13 @@
 
         public enum ItemType : byte
         {
+            Undefined = 0xFF,
             Equip = 0,
             Equip1 = 1,     // [1]
             Equip2 = 2,     // [2]
-            Use = 3,        // [3]
-            Etc = 4,        // [4]
-            Pet = 5         // [5]
+            Spend3 = 3,     // [3]
+            Other4 = 4,     // [4]
+            Pet5 = 5        // [5]
         }
     }
 }

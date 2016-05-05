@@ -1,4 +1,5 @@
-﻿using Server.Common.Data;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
 using Server.Ghost;
 
@@ -54,6 +55,7 @@ namespace Server.Characters
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
 
+        public Inventory[] Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
 
@@ -64,6 +66,13 @@ namespace Server.Characters
             this.ID = id;
             this.Client = gc;
 
+            this.Inventory = new Inventory[6];
+            Inventory[0] = new Inventory(InventoryType.ItemType.Equip, this);
+            Inventory[1] = new Inventory(InventoryType.ItemType.Equip1, this);
+            Inventory[2] = new Inventory(InventoryType.ItemType.Equip2, this);
+            Inventory[3] = new Inventory(InventoryType.ItemType.Spend3, this);
+            Inventory[4] = new Inventory(InventoryType.ItemType.Other4, this);
+            Inventory[5] = new Inventory(InventoryType.ItemType.Pet5, this);
             this.Items = new CharacterItems(this);
             this.Skills = new CharacterSkills(this);
         }
@@ -121,6 +130,7 @@ namespace Server.Characters
             this.PlayerY = (short)datum.playerY;
             this.Position = (byte)datum.position;
 
+            this.Inventory[0].Load(InventoryType.ItemType.Equip);
             this.Items.Load();
             this.Skills.Load();
         }
@@ -200,6 +210,11 @@ namespace Server.Characters
             Database.Delete("Characters", "id = '{0}'", this.ID);
 
             this.Assigned = false;
+        }
+
+        public Inventory getInventory(InventoryType.ItemType type)
+        {
+            return Inventory[(byte)type];
         }
     }
 }

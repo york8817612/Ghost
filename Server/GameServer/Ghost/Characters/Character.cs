@@ -1,6 +1,7 @@
-﻿using Server.Common.Data;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
-using Server.Ghost;
+using System;
 
 namespace Server.Ghost.Characters
 {
@@ -19,7 +20,7 @@ namespace Server.Ghost.Characters
         public int Eyes { get; set; }
         public byte Level { get; set; }
         public byte Class { get; set; }
-        public byte ClassLV { get; set; }
+        public byte ClassLevel { get; set; }
         public int Hp { get; set; }
         public int MaxHp { get; set; }
         public short Mp { get; set; }
@@ -55,6 +56,7 @@ namespace Server.Ghost.Characters
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
 
+        public Inventory[] Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
 
@@ -65,6 +67,13 @@ namespace Server.Ghost.Characters
             this.ID = id;
             this.Client = gc;
 
+            this.Inventory = new Inventory[6];
+            Inventory[0] = new Inventory(InventoryType.ItemType.Equip, this);
+            Inventory[1] = new Inventory(InventoryType.ItemType.Equip1, this);
+            Inventory[2] = new Inventory(InventoryType.ItemType.Equip2, this);
+            Inventory[3] = new Inventory(InventoryType.ItemType.Spend3, this);
+            Inventory[4] = new Inventory(InventoryType.ItemType.Other4, this);
+            Inventory[5] = new Inventory(InventoryType.ItemType.Pet5, this);
             this.Items = new CharacterItems(this);
             this.Skills = new CharacterSkills(this);
         }
@@ -87,7 +96,7 @@ namespace Server.Ghost.Characters
             this.Eyes = datum.eyes;
             this.Level = (byte)datum.level;
             this.Class = (byte)datum.classId;
-            this.ClassLV = (byte)datum.classLv;
+            this.ClassLevel = (byte)datum.classLv;
             this.Hp = datum.hp;
             this.MaxHp = datum.maxHp;
             this.Mp = (short)datum.mp;
@@ -122,6 +131,12 @@ namespace Server.Ghost.Characters
             this.PlayerY = (short)datum.playerY;
             this.Position = (byte)datum.position;
 
+            this.Inventory[0].Load(InventoryType.ItemType.Equip);
+            this.Inventory[1].Load(InventoryType.ItemType.Equip1);
+            this.Inventory[2].Load(InventoryType.ItemType.Equip2);
+            this.Inventory[3].Load(InventoryType.ItemType.Spend3);
+            this.Inventory[4].Load(InventoryType.ItemType.Other4);
+            this.Inventory[5].Load(InventoryType.ItemType.Pet5);
             this.Items.Load();
             this.Skills.Load();
         }
@@ -139,7 +154,7 @@ namespace Server.Ghost.Characters
             datum.eyes = this.Eyes;
             datum.level = this.Level;
             datum.classId = this.Class;
-            datum.classLv = this.ClassLV;
+            datum.classLv = this.ClassLevel;
             datum.hp = this.Hp;
             datum.maxHp = this.MaxHp;
             datum.mp = this.Mp;
@@ -196,10 +211,16 @@ namespace Server.Ghost.Characters
         public void Delete()
         {
             this.Items.Delete();
+            this.Skills.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 
             this.Assigned = false;
+        }
+
+        public Inventory getInventory(InventoryType.ItemType type)
+        {
+            return Inventory[(byte)type];
         }
     }
 }
