@@ -56,6 +56,7 @@ namespace Server.Ghost.Characters
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
 
+        public Map Map { get; private set; }
         public Inventory[] Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
@@ -216,6 +217,11 @@ namespace Server.Ghost.Characters
             Database.Delete("Characters", "id = '{0}'", this.ID);
 
             this.Assigned = false;
+        }
+
+        public Map SetMap(Map map)
+        {
+            return this.Map = map;
         }
 
         public Inventory getInventory(InventoryType.ItemType type)

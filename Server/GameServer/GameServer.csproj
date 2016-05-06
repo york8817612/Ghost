@@ -49,6 +49,7 @@
     <Compile Include="Ghost\Inventory.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
+    <Compile Include="Ghost\Map.cs" />
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Handler\InventoryHandler.cs" />
     <Compile Include="Handler\MapHandler.cs" />

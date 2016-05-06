@@ -81,7 +81,7 @@ namespace Server.Handler
             QuestPacket.getQuickSlot(gc);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreInfo(gc);
-            InventoryPacket.getStoreMoney(gc, chr.Money);
+            InventoryPacket.getStoreMoney(gc, 0);
             MapPacket.enterMapStart(gc);
             InventoryPacket.getInvenEquip(gc);
             InventoryPacket.getInvenEquip1(gc);

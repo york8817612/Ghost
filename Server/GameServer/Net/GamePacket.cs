@@ -511,10 +511,8 @@ namespace Server.Ghost
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(money);
-                plew.WriteInt(0);
-                plew.WriteInt(pickup);
-                plew.WriteInt(0);
+                plew.WriteLong(money);
+                plew.WriteLong(pickup);
 
                 c.Send(plew);
             }
@@ -729,7 +727,7 @@ namespace Server.Ghost
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(50);
+                plew.WriteInt(monster.Length);
                 for (int i = 0; i < 50; i++)
                 {//??
                     plew.WriteByte(1);
@@ -815,13 +813,28 @@ namespace Server.Ghost
             }
         }
 
-        public static void spawnMonster(Client c)
+        public static void spawnMonster(Client c, Monster Monster, int CharacterID, int Damage, short HitX, short HitY)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.MON_SPAWN))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("00 FB 89 40 1A 00 00 00 00 00 00 00 01 00 00 40 00 00 00 00 10 0B 9E 02 00 00 00 00 00 00 00 00 00 00 00 00 FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 93 0E 82 02 00 00 00 00");
+                plew.WriteByte(Monster.State);
+                plew.WriteHexString("00 00 00");
+                plew.WriteInt(Monster.OriginalID);
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteByte(Monster.Facing);
+                plew.WriteHexString("FF FF FF 00 00 40 40");
+                plew.WriteShort(Monster.PositionX);
+                plew.WriteShort(Monster.PositionY);
+                plew.WriteHexString("00 00 00 00 00 00 00 00");
+                plew.WriteInt(CharacterID);
+                plew.WriteInt(Damage); // Damage
+                plew.WriteInt(Monster.HP);
+                plew.WriteShort(HitX); // Hit
+                plew.WriteShort(HitY); // Hit
+                plew.WriteHexString("00 00 00 00 00 00 00 00");
 
                 c.Send(plew);
             }

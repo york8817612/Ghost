@@ -1,6 +1,8 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Ghost;
 using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Server.Handler
 {
@@ -20,16 +22,29 @@ namespace Server.Handler
             MapPacket.warpToMap(gc, playerId, mapX, mapY, playerX, playerY);
             if (mapX == 2 && mapY == 1)
             {
+                Map map = new Map();
+                gc.Character.SetMap(map);
+                map.Monster = new List<Monster>();
+
                 Random random = new Random();
                 Monster[] monster = new Monster[50];
                 for (int i = 0; i < 50; i++)
                 {
-                    monster[i] = new Monster(1000011, 3, 37, 10, 2, 1, random.Next(25, 4775), random.Next(436, 1045));
+                    int facing = 0;
+                    if (i < 25)
+                    {
+                        facing = 0xFF;
+                    } else
+                    {
+                        facing = 0x01;
+                    }
+                    monster[i] = new Monster(i, 1000101, 3, 3, 10, 1, facing, 1, random.Next(25, 4775), random.Next(436, 1045));
+                    map.Monster.Add(monster[i]);
                 }
                 MonsterPacket.createAllMonster(gc, monster);
                 for (int i = 0; i < 50; i++)
                 {
-                    MonsterPacket.spawnMonster(gc);
+                    MonsterPacket.spawnMonster(gc, monster[i], 0, 0, 0, 0);
                 }
             }
         }
