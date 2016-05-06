@@ -1,5 +1,6 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Ghost;
+using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -9,23 +10,19 @@ namespace Server.Handler
         {
             byte inventory = lea.ReadByte();
             byte slot = lea.ReadByte();
-            byte skillLevel = 0;
-            for (int i = 0; i < 7; i++)
+            List<Skill> s = gc.Character.Skills.getSkills();
+            Skill sl = null;
+            foreach (Skill skill in s)
             {
-                foreach (Skill s in gc.Character.Skills.getSkills())
+                if (skill.slot == slot)
                 {
-                    skillLevel = (s.slot == i ? s.SkillLevel : (byte)0);
-                    if (skillLevel > 0)
-                    {
-                        s.SkillLevel++;
-                        gc.Character.SkillBonus--;
-                        SkillPacket.setSkillLevel(gc, gc.Character.SkillBonus, inventory, slot, s.SkillLevel);
-                        break;
-                    }
-                }
-                if (skillLevel > 0)
+                    sl = skill;
                     break;
+                }
             }
+            if (sl == null)
+                return;
+            SkillPacket.updateSkillLevel(gc, --gc.Character.SkillBonus, inventory, slot, ++sl.SkillLevel);
         }
     }
 }

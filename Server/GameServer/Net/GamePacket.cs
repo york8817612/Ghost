@@ -172,7 +172,6 @@ namespace Server.Ghost
         }
     }
 
-
     public static class InventoryPacket
     {
         public static void getCharacterEquip(Client c)
@@ -632,6 +631,39 @@ namespace Server.Ghost
                 c.Send(plew);
             }
         }
+
+        public static void updateStat(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_STATUP_ACK))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteShort(chr.MaxHp);
+                plew.WriteShort(chr.MaxMp);
+                plew.WriteShort(chr.Str);
+                plew.WriteShort(chr.Dex);
+                plew.WriteShort(chr.Vit);//vit
+                plew.WriteShort(chr.Int);
+                plew.WriteShort(chr.MaxAttack);
+                plew.WriteShort(chr.Attack);
+                plew.WriteShort(chr.MaxMagic);
+                plew.WriteShort(chr.Magic);
+                plew.WriteShort(chr.Defense);
+                plew.WriteByte(3);
+                plew.WriteHexString("64 00 00");
+                plew.WriteShort(chr.AbilityBonus);
+                plew.WriteShort(chr.SkillBonus);
+                plew.WriteShort(chr.UpgradeStr);
+                plew.WriteShort(chr.UpgradeDex);
+                plew.WriteShort(chr.UpgradeVit);//vit
+                plew.WriteShort(chr.UpgradeInt);
+                plew.WriteShort(chr.UpgradeAttack);
+                plew.WriteShort(chr.UpgradeMagic);
+                plew.WriteShort(chr.UpgradeDefense);
+                c.Send(plew);
+            }
+        }
     }
 
     public static class SkillPacket
@@ -642,29 +674,20 @@ namespace Server.Ghost
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                int skillID = 0;
-                int skillLevel = 0;
-                //
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    foreach (Skill s in skill)
+                    int skillID = 0;
+                    foreach(Skill s in skill)
                     {
                         skillID = (s.slot == i ? s.SkillID : 0);
                         if (skillID > 0)
                             break;
                     }
-                    if (i < 4)
-                    {
-                        plew.WriteShort(skillID);
-                    }
-                    else
-                    {
-                        plew.WriteInt(skillID);
-                    }
+                    plew.WriteShort(skillID);
                 }
-                //
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 10; i++)
                 {
+                    int skillLevel = 0;
                     foreach (Skill s in skill)
                     {
                         skillLevel = (s.slot == i ? s.SkillLevel : 0);
@@ -673,20 +696,21 @@ namespace Server.Ghost
                     }
                     plew.WriteByte(skillLevel);
                 }
+                plew.WriteBytes(new byte[174]);
                 c.Send(plew);
             }
         }
 
-        public static void setSkillLevel(Client c, short skillBonus, byte value, byte slot, byte skillLevel)
+        public static void updateSkillLevel(Client c, short skillBonus, byte inventory, byte slot, byte level)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.SKILL_LEVELUP_ACK))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteShort(skillBonus);
-                plew.WriteByte(value);
+                plew.WriteByte(inventory);
                 plew.WriteByte(slot);
-                plew.WriteByte(skillLevel);
+                plew.WriteByte(level);
                 c.Send(plew);
             }
         }

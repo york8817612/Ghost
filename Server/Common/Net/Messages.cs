@@ -65,6 +65,7 @@ namespace Server.Common.Net
         MOVE_ITEM_REQ = 0x6C,
         USE_WATER_REQ = 0x6F,
         PLAYER_DAMAGE_REQ = 0x70,
+        CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,
         CAN_WARP_ACK_REQ = 0x85,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,

@@ -83,6 +83,10 @@ namespace Server.Ghost
                         case ClientOpcode.GAMELOG_REQ:
                             GameHandler.Game_Log_Req(ip, this);
                             break;
+                        // State
+                        case ClientOpcode.CHAR_STATUP_REQ:
+                            StatusHandler.Char_Statup_Req(ip, this);
+                            break;
                         // Inventory
                         case ClientOpcode.MOVE_ITEM_REQ:
                             InventoryHandler.MoveItem_Req(ip, this);
