@@ -100,45 +100,12 @@ namespace Server.Ghost.Characters
         public void AddItem(byte slot, Item item)
         {
             this.inventory.Add(slot, item);
-            item.slot = slot;
         }
 
-        public void Move(byte sSlot, byte dSlot, short slotMax)
+        public void AddItem(byte slot, byte type, Item item)
         {
-            Item source = (Item)inventory[sSlot];
-            Item target = null;
-            try
-            {
-                target = (Item)inventory[dSlot];
-            } catch
-            {
-                target = null;
-            }
-            if (target == null)
-            {
-                source.slot = dSlot;
-                inventory.Add(dSlot, source);
-                inventory.Remove(sSlot);
-            }
-            else if (target.ItemID == source.ItemID)
-            {
-                if (type == InventoryType.ItemType.Equip1 || type == InventoryType.ItemType.Equip2 || type == InventoryType.ItemType.Pet5)
-                {
-                    swap(target, source);
-                }
-                else if (source.Quantity + target.Quantity > slotMax)
-                {
-                    source.Quantity = (byte)((source.Quantity + target.Quantity) - slotMax);
-                    target.Quantity = slotMax;
-                }
-                else {
-                    target.Quantity = (byte)(source.Quantity + target.Quantity);
-                    inventory.Remove(sSlot);
-                }
-            }
-            else {
-                swap(target, source);
-            }
+            this.inventory.Add(slot, item);
+            Parent.Items.Add(new Item(item.ItemID, slot, type, item.Quantity));
         }
 
         private void swap(Item source, Item target)
@@ -150,6 +117,10 @@ namespace Server.Ghost.Characters
             target.slot = swapSlot;
             this.inventory.Add(source.slot, source);
             this.inventory.Add(target.slot, target);
+            Parent.Items.RemoveItem(Parent.Items.getItems(), source.type, source.slot);
+            Parent.Items.Add(source);
+            Parent.Items.RemoveItem(Parent.Items.getItems(), target.type, target.slot);
+            Parent.Items.Add(target);
         }
 
         public Item getItem(byte slot)
@@ -164,30 +135,22 @@ namespace Server.Ghost.Characters
             }
         }
 
-        public void removeItem(byte slot)
+        public void RemoveItem(byte slot)
         {
-            removeItem(slot, (short)1, false);
+            RemoveItem(slot, (short)1, false);
         }
 
-        public void removeItem(byte slot, short quantity, bool allowZero)
+        public void RemoveItem(byte slot, short quantity, bool allowZero)
         {
             Item item = (Item)this.inventory[slot];
             if (item == null)
             {
                 return;
             }
-            item.Quantity = (short)(item.Quantity - quantity);
-            if (item.Quantity < 0)
-            {
-                item.Quantity = 0;
-            }
-            if ((item.Quantity == 0) && (!allowZero))
-            {
-                removeSlot(slot);
-            }
+            RemoveSlot(slot);
         }
 
-        public void removeSlot(byte slot)
+        public void RemoveSlot(byte slot)
         {
             this.inventory.Remove(slot);
         }

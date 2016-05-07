@@ -67,6 +67,8 @@ namespace Server.Common.Net
         PLAYER_DAMAGE_REQ = 0x70,
         CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,
+        QUEST_ALL_REQ = 0x7A,
+        QUEST_DONE_REQ = 0x7C,
         CAN_WARP_ACK_REQ = 0x85,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,

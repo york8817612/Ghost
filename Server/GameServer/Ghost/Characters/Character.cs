@@ -2,6 +2,7 @@
 using Server.Common.Data;
 using Server.Common.IO;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Ghost.Characters
 {
@@ -60,6 +61,7 @@ namespace Server.Ghost.Characters
         public Inventory[] Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
+        public CharacterQuests Quests { get; private set; }
 
         private bool Assigned { get; set; }
 
@@ -77,6 +79,7 @@ namespace Server.Ghost.Characters
             Inventory[5] = new Inventory(InventoryType.ItemType.Pet5, this);
             this.Items = new CharacterItems(this);
             this.Skills = new CharacterSkills(this);
+            this.Quests = new CharacterQuests(this);
         }
 
         public void Load(bool IsFullLoad = true)
@@ -140,6 +143,7 @@ namespace Server.Ghost.Characters
             this.Inventory[5].Load(InventoryType.ItemType.Pet5);
             this.Items.Load();
             this.Skills.Load();
+            this.Quests.Load();
         }
 
         public void Save()
@@ -205,6 +209,7 @@ namespace Server.Ghost.Characters
 
             this.Items.Save();
             this.Skills.Save();
+            this.Quests.Save();
 
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
@@ -213,6 +218,7 @@ namespace Server.Ghost.Characters
         {
             this.Items.Delete();
             this.Skills.Delete();
+            this.Quests.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 

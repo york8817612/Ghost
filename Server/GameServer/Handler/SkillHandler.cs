@@ -8,13 +8,13 @@ namespace Server.Handler
     {
         public static void SkillLevelUp_Req(InPacket lea, Client gc)
         {
-            byte inventory = lea.ReadByte();
+            byte type = lea.ReadByte();
             byte slot = lea.ReadByte();
             List<Skill> s = gc.Character.Skills.getSkills();
             Skill sl = null;
             foreach (Skill skill in s)
             {
-                if (skill.slot == slot)
+                if (skill.Type == type && skill.Slot == slot)
                 {
                     sl = skill;
                     break;
@@ -22,7 +22,7 @@ namespace Server.Handler
             }
             if (sl == null)
                 return;
-            SkillPacket.updateSkillLevel(gc, --gc.Character.SkillBonus, inventory, slot, ++sl.SkillLevel);
+            SkillPacket.updateSkillLevel(gc, --gc.Character.SkillBonus, type, slot, ++sl.SkillLevel);
         }
     }
 }

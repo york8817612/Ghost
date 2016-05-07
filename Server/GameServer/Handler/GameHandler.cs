@@ -73,7 +73,7 @@ namespace Server.Handler
 
             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, chr.MaxFury, chr.Fury);
             GamePacket.FW_DISCOUNTFACTION(gc);
-            QuestPacket.getQuestInfo(gc);
+            QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
             InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);

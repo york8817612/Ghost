@@ -2,6 +2,7 @@
 using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Ghost;
+using Server.Ghost.Characters;
 using System;
 using System.Collections.Generic;
 
@@ -674,12 +675,13 @@ namespace Server.Ghost
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
+                // 共用(0轉)
                 for (int i = 0; i < 10; i++)
                 {
                     int skillID = 0;
                     foreach(Skill s in skill)
                     {
-                        skillID = (s.slot == i ? s.SkillID : 0);
+                        skillID = (s.Type == 0 && s.Slot == i ? s.SkillID : 0);
                         if (skillID > 0)
                             break;
                     }
@@ -690,25 +692,122 @@ namespace Server.Ghost
                     int skillLevel = 0;
                     foreach (Skill s in skill)
                     {
-                        skillLevel = (s.slot == i ? s.SkillLevel : 0);
+                        skillLevel = (s.Type == 0 && s.Slot == i ? s.SkillLevel : 0);
                         if (skillLevel > 0)
                             break;
                     }
                     plew.WriteByte(skillLevel);
                 }
-                plew.WriteBytes(new byte[174]);
+
+                // 1轉
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillID = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillID = (s.Type == 1 && s.Slot == i ? s.SkillID : 0);
+                        if (skillID > 0)
+                            break;
+                    }
+                    plew.WriteShort(skillID);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillLevel = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillLevel = (s.Type == 1 && s.Slot == i ? s.SkillLevel : 0);
+                        if (skillLevel > 0)
+                            break;
+                    }
+                    plew.WriteByte(skillLevel);
+                }
+
+                // 2轉
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillID = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillID = (s.Type == 2 && s.Slot == i ? s.SkillID : 0);
+                        if (skillID > 0)
+                            break;
+                    }
+                    plew.WriteShort(skillID);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillLevel = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillLevel = (s.Type == 2 && s.Slot == i ? s.SkillLevel : 0);
+                        if (skillLevel > 0)
+                            break;
+                    }
+                    plew.WriteByte(skillLevel);
+                }
+
+                // 3轉
+                for (int i = 0; i < 20; i++)
+                {
+                    int skillID = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillID = (s.Type == 3 && s.Slot == i ? s.SkillID : 0);
+                        if (skillID > 0)
+                            break;
+                    }
+                    plew.WriteShort(skillID);
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    int skillLevel = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillLevel = (s.Type == 3 && s.Slot == i ? s.SkillLevel : 0);
+                        if (skillLevel > 0)
+                            break;
+                    }
+                    plew.WriteByte(skillLevel);
+                }
+
+                // 4轉
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillID = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillID = (s.Type == 4 && s.Slot == i ? s.SkillID : 0);
+                        if (skillID > 0)
+                            break;
+                    }
+                    plew.WriteInt(skillID);
+                }
+                for (int i = 0; i < 10; i++)
+                {
+                    int skillLevel = 0;
+                    foreach (Skill s in skill)
+                    {
+                        skillLevel = (s.Type == 4 && s.Slot == i ? s.SkillLevel : 0);
+                        if (skillLevel > 0)
+                            break;
+                    }
+                    plew.WriteByte(skillLevel);
+                }
+                plew.WriteInt(0);
+
                 c.Send(plew);
             }
         }
 
-        public static void updateSkillLevel(Client c, short skillBonus, byte inventory, byte slot, byte level)
+        public static void updateSkillLevel(Client c, short skillBonus, byte type, byte slot, byte level)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.SKILL_LEVELUP_ACK))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteShort(skillBonus);
-                plew.WriteByte(inventory);
+                plew.WriteByte(type);
                 plew.WriteByte(slot);
                 plew.WriteByte(level);
                 c.Send(plew);
@@ -718,13 +817,47 @@ namespace Server.Ghost
 
     public static class QuestPacket
     {
-        public static void getQuestInfo(Client c)
+        public static void getQuestInfo(Client c, List<Quest> quest)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.QUEST_ALL))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 30 30 30 30 30 20 20 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 30 20 20 20 20 20 20 20 20 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 20 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 20 20 20 30 20 20 20 20 20 20 20 20 20 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 30 30 30 30 20 20 20 20 20 30 30 20 20 20 20 20 20 20 20 20 20 20 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 32 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 30 30 30 30 30 30 30 30 30 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 00");
+                plew.WriteInt(0);
+                plew.WriteInt(0);
+                plew.WriteInt(0);
+                int value = 0;
+                foreach(Quest q in quest)
+                {
+                    if (q.QuestState == 0x20)
+                        continue;
+                    plew.WriteShort(q.QuestID);
+                    plew.WriteByte(1);
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00");
+                    value++;
+                }
+
+                for (int i = value; i < 14; i++)
+                {
+                    plew.WriteShort(0);
+                    plew.WriteByte(0);
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00");
+                }
+
+                plew.WriteInt(0);
+
+                for (int i = 0; i < 999; i++)
+                {
+                    int questState = 0 ;
+                    foreach (Quest q in quest)
+                    {
+                        questState = (q.QuestState != 0x20 && (q.QuestID - 1) == i ? q.QuestState : 0x20);
+                        if (questState != 0x20)
+                            break;
+                    }
+                    plew.WriteByte(questState);
+                }
+                plew.WriteByte(0);
 
                 c.Send(plew);
             }
@@ -736,7 +869,7 @@ namespace Server.Ghost
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("01 00 00 00 00 00 00 00 04 00 00 00 00 00 03 00 03 00 00 00 00 00 02 00 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 00 37 45 08");
+                plew.WriteHexString("01 00 00 00 00 00 00 00 04 00 00 00 00 00 03 00 03 00 00 00 00 00 02 00 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF");
 
                 c.Send(plew);
             }

@@ -129,10 +129,10 @@ namespace Server.Ghost
             chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
-            chr.Skills.Add(new Skill(1 , 1, 0));
-            chr.Skills.Add(new Skill(2, 1, 1));
-            chr.Skills.Add(new Skill(3, 1, 2));
-            chr.Skills.Add(new Skill(4, 1, 3));
+            chr.Skills.Add(new Skill(1 , 1, 0, 0));
+            chr.Skills.Add(new Skill(2, 1, 0, 1));
+            chr.Skills.Add(new Skill(3, 1, 0, 2));
+            chr.Skills.Add(new Skill(4, 1, 0, 3));
 
 
             if ((gc.Account.Characters.Count + 1) <= 4)

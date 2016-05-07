@@ -1,7 +1,6 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Ghost;
-using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -13,7 +12,11 @@ namespace Server.Handler
             byte originalSlot = lea.ReadByte();
             byte moveToType = lea.ReadByte();
             byte moveToSlot = lea.ReadByte();
-            gc.Character.Inventory[originalType].Move(originalSlot, moveToSlot, 1);
+            Item originalItem = gc.Character.Items.SearchItem(gc.Character.Items.getItems(), originalType, originalSlot);
+            gc.Character.Items.Add(new Item(originalItem.ItemID, moveToSlot, moveToType, originalItem.Quantity));
+            gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
+            gc.Character.Inventory[originalType].RemoveItem(originalSlot);
+            gc.Character.Inventory[moveToType].AddItem(moveToSlot, originalItem);
             switch (originalType)
             {
                 case 0:
@@ -78,7 +81,7 @@ namespace Server.Handler
             lea.ReadByte();
             if (slot >= 0 && slot < 24 && message.Length < 60)
             {
-                gc.Character.Items.DeleteItem(gc.Character.Items.getItems(), (byte)InventoryType.ItemType.Spend3, slot);
+                gc.Character.Inventory[3].RemoveItem(slot);
                 MapPacket.InvenUseSpendShout(gc, message);
                 InventoryPacket.getInvenSpend3(gc);
             }

@@ -8,10 +8,6 @@ namespace Server.Ghost.Characters
     {
         public Character Parent { get; private set; }
 
-        public int SkillID { get; set; }
-        public int SkillLevel { get; set; }
-        public int Position { get; set; }
-
         private List<Skill> Skills { get; set; }
 
         public CharacterSkills(Character parent)

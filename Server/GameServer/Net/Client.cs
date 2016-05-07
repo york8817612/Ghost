@@ -99,6 +99,10 @@ namespace Server.Ghost
                         case ClientOpcode.SKILL_LEVELUP_REQ:
                             SkillHandler.SkillLevelUp_Req(ip, this);
                             break;
+                        // Quest
+                        case ClientOpcode.QUEST_ALL_REQ:
+                            QuestHandler.Quest_All_Req(ip, this);
+                            break;
                         // Map
                         case ClientOpcode.ENTER_WARP_ACK_REQ:
                             MapHandler.WarpToMap_Req(ip, this);

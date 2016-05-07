@@ -10,7 +10,8 @@ namespace Server.Ghost
         public int ID { get; private set; }
         public int SkillID { get; set; }
         public byte SkillLevel { get; set; }
-        public byte slot { get; set; }
+        public byte Type { get; set; }
+        public byte Slot { get; set; }
 
         public bool Assigned { get; set; }
 
@@ -29,11 +30,12 @@ namespace Server.Ghost
             }
         }
 
-        public Skill(int skillID, byte skillLevel, byte slot)
+        public Skill(int SkillID, byte SkillLevel, byte Type, byte Slot)
         {
-            this.SkillID = skillID;
-            this.SkillLevel = skillLevel;
-            this.slot = slot;
+            this.SkillID = SkillID;
+            this.SkillLevel = SkillLevel;
+            this.Type = Type;
+            this.Slot = Slot;
         }
 
         public Skill(dynamic datum)
@@ -43,7 +45,8 @@ namespace Server.Ghost
 
             this.SkillID = datum.skillId;
             this.SkillLevel = (byte)datum.skillLevel;
-            this.slot = (byte)datum.slot;
+            this.Type = (byte)datum.type;
+            this.Slot = (byte)datum.slot;
         }
 
         public void Save()
@@ -53,7 +56,8 @@ namespace Server.Ghost
             datum.cid = this.Character.ID;
             datum.skillId = this.SkillID;
             datum.skillLevel = this.SkillLevel;
-            datum.slot = this.slot;
+            datum.type = this.Type;
+            datum.slot = this.Slot;
 
             if (this.Assigned)
             {
@@ -63,7 +67,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Skills", "id", "cid = '{0}' && skillId = '{1}' && skillLevel = '{2}' && slot = '{3}'", this.Character.ID, this.SkillID, this.SkillLevel, this.slot);
+                this.ID = Database.Fetch("Skills", "id", "cid = '{0}' && skillId = '{1}' && skillLevel = '{2}' && type = '{3}' && slot = '{4}'", this.Character.ID, this.SkillID, this.SkillLevel, this.Type, this.Slot);
 
                 this.Assigned = true;
             }
