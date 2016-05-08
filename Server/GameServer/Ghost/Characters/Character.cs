@@ -58,7 +58,7 @@ namespace Server.Ghost.Characters
         public byte Position { get; set; }
 
         public Map Map { get; private set; }
-        public Inventory[] Inventory { get; private set; }
+        public List<Inventory> Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
@@ -70,13 +70,13 @@ namespace Server.Ghost.Characters
             this.ID = id;
             this.Client = gc;
 
-            this.Inventory = new Inventory[6];
-            Inventory[0] = new Inventory(InventoryType.ItemType.Equip, this);
-            Inventory[1] = new Inventory(InventoryType.ItemType.Equip1, this);
-            Inventory[2] = new Inventory(InventoryType.ItemType.Equip2, this);
-            Inventory[3] = new Inventory(InventoryType.ItemType.Spend3, this);
-            Inventory[4] = new Inventory(InventoryType.ItemType.Other4, this);
-            Inventory[5] = new Inventory(InventoryType.ItemType.Pet5, this);
+            this.Inventory = new List<Inventory>();
+            Inventory.Add(new Inventory(InventoryType.ItemType.Equip, this));
+            Inventory.Add(new Inventory(InventoryType.ItemType.Equip1, this));
+            Inventory.Add(new Inventory(InventoryType.ItemType.Equip2, this));
+            Inventory.Add(new Inventory(InventoryType.ItemType.Spend3, this));
+            Inventory.Add(new Inventory(InventoryType.ItemType.Other4, this));
+            Inventory.Add(new Inventory(InventoryType.ItemType.Pet5, this));
             this.Items = new CharacterItems(this);
             this.Skills = new CharacterSkills(this);
             this.Quests = new CharacterQuests(this);

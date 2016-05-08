@@ -136,6 +136,140 @@ namespace Server.Ghost
             }
         }
 
+        public static void removeUser(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.LEAVE_WARP_ACK))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(0); // 玩家ID
+
+                c.Send(plew);
+            }
+        }
+
+        public static void createUser(Client c, int playerCount)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.USER_CREATE))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(playerCount); // 玩家數量 - 1
+                for (int i = 0; i < playerCount; i++)
+                {
+                    plew.WriteInt(0); // 玩家ID
+                    plew.WriteString("", 16); // 玩家名稱
+                    plew.WriteString("", 10); // 玩家稱號
+                    plew.WriteShort(0); // 玩家 PositionX
+                    plew.WriteShort(0); // 玩家 PositionY
+                    plew.WriteByte(0); // 性別
+                    plew.WriteByte(0); // 等級
+                    plew.WriteByte(0); // 職業
+                    plew.WriteByte(-1);
+                    plew.WriteByte(-1);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0); // HidePlayer
+                    plew.WriteByte(0); // ReflectorSkill
+                    plew.WriteByte(0); // 1 : 個人商店
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+                    plew.WriteByte(1);
+
+                    plew.WriteInt(0); // 頭髮[Hair]
+                    plew.WriteInt(0); // 臉上[Face]
+                    plew.WriteInt(0); // 臉下[Face2]
+                    plew.WriteInt(0); // 頭部[Hat]
+                    plew.WriteInt(0); // 眼睛[Eyes]
+                    plew.WriteInt(0); // 衣服[Outfit]
+                    plew.WriteInt(0); // 服裝[Dress]
+                    plew.WriteInt(0); // 武器[Weapon]
+                    plew.WriteInt(0); // 披風[Mantle]
+                    plew.WriteInt(0); // 靈物[Pet]
+                    plew.WriteInt(0); // [HairAcc]
+                    plew.WriteInt(0); // 玩物[Toy]
+
+                    // 寵物
+                    plew.WriteString("", 16); // 名稱
+                    plew.WriteByte(0); // 等級
+                    plew.WriteHexString("00 00 00");
+                    plew.WriteInt(0); // 血量
+                    plew.WriteInt(0); // MaxMP
+                    plew.WriteInt(0); // 經驗值
+
+                    // 玩物
+                    plew.WriteString("", 16); // 名稱
+                    plew.WriteByte(0); // 等級
+                    plew.WriteHexString("00 00 00");
+                    plew.WriteInt(0); // 血量
+                    plew.WriteInt(0); // MaxMP
+
+                    plew.WriteHexString("00 00"); // 武器 Glow ++
+                    plew.WriteHexString("00 00");
+
+                    // 遠端IP位置
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+
+                    // 本地IP位置
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+
+                    plew.WriteHexString("1F 40");
+                    // 個人商店
+                    plew.WriteString("", 22); // 個人商店名稱
+                    plew.WriteString("", 20);
+
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
+
+                    plew.WriteByte(0);
+                    plew.WriteByte(0); // Like Warp On Player Effect
+                    plew.WriteByte(0);
+                    plew.WriteByte(0); // 泡泡效果
+                    plew.WriteByte(0); // 泡泡效果
+                    plew.WriteByte(0);
+                    plew.WriteShort(0);
+                    plew.WriteShort(0);// 玩家ID [Map Number]
+                    plew.WriteHexString("FF 00");
+                }
+
+                c.Send(plew);
+            }
+        }
+
+        public static void userDead(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.PLAYER_DEAD_ACK))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(0); // 玩家ID
+                plew.WriteShort(1);
+                plew.WriteShort(1);
+                plew.WriteShort(0); // 玩家 PositionX
+                plew.WriteShort(0); // 玩家 PositionY
+
+                plew.WriteShort(1);
+                plew.WriteShort(1);
+                plew.WriteShort(0); // 玩家 PositionX
+                plew.WriteShort(0); // 玩家 PositionY
+                c.Send(plew);
+            }
+        }
+
         public static void warpToMapAuth(Client c, Boolean isAvailableMap, short mapX, short mapY, short positionX, short positionY)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CAN_WARP_ACK))
