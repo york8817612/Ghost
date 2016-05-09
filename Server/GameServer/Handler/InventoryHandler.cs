@@ -13,10 +13,21 @@ namespace Server.Handler
             byte moveToType = lea.ReadByte();
             byte moveToSlot = lea.ReadByte();
             Item originalItem = gc.Character.Items.SearchItem(gc.Character.Items.getItems(), originalType, originalSlot);
-            gc.Character.Items.Add(new Item(originalItem.ItemID, moveToSlot, moveToType, originalItem.Quantity));
-            gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
-            gc.Character.Inventory[originalType].RemoveItem(originalSlot);
-            gc.Character.Inventory[moveToType].AddItem(moveToSlot, originalItem);
+
+            if (moveToType == 0x63 && moveToSlot == 0x63) // Drop Item
+            {
+                gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
+                gc.Character.Inventory[originalType].RemoveItem(originalSlot);
+
+
+            } else
+            {
+                gc.Character.Items.Add(new Item(originalItem.ItemID, moveToSlot, moveToType, originalItem.Quantity));
+                gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
+                gc.Character.Inventory[originalType].RemoveItem(originalSlot);
+                gc.Character.Inventory[moveToType].AddItem(moveToSlot, originalItem);                
+            }
+
             switch (originalType)
             {
                 case 0:
