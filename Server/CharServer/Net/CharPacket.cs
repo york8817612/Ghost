@@ -115,15 +115,82 @@ namespace Server.Ghost
             plew.WriteByte(0);
             plew.WriteShort(chr != null ? 1 : 0);
             plew.WriteShort(chr != null ? 1 : 0);
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(0) != null ? chr.Inventory[0].getItem(0).ItemID : 0) : 0);  // 武器[Weapon] 8010101
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(1) != null ? chr.Inventory[0].getItem(1).ItemID : 0) : 0);  // 衣服[Outfit] 8160351
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(9) != null ? chr.Inventory[0].getItem(9).ItemID : 0) : 0);  // 臉下[Face2]  9410021
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(12) != null ? chr.Inventory[0].getItem(12).ItemID : 0) : 0);// 臉上[Face]   8710013
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(6) != null ? chr.Inventory[0].getItem(6).ItemID : 0) : 0);  // 帽子[Hat]    8610011
-            plew.WriteInt(chr != null ? chr.Eyes : 0);                                                    // 眼睛[Eye]    9110011
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(4) != null ? chr.Inventory[0].getItem(4).ItemID : 0) : 0);  // 服裝[Dress]  9510081
-            plew.WriteInt(chr != null ? (chr.Inventory[0].getItem(11) != null ? chr.Inventory[0].getItem(11).ItemID : 0) : 0);// 披風[Mantle] 8493122
-            plew.WriteInt(chr != null ? chr.Hair : 0);                                                    // 頭髮[Hair]   9010011
+            Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0); // 武器[Weapon] 8010101
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0); // [Outfit]     8160351
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);     // 臉下[face2]  9410021
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);   // 臉上[face]   8710013
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);       // 帽子[hat]    8610011
+            plew.WriteInt(chr != null ? chr.Eyes : 0);                                                                    // 眼睛[eye]    9110011
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0); // 服裝[outfit] 9510081
+            plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);   // 披風[mantle] 8493122
+            plew.WriteInt(chr != null ? chr.Hair : 0);                                                                    // 頭髮[Hair]   9010011
+        }
+
+        public static Dictionary<InventoryType.EquipType, int> getEquip(Character chr)
+        {
+            Dictionary<InventoryType.EquipType, int> equip = new Dictionary<InventoryType.EquipType, int>();
+            if (chr != null)
+            {
+                foreach (Item im in chr.Items)
+                {
+                    if (im.type != (byte)InventoryType.ItemType.Equip)
+                        continue;
+                    switch (im.slot)
+                    {
+                        case (byte)InventoryType.EquipType.Weapon:
+                            equip.Add(InventoryType.EquipType.Weapon, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Outfit:
+                            equip.Add(InventoryType.EquipType.Outfit, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Ring:
+                            equip.Add(InventoryType.EquipType.Ring, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Necklace:
+                            equip.Add(InventoryType.EquipType.Necklace, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Mantle:
+                            equip.Add(InventoryType.EquipType.Mantle, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Seal:
+                            equip.Add(InventoryType.EquipType.Seal, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Hat:
+                            equip.Add(InventoryType.EquipType.Hat, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Hair:
+                            equip.Add(InventoryType.EquipType.Hair, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Eyes:
+                            equip.Add(InventoryType.EquipType.Eyes, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Face:
+                            equip.Add(InventoryType.EquipType.Face, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Pet:
+                            equip.Add(InventoryType.EquipType.Pet, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Dress:
+                            equip.Add(InventoryType.EquipType.Dress, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Face2:
+                            equip.Add(InventoryType.EquipType.Face2, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Earing:
+                            equip.Add(InventoryType.EquipType.Earing, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.HairAcc:
+                            equip.Add(InventoryType.EquipType.HairAcc, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Toy:
+                            equip.Add(InventoryType.EquipType.Toy, im.ItemID);
+                            break;
+                    }
+                }
+                return equip;
+            }
+            return new Dictionary<InventoryType.EquipType, int>();
         }
     }
 }

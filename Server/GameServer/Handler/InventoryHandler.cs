@@ -8,35 +8,59 @@ namespace Server.Handler
     {
         public static void MoveItem_Req(InPacket lea, Client gc)
         {
-            byte originalType = lea.ReadByte();
-            byte originalSlot = lea.ReadByte();
-            byte moveToType = lea.ReadByte();
-            byte moveToSlot = lea.ReadByte();
-            Item originalItem = gc.Character.Items.SearchItem(gc.Character.Items.getItems(), originalType, originalSlot);
+            byte sourceType = lea.ReadByte();
+            byte sorceSlot = lea.ReadByte();
+            byte targetType = lea.ReadByte();
+            byte targetSlot = lea.ReadByte();
 
-            if (moveToType == 0x63 && moveToSlot == 0x63) // Drop Item
+            Item source = gc.Character.Items.GetItem(sourceType, sorceSlot);
+            Item target = gc.Character.Items.GetItem(targetType, targetSlot);
+
+            if (targetType == 0x63 && targetSlot == 0x63)
             {
-                gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
-                gc.Character.Inventory[originalType].RemoveItem(originalSlot);
-
-
-            } else
+                gc.Character.Items.RemoveItem(sourceType, sorceSlot);
+            }
+            else
             {
-                gc.Character.Items.Add(new Item(originalItem.ItemID, moveToSlot, moveToType, originalItem.Quantity));
-                gc.Character.Items.RemoveItem(gc.Character.Items.getItems(), originalType, originalSlot);
-                gc.Character.Inventory[originalType].RemoveItem(originalSlot);
-                gc.Character.Inventory[moveToType].AddItem(moveToSlot, originalItem);                
+                if (gc.Character.Items.GetItem(targetType, targetSlot) == null)
+                {
+                    source.type = targetType;
+                    source.slot = targetSlot;
+                }
+                else
+                {   // 交換位置(swap)
+                    gc.Character.Items.RemoveItem(sourceType, sorceSlot);
+                    gc.Character.Items.RemoveItem(targetType, targetSlot);
+                    byte swapSlot = source.slot;
+                    source.slot = target.slot;
+                    target.slot = swapSlot;
+                    gc.Character.Items.Add(source);
+                    gc.Character.Items.Add(target);
+                }
             }
 
-            switch (originalType)
+            switch (sourceType)
             {
                 case 0:
-                    InventoryPacket.getCharacterEquip(gc);
+                    getAvatar(gc);
+                    switch (targetType)
+                    {
+                        case 1:
+                            InventoryPacket.getInvenEquip1(gc);
+                            break;
+                        case 2:
+                            InventoryPacket.getInvenEquip2(gc);
+                            break;
+                    }
                     break;
                 case 1:
+                    if (targetType == 0)
+                        getAvatar(gc);
                     InventoryPacket.getInvenEquip1(gc);
                     break;
                 case 2:
+                    if (targetType == 0)
+                        getAvatar(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     break;
                 case 3:
@@ -49,29 +73,13 @@ namespace Server.Handler
                     InventoryPacket.getInvenPet5(gc);
                     break;
             }
-            if (originalType == moveToType)
-                return;
-            switch (moveToType)
-            {
-                case 0:
-                    InventoryPacket.getCharacterEquip(gc);
-                    break;
-                case 1:
-                    InventoryPacket.getInvenEquip1(gc);
-                    break;
-                case 2:
-                    InventoryPacket.getInvenEquip2(gc);
-                    break;
-                case 3:
-                    InventoryPacket.getInvenSpend3(gc);
-                    break;
-                case 4:
-                    InventoryPacket.getInvenOther4(gc);
-                    break;
-                case 5:
-                    InventoryPacket.getInvenPet5(gc);
-                    break;
-            }
+        }
+
+        public static void getAvatar(Client gc)
+        {
+            InventoryPacket.getInvenEquip(gc);
+            StatusPacket.getStatusInfo(gc);
+            InventoryPacket.getAvatar(gc);
         }
 
         public static void UseWater_Req(InPacket lea, Client gc)
@@ -92,7 +100,7 @@ namespace Server.Handler
             lea.ReadByte();
             if (slot >= 0 && slot < 24 && message.Length < 60)
             {
-                gc.Character.Inventory[3].RemoveItem(slot);
+                gc.Character.Items.RemoveItem(InventoryType.ItemType.Spend3, slot);
                 MapPacket.InvenUseSpendShout(gc, message);
                 InventoryPacket.getInvenSpend3(gc);
             }

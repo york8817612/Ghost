@@ -61,12 +61,14 @@ namespace Server.Common.Net
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
         ENTER_WARP_ACK_REQ = 0x1D,
+        NPC_SHOP_REQ = 0x22,
         ATTACK_MONSTER_REQ = 0x45,
         MOVE_ITEM_REQ = 0x6C,
         USE_WATER_REQ = 0x6F,
         PLAYER_DAMAGE_REQ = 0x70,
         CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,
+        USE_SKILL_REQ = 0x76,
         QUEST_ALL_REQ = 0x7A,
         QUEST_DONE_REQ = 0x7C,
         CAN_WARP_ACK_REQ = 0x85,
@@ -108,6 +110,8 @@ namespace Server.Common.Net
         LEAVE_WARP_ACK = 0x1F,
         BADUSER = 0x20,
 
+        NPC_SHOP_ACK = 0x23,
+
         UDPLOG_ACK = 0x25,
 
         MON_SPAWN = 0x38, // 2015/10/31
@@ -137,7 +141,7 @@ namespace Server.Common.Net
         CHAR_DEFPLUS = 0x59,
         CHAR_DEFPLUS_SKILL = 0x5A,
         CHAR_LVEXP = 0x5B,
-        // 0x5C
+        CHAR_SET_AVATAR = 0x5C,
         CHAR_LEVELUP = 0x5D,
 
         CHAR_FAME = 0x5F,

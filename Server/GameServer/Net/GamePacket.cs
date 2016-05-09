@@ -81,6 +81,7 @@ namespace Server.Ghost
             using (OutPacket plew = new OutPacket(ServerOpcode.ENTER_WARP_ACK))
             {
                 var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = InventoryPacket.getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(playerId); // 角色編號
@@ -103,17 +104,17 @@ namespace Server.Ghost
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteInt(chr.Hair);                                                                              // 頭髮
-                plew.WriteInt(chr.Inventory[0].getItem(9) != null ? c.Character.Inventory[0].getItem(9).ItemID : 0);  // 臉上
-                plew.WriteInt(chr.Inventory[0].getItem(12) != null ? c.Character.Inventory[0].getItem(12).ItemID : 0);// 臉下
-                plew.WriteInt(chr.Inventory[0].getItem(6) != null ? c.Character.Inventory[0].getItem(6).ItemID : 0);  // 帽子
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);  // 臉上
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);// 臉下
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);  // 帽子
                 plew.WriteInt(chr.Eyes);                                                                              // 眼睛
-                plew.WriteInt(chr.Inventory[0].getItem(1) != null ? c.Character.Inventory[0].getItem(1).ItemID : 0);  // 衣服
-                plew.WriteInt(chr.Inventory[0].getItem(11) != null ? c.Character.Inventory[0].getItem(11).ItemID : 0);// 服裝
-                plew.WriteInt(chr.Inventory[0].getItem(0) != null ? c.Character.Inventory[0].getItem(0).ItemID : 0);  // 武器
-                plew.WriteInt(chr.Inventory[0].getItem(4) != null ? c.Character.Inventory[0].getItem(4).ItemID : 0);  // 披風
-                plew.WriteInt(chr.Inventory[0].getItem(10) != null ? c.Character.Inventory[0].getItem(10).ItemID : 0);// 靈物
-                plew.WriteInt(chr.Inventory[0].getItem(14) != null ? c.Character.Inventory[0].getItem(14).ItemID : 0);// HairAcc
-                plew.WriteInt(chr.Inventory[0].getItem(15) != null ? c.Character.Inventory[0].getItem(15).ItemID : 0);// 玩物
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0);  // 衣服
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);// 服裝
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);  // 武器
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);  // 披風
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);// 靈物
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
                 // 寵物
                 plew.WriteString("", 20); // 寵物名稱
                 plew.WriteByte(0); // 寵物等級
@@ -309,29 +310,95 @@ namespace Server.Ghost
 
     public static class InventoryPacket
     {
+        public static void getAvatar(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_SET_AVATAR))
+            {
+                var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(chr.CharacterID);
+                plew.WriteInt(chr.Hair);
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);  // 臉上
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);// 臉下
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);  // 帽子
+                plew.WriteInt(chr.Eyes);                                                                              // 眼睛
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0);  // 衣服
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);// 服裝
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);  // 武器
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);  // 披風
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);// 靈物
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
+
+                // 寵物
+                plew.WriteInt(0);
+                plew.WriteString("", 16); // 名稱
+                plew.WriteByte(0); // 等級
+                plew.WriteHexString("00 00 00");
+                plew.WriteInt(0); // HP
+                plew.WriteInt(0); // MaxMP
+                plew.WriteInt(0); // 經驗值
+                plew.WriteInt(0); // Deco
+                plew.WriteInt(-1); // Slot
+
+                // 玩物
+                plew.WriteByte(1);
+                plew.WriteInt(0);
+                plew.WriteString("", 16); // 名稱
+                plew.WriteByte(0); // 等級
+                plew.WriteHexString("00 00");
+                plew.WriteInt(0); // HP
+                plew.WriteInt(0); // MaxMP
+                plew.WriteInt(0); // 經驗值
+
+                plew.WriteByte(0);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+                plew.WriteByte(1);
+
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+
+                plew.WriteByte(0);
+
+                plew.WriteHexString("00 00 00");
+                plew.WriteInt(0);
+                plew.WriteByte(0);
+
+                c.Send(plew);
+            }
+        }
+        
         public static void getCharacterEquip(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_ALL))
             {
                 var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(chr.Inventory[0].getItem(0) != null ? c.Character.Inventory[0].getItem(0).ItemID : 0);  // 武器[Weapon] 8010101
-                plew.WriteInt(chr.Inventory[0].getItem(1) != null ? c.Character.Inventory[0].getItem(1).ItemID : 0);  // 衣服[Outfit] 8160351
-                plew.WriteInt(chr.Inventory[0].getItem(2) != null ? c.Character.Inventory[0].getItem(2).ItemID : 0);  // 戒指[Ring]
-                plew.WriteInt(chr.Inventory[0].getItem(3) != null ? c.Character.Inventory[0].getItem(3).ItemID : 0);  // 項鍊[Necklace]
-                plew.WriteInt(chr.Inventory[0].getItem(4) != null ? c.Character.Inventory[0].getItem(4).ItemID : 0);  // 披風[Mantle]
-                plew.WriteInt(chr.Inventory[0].getItem(5) != null ? c.Character.Inventory[0].getItem(5).ItemID : 0);  // 封印物[Seal]
-                plew.WriteInt(chr.Inventory[0].getItem(6) != null ? c.Character.Inventory[0].getItem(6).ItemID : 0);  // 頭部[Hat]
-                plew.WriteInt(chr.Hair);                                                                              // 頭髮[Hair]
-                plew.WriteInt(chr.Eyes);                                                                              // 眼睛[Eyes]
-                plew.WriteInt(chr.Inventory[0].getItem(9) != null ? c.Character.Inventory[0].getItem(9).ItemID : 0);  // 臉上[Face]
-                plew.WriteInt(chr.Inventory[0].getItem(10) != null ? c.Character.Inventory[0].getItem(10).ItemID : 0);// 靈物[Pet]
-                plew.WriteInt(chr.Inventory[0].getItem(11) != null ? c.Character.Inventory[0].getItem(11).ItemID : 0);// 服裝[Dress]
-                plew.WriteInt(chr.Inventory[0].getItem(12) != null ? c.Character.Inventory[0].getItem(12).ItemID : 0);// 臉下[Face2]
-                plew.WriteInt(chr.Inventory[0].getItem(13) != null ? c.Character.Inventory[0].getItem(13).ItemID : 0);// 耳環[Earing]
-                plew.WriteInt(chr.Inventory[0].getItem(14) != null ? c.Character.Inventory[0].getItem(14).ItemID : 0);// [HairAcc] 
-                plew.WriteInt(chr.Inventory[0].getItem(15) != null ? c.Character.Inventory[0].getItem(15).ItemID : 0);// 玩物[Toy]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);    // 武器[Weapon] 8010101
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0);    // 衣服[Outfit] 8160351
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Ring) ? equip[InventoryType.EquipType.Ring] : 0);        // 戒指[Ring]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Necklace) ? equip[InventoryType.EquipType.Necklace] : 0);// 項鍊[Necklace]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);    // 披風[Mantle]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Seal) ? equip[InventoryType.EquipType.Seal] : 0);        // 封印物[Seal]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);          // 頭部[Hat]
+                plew.WriteInt(chr.Hair);                                                                                         // 頭髮[Hair]
+                plew.WriteInt(chr.Eyes);                                                                                         // 眼睛[Eyes]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);        // 臉上[Face]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);          // 靈物[Pet]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);      // 服裝[Dress]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);      // 臉下[Face2]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Earing) ? equip[InventoryType.EquipType.Earing] : 0);    // 耳環[Earing]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);  // [HairAcc] 
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);          // 玩物[Toy]
                 plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 plew.WriteInt(chr.Money);
                 plew.WriteInt(0);
@@ -346,24 +413,25 @@ namespace Server.Ghost
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_EQUIP))
             {
                 var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(chr.Inventory[0].getItem(0) != null ? c.Character.Inventory[0].getItem(0).ItemID : 0);  // 武器[Weapon] 8010101
-                plew.WriteInt(chr.Inventory[0].getItem(1) != null ? c.Character.Inventory[0].getItem(1).ItemID : 0);  // 衣服[Outfit] 8160351
-                plew.WriteInt(chr.Inventory[0].getItem(2) != null ? c.Character.Inventory[0].getItem(2).ItemID : 0);  // 戒指[Ring]
-                plew.WriteInt(chr.Inventory[0].getItem(3) != null ? c.Character.Inventory[0].getItem(3).ItemID : 0);  // 項鍊[Necklace]
-                plew.WriteInt(chr.Inventory[0].getItem(4) != null ? c.Character.Inventory[0].getItem(4).ItemID : 0);  // 披風[Mantle]
-                plew.WriteInt(chr.Inventory[0].getItem(5) != null ? c.Character.Inventory[0].getItem(5).ItemID : 0);  // 封印物[Seal]
-                plew.WriteInt(chr.Inventory[0].getItem(6) != null ? c.Character.Inventory[0].getItem(6).ItemID : 0);  // 頭部[Hat]
-                plew.WriteInt(chr.Hair);                                                                              // 頭髮[Hair]
-                plew.WriteInt(chr.Eyes);                                                                              // 眼睛[Eyes]
-                plew.WriteInt(chr.Inventory[0].getItem(9) != null ? c.Character.Inventory[0].getItem(9).ItemID : 0);  // 臉上[Face]
-                plew.WriteInt(chr.Inventory[0].getItem(10) != null ? c.Character.Inventory[0].getItem(10).ItemID : 0);// 靈物[Pet]
-                plew.WriteInt(chr.Inventory[0].getItem(11) != null ? c.Character.Inventory[0].getItem(11).ItemID : 0);// 服裝[Dress]
-                plew.WriteInt(chr.Inventory[0].getItem(12) != null ? c.Character.Inventory[0].getItem(12).ItemID : 0);// 臉下[Face2]
-                plew.WriteInt(chr.Inventory[0].getItem(13) != null ? c.Character.Inventory[0].getItem(13).ItemID : 0);// 耳環[Earing]
-                plew.WriteInt(chr.Inventory[0].getItem(14) != null ? c.Character.Inventory[0].getItem(14).ItemID : 0);// [HairAcc] 
-                plew.WriteInt(chr.Inventory[0].getItem(15) != null ? c.Character.Inventory[0].getItem(15).ItemID : 0);// 玩物[Toy]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);    // 武器[Weapon] 8010101
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0);    // 衣服[Outfit] 8160351
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Ring) ? equip[InventoryType.EquipType.Ring] : 0);        // 戒指[Ring]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Necklace) ? equip[InventoryType.EquipType.Necklace] : 0);// 項鍊[Necklace]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);    // 披風[Mantle]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Seal) ? equip[InventoryType.EquipType.Seal] : 0);        // 封印物[Seal]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);          // 頭部[Hat]
+                plew.WriteInt(chr.Hair);                                                                                         // 頭髮[Hair]
+                plew.WriteInt(chr.Eyes);                                                                                         // 眼睛[Eyes]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);        // 臉上[Face]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);          // 靈物[Pet]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);      // 服裝[Dress]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);      // 臉下[Face2]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Earing) ? equip[InventoryType.EquipType.Earing] : 0);    // 耳環[Earing]
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);  // [HairAcc] 
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);          // 玩物[Toy]
                 plew.WriteInt(0); // 16
                 plew.WriteInt(0); // 17
 
@@ -443,7 +511,7 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Inventory[1].getItem(i) != null ? c.Character.Inventory[1].getItem(i).ItemID : 0);
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
@@ -486,7 +554,7 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Inventory[2].getItem(i) != null ? c.Character.Inventory[2].getItem(i).ItemID : 0);
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
@@ -525,11 +593,11 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Inventory[3].getItem(i) != null ? c.Character.Inventory[3].getItem(i).ItemID : 0);
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteInt(chr.Inventory[3].getItem(i) != null ? c.Character.Inventory[3].getItem(i).Quantity : 0);
+                    plew.WriteInt(chr.Items.GetItemQuantity(InventoryType.ItemType.Spend3, i));
                 }
                 for (short i = 1; i <= 24; i++)
                 { // 物品Lock
@@ -553,11 +621,11 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Inventory[4].getItem(i) != null ? c.Character.Inventory[4].getItem(i).ItemID : 0);
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteInt(chr.Inventory[4].getItem(i) != null ? c.Character.Inventory[4].getItem(i).Quantity : 0);
+                    plew.WriteInt(chr.Items.GetItemQuantity(InventoryType.ItemType.Other4, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 物品Lock
@@ -678,6 +746,72 @@ namespace Server.Ghost
 
                 c.Send(plew);
             }
+        }
+
+        public static Dictionary<InventoryType.EquipType, int> getEquip(Character chr)
+        {
+            Dictionary<InventoryType.EquipType, int> equip = new Dictionary<InventoryType.EquipType, int>();
+            if (chr != null)
+            {
+                foreach (Item im in chr.Items)
+                {
+                    if (im.type != (byte)InventoryType.ItemType.Equip)
+                        continue;
+                    switch (im.slot)
+                    {
+                        case (byte)InventoryType.EquipType.Weapon:
+                            equip.Add(InventoryType.EquipType.Weapon, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Outfit:
+                            equip.Add(InventoryType.EquipType.Outfit, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Ring:
+                            equip.Add(InventoryType.EquipType.Ring, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Necklace:
+                            equip.Add(InventoryType.EquipType.Necklace, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Mantle:
+                            equip.Add(InventoryType.EquipType.Mantle, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Seal:
+                            equip.Add(InventoryType.EquipType.Seal, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Hat:
+                            equip.Add(InventoryType.EquipType.Hat, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Hair:
+                            equip.Add(InventoryType.EquipType.Hair, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Eyes:
+                            equip.Add(InventoryType.EquipType.Eyes, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Face:
+                            equip.Add(InventoryType.EquipType.Face, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Pet:
+                            equip.Add(InventoryType.EquipType.Pet, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Dress:
+                            equip.Add(InventoryType.EquipType.Dress, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Face2:
+                            equip.Add(InventoryType.EquipType.Face2, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Earing:
+                            equip.Add(InventoryType.EquipType.Earing, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.HairAcc:
+                            equip.Add(InventoryType.EquipType.HairAcc, im.ItemID);
+                            break;
+                        case (byte)InventoryType.EquipType.Toy:
+                            equip.Add(InventoryType.EquipType.Toy, im.ItemID);
+                            break;
+                    }
+                }
+                return equip;
+            }
+            return new Dictionary<InventoryType.EquipType, int>();
         }
     }
 

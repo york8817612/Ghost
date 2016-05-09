@@ -1,8 +1,5 @@
-﻿using Server.Common.Constants;
-using Server.Common.Data;
+﻿using Server.Common.Data;
 using Server.Common.IO;
-using System;
-using System.Collections.Generic;
 
 namespace Server.Ghost.Characters
 {
@@ -58,7 +55,6 @@ namespace Server.Ghost.Characters
         public byte Position { get; set; }
 
         public Map Map { get; private set; }
-        public List<Inventory> Inventory { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
@@ -70,13 +66,6 @@ namespace Server.Ghost.Characters
             this.ID = id;
             this.Client = gc;
 
-            this.Inventory = new List<Inventory>();
-            Inventory.Add(new Inventory(InventoryType.ItemType.Equip, this));
-            Inventory.Add(new Inventory(InventoryType.ItemType.Equip1, this));
-            Inventory.Add(new Inventory(InventoryType.ItemType.Equip2, this));
-            Inventory.Add(new Inventory(InventoryType.ItemType.Spend3, this));
-            Inventory.Add(new Inventory(InventoryType.ItemType.Other4, this));
-            Inventory.Add(new Inventory(InventoryType.ItemType.Pet5, this));
             this.Items = new CharacterItems(this);
             this.Skills = new CharacterSkills(this);
             this.Quests = new CharacterQuests(this);
@@ -109,6 +98,7 @@ namespace Server.Ghost.Characters
             this.MaxFury = (short)datum.maxFury;
             this.Exp = datum.exp;
             this.Fame = datum.fame;
+            this.Money = datum.money;
             this.Rank = datum.rank;
             this.Str = (short)datum.c_str;
             this.Dex = (short)datum.c_dex;
@@ -135,12 +125,6 @@ namespace Server.Ghost.Characters
             this.PlayerY = (short)datum.playerY;
             this.Position = (byte)datum.position;
 
-            this.Inventory[0].Load(InventoryType.ItemType.Equip);
-            this.Inventory[1].Load(InventoryType.ItemType.Equip1);
-            this.Inventory[2].Load(InventoryType.ItemType.Equip2);
-            this.Inventory[3].Load(InventoryType.ItemType.Spend3);
-            this.Inventory[4].Load(InventoryType.ItemType.Other4);
-            this.Inventory[5].Load(InventoryType.ItemType.Pet5);
             this.Items.Load();
             this.Skills.Load();
             this.Quests.Load();
@@ -168,6 +152,7 @@ namespace Server.Ghost.Characters
             datum.maxFury = this.MaxFury;
             datum.exp = this.Exp;
             datum.fame = this.Fame;
+            datum.money = this.Money;
             datum.rank = this.Rank;
             datum.c_str = this.Str;
             datum.c_dex = this.Dex;
@@ -228,11 +213,6 @@ namespace Server.Ghost.Characters
         public Map SetMap(Map map)
         {
             return this.Map = map;
-        }
-
-        public Inventory getInventory(InventoryType.ItemType type)
-        {
-            return Inventory[(byte)type];
         }
     }
 }

@@ -6,6 +6,15 @@ namespace Server.Handler
 {
     class SkillHandler
     {
+        public static void UseSkill_Req(InPacket lea, Client gc)
+        {
+            byte Type = lea.ReadByte();
+            byte Slot = lea.ReadByte();
+            byte Level = lea.ReadByte();
+            byte NumOfTargets = lea.ReadByte();
+            int Active = lea.ReadInt();
+        }
+
         public static void SkillLevelUp_Req(InPacket lea, Client gc)
         {
             byte type = lea.ReadByte();

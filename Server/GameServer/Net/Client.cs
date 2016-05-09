@@ -83,6 +83,10 @@ namespace Server.Ghost
                         case ClientOpcode.GAMELOG_REQ:
                             GameHandler.Game_Log_Req(ip, this);
                             break;
+                        // Shop
+                        case ClientOpcode.NPC_SHOP_REQ:
+                            NpcShopHandler.Buy_Req(ip, this);
+                            break;
                         // State
                         case ClientOpcode.CHAR_STATUP_REQ:
                             StatusHandler.Char_Statup_Req(ip, this);
@@ -98,6 +102,8 @@ namespace Server.Ghost
                         // Skill
                         case ClientOpcode.SKILL_LEVELUP_REQ:
                             SkillHandler.SkillLevelUp_Req(ip, this);
+                            break;
+                        case ClientOpcode.USE_SKILL_REQ:
                             break;
                         // Quest
                         case ClientOpcode.QUEST_ALL_REQ:

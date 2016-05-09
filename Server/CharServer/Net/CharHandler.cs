@@ -123,9 +123,6 @@ namespace Server.Ghost
 
             chr.Position = (byte)(pos);
 
-            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Weapon, new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
-            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Outfit, new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
-            chr.getInventory(InventoryType.ItemType.Equip).AddItem((byte)InventoryType.EquipType.Seal, new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));

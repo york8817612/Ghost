@@ -1,6 +1,6 @@
 ﻿namespace Server.Common.Constants
 {
-    public class InventoryType
+    public static class InventoryType
     {
         public enum EquipType : byte
         {

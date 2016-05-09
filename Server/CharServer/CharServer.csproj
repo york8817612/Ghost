@@ -48,7 +48,6 @@
     <Compile Include="Characters\CharacterSkills.cs" />
     <Compile Include="CharServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
-    <Compile Include="Inventory.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Net\CharHandler.cs" />
     <Compile Include="Net\CharPacket.cs" />
