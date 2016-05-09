@@ -1,5 +1,7 @@
 ﻿using Server.Common.Constants;
 using Server.Common.Data;
+using Server.Common.IO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,13 +10,21 @@ namespace Server.Ghost.Characters
     public class CharacterItems : IEnumerable<Item>
     {
         public Character Parent { get; private set; }
-
+        public Dictionary<InventoryType.ItemType, byte> MaxSlots { get; private set; }
         private List<Item> Items { get; set; }
 
         public CharacterItems(Character parent)
             : base()
         {
             this.Parent = parent;
+
+            this.MaxSlots = new Dictionary<InventoryType.ItemType, byte>(Enum.GetValues(typeof(InventoryType.ItemType)).Length);
+
+            this.MaxSlots.Add(InventoryType.ItemType.Equip1, 24);
+            this.MaxSlots.Add(InventoryType.ItemType.Equip2, 24);
+            this.MaxSlots.Add(InventoryType.ItemType.Spend3, 24);
+            this.MaxSlots.Add(InventoryType.ItemType.Other4, 24);
+            this.MaxSlots.Add(InventoryType.ItemType.Pet5, 24);
 
             this.Items = new List<Item>();
         }
@@ -101,6 +111,50 @@ namespace Server.Ghost.Characters
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable)this.Items).GetEnumerator();
+        }
+
+        public byte GetNextFreeSlot(InventoryType.ItemType type)
+        {
+            for (byte i = 1; i <= this.MaxSlots[type]; i++)
+            {
+                if (this[type, i] == null)
+                {
+                    return i;
+                }
+            }
+
+            throw new InventoryFullException();
+        }
+
+        public bool IsFull(InventoryType.ItemType type)
+        {
+            short count = 0;
+
+            foreach (Item item in this)
+            {
+                if (item.type == (byte)type)
+                {
+                    count++;
+                }
+            }
+
+            return (count == this.MaxSlots[type]);
+        }
+
+        public Item this[InventoryType.ItemType type, byte slot]
+        {
+            get
+            {
+                foreach (Item item in this)
+                {
+                    if (item.type == (byte)type && item.slot == slot)
+                    {
+                        return item;
+                    }
+                }
+
+                return null;
+            }
         }
 
     }

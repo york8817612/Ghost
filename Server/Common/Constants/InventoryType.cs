@@ -32,5 +32,40 @@
             Other4 = 4,     // [4]
             Pet5 = 5        // [5]
         }
+
+        public static int getItemType(int itemid)
+        {
+            int type = 0;
+
+            switch (itemid / 100000)
+            {
+                case 75: // 耳環
+                case 79: // 武器
+                case 80: // 武器
+                case 81: // 衣服
+                case 84: // 披風
+                case 86: // 帽子
+                case 87: // 面具
+                case 93: // 武器
+                case 94: // 鬍子
+                case 95: // 服裝
+                    type = 1;
+                    break;
+                case 82: // 戒指
+                case 83: // 項鍊
+                case 85: // 封印箱
+                    type = 2;
+                    break;
+                case 11: // 拼圖
+                case 88: // 消耗
+                    type = 3;
+                    break;
+                case 89: // 其他
+                    type = 4;
+                    break;
+            }
+
+            return type;
+        }
     }
 }

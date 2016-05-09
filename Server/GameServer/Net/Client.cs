@@ -99,6 +99,9 @@ namespace Server.Ghost
                         case ClientOpcode.INVEN_USESPEND_SHOUT_ALL_REQ:
                             InventoryHandler.InvenUseSpendShout_Req(ip, this);
                             break;
+                        case ClientOpcode.PICKUP_ITEM:
+                            InventoryHandler.pickupItem(ip, this);
+                            break;
                         // Skill
                         case ClientOpcode.SKILL_LEVELUP_REQ:
                             SkillHandler.SkillLevelUp_Req(ip, this);

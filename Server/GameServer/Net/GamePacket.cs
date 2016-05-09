@@ -748,6 +748,40 @@ namespace Server.Ghost
             }
         }
 
+        public static void charDropItem(Client c, int oid, int iid, short posX, short posY, int quantity)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_DROP_ITEM))
+            {
+                // 4D 00 4E 00 //  + 0
+                plew.WriteInt(0); // length + CRC // + 4
+                plew.WriteInt(0); // + 8
+                plew.WriteInt(oid); // 掉落 id // + 12
+                plew.WriteInt(iid); // 物品 id // + 16
+                plew.WriteShort(posX); // pos x // + 20
+                plew.WriteShort(posY); // pos y // + 22
+                plew.WriteInt(quantity); // 數量 // + 24
+                plew.WriteInt(); // + 28
+
+                c.Send(plew);
+            }
+        }
+
+        public static void clearDropItem(Client c, int cid, int oid, int iid, int quantity)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CLEAR_DROP_ITEM))
+            {
+                // 4D 00 4E 00 //  + 0
+                plew.WriteInt(0); // length + CRC // + 4
+                plew.WriteInt(0); // + 8
+                plew.WriteInt(cid); // 角色 id // + 12
+                plew.WriteInt(oid); // 掉落 id  // + 16
+                plew.WriteInt(iid); // 物品 id // + 20
+                plew.WriteInt(quantity); // 數量 // + 24
+
+                c.Send(plew);
+            }
+        }
+
         public static Dictionary<InventoryType.EquipType, int> getEquip(Character chr)
         {
             Dictionary<InventoryType.EquipType, int> equip = new Dictionary<InventoryType.EquipType, int>();

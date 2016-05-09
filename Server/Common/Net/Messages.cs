@@ -63,6 +63,7 @@ namespace Server.Common.Net
         ENTER_WARP_ACK_REQ = 0x1D,
         NPC_SHOP_REQ = 0x22,
         ATTACK_MONSTER_REQ = 0x45,
+        PICKUP_ITEM = 0x4C,
         MOVE_ITEM_REQ = 0x6C,
         USE_WATER_REQ = 0x6F,
         PLAYER_DAMAGE_REQ = 0x70,
@@ -123,11 +124,11 @@ namespace Server.Common.Net
         USER_CREATE = 0x44,
 
         PLAYER_DEAD_ACK = 0x48,
-        // 0x4A
+        MON_DROP_ITEM = 0x4A,
         // 0x4B
 
-        // 0x4D
-        // 0x4E
+        CLEAR_DROP_ITEM = 0x4D,
+        CHAR_DROP_ITEM = 0x4E,
         ITEM_ALLCREATE = 0x4F,
         CHAR_ALL = 0x50,
         CHAR_HPSP = 0x51,

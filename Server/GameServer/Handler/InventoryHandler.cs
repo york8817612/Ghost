@@ -12,12 +12,13 @@ namespace Server.Handler
             byte sorceSlot = lea.ReadByte();
             byte targetType = lea.ReadByte();
             byte targetSlot = lea.ReadByte();
-
+            int count = lea.ReadInt();
             Item source = gc.Character.Items.GetItem(sourceType, sorceSlot);
             Item target = gc.Character.Items.GetItem(targetType, targetSlot);
 
             if (targetType == 0x63 && targetSlot == 0x63)
             {
+                InventoryPacket.charDropItem(gc, 0, source.ItemID, gc.Character.PlayerX, gc.Character.PlayerY, count);
                 gc.Character.Items.RemoveItem(sourceType, sorceSlot);
             }
             else
@@ -105,5 +106,51 @@ namespace Server.Handler
                 InventoryPacket.getInvenSpend3(gc);
             }
         }
-    }
+
+        public static void pickupItem(InPacket lea, Client gc)
+        {
+            int unk1 = lea.ReadInt();
+            int itemid = lea.ReadInt();
+            int unk2 = lea.ReadInt();
+            int type = InventoryType.getItemType(itemid);
+            byte solt = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType) type);
+            Item oItem = new Item(itemid, solt, (byte)type, 1);
+            gc.Character.Items.Add(oItem);
+            InventoryPacket.clearDropItem(gc, 11, 0, itemid, 1);
+            switch (type)
+            {
+                case 0:
+                    getAvatar(gc);
+                    switch (type)
+                    {
+                        case 1:
+                            InventoryPacket.getInvenEquip1(gc);
+                            break;
+                        case 2:
+                            InventoryPacket.getInvenEquip2(gc);
+                            break;
+                    }
+                    break;
+                case 1:
+                    if (type == 0)
+                        getAvatar(gc);
+                    InventoryPacket.getInvenEquip1(gc);
+                    break;
+                case 2:
+                    if (type == 0)
+                        getAvatar(gc);
+                    InventoryPacket.getInvenEquip2(gc);
+                    break;
+                case 3:
+                    InventoryPacket.getInvenSpend3(gc);
+                    break;
+                case 4:
+                    InventoryPacket.getInvenOther4(gc);
+                    break;
+                case 5:
+                    InventoryPacket.getInvenPet5(gc);
+                    break;
+            }
+        }
+}
 }
