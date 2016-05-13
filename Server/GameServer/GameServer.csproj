@@ -47,12 +47,14 @@
     <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
+    <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Characters\InventoryFullException.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\Map.cs" />
     <Compile Include="Ghost\Quest.cs" />
     <Compile Include="Ghost\Skill.cs" />
+    <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Handler\InventoryHandler.cs" />
     <Compile Include="Handler\MapHandler.cs" />
     <Compile Include="Handler\MonsterHandler.cs" />

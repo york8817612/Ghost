@@ -46,6 +46,7 @@
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\CharacterItems.cs" />
     <Compile Include="Characters\CharacterSkills.cs" />
+    <Compile Include="Characters\CharacterStorages.cs" />
     <Compile Include="CharServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Item.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Net\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skill.cs" />
+    <Compile Include="Storage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

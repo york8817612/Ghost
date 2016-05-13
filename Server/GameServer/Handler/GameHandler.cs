@@ -71,7 +71,7 @@ namespace Server.Handler
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
 
-            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, chr.MaxFury, chr.Fury);
+            StatusPacket.updateHpMp(gc, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
@@ -81,7 +81,7 @@ namespace Server.Handler
             QuestPacket.getQuickSlot(gc);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreInfo(gc);
-            InventoryPacket.getStoreMoney(gc, 0);
+            InventoryPacket.getStoreMoney(gc);
             MapPacket.enterMapStart(gc);
             InventoryPacket.getInvenEquip(gc);
             InventoryPacket.getInvenEquip1(gc);
@@ -94,36 +94,45 @@ namespace Server.Handler
 
         public static void Command_Req(InPacket lea, Client gc)
         {
-            string[] command = lea.ReadString(60).Split(new[] { (char)0x20 }, StringSplitOptions.None);
+            string[] cmd = lea.ReadString(60).Split(new[] { (char)0x20 }, StringSplitOptions.None);
 
-            if (gc.Account.Master == 0 || command.Length < 1)
+            if (gc.Account.Master == 0 || cmd.Length < 1)
                 return;
 
-            switch (command[0])
+            switch (cmd[0])
             {
                 case "//notice":
-                    if (command.Length != 2)
+                    if (cmd.Length != 2)
                         break;
-                    GamePacket.getNotice(gc, 3, command[1]);
+                    GamePacket.getNotice(gc, 3, cmd[1]);
                     break;
                 case "//item":
-                    if (command.Length != 4 || Convert.ToByte(command[2]) < 0 || Convert.ToByte(command[2]) > 23 || Convert.ToByte(command[3]) == 0)
+                    if (cmd.Length != 4 || byte.Parse(cmd[2]) < 0 || byte.Parse(cmd[2]) > 23 || byte.Parse(cmd[3]) == 0)
                         break;
-                    gc.Character.Items.Add(new Item(Convert.ToInt32(command[1]), Convert.ToByte(command[2]), Convert.ToByte(command[3])));
+                    gc.Character.Items.Add(new Item(int.Parse(cmd[1]), byte.Parse(cmd[2]), byte.Parse(cmd[3])));
                     InventoryPacket.getInvenEquip1(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     InventoryPacket.getInvenSpend3(gc);
                     InventoryPacket.getInvenOther4(gc);
                     InventoryPacket.getInvenPet5(gc);
                     break;
+                case "//money":
+                    if (cmd.Length != 2)
+                        break;
+                    gc.Character.Money = int.Parse(cmd[1]);
+                    InventoryPacket.getCharacterEquip(gc);
+                    break;
                 case "//levelup":
                     StatusPacket.levelUp(gc, gc.Character.Level++);
                     StatusPacket.getStatusInfo(gc);
                     break;
                 case "//gogo":
-                    if (command.Length != 3)
+                    if (cmd.Length != 3)
                         break;
-                    MapPacket.warpToMapAuth(gc, true, Convert.ToInt16(command[1]), Convert.ToInt16(command[2]), -1, -1);
+                    MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
+                    break;
+                case "//test":
+                    StatusPacket.updateHpMp(gc, 0, 0, 0);
                     break;
                 default:
                     break;

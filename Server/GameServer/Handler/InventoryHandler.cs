@@ -85,11 +85,11 @@ namespace Server.Handler
 
         public static void UseWater_Req(InPacket lea, Client gc)
         {
-            int hp = lea.ReadInt();
-            short mp = lea.ReadShort();
-            short maxFury = lea.ReadShort();
-            short fury = lea.ReadShort();
-            StatusPacket.updateHpMp(gc, hp, mp, maxFury, fury);
+            int updateHp = lea.ReadInt();
+            short updateMp = lea.ReadShort();
+            short updateMaxFury = lea.ReadShort();
+            lea.ReadShort();
+            StatusPacket.updateHpMp(gc, updateHp, updateMp, updateMaxFury);
         }
 
         public static void InvenUseSpendShout_Req(InPacket lea, Client gc)

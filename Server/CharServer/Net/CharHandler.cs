@@ -126,6 +126,7 @@ namespace Server.Ghost
             chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
+            chr.Storages.Add(new Storage(0));
             chr.Skills.Add(new Skill(1 , 1, 0, 0));
             chr.Skills.Add(new Skill(2, 1, 0, 1));
             chr.Skills.Add(new Skill(3, 1, 0, 2));
