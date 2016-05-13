@@ -56,6 +56,7 @@ namespace Server.Ghost.Characters
 
         public Map Map { get; private set; }
         public CharacterItems Items { get; private set; }
+        public CharacterStorages Storages { get; private set; }
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
 
@@ -67,6 +68,7 @@ namespace Server.Ghost.Characters
             this.Client = gc;
 
             this.Items = new CharacterItems(this);
+            this.Storages = new CharacterStorages(this);
             this.Skills = new CharacterSkills(this);
             this.Quests = new CharacterQuests(this);
         }
@@ -126,6 +128,7 @@ namespace Server.Ghost.Characters
             this.Position = (byte)datum.position;
 
             this.Items.Load();
+            this.Storages.Load();
             this.Skills.Load();
             this.Quests.Load();
         }
@@ -193,6 +196,7 @@ namespace Server.Ghost.Characters
             }
 
             this.Items.Save();
+            this.Storages.Save();
             this.Skills.Save();
             this.Quests.Save();
 
@@ -202,6 +206,7 @@ namespace Server.Ghost.Characters
         public void Delete()
         {
             this.Items.Delete();
+            this.Storages.Delete();
             this.Skills.Delete();
             this.Quests.Delete();
 

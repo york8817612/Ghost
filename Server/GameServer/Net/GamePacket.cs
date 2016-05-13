@@ -170,14 +170,14 @@ namespace Server.Ghost
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(playerCount); // 玩家數量 - 1
-                for (int i = 0; i < playerCount; i++)
+                for (int i = 0; i < 250; i++)
                 {
-                    plew.WriteInt(0); // 玩家ID
-                    plew.WriteString("", 16); // 玩家名稱
-                    plew.WriteString("", 10); // 玩家稱號
+                    plew.WriteInt(-1); // 玩家ID
+                    plew.WriteString("", 20); // 玩家名稱
+                    plew.WriteString("", 20); // 玩家稱號
                     plew.WriteShort(0); // 玩家 PositionX
                     plew.WriteShort(0); // 玩家 PositionY
-                    plew.WriteByte(0); // 性別
+                    plew.WriteByte(1); // 性別
                     plew.WriteByte(0); // 等級
                     plew.WriteByte(0); // 職業
                     plew.WriteByte(-1);
@@ -186,16 +186,7 @@ namespace Server.Ghost
                     plew.WriteByte(0); // HidePlayer
                     plew.WriteByte(0); // ReflectorSkill
                     plew.WriteByte(0); // 1 : 個人商店
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-                    plew.WriteByte(1);
-
+                    plew.WriteHexString("00 00 00");
                     plew.WriteInt(0); // 頭髮[Hair]
                     plew.WriteInt(0); // 臉上[Face]
                     plew.WriteInt(0); // 臉下[Face2]
@@ -206,26 +197,25 @@ namespace Server.Ghost
                     plew.WriteInt(0); // 武器[Weapon]
                     plew.WriteInt(0); // 披風[Mantle]
                     plew.WriteInt(0); // 靈物[Pet]
-                    plew.WriteInt(0); // [HairAcc]
+                    //plew.WriteInt(0); // [HairAcc]
                     plew.WriteInt(0); // 玩物[Toy]
 
                     // 寵物
-                    plew.WriteString("", 16); // 名稱
-                    plew.WriteByte(0); // 等級
-                    plew.WriteHexString("00 00 00");
-                    plew.WriteInt(0); // 血量
-                    plew.WriteInt(0); // MaxMP
-                    plew.WriteInt(0); // 經驗值
+                    plew.WriteString("", 20); // PetName
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
 
                     // 玩物
-                    plew.WriteString("", 16); // 名稱
-                    plew.WriteByte(0); // 等級
-                    plew.WriteHexString("00 00 00");
-                    plew.WriteInt(0); // 血量
-                    plew.WriteInt(0); // MaxMP
+                    plew.WriteString("", 20); // ToyName
+                    plew.WriteInt(0); // ToyLevel
+                    plew.WriteInt(0); // ToyHP
+                    plew.WriteInt(0); // ToyMaxMP
 
-                    plew.WriteHexString("00 00"); // 武器 Glow ++
-                    plew.WriteHexString("00 00");
+                    plew.WriteShort(0); // 武器 Glow ++
+                    plew.WriteShort(0);
 
                     // 遠端IP位置
                     plew.WriteByte(0);
@@ -241,14 +231,16 @@ namespace Server.Ghost
 
                     plew.WriteHexString("1F 40");
                     // 個人商店
-                    plew.WriteString("", 22); // 個人商店名稱
+                    plew.WriteString("", 40); // 個人商店名稱
+
+                    plew.WriteShort(0);
+                    plew.WriteShort(-1);
+                    plew.WriteShort(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(-1);
+
                     plew.WriteString("", 20);
-
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
-
-                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
 
                     plew.WriteByte(0);
                     plew.WriteByte(0); // Like Warp On Player Effect
@@ -257,8 +249,12 @@ namespace Server.Ghost
                     plew.WriteByte(0); // 泡泡效果
                     plew.WriteByte(0);
                     plew.WriteShort(0);
-                    plew.WriteShort(0);// 玩家ID [Map Number]
-                    plew.WriteHexString("FF 00");
+                    plew.WriteShort(-1);// 玩家ID [Map Number]
+                    plew.WriteByte(-1);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteShort(0);
                 }
 
                 c.Send(plew);
@@ -343,46 +339,30 @@ namespace Server.Ghost
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);  // 武器
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);  // 披風
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);// 靈物
-                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
+                //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
 
                 // 寵物
-                plew.WriteInt(0);
-                plew.WriteString("", 16); // 名稱
-                plew.WriteByte(0); // 等級
-                plew.WriteHexString("00 00 00");
-                plew.WriteInt(0); // HP
-                plew.WriteInt(0); // MaxMP
-                plew.WriteInt(0); // 經驗值
-                plew.WriteInt(0); // Deco
-                plew.WriteInt(-1); // Slot
-
+                plew.WriteString("", 20); // PetName
+                plew.WriteInt(0); // PetLevel
+                plew.WriteInt(0); // PetHP
+                plew.WriteInt(0); // PetMaxMP
+                plew.WriteInt(0); // PetExp
+                plew.WriteInt(0); // PetDeco
+                plew.WriteInt(-1); // PetSlot
                 // 玩物
-                plew.WriteByte(1);
-                plew.WriteInt(0);
-                plew.WriteString("", 16); // 名稱
-                plew.WriteByte(0); // 等級
-                plew.WriteHexString("00 00");
-                plew.WriteInt(0); // HP
-                plew.WriteInt(0); // MaxMP
-                plew.WriteInt(0); // 經驗值
-
-                plew.WriteByte(0);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-                plew.WriteByte(1);
-
-                plew.WriteShort(0);
-                plew.WriteShort(0);
-
-                plew.WriteByte(0);
-
+                plew.WriteString("", 20); // ToyName
+                plew.WriteByte(0); // ToyLevel
                 plew.WriteHexString("00 00 00");
-                plew.WriteInt(0);
+                plew.WriteInt(0); // ToyHP
+                plew.WriteInt(0); // ToyMaxMP
+                plew.WriteInt(0); // ToyExp
+
+                //
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteByte(0);
                 plew.WriteByte(0);
 
                 c.Send(plew);
@@ -749,13 +729,14 @@ namespace Server.Ghost
             }
         }
 
-        public static void getStoreMoney(Client c, int money)
+        public static void getStoreMoney(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.STORE_MONEYINFO))
             {
+                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(money);
+                plew.WriteInt(chr.Storages.getStorages()[0].Money);
                 plew.WriteInt(0);
 
                 c.Send(plew);
@@ -920,17 +901,16 @@ namespace Server.Ghost
             }
         }
 
-        public static void updateHpMp(Client c, int hp, short mp, short maxFury, short fury)
+        public static void updateHpMp(Client c, int updateHp, short updateMp, short updateMaxFury)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HPSP))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(hp);
-                plew.WriteShort(mp);
-                plew.WriteShort(maxFury);
-                plew.WriteShort(fury);
-                plew.WriteShort(-1);
+                plew.WriteShort(updateHp);
+                plew.WriteShort(updateMp);
+                plew.WriteShort(updateMaxFury);
+                plew.WriteShort(0);
 
                 c.Send(plew);
             }
@@ -960,24 +940,26 @@ namespace Server.Ghost
                 plew.WriteShort(chr.MaxMp);
                 plew.WriteShort(chr.Str);
                 plew.WriteShort(chr.Dex);
-                plew.WriteShort(chr.Vit);//vit
+                plew.WriteShort(chr.Vit);
                 plew.WriteShort(chr.Int);
                 plew.WriteShort(chr.MaxAttack);
                 plew.WriteShort(chr.Attack);
                 plew.WriteShort(chr.MaxMagic);
                 plew.WriteShort(chr.Magic);
                 plew.WriteShort(chr.Defense);
-                plew.WriteByte(3);
-                plew.WriteHexString("64 00 00");
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus);
                 plew.WriteShort(chr.SkillBonus);
                 plew.WriteShort(chr.UpgradeStr);
                 plew.WriteShort(chr.UpgradeDex);
-                plew.WriteShort(chr.UpgradeVit);//vit
+                plew.WriteShort(chr.UpgradeVit);
                 plew.WriteShort(chr.UpgradeInt);
                 plew.WriteShort(chr.UpgradeAttack);
                 plew.WriteShort(chr.UpgradeMagic);
                 plew.WriteShort(chr.UpgradeDefense);
+
                 c.Send(plew);
             }
         }
