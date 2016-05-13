@@ -883,12 +883,11 @@ namespace Server.Ghost
                 plew.WriteShort(chr.MaxHp);
                 plew.WriteShort(chr.Hp);
                 plew.WriteShort(chr.MaxMp);
-                plew.WriteShort(chr.Mp);
+                plew.WriteInt(chr.Mp);
                 plew.WriteInt(GameConstants.getExpNeededForLevel(chr.Level));
                 plew.WriteInt(0);
                 plew.WriteInt(chr.Exp);
                 plew.WriteInt(0);
-                plew.WriteShort(0);
                 plew.WriteShort(chr.Fame);
                 plew.WriteShort(chr.MaxFury); // 憤怒值(Max)
                 plew.WriteShort(chr.Fury);    // 憤怒值
@@ -905,8 +904,7 @@ namespace Server.Ghost
                 plew.WriteShort(chr.Defense); // 防禦力
                 plew.WriteByte(0);
                 plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
+                plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
                 plew.WriteShort(chr.SkillBonus); // 技能上升值
                 plew.WriteShort(chr.UpgradeStr); // 力量+
@@ -916,8 +914,7 @@ namespace Server.Ghost
                 plew.WriteShort(chr.UpgradeAttack); // 攻擊力+
                 plew.WriteShort(chr.UpgradeMagic); // 魔攻力+
                 plew.WriteShort(chr.UpgradeDefense); // 防禦力+
-                plew.WriteShort(0);
-                plew.WriteShort(0);
+                plew.WriteInt(0);
 
                 c.Send(plew);
             }
