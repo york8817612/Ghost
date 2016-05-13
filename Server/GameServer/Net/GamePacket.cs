@@ -76,7 +76,7 @@ namespace Server.Ghost
             }
         }
 
-        public static void warpToMap(Client c, int playerId, short mapX, short mapY, short playerX, short playerY)
+        public static void warpToMap(Client c, int playerId, short mapX, short mapY, short positionX, short positionY)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.ENTER_WARP_ACK))
             {
@@ -89,8 +89,8 @@ namespace Server.Ghost
                 plew.WriteString(chr.Title, 20);
                 plew.WriteShort(mapX);
                 plew.WriteShort(mapY);
-                plew.WriteShort(playerX);
-                plew.WriteShort(playerY);
+                plew.WriteShort(positionX);
+                plew.WriteShort(positionY);
                 plew.WriteByte(chr.Gender);
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
@@ -99,10 +99,7 @@ namespace Server.Ghost
                 plew.WriteByte(0);
                 plew.WriteByte(0); // 變身效果
                 plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
+                plew.WriteInt(0);
                 plew.WriteInt(chr.Hair);                                                                              // 頭髮
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);  // 臉上
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);// 臉下
@@ -113,25 +110,42 @@ namespace Server.Ghost
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);  // 武器
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);  // 披風
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);// 靈物
-                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
+                //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
                 // 寵物
-                plew.WriteString("", 20); // 寵物名稱
-                plew.WriteByte(0); // 寵物等級
-                plew.WriteHexString("00 00 00");
-                plew.WriteInt(0); // 寵物血量
+                plew.WriteString("", 20); // PetName
+                plew.WriteInt(0); // PetLevel
+                plew.WriteInt(0); // PetHP
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 // 玩物
-                plew.WriteString("", 20); // 玩物名稱
-                plew.WriteByte(0); // 玩物等級
-                plew.WriteHexString("FF FF FF");
+                plew.WriteString("", 20); // ToyName
+                plew.WriteInt(0); // ToyLevel
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 //
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00");
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteHexString("00 00 00 00 00 00 00 00");
+                plew.WriteInt(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteShort(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+                plew.WriteByte(0);
+
 
                 c.Send(plew);
             }

@@ -47,6 +47,7 @@
     <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
+    <Compile Include="Ghost\Characters\InventoryFullException.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\Map.cs" />
