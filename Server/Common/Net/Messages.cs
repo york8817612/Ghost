@@ -74,6 +74,7 @@ namespace Server.Common.Net
         CAN_WARP_ACK_REQ = 0x85,
         MOVE_ITEM_STORAGE = 0xAC,
         SAVE_MONEY = 0xAE,
+        GIVE_MONEY = 0xAF,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
         CASH_SN = 0x11D

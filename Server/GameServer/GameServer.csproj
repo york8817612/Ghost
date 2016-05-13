@@ -62,6 +62,7 @@
     <Compile Include="Handler\QuestHandler.cs" />
     <Compile Include="Handler\SkillHandler.cs" />
     <Compile Include="Handler\StatusHandler.cs" />
+    <Compile Include="Handler\StorageHandler.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Net\Client.cs" />
     <Compile Include="Handler\GameHandler.cs" />

@@ -87,6 +87,10 @@ namespace Server.Ghost
                         case ClientOpcode.NPC_SHOP_REQ:
                             NpcShopHandler.Buy_Req(ip, this);
                             break;
+                        // Cash Shop
+                        case ClientOpcode.CASH_SN:
+
+                            break;
                         // State
                         case ClientOpcode.CHAR_STATUP_REQ:
                             StatusHandler.Char_Statup_Req(ip, this);
@@ -122,6 +126,15 @@ namespace Server.Ghost
                         // Monster
                         case ClientOpcode.ATTACK_MONSTER_REQ:
                             MonsterHandler.AttackMonster_Req(ip, this);
+                            break;
+                        // Storage
+                        case ClientOpcode.MOVE_ITEM_STORAGE:
+                            break;
+                        case ClientOpcode.SAVE_MONEY:
+                            StorageHandler.saveStorageMoney(ip, this);
+                            break;
+                        case ClientOpcode.GIVE_MONEY:
+                            StorageHandler.giveStorageMoney(ip, this);
                             break;
                     }
                 }
