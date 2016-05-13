@@ -99,7 +99,7 @@ namespace Server
                     }
                     catch
                     {
-                        port = Log.Input("Port: ", 8585);
+                        port = Log.Input("Port: ", 14101);
                     }
                 }
 

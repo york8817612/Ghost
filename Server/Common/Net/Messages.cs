@@ -57,7 +57,6 @@ namespace Server.Common.Net
 
         // Game
         COMMAND_REQ = 0x10,
-        P_MOVE_C = 0x15,
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
         ENTER_WARP_ACK_REQ = 0x1D,
@@ -73,8 +72,11 @@ namespace Server.Common.Net
         QUEST_ALL_REQ = 0x7A,
         QUEST_DONE_REQ = 0x7C,
         CAN_WARP_ACK_REQ = 0x85,
+        MOVE_ITEM_STORAGE = 0xAC,
+        SAVE_MONEY = 0xAE,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
+        CASH_SN = 0x11D
     }
 
     public enum LoginServerOpcode : byte
