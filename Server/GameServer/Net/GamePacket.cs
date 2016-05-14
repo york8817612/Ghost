@@ -883,7 +883,7 @@ namespace Server.Ghost
                 plew.WriteShort(chr.MaxMagic); // 魔攻力(Max)
                 plew.WriteShort(chr.Magic); // 魔攻力(Min)
                 plew.WriteShort(chr.Defense); // 防禦力
-                plew.WriteByte(0);
+                plew.WriteByte(4); // 攻擊速度
                 plew.WriteByte(0);
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
