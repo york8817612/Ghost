@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Server.Ghost
+﻿namespace Server.Ghost
 {
     public class Monster
     {
@@ -11,11 +9,11 @@ namespace Server.Ghost
         public int MP { get; set; }
         public int Speed { get; set; }
         public int Facing { get; set; }
-        public int State { get; set; }
+        public byte State { get; set; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Speed, int Facing, int State, int PositionX, int PositionY)
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Speed, int Facing, byte State, int PositionX, int PositionY)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;

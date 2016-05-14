@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.IO.Packet;
 using Server.Ghost;
 
 namespace Server.Handler
@@ -13,9 +14,22 @@ namespace Server.Handler
             short Damage = lea.ReadShort();
             short HitX = lea.ReadShort();
             short HitY = lea.ReadShort();
+            var chr = gc.Character;
             Monster Monster = gc.Character.Map.getMonsterByOriginalID(OriginalID);
             if (Monster == null)
                 return;
+            Monster.HP -= Damage;
+            if (Monster.HP <= 0)
+            {
+                Monster.State = 0x09;
+                chr.Exp += 10;
+                if (chr.Exp >= GameConstants.getExpNeededForLevel(chr.Level))
+                    chr.LevelUp();
+                StatusPacket.updateExp(gc);
+            } else
+            {
+                Monster.State = 0x07;
+            }
             MonsterPacket.spawnMonster(gc, Monster, CharacterID, Damage, HitX, HitY);
         }
     }

@@ -223,5 +223,15 @@ namespace Server.Ghost.Characters
         {
             return this.Map = map;
         }
+
+        public void LevelUp()
+        {
+            this.Exp = 0;
+            this.Level++;
+            this.AbilityBonus += 4;
+            this.SkillBonus += 2;
+            StatusPacket.levelUp(Client, this.Level);
+            StatusPacket.getStatusInfo(Client);
+        }
     }
 }

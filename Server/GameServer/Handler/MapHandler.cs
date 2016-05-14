@@ -15,30 +15,21 @@ namespace Server.Handler
             short mapY = lea.ReadShort();
             short playerX = lea.ReadShort();
             short playerY = lea.ReadShort();
-            gc.Character.MapX = mapX;
-            gc.Character.MapY = mapY;
-            gc.Character.PlayerX = playerX;
-            gc.Character.PlayerY = playerY;
+            var chr = gc.Character;
+            chr.MapX = mapX;
+            chr.MapY = mapY;
+            chr.PlayerX = playerX;
+            chr.PlayerY = playerY;
             MapPacket.warpToMap(gc, playerId, mapX, mapY, playerX, playerY);
-            if (mapX == 2 && mapY == 1)
+            if (mapX == 2 && mapY == 6)
             {
                 Map map = new Map();
-                gc.Character.SetMap(map);
+                chr.SetMap(map);
                 map.Monster = new List<Monster>();
-
-                Random random = new Random();
                 Monster[] monster = new Monster[50];
                 for (int i = 0; i < 50; i++)
                 {
-                    int facing = 0;
-                    if (i < 25)
-                    {
-                        facing = 0xFF;
-                    } else
-                    {
-                        facing = 0x01;
-                    }
-                    monster[i] = new Monster(i, 1000101, 3, 3, 10, 1, facing, 1, random.Next(25, 4775), random.Next(436, 1045));
+                    monster[i] = new Monster(i, 1000601, 3, 33, 10, 3, 0xFF, 0, 253 + i * 100, 1045);
                     map.Monster.Add(monster[i]);
                 }
                 MonsterPacket.createAllMonster(gc, monster);

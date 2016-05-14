@@ -98,6 +98,7 @@ namespace Server.Handler
 
             if (gc.Account.Master == 0 || cmd.Length < 1)
                 return;
+            var chr = gc.Character;
 
             switch (cmd[0])
             {
@@ -109,7 +110,7 @@ namespace Server.Handler
                 case "//item":
                     if (cmd.Length != 4 || byte.Parse(cmd[2]) < 0 || byte.Parse(cmd[2]) > 23 || byte.Parse(cmd[3]) == 0)
                         break;
-                    gc.Character.Items.Add(new Item(int.Parse(cmd[1]), byte.Parse(cmd[2]), byte.Parse(cmd[3])));
+                    chr.Items.Add(new Item(int.Parse(cmd[1]), byte.Parse(cmd[2]), byte.Parse(cmd[3])));
                     InventoryPacket.getInvenEquip1(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     InventoryPacket.getInvenSpend3(gc);
@@ -119,12 +120,11 @@ namespace Server.Handler
                 case "//money":
                     if (cmd.Length != 2)
                         break;
-                    gc.Character.Money = int.Parse(cmd[1]);
+                    chr.Money = int.Parse(cmd[1]);
                     InventoryPacket.getCharacterEquip(gc);
                     break;
                 case "//levelup":
-                    StatusPacket.levelUp(gc, gc.Character.Level++);
-                    StatusPacket.getStatusInfo(gc);
+                    chr.LevelUp();
                     break;
                 case "//gogo":
                     if (cmd.Length != 3)
