@@ -129,7 +129,7 @@ namespace Server.Ghost
                 //
                 plew.WriteShort(0);
                 plew.WriteShort(0);
-                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00");
+                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 1F 40");
                 plew.WriteShort(0);
                 plew.WriteShort(0);
                 plew.WriteHexString("00 00 00 00 00 00 00 00");
@@ -368,7 +368,7 @@ namespace Server.Ghost
                 c.Send(plew);
             }
         }
-        
+
         public static void getCharacterEquip(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_ALL))
@@ -991,7 +991,7 @@ namespace Server.Ghost
                 for (int i = 0; i < 10; i++)
                 {
                     int skillID = 0;
-                    foreach(Skill s in skill)
+                    foreach (Skill s in skill)
                     {
                         skillID = (s.Type == 0 && s.Slot == i ? s.SkillID : 0);
                         if (skillID > 0)
@@ -1139,7 +1139,7 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 int value = 0;
-                foreach(Quest q in quest)
+                foreach (Quest q in quest)
                 {
                     if (q.QuestState == 0x20)
                         continue;
@@ -1160,7 +1160,7 @@ namespace Server.Ghost
 
                 for (int i = 0; i < 999; i++)
                 {
-                    int questState = 0 ;
+                    int questState = 0;
                     foreach (Quest q in quest)
                     {
                         questState = (q.QuestState != 0x20 && (q.QuestID - 1) == i ? q.QuestState : 0x20);

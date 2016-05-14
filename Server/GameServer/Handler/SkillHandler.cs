@@ -61,7 +61,7 @@ namespace Server.Handler
                                 if (addMp > 2)
                                     addMp = 2;
                             }
-                            chr.Hp += addHp;
+                            chr.Hp += (short)addHp;
                             chr.Mp += (short)addMp;
                             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
                         }

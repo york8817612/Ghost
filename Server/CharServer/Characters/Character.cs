@@ -20,8 +20,8 @@ namespace Server.Characters
         public byte Level { get; set; }
         public byte Class { get; set; }
         public byte ClassLevel { get; set; }
-        public int Hp { get; set; }
-        public int MaxHp { get; set; }
+        public short Hp { get; set; }
+        public short MaxHp { get; set; }
         public short Mp { get; set; }
         public short MaxMp { get; set; }
         public short Fury { get; set; }
@@ -90,8 +90,8 @@ namespace Server.Characters
             this.Level = (byte)datum.level;
             this.Class = (byte)datum.classId;
             this.ClassLevel = (byte)datum.classLv;
-            this.Hp = datum.hp;
-            this.MaxHp = datum.maxHp;
+            this.Hp = (short)datum.hp;
+            this.MaxHp = (short)datum.maxHp;
             this.Mp = (short)datum.mp;
             this.MaxMp = (short)datum.maxMp;
             this.Fury = (short)datum.fury;
