@@ -1,5 +1,6 @@
 ﻿using Server.Common.Data;
 using Server.Common.IO;
+using System.Collections.Generic;
 
 namespace Server.Ghost.Characters
 {
@@ -60,6 +61,8 @@ namespace Server.Ghost.Characters
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
 
+        public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
+
         private bool Assigned { get; set; }
 
         public Character(int id = 0, Client gc = null)
@@ -71,6 +74,7 @@ namespace Server.Ghost.Characters
             this.Storages = new CharacterStorages(this);
             this.Skills = new CharacterSkills(this);
             this.Quests = new CharacterQuests(this);
+            this.SkillState = new Dictionary<int, Common.Threading.Delay>();
         }
 
         public void Load(bool IsFullLoad = true)

@@ -111,6 +111,7 @@ namespace Server.Ghost
                             SkillHandler.SkillLevelUp_Req(ip, this);
                             break;
                         case ClientOpcode.USE_SKILL_REQ:
+                            SkillHandler.UseSkill_Req(ip, this);
                             break;
                         // Quest
                         case ClientOpcode.QUEST_ALL_REQ:

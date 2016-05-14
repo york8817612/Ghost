@@ -80,7 +80,11 @@
     <Compile Include="Security\PacketCrypt.cs.cs" />
     <Compile Include="Security\PasswordEncrypt.cs" />
     <Compile Include="Security\ShaCryptograph.cs" />
+    <Compile Include="Threading\Delay.cs" />
     <Compile Include="Utilities\Randomizer.cs" />
+    <Compile Include="Utilities\TimerPlus.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
