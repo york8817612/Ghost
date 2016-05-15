@@ -24,7 +24,7 @@ namespace Server.Handler
                     skill = sl;
                 }
             }
-
+			if (skill != null)
             switch (skill.SkillID)
             {
                 case 0:
