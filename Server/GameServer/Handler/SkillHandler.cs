@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.IO;
+using Server.Common.IO.Packet;
 using Server.Common.Threading;
 using Server.Ghost;
 using System.Collections.Generic;
@@ -77,6 +78,9 @@ namespace Server.Handler
                 case 4:
                     chr.Mp -= (short)5;
                     StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                    break;
+                default:
+                    Log.Error("未處理的技能ID：{0}", skill.SkillID);
                     break;
             }
         }
