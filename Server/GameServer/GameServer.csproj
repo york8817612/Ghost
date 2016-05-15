@@ -68,6 +68,12 @@
     <Compile Include="Handler\GameHandler.cs" />
     <Compile Include="Net\GamePacket.cs" />
     <Compile Include="Ghost\Monster.cs" />
+    <Compile Include="Net\InventoryPacket.cs" />
+    <Compile Include="Net\MapPacket.cs" />
+    <Compile Include="Net\MonsterPacket.cs" />
+    <Compile Include="Net\QuestPacket.cs" />
+    <Compile Include="Net\SkillPacket.cs" />
+    <Compile Include="Net\StatusPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

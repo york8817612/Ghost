@@ -226,8 +226,12 @@ namespace Server.Ghost.Characters
 
         public void LevelUp()
         {
-            this.Exp = 0;
             this.Level++;
+            this.Exp = 0;
+            this.MaxHp += 10;
+            this.MaxMp += 15;
+            this.Hp = this.MaxHp;
+            this.Mp = this.MaxMp;
             this.AbilityBonus += 4;
             this.SkillBonus += 2;
             StatusPacket.levelUp(Client, this.Level);
