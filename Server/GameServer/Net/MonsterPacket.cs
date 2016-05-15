@@ -117,7 +117,7 @@ namespace Server.Ghost
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteShort(Damage);
-                plew.WriteShort(0); // 怪物受到的效果(0: 無、1: 無法移動、2: 中毒、3: 黑暗、4: 未知、5: 冰凍)
+                plew.WriteShort(Monster.Effect); // 怪物受到的效果(0: 無、1: 無法移動、2: 中毒、3: 黑暗、4: 未知、5: 冰凍)
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteShort(HitX); // Hit

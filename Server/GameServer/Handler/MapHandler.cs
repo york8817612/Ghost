@@ -27,7 +27,7 @@ namespace Server.Handler
                 Monster[] monster = new Monster[50];
                 for (int i = 0; i < 50; i++)
                 {
-                    monster[i] = new Monster(i, 1000601, 3, 33, 10, 3, 0xFF, 0, 253 + i * 100, 1045);
+                    monster[i] = new Monster(i, 1000601, 3, 33, 10, 3, 0xFF, 0, 0, 253 + i * 100, 1045);
                     map.Monster.Add(monster[i]);
                 }
                 MonsterPacket.createAllMonster(gc, monster);

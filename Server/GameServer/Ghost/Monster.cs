@@ -10,10 +10,11 @@
         public int Speed { get; set; }
         public int Facing { get; set; }
         public byte State { get; set; }
+        public byte Effect { get; set; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Speed, int Facing, byte State, int PositionX, int PositionY)
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Speed, int Facing, byte State, byte Effect, int PositionX, int PositionY)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;
@@ -23,6 +24,7 @@
             this.Speed = Speed;
             this.Facing = Facing;
             this.State = State;
+            this.Effect = Effect;
             this.PositionX = PositionX;
             this.PositionY = PositionY;
         }
