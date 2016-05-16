@@ -28,7 +28,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {//Facing
-                    plew.WriteByte(monster[i] != null ? monster[i].Facing : 0);
+                    plew.WriteByte(monster[i] != null ? monster[i].Direction : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {//??
@@ -40,7 +40,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {//IN MAP ID
-                    plew.WriteShort(monster[i] != null ? i : 0);
+                    plew.WriteShort(monster[i] != null ? i : -1);
                 }
                 for (int i = 0; i < 50; i++)
                 {//Mob X
@@ -80,7 +80,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {//MobSpeed
-                    plew.WriteInt(monster[i] != null ? monster[i].Speed : 0);
+                    plew.WriteInt(monster[i] != null ? monster[i].MoveState : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {//??
@@ -108,8 +108,8 @@ namespace Server.Packet
                 plew.WriteInt(Monster.OriginalID);
                 plew.WriteShort(0);
                 plew.WriteShort(0);
-                plew.WriteInt(Monster.Facing);
-                plew.WriteInt(Monster.Speed); // float
+                plew.WriteInt(Monster.Direction);
+                plew.WriteInt(Monster.MoveState);
                 plew.WriteShort(Monster.PositionX);
                 plew.WriteShort(Monster.PositionY);
                 plew.WriteShort(0);
@@ -117,13 +117,13 @@ namespace Server.Packet
                 plew.WriteByte(0);
                 plew.WriteHexString("00 00 00");
                 plew.WriteInt(0);
-                plew.WriteInt(0);
+                plew.WriteInt(-1);
                 plew.WriteShort(Damage);
                 plew.WriteShort(Monster.Effect); // 怪物受到的效果(0: 無、1: 無法移動、2: 中毒、3: 黑暗、4: 未知、5: 冰凍)
                 plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteShort(HitX); // Hit
-                plew.WriteShort(HitY); // Hit
+                plew.WriteInt(Monster.HP);
+                plew.WriteShort(0);
+                plew.WriteShort(0); // Not read
                 c.Send(plew);
             }
         }

@@ -1,7 +1,6 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
-using Server.Ghost;
 using Server.Net;
 
 namespace Server.Packet
