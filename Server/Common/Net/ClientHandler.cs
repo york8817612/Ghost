@@ -114,7 +114,7 @@ namespace Server.Common.Net
 
                     this.ReceiveDone.Set();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     this.Stop();
                 }

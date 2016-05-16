@@ -1,7 +1,9 @@
 ﻿using Server.Common.IO;
 using Server.Common.IO.Packet;
 using System;
+using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Server.Common.Net
 {
@@ -10,6 +12,9 @@ namespace Server.Common.Net
         public const int ReceiveSize = 262144;
 
         private readonly Socket m_socket;
+
+        private readonly UdpClient UdpListener;
+
 
         private byte[] m_recvBuffer;
         private byte[] m_buffer;
@@ -55,10 +60,46 @@ namespace Server.Common.Net
             Receive();
         }
 
+        public Session(Socket socket, UdpClient udpclient)
+        {
+            m_socket = socket;
+            m_socket.NoDelay = true;
+
+            Title = socket.RemoteEndPoint.ToString().Split(':')[0];
+
+            m_recvBuffer = new byte[ReceiveSize];
+            m_buffer = new byte[ReceiveSize];
+            m_offset = 0;
+
+            m_disposed = false;
+
+            m_sendSync = new object();
+
+            UdpListener = udpclient;
+
+            //m_siv = new MapleIV((uint)Randomizer.Next());
+            //m_riv = new MapleIV((uint)Randomizer.Next());
+
+            Register();
+
+            Thread udpReceive = new Thread(new ThreadStart(UdpReceive));
+            udpReceive.Start();
+
+            Thread tcpReceive = new Thread(new ThreadStart(Receive));
+            tcpReceive.Start();
+        }
+
         protected abstract void Register();
         protected abstract void Unregister();
         protected abstract void Dispatch(InPacket inPacket);
 
+        private void UdpReceive()
+        {
+            if (Int32.Parse(m_socket.LocalEndPoint.ToString().Split(':')[1]) >= 14101)
+            {
+                UdpListener.BeginReceive(new AsyncCallback(UDP_OnReceive), UdpListener);
+            }
+        }
 
         private void Receive()
         {
@@ -87,7 +128,7 @@ namespace Server.Common.Net
                 else
                 {
                     Append(length);
-                    ManipulateBuffer();
+                    ManipulateBuffer();                    
                     Receive();
                 }
             }
@@ -135,6 +176,22 @@ namespace Server.Common.Net
                 this.Dispatch(new InPacket(packetBuffer));
             }
 
+        }
+
+        private void UDP_OnReceive(IAsyncResult t)
+        {
+            try
+            {
+                UdpClient client = (UdpClient)t.AsyncState;
+                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 14199);
+                byte[] packet = client.EndReceive(t, ref RemoteIpEndPoint);
+                this.Dispatch(new InPacket(packet));
+                UdpReceive();
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (SocketException) { }
         }
 
         public void Send(OutPacket outPacket)

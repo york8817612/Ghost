@@ -6,11 +6,12 @@ using Server.Common.Utilities;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
 using Server.Handler;
+using Server.Packet;
 using System;
 using System.Net.Sockets;
 using static Server.Common.Constants.ServerUtilities;
 
-namespace Server.Ghost
+namespace Server.Net
 {
     public sealed class Client : Session
     {
@@ -19,7 +20,7 @@ namespace Server.Ghost
         public int CharacterID { get; private set; }
         public long SessionID { get; private set; }
 
-        public Client(Socket socket) : base(socket) { }
+        public Client(Socket socket, UdpClient udp) : base(socket, udp) { }
 
         protected override void Register()
         {
@@ -68,76 +69,7 @@ namespace Server.Ghost
 
                 if (ip.OperationCode == (ushort)ClientOpcode.SERVER)
                 {
-                    var Header = ip.ReadShort(); // 讀取包頭
-                    ip.ReadInt(); // 原始長度 + CRC
-                    ip.ReadInt();
-
-                    Log.Hex("Received {0}({1}) packet from {2}: ", ii, ((ClientOpcode)Header).ToString(), Header, this.Title);
-
-                    switch ((ClientOpcode)Header)
-                    {
-                        // Game
-                        case ClientOpcode.COMMAND_REQ:
-                            GameHandler.Command_Req(ip, this);
-                            break;
-                        case ClientOpcode.GAMELOG_REQ:
-                            GameHandler.Game_Log_Req(ip, this);
-                            break;
-                        // Shop
-                        case ClientOpcode.NPC_SHOP_REQ:
-                            NpcShopHandler.Buy_Req(ip, this);
-                            break;
-                        // Cash Shop
-                        case ClientOpcode.CASH_SN:
-
-                            break;
-                        // State
-                        case ClientOpcode.CHAR_STATUP_REQ:
-                            StatusHandler.Char_Statup_Req(ip, this);
-                            break;
-                        // Inventory
-                        case ClientOpcode.MOVE_ITEM_REQ:
-                            InventoryHandler.MoveItem_Req(ip, this);
-                            break;
-                        case ClientOpcode.INVEN_USESPEND_SHOUT_REQ:
-                        case ClientOpcode.INVEN_USESPEND_SHOUT_ALL_REQ:
-                            InventoryHandler.InvenUseSpendShout_Req(ip, this);
-                            break;
-                        case ClientOpcode.PICKUP_ITEM:
-                            InventoryHandler.pickupItem(ip, this);
-                            break;
-                        // Skill
-                        case ClientOpcode.SKILL_LEVELUP_REQ:
-                            SkillHandler.SkillLevelUp_Req(ip, this);
-                            break;
-                        case ClientOpcode.USE_SKILL_REQ:
-                            SkillHandler.UseSkill_Req(ip, this);
-                            break;
-                        // Quest
-                        case ClientOpcode.QUEST_ALL_REQ:
-                            QuestHandler.Quest_All_Req(ip, this);
-                            break;
-                        // Map
-                        case ClientOpcode.ENTER_WARP_ACK_REQ:
-                            MapHandler.WarpToMap_Req(ip, this);
-                            break;
-                        case ClientOpcode.CAN_WARP_ACK_REQ:
-                            MapHandler.WarpToMapAuth_Req(ip, this);
-                            break;
-                        // Monster
-                        case ClientOpcode.ATTACK_MONSTER_REQ:
-                            MonsterHandler.AttackMonster_Req(ip, this);
-                            break;
-                        // Storage
-                        case ClientOpcode.MOVE_ITEM_STORAGE:
-                            break;
-                        case ClientOpcode.SAVE_MONEY:
-                            StorageHandler.saveStorageMoney(ip, this);
-                            break;
-                        case ClientOpcode.GIVE_MONEY:
-                            StorageHandler.giveStorageMoney(ip, this);
-                            break;
-                    }
+                    GameServerHandler.ServerHandlerReceive(ip, this);
                 }
             }
             catch (HackException e)

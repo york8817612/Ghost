@@ -5,6 +5,7 @@ using Server.Ghost;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Server.Net;
 
 namespace Server.Ghost.Accounts
 {

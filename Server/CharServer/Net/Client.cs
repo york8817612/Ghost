@@ -72,7 +72,7 @@ namespace Server.Ghost
             }
             catch (HackException e)
             {
-                // TODO: Register offense using the exception's message.
+                Log.Warn("Hack from {0}: \n{1}", this.Account.Username, e.ToString());
             }
             catch (Exception e)
             {

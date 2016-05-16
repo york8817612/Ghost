@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using static Server.Common.Constants.ServerUtilities;
+using Server.Net;
+using Server.Common.IO.Packet;
 
 namespace Server
 {
@@ -19,6 +21,10 @@ namespace Server
 
         public static TcpListener Listener { get; private set; }
         public static IPEndPoint RemoteEndPoint { get; private set; }
+
+        public static UdpClient UdpListener { get; private set; }
+        public static IPEndPoint UdpRemoteEndPoint { get; private set; }
+
         public static InteroperabilityClient LoginServerConnection { get; set; }
         public static List<Client> Clients { get; private set; }
         public static byte WorldID { get; set; }
@@ -112,8 +118,11 @@ namespace Server
                 Database.Analyze(true);
 
                 GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port); // TODO: Get actual host.
-
                 //MapleData.Initialize();
+
+                UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
+                UdpListener = new UdpClient(UdpRemoteEndPoint);
+                Log.Inform("Initialized clients UDP listener on {0}.", UdpRemoteEndPoint.Address);
 
                 GameServer.Listener = new TcpListener(IPAddress.Any, GameServer.RemoteEndPoint.Port);
                 GameServer.Listener.Start();
@@ -145,9 +154,7 @@ namespace Server
             while (GameServer.IsAlive)
             {
                 GameServer.AcceptDone.Reset();
-
                 GameServer.Listener.BeginAcceptSocket(new AsyncCallback(GameServer.OnAcceptSocket), null);
-
                 GameServer.AcceptDone.WaitOne();
             }
 
@@ -182,7 +189,7 @@ namespace Server
 
             try
             {
-                new Client(GameServer.Listener.EndAcceptSocket(ar));
+                new Client(GameServer.Listener.EndAcceptSocket(ar), GameServer.UdpListener);
             }
             catch (ObjectDisposedException) { } // NOTE: Seems to be an issue with the ManualResetEvent or the TcpListener, most likely to be a disposal issue.
         }
