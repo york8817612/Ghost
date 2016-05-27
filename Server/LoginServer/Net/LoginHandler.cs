@@ -62,11 +62,7 @@ namespace Server.Ghost
                     Account account = new Account(c);
                     account.Username = username.ToLower();
                     account.Password = password;
-                    account.Salt = "";
-                    account.Pin = "";
-                    account.Birthday = new DateTime(1, 1, 1);
-                    account.Creation = DateTime.Today;
-                    account.Gender = 1;
+                    account.Creation = DateTime.Now;
                     account.LoggedIn = 0;
                     account.Banned = 0;
                     account.Master = 0;

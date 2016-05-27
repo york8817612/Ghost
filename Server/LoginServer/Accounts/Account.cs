@@ -13,11 +13,7 @@ namespace Server.Accounts
         public int ID { get; private set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Salt { get; set; }
-        public string Pin { get; set; }
-        public DateTime Birthday { get; set; }
         public DateTime Creation { get; set; }
-        public int Gender { get; set; }
         public int LoggedIn { get; set; }
         public int Banned { get; set; }
         public int Master { get; set; }
@@ -46,13 +42,9 @@ namespace Server.Accounts
             this.ID = datum.id;
             this.Assigned = true;
 
-            this.Username = datum.userName;
+            this.Username = datum.username;
             this.Password = datum.password;
-            this.Salt = datum.salt;
-            this.Pin = datum.pin;
-            this.Birthday = datum.birthday;
             this.Creation = datum.creation;
-            this.Gender = datum.gender;
             this.LoggedIn = datum.isLoggedIn;
             this.Banned = datum.isBanned;
             this.Master = datum.isMaster;
@@ -65,11 +57,7 @@ namespace Server.Accounts
 
             datum.userName = this.Username;
             datum.password = this.Password;
-            datum.salt = this.Salt;
-            datum.pin = this.Pin;
-            datum.birthday = this.Birthday;
             datum.creation = this.Creation;
-            datum.gender = this.Gender;
             datum.isLoggedIn = this.LoggedIn;
             datum.isBanned = this.Banned;
             datum.isMaster = this.Master;

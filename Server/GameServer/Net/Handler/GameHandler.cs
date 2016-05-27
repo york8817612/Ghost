@@ -79,7 +79,7 @@ namespace Server.Handler
             GamePacket.FW_DISCOUNTFACTION(gc);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
-            //InventoryPacket.getCharacterEquip(gc);
+            InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
             QuestPacket.getQuickSlot(gc);
