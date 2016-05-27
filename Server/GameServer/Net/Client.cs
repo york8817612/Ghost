@@ -5,9 +5,9 @@ using Server.Common.Security;
 using Server.Common.Utilities;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
-using Server.Handler;
 using Server.Packet;
 using System;
+using System.Net;
 using System.Net.Sockets;
 using static Server.Common.Constants.ServerUtilities;
 
@@ -17,7 +17,9 @@ namespace Server.Net
     {
         public Account Account { get; private set; }
         public Character Character { get; private set; }
+        public static int i { get; private set; }
         public int CharacterID { get; private set; }
+        public string[] IP { get; private set; }
         public long SessionID { get; private set; }
 
         public Client(Socket socket, UdpClient udp) : base(socket, udp) { }
@@ -25,9 +27,13 @@ namespace Server.Net
         protected override void Register()
         {
             GameServer.Clients.Add(this);
-            this.CharacterID = GameServer.Clients.Count;
+            this.CharacterID = ++i;
             this.SessionID = Randomizer.NextLong();
-            GamePacket.Game_Log_Ack(this, CharacterID);
+            //
+            string[] IP = base.Title.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            this.IP = IP;
+            //
+            GamePacket.Game_Log_Ack(this, CharacterID, this.IP);
             Log.Inform("Accepted connection from {0}.", this.Title);
         }
 

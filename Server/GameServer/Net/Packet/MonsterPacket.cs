@@ -2,96 +2,97 @@
 using Server.Common.Net;
 using Server.Ghost;
 using Server.Net;
+using System.Collections.Generic;
 
 namespace Server.Packet
 {
     public static class MonsterPacket
     {
-        public static void createAllMonster(Client c, Monster[] monster)
+        public static void createAllMonster(Client c, List<Monster> monster)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.MON_ALLCREATE))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(monster.Length);
+                plew.WriteInt(3); // 怪物數量
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteByte(monster[i] != null ? 1 : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//Level
+                {
                     plew.WriteByte(monster[i] != null ? monster[i].Level : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//Facing
+                {
                     plew.WriteByte(monster[i] != null ? monster[i].Direction : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteByte(monster[i] != null ? 1 : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//IN MAP ID
+                {
                     plew.WriteShort(monster[i] != null ? i : -1);
                 }
                 for (int i = 0; i < 50; i++)
-                {//Mob X
+                {
                     plew.WriteShort(monster[i] != null ? monster[i].PositionX : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//Y
+                {
                     plew.WriteShort(monster[i] != null ? monster[i].PositionY : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteInt(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
+                {
                     plew.WriteInt(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
-                    plew.WriteShort(monster[i] != null ? 5 : 0);
+                {
+                    plew.WriteShort(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
-                    plew.WriteShort(monster[i] != null ? 6 : 0);
+                {
+                    plew.WriteShort(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
-                    plew.WriteShort(monster[i] != null ? 5 : 0);
+                {
+                    plew.WriteShort(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
-                    plew.WriteShort(monster[i] != null ? 1 : 0);
+                {
+                    plew.WriteShort(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//Mobs ID
+                {
                     plew.WriteInt(monster[i] != null ? monster[i].MonsterID : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//MobSpeed
-                    plew.WriteInt(monster[i] != null ? monster[i].MoveState : 0);
+                {
+                    plew.WriteFloat(monster[i] != null ? monster[i].Speed : 0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//??
-                    plew.WriteHexString(monster[i] != null ? "CB 46" : "00 00");
+                {
+                    plew.WriteHexString("00 00");
                 }
                 for (int i = 0; i < 50; i++)
-                {//MobHP
-                    plew.WriteInt(monster[i] != null ? monster[i].MP : 0);
+                {
+                    plew.WriteInt(0);
                 }
                 for (int i = 0; i < 50; i++)
-                {//MobHP
+                {
                     plew.WriteInt(monster[i] != null ? monster[i].HP : 0);
                 }
                 c.Send(plew);
@@ -109,7 +110,7 @@ namespace Server.Packet
                 plew.WriteShort(0);
                 plew.WriteShort(0);
                 plew.WriteInt(Monster.Direction);
-                plew.WriteInt(Monster.MoveState);
+                plew.WriteFloat(Monster.Speed);
                 plew.WriteShort(Monster.PositionX);
                 plew.WriteShort(Monster.PositionY);
                 plew.WriteShort(0);

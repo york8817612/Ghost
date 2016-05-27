@@ -40,7 +40,7 @@ namespace Server.Ghost
                     {
                         plew.WriteShort(i + 1);
                         plew.WriteShort(i + 1);
-                        plew.WriteString(ServerConstants.SERVER_IP);
+                        plew.WriteString((c.Title == "127.0.0.1" || c.Title.Equals(ServerConstants.SERVER_IP)) ? "127.0.0.1" : ServerConstants.SERVER_IP);
                         plew.WriteInt(14101 + i);
                         plew.WriteInt(i < world.Count ? world[i].LoadProportion : 0); // 玩家數量
                         plew.WriteInt(ServerConstants.CHANNEL_LOAD); // 頻道人數上限
@@ -60,7 +60,7 @@ namespace Server.Ghost
             using (var plew = new OutPacket(LoginServerOpcode.GAME_ACK))
             {
                 plew.WriteByte((byte)state);
-                plew.WriteString(ServerConstants.SERVER_IP);
+                plew.WriteString((c.Title == "127.0.0.1" || c.Title.Equals(ServerConstants.SERVER_IP)) ? "127.0.0.1" : ServerConstants.SERVER_IP);
                 plew.WriteInt(14101 + c.World.ID);
                 plew.WriteInt(14199);
 

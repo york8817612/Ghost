@@ -8,6 +8,7 @@ using System.Net;
 using Server.Common.Collections;
 using static Server.Common.Constants.ServerUtilities;
 using Server.Ghost.Characters;
+using Server.Ghost;
 
 namespace Server.Interoperability
 {
@@ -121,6 +122,8 @@ namespace Server.Interoperability
                                            GameServer.Rates.PartyQuestExperience,
                                            GameServer.Rates.Meso,
                                            GameServer.Rates.Loot);
+                        Maps.Initialize();
+                        Log.Success("Maps initialize Success!");
                     }
                     break;
 

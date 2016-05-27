@@ -2,12 +2,13 @@
 using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Net;
+using System.Net;
 
 namespace Server.Packet
 {
     public static class GamePacket
     {
-        public static void Game_Log_Ack(Client c, int characterID)
+        public static void Game_Log_Ack(Client c, int characterID, string[] IP)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.GAMELOG))
             {
@@ -17,7 +18,10 @@ namespace Server.Packet
                 plew.WriteInt(ServerConstants.CLIENT_VERSION);
                 plew.WriteInt(14199);
                 plew.WriteInt(12615854); // TimeLogin
-                plew.WriteBytes(new byte[] { 127, 0, 0, 1 });
+                plew.WriteByte(byte.Parse(IP[0]));
+                plew.WriteByte(byte.Parse(IP[1]));
+                plew.WriteByte(byte.Parse(IP[2]));
+                plew.WriteByte(byte.Parse(IP[3]));
                 plew.WriteLong(c.SessionID); // Key
 
                 c.Send(plew);

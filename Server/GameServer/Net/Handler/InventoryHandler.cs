@@ -1,6 +1,7 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Ghost;
+using Server.Ghost.Characters;
 using Server.Net;
 using Server.Packet;
 
@@ -17,10 +18,16 @@ namespace Server.Handler
             int count = lea.ReadInt();
             Item source = gc.Character.Items.GetItem(sourceType, sorceSlot);
             Item target = gc.Character.Items.GetItem(targetType, targetSlot);
+            var chr = gc.Character;
 
             if (targetType == 0x63 && targetSlot == 0x63)
             {
-                InventoryPacket.charDropItem(gc, 0, source.ItemID, gc.Character.PlayerX,(short)(gc.Character.PlayerY - 50), count);
+                if (sourceType == 0xFF && sorceSlot == 0xFF)
+                    return;
+                Map map = Maps.GetMap(chr.MapX, chr.MapY);
+                InventoryPacket.charDropItem(gc, map.DropOriginalID, source.ItemID, gc.Character.PlayerX,(short)(gc.Character.PlayerY - 50), count);
+                map.DropItem.Add(map.DropOriginalID, source);
+                map.DropOriginalID++;
                 gc.Character.Items.RemoveItem(sourceType, sorceSlot);
             }
             else
@@ -104,26 +111,35 @@ namespace Server.Handler
             if (slot >= 0 && slot < 24 && message.Length < 60)
             {
                 gc.Character.Items.RemoveItem(InventoryType.ItemType.Spend3, slot);
-                MapPacket.InvenUseSpendShout(gc, message);
+                foreach (Character all in Maps.AllCharacters)
+                {
+                    MapPacket.InvenUseSpendShout(all.Client, message);
+                }
                 InventoryPacket.getInvenSpend3(gc);
             }
         }
 
-        public static void pickupItem(InPacket lea, Client gc)
+        public static void PickupItem(InPacket lea, Client gc)
         {
-            int unk1 = lea.ReadInt();
-            int itemid = lea.ReadInt();
-            int unk2 = lea.ReadInt();
-            int type = InventoryType.getItemType(itemid);
-            byte solt = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType) type);
-            Item oItem = new Item(itemid, solt, (byte)type, 1);
-            gc.Character.Items.Add(oItem);
-            InventoryPacket.clearDropItem(gc, 11, 0, itemid, 1);
-            switch (type)
+            int OriginalID = lea.ReadInt();
+            int ItemID = lea.ReadInt();
+            lea.ReadInt();
+            int Type = InventoryType.getItemType(ItemID);
+            byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType) Type);
+            var chr = gc.Character;
+
+            Item oItem = new Item(ItemID, Slot, (byte)Type, 1);
+            Map map = Maps.GetMap(chr.MapX, chr.MapY);
+            if (!map.DropItem.ContainsKey(OriginalID))
+                return;
+            chr.Items.Add(oItem);
+            InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, 1);
+            map.DropItem.Remove(OriginalID);
+            switch (Type)
             {
                 case 0:
                     getAvatar(gc);
-                    switch (type)
+                    switch (Type)
                     {
                         case 1:
                             InventoryPacket.getInvenEquip1(gc);
@@ -134,12 +150,12 @@ namespace Server.Handler
                     }
                     break;
                 case 1:
-                    if (type == 0)
+                    if (Type == 0)
                         getAvatar(gc);
                     InventoryPacket.getInvenEquip1(gc);
                     break;
                 case 2:
-                    if (type == 0)
+                    if (Type == 0)
                         getAvatar(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     break;

@@ -86,6 +86,7 @@ namespace Server.Common.Net
         MOVE_ITEM_STORAGE = 0xAC,
         SAVE_MONEY = 0xAE,
         GIVE_MONEY = 0xAF,
+        P_MOVE = 0xDD,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
         PET_MOVE_C = 0x10B,

@@ -70,7 +70,20 @@ namespace Server.Ghost
         public Item(int itemID, byte slot, byte type, short quantity = 1)
         {
             this.ItemID = itemID;
-            this.MaxPerStack = this.MaxPerStack;
+            this.MaxPerStack = 1;
+            switch (type)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 5:
+                    this.MaxPerStack = 1;
+                    break;
+                case 3:
+                case 4:
+                    this.MaxPerStack = 100;
+                    break;
+            }
             this.Quantity = quantity;
             this.slot = slot;
             this.type = type;
@@ -83,6 +96,19 @@ namespace Server.Ghost
 
             this.ItemID = datum.itemId;
             this.MaxPerStack = 1;
+            switch ((byte)(datum.type))
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 5:
+                    this.MaxPerStack = 1;
+                    break;
+                case 3:
+                case 4:
+                    this.MaxPerStack = 100;
+                    break;
+            }
             this.Quantity = (short)datum.quantity;
             this.slot = (byte)datum.slot;
             this.type = (byte)datum.type;

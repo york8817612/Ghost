@@ -1,8 +1,10 @@
 ﻿using Server.Accounts;
 using Server.Common;
+using Server.Common.Constants;
 using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Security;
+using System;
 
 namespace Server.Ghost
 {
@@ -25,9 +27,12 @@ namespace Server.Ghost
             try
             {
                 c.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(c.Account.Password);
-                if (!password.Equals(encryptPassword))
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(c.Account.Password, password.ToCharArray());
+                //if (password.Length > 14)
+                //    PasswordEncrypt.Data2 = null;
+
+                if (!password.Equals(c.Account.Password))
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
                     Log.Error("Login Fail!");
@@ -42,17 +47,33 @@ namespace Server.Ghost
                     c.Account.LoggedIn = 1;
                     Log.Success("Login Success!");
                 }
-                Log.Inform("Password = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("密碼 = {0}", password);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
-                if (false)
+                // Auto registration
+                if (ServerConstants.AUTO_REGISTRATION == true)
                 {
-                    // TODO: Auto registration.
-                }
-                else
+                    if (username.Length < 5 || password.Length < 5)
+                        LoginPacket.Login_Ack(c, ServerState.LoginState.NO_USERNAME);
+
+                    Account account = new Account(c);
+                    account.Username = username.ToLower();
+                    account.Password = password;
+                    account.Salt = "";
+                    account.Pin = "";
+                    account.Birthday = new DateTime(1, 1, 1);
+                    account.Creation = DateTime.Today;
+                    account.Gender = 1;
+                    account.LoggedIn = 0;
+                    account.Banned = 0;
+                    account.Master = 0;
+                    account.CashPoint = 0;
+                    account.Save();
+                    LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
+                } else
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.NO_USERNAME);
                 }

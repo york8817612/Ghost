@@ -20,8 +20,8 @@ namespace Server.Packet
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLevel);
-                plew.WriteByte(0);
                 plew.WriteByte(0xFF);
+                plew.WriteByte(0);
                 plew.WriteShort(chr.MaxHp);
                 plew.WriteShort(chr.Hp);
                 plew.WriteShort(chr.MaxMp);
@@ -45,7 +45,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Magic); // 魔攻力(Min)
                 plew.WriteShort(chr.Defense); // 防禦力
                 plew.WriteByte(3); // 攻擊速度
-                plew.WriteByte(0);
+                plew.WriteByte(1);
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
                 plew.WriteShort(chr.SkillBonus); // 技能上升值
@@ -96,9 +96,10 @@ namespace Server.Packet
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_LEVELUP))
             {
+                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(c.Character.CharacterID);
+                plew.WriteInt(chr.CharacterID);
                 plew.WriteInt(level);
                 c.Send(plew);
             }
@@ -123,7 +124,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Magic);
                 plew.WriteShort(chr.Defense);
                 plew.WriteByte(3); // 攻擊速度
-                plew.WriteByte(0);
+                plew.WriteByte(1);
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus);
                 plew.WriteShort(chr.SkillBonus);

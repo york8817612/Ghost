@@ -24,9 +24,10 @@ namespace Server.Ghost
             try
             {
                 gc.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(gc.Account.Password);
-                if (!password.Equals(encryptPassword))
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
+
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -47,9 +48,9 @@ namespace Server.Ghost
                     CharPacket.MyChar_Info_Ack(gc, gc.Account.Characters);
                     Log.Success("Login Success!");
                 }
-                Log.Inform("Password = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("密碼 = {0}", password);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
@@ -126,6 +127,8 @@ namespace Server.Ghost
             chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
             chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
+            chr.Items.Add(new Item(8810011, (byte)0, (byte)InventoryType.ItemType.Spend3, 10));
+            chr.Items.Add(new Item(8820011, (byte)1, (byte)InventoryType.ItemType.Spend3, 10));
             chr.Storages.Add(new Storage(0));
             chr.Skills.Add(new Skill(1 , 1, 0, 0));
             chr.Skills.Add(new Skill(2, 1, 0, 1));

@@ -31,9 +31,9 @@ namespace Server.Handler
             try
             {
                 gc.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(gc.Account.Password);
-                if (!password.Equals(encryptPassword))
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -49,13 +49,14 @@ namespace Server.Handler
                     {
                         Character character = new Character(datum.id, gc);
                         character.Load(false);
+                        character.IP = hostid;
                         gc.Account.Characters.Add(character);
                     }
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
-                Log.Inform("Password = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("密碼 = {0}", password);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
@@ -72,12 +73,13 @@ namespace Server.Handler
 
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
+            Maps.AllCharacters.Add(chr);
 
             StatusPacket.updateHpMp(gc, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
-            InventoryPacket.getCharacterEquip(gc);
+            //InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
             QuestPacket.getQuickSlot(gc);
@@ -107,7 +109,10 @@ namespace Server.Handler
                 case "//notice":
                     if (cmd.Length != 2)
                         break;
-                    GamePacket.getNotice(gc, 3, cmd[1]);
+                    foreach (Character all in Maps.AllCharacters)
+                    {
+                        GamePacket.getNotice(all.Client, 3, cmd[1]);
+                    }
                     break;
                 case "//item":
                     if (cmd.Length != 4 || byte.Parse(cmd[2]) < 0 || byte.Parse(cmd[2]) > 23 || byte.Parse(cmd[3]) == 0)

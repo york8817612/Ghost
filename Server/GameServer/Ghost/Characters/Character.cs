@@ -3,6 +3,7 @@ using Server.Common.IO;
 using Server.Net;
 using Server.Packet;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Server.Ghost.Characters
 {
@@ -56,8 +57,8 @@ namespace Server.Ghost.Characters
         public short SkillBonus { get; set; }
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
+        public IPAddress IP { get; set; }
 
-        public Map Map { get; private set; }
         public CharacterItems Items { get; private set; }
         public CharacterStorages Storages { get; private set; }
         public CharacterSkills Skills { get; private set; }
@@ -221,11 +222,6 @@ namespace Server.Ghost.Characters
             this.Assigned = false;
         }
 
-        public Map SetMap(Map map)
-        {
-            return this.Map = map;
-        }
-
         public void LevelUp()
         {
             this.Level++;
@@ -236,7 +232,9 @@ namespace Server.Ghost.Characters
             this.Mp = this.MaxMp;
             this.AbilityBonus += 4;
             this.SkillBonus += 2;
-            StatusPacket.levelUp(Client, this.Level);
+            Map map = Maps.GetMap(this.MapX, this.MapY);
+            foreach (Character all in map.Characters)
+                StatusPacket.levelUp(Client, this.Level);
             StatusPacket.getStatusInfo(Client);
         }
     }

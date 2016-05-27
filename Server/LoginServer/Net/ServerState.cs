@@ -16,6 +16,7 @@
         public enum LoginState
         {
             OK = 0,
+            AUTO_REGISTRATION = 1, // 非客戶端
             BUG_LOCK = 7,
             MEMONY_LOCK = 8,
             FUCK_LOCK = 9,

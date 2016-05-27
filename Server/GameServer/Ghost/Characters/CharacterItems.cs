@@ -103,19 +103,9 @@ namespace Server.Ghost.Characters
             item.Delete();
         }
 
-        public IEnumerator<Item> GetEnumerator()
-        {
-            return this.Items.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)this.Items).GetEnumerator();
-        }
-
         public byte GetNextFreeSlot(InventoryType.ItemType type)
         {
-            for (byte i = 1; i <= this.MaxSlots[type]; i++)
+            for (byte i = 0; i < this.MaxSlots[type]; i++)
             {
                 if (this[type, i] == null)
                 {
@@ -157,5 +147,14 @@ namespace Server.Ghost.Characters
             }
         }
 
+        public IEnumerator<Item> GetEnumerator()
+        {
+            return this.Items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this.Items).GetEnumerator();
+        }
     }
 }

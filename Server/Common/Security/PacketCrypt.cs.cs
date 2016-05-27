@@ -128,7 +128,7 @@ namespace Server.Common.Security
             int v10 = 0;
             int v11 = 0;
             int v12 = 0;
-        label:
+            label:
             if (j >= 0x20000 || i >= length)
             {
                 goto label2;
@@ -167,7 +167,7 @@ namespace Server.Common.Security
                 } while (v12 > 0);
                 goto label;
             }
-        label2:
+            label2:
             byte[] ret = new byte[j];
             Array.Copy(v7, ret, ret.Length);
             return ret;

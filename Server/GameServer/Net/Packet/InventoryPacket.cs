@@ -118,27 +118,33 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);          // 玩物[Toy]
                 plew.WriteInt(0); // 16
                 plew.WriteInt(0); // 17
+                plew.WriteInt(0); // 18
+                plew.WriteInt(0); // 19
+                plew.WriteInt(0); // 20
+                plew.WriteInt(0); // 21
 
                 for (int i = 0; i < 17; i++)
                 {
                     plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
                 }
 
                 for (int i = 0; i < 17; i++)
-                {
-                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
-                }
-
-                plew.WriteByte(0);
-
-                for (int i = 0; i < 17; i++)
-                {
+                {   // 封印量
                     plew.WriteShort(0);
                 }
 
                 for (int i = 0; i < 17; i++)
                 {
-                    plew.WriteShort(0);
+                    plew.WriteInt(0);
                 }
 
                 for (int i = 0; i < 17; i++)
@@ -146,11 +152,16 @@ namespace Server.Packet
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
 
-                // 寵物
-                plew.WriteString("", 20); // 寵物名稱
-                plew.WriteByte(0); // 寵物等級
+                for (int i = 0; i < 17; i++)
+                {
+                    plew.WriteShort(0);
+                }
+
+                //寵物
+                plew.WriteString("", 20); // PetName
+                plew.WriteByte(0); // PetLevel
                 plew.WriteByte(0);
-                plew.WriteInt(0); // 寵物血量
+                plew.WriteInt(0); // PetHP
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 plew.WriteInt(-1);
@@ -159,28 +170,15 @@ namespace Server.Packet
                 plew.WriteByte(0);
 
                 // 玩物
-                plew.WriteString("", 20); // 玩物名稱
+                plew.WriteString("", 20); // ToyName
                 plew.WriteByte(0);
                 plew.WriteShort(0);
                 plew.WriteInt(0);
-                plew.WriteInt(0); // 玩物血量
+                plew.WriteInt(0); // ToyHP
                 plew.WriteInt(0);
 
-                plew.WriteInt(-1); // 玩物[Toy]截止日期
                 plew.WriteInt(-1); // 武器[Weapon]截止日期
-                plew.WriteInt(-1); // 衣服[Outfit]截止日期
-                plew.WriteInt(-1); // 頭部[Hat]截止日期
                 plew.WriteInt(-1); // 未知[]截止日期
-
-                for (int i = 0; i < 17; i++)
-                {
-                    plew.WriteInt(0);
-                }
-
-                for (int i = 0; i < 17; i++)
-                {
-                    plew.WriteInt(0);
-                }
 
                 c.Send(plew);
             }
@@ -215,7 +213,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(-1);
+                    plew.WriteInt(0);
                 }
                 for (int i = 0; i < 24; i++)
                 { // 物品標誌
@@ -249,7 +247,7 @@ namespace Server.Packet
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
                 }
                 for (int i = 0; i < 24; i++)
-                { // 封印物量
+                { // 封印量
                     plew.WriteShort(0);
                 }
                 for (int i = 0; i < 24; i++)
@@ -257,12 +255,12 @@ namespace Server.Packet
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 物品標誌
-                    plew.WriteShort(0);
+                { // 截止日期
+                    plew.WriteInt(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 截止日期
-                    plew.WriteInt(-1);
+                { // 物品標誌
+                    plew.WriteShort(0);
                 }
                 c.Send(plew);
             }
@@ -281,15 +279,15 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteInt(chr.Items.GetItemQuantity(InventoryType.ItemType.Spend3, i));
+                    plew.WriteShort(chr.Items.GetItemQuantity(InventoryType.ItemType.Spend3, i));
                 }
-                for (short i = 1; i <= 24; i++)
+                for (int i = 0; i < 24; i++)
                 { // 物品Lock
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(-1);
+                    plew.WriteInt(0);
                 }
                 plew.WriteHexString("03 FF FF FF");
                 c.Send(plew);
@@ -309,7 +307,7 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteInt(chr.Items.GetItemQuantity(InventoryType.ItemType.Other4, i));
+                    plew.WriteShort(chr.Items.GetItemQuantity(InventoryType.ItemType.Other4, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 物品Lock
@@ -371,7 +369,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
-                    plew.WriteInt(-1);
+                    plew.WriteInt(0);
                 }
                 for (int i = 0; i < 24; i++)
                 { // 物品Icon

@@ -154,6 +154,14 @@ namespace Server.Common.IO.Packet
             this.Append(value, 8);
         }
 
+        public void WriteFloat(float value = 0)
+        {
+            this.ThrowIfDisposed();
+
+            byte[] x = BitConverter.GetBytes(value);
+            this._stream.Write(x, 0, x.Length);
+        }
+
         public void WriteString(string value)
         {
             this.ThrowIfDisposed();

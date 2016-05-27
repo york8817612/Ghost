@@ -50,7 +50,7 @@ namespace Server.Net
                     InventoryHandler.InvenUseSpendShout_Req(ip, gc);
                     break;
                 case ClientOpcode.PICKUP_ITEM:
-                    InventoryHandler.pickupItem(ip, gc);
+                    InventoryHandler.PickupItem(ip, gc);
                     break;
                 // Skill
                 case ClientOpcode.SKILL_LEVELUP_REQ:
@@ -92,6 +92,9 @@ namespace Server.Net
                     break;
                 case ClientOpcode.P_SPEED_C:
                     ActionHandler.p_Speed_c(ip, gc);
+                    break;
+                case ClientOpcode.P_MOVE:
+                    ActionHandler.p_Move(ip, gc);
                     break;
             }
         }

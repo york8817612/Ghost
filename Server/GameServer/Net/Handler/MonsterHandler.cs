@@ -20,7 +20,8 @@ namespace Server.Handler
             short HitY = lea.ReadShort();
             short SkillID = lea.ReadShort();
             var chr = gc.Character;
-            Monster Monster = gc.Character.Map.getMonsterByOriginalID(OriginalID);
+            Map map = Maps.GetMap(chr.MapX, chr.MapY);
+            Monster Monster = map.getMonsterByOriginalID(OriginalID);
             if (Monster == null)
                 return;
             Monster.HP -= Damage;
@@ -38,14 +39,17 @@ namespace Server.Handler
             }
             if (Monster.HP <= 0)
             {
-                Monster.State = 0x09;
+                Monster.State = 9;
+                map.Monster.Remove(Monster);
                 chr.Exp += 10;
                 if (chr.Exp >= GameConstants.getExpNeededForLevel(chr.Level))
                     chr.LevelUp();
                 StatusPacket.updateExp(gc);
             } else
             {
-                Monster.State = 0x07;
+                Monster.State = 7;
+                if ((chr.PlayerX < HitX && Monster.Direction == 1) || (chr.PlayerX > HitX && Monster.Direction == -1))
+                    Monster.Direction = Monster.Direction * -1;
             }
             MonsterPacket.spawnMonster(gc, Monster, CharacterID, Damage, HitX, HitY);
         }
