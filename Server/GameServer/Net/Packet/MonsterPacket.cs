@@ -8,13 +8,21 @@ namespace Server.Packet
 {
     public static class MonsterPacket
     {
-        public static void createAllMonster(Client c, List<Monster> monster)
+        public static void createAllMonster(Client c, Map map, List<Monster> monster)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.MON_ALLCREATE))
             {
+                int j = 0;
+                for (int i = 0; i < 50; i++)
+                {
+                    if (monster[i] != null)
+                    {
+                        j++;
+                    }
+                }
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(3); // 怪物數量
+                plew.WriteInt(j); // 怪物數量
                 for (int i = 0; i < 50; i++)
                 {
                     plew.WriteByte(monster[i] != null ? 1 : 0);

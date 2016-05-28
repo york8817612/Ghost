@@ -75,7 +75,7 @@ namespace Server.Common.Net
         ATTACK_MONSTER_REQ = 0x45,
         PICKUP_ITEM = 0x4C,
         MOVE_ITEM_REQ = 0x6C,
-        USE_WATER_REQ = 0x6F,
+        USE_SPEND_REQ = 0x6F,
         PLAYER_DAMAGE_REQ = 0x70,
         CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,

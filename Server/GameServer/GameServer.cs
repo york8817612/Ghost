@@ -1,15 +1,14 @@
-﻿using Server.Common.Data;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
 using Server.Interoperability;
-using Server.Ghost;
+using Server.Net;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using static Server.Common.Constants.ServerUtilities;
-using Server.Net;
-using Server.Common.IO.Packet;
 
 namespace Server
 {
@@ -117,7 +116,7 @@ namespace Server
                 Database.Test();
                 Database.Analyze(true);
 
-                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port); // TODO: Get actual host.
+                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
                 //MapleData.Initialize();
 
                 UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);

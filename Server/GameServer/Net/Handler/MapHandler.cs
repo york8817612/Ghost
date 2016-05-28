@@ -65,7 +65,7 @@ namespace Server.Handler
                     map.Monster.Add(null);
             }
             //}
-            MonsterPacket.createAllMonster(gc, map.Monster);
+            MonsterPacket.createAllMonster(gc, map, map.Monster);
             //for (int i = 0; i < 1; i++)
             //{
             //    MonsterPacket.spawnMonster(gc, monster[i], 0, 0, 0, 0);

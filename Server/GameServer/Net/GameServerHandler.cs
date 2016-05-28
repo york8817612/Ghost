@@ -3,6 +3,7 @@ using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Ghost;
 using Server.Handler;
+using Server.Net.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,6 @@ namespace Server.Net
                 case ClientOpcode.NPC_SHOP_REQ:
                     NpcShopHandler.Buy_Req(ip, gc);
                     break;
-                // Cash Shop
-                case ClientOpcode.CASH_SN:
-                    break;
                 // State
                 case ClientOpcode.CHAR_STATUP_REQ:
                     StatusHandler.Char_Statup_Req(ip, gc);
@@ -44,6 +42,9 @@ namespace Server.Net
                 // Inventory
                 case ClientOpcode.MOVE_ITEM_REQ:
                     InventoryHandler.MoveItem_Req(ip, gc);
+                    break;
+                case ClientOpcode.USE_SPEND_REQ:
+                    InventoryHandler.UseSpend_Req(ip, gc);
                     break;
                 case ClientOpcode.INVEN_USESPEND_SHOUT_REQ:
                 case ClientOpcode.INVEN_USESPEND_SHOUT_ALL_REQ:
@@ -82,6 +83,10 @@ namespace Server.Net
                     break;
                 case ClientOpcode.GIVE_MONEY:
                     StorageHandler.giveStorageMoney(ip, gc);
+                    break;
+                // Coupon
+                case ClientOpcode.CASH_SN:
+                    CouponHandler.Use_Coupon_Req(ip, gc);
                     break;
                 // Action
                 case ClientOpcode.P_MOVE_C:

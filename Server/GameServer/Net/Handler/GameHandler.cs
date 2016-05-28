@@ -1,7 +1,7 @@
-﻿using Server.Common.Data;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO;
 using Server.Common.IO.Packet;
-using Server.Common.Security;
 using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
@@ -33,14 +33,10 @@ namespace Server.Handler
                 gc.Account.Load(username);
                 //var pe = new PasswordEncrypt(encryptKey);
                 //string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
-                if (!password.Equals(gc.Account.Password))
+                if (!password.Equals(gc.Account.Password) || gc.Account.Banned > 0)
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
-                }
-                else if (gc.Account.Banned > 0)
-                {
-                    gc.Dispose();
                 }
                 else
                 {
@@ -54,21 +50,14 @@ namespace Server.Handler
                     }
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
-                Log.Inform("密碼 = {0}", password);
+                Log.Inform("Password = {0}", password);
                 //Log.Inform("encryptKey = {0}", encryptKey);
                 //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
-                if (false)
-                {
-                    // TODO: Auto registration.
-                }
-                else
-                {
-                    gc.Dispose();
-                    Log.Error("Login Fail!");
-                }
+                gc.Dispose();
+                Log.Error("Login Fail!");
             }
 
             Character chr = gc.Character;
@@ -115,9 +104,9 @@ namespace Server.Handler
                     }
                     break;
                 case "//item":
-                    if (cmd.Length != 4 || byte.Parse(cmd[2]) < 0 || byte.Parse(cmd[2]) > 23 || byte.Parse(cmd[3]) == 0)
+                    if (cmd.Length != 2)
                         break;
-                    chr.Items.Add(new Item(int.Parse(cmd[1]), byte.Parse(cmd[2]), byte.Parse(cmd[3])));
+                    chr.Items.Add(new Item(int.Parse(cmd[1]), chr.Items.GetNextFreeSlot((InventoryType.ItemType)InventoryType.getItemType(int.Parse(cmd[1]))), InventoryType.getItemType(int.Parse(cmd[1]))));
                     InventoryPacket.getInvenEquip1(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     InventoryPacket.getInvenSpend3(gc);
