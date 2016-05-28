@@ -60,8 +60,8 @@ namespace Server.Common.Net
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
         ENTER_WARP_ACK_REQ = 0x1D,
-        NPC_SHOP_REQ = 0x22,
-
+        NPC_SHOP_BUY_REQ = 0x22,
+        NPC_SHOP_SELL_REQ = 0x23,
         P_MOVE_C = 0x27,
         P_SPEED_C = 0x29,
         P_JUMP_C = 0x2A,

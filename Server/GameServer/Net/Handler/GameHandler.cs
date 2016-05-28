@@ -5,6 +5,7 @@ using Server.Common.Security;
 using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System;
@@ -31,9 +32,9 @@ namespace Server.Handler
             try
             {
                 gc.Account.Load(username);
-                //var pe = new PasswordEncrypt(encryptKey);
-                //string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
-                if (!password.Equals(gc.Account.Password))
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
+                if (!password.Equals(encryptPassword))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -73,7 +74,7 @@ namespace Server.Handler
 
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
-            Maps.AllCharacters.Add(chr);
+            MapFactory.AllCharacters.Add(chr);
 
             StatusPacket.updateHpMp(gc, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
@@ -109,7 +110,7 @@ namespace Server.Handler
                 case "//notice":
                     if (cmd.Length != 2)
                         break;
-                    foreach (Character all in Maps.AllCharacters)
+                    foreach (Character all in MapFactory.AllCharacters)
                     {
                         GamePacket.getNotice(all.Client, 3, cmd[1]);
                     }

@@ -1,5 +1,6 @@
 ﻿using Server.Common.Data;
 using Server.Common.IO;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System.Collections.Generic;
@@ -232,7 +233,7 @@ namespace Server.Ghost.Characters
             this.Mp = this.MaxMp;
             this.AbilityBonus += 4;
             this.SkillBonus += 2;
-            Map map = Maps.GetMap(this.MapX, this.MapY);
+            Map map = MapFactory.GetMap(this.MapX, this.MapY);
             foreach (Character all in map.Characters)
                 StatusPacket.levelUp(Client, this.Level);
             StatusPacket.getStatusInfo(Client);

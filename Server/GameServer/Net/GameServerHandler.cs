@@ -31,8 +31,11 @@ namespace Server.Net
                     GameHandler.Game_Log_Req(ip, gc);
                     break;
                 // Shop
-                case ClientOpcode.NPC_SHOP_REQ:
+                case ClientOpcode.NPC_SHOP_BUY_REQ:
                     NpcShopHandler.Buy_Req(ip, gc);
+                    break;
+                case ClientOpcode.NPC_SHOP_SELL_REQ:
+                    NpcShopHandler.Sell_Req(ip, gc);
                     break;
                 // Cash Shop
                 case ClientOpcode.CASH_SN:

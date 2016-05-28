@@ -122,8 +122,6 @@ namespace Server.Interoperability
                                            GameServer.Rates.PartyQuestExperience,
                                            GameServer.Rates.Meso,
                                            GameServer.Rates.Loot);
-                        Maps.Initialize();
-                        Log.Success("Maps initialize Success!");
                     }
                     break;
 

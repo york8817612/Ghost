@@ -2,6 +2,7 @@
 using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Ghost;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System;
@@ -20,7 +21,7 @@ namespace Server.Handler
             short HitY = lea.ReadShort();
             short SkillID = lea.ReadShort();
             var chr = gc.Character;
-            Map map = Maps.GetMap(chr.MapX, chr.MapY);
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             Monster Monster = map.getMonsterByOriginalID(OriginalID);
             if (Monster == null)
                 return;

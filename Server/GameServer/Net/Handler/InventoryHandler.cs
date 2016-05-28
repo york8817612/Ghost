@@ -2,6 +2,7 @@
 using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 
@@ -24,7 +25,7 @@ namespace Server.Handler
             {
                 if (sourceType == 0xFF && sorceSlot == 0xFF)
                     return;
-                Map map = Maps.GetMap(chr.MapX, chr.MapY);
+                Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
                 InventoryPacket.charDropItem(gc, map.DropOriginalID, source.ItemID, gc.Character.PlayerX,(short)(gc.Character.PlayerY - 50), count);
                 map.DropItem.Add(map.DropOriginalID, source);
                 map.DropOriginalID++;
@@ -111,7 +112,7 @@ namespace Server.Handler
             if (slot >= 0 && slot < 24 && message.Length < 60)
             {
                 gc.Character.Items.RemoveItem(InventoryType.ItemType.Spend3, slot);
-                foreach (Character all in Maps.AllCharacters)
+                foreach (Character all in MapFactory.AllCharacters)
                 {
                     MapPacket.InvenUseSpendShout(all.Client, message);
                 }
@@ -129,7 +130,7 @@ namespace Server.Handler
             var chr = gc.Character;
 
             Item oItem = new Item(ItemID, Slot, (byte)Type, 1);
-            Map map = Maps.GetMap(chr.MapX, chr.MapY);
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             if (!map.DropItem.ContainsKey(OriginalID))
                 return;
             chr.Items.Add(oItem);

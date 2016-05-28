@@ -27,12 +27,12 @@ namespace Server.Ghost
             try
             {
                 c.Account.Load(username);
-                //var pe = new PasswordEncrypt(encryptKey);
-                //string encryptPassword = pe.encrypt(c.Account.Password, password.ToCharArray());
-                //if (password.Length > 14)
-                //    PasswordEncrypt.Data2 = null;
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(c.Account.Password, password.ToCharArray());
+                if (password.Length > 14)
+                    PasswordEncrypt.Data2 = null;
 
-                if (!password.Equals(c.Account.Password))
+                if (!password.Equals(encryptPassword))
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
                     Log.Error("Login Fail!");
@@ -47,9 +47,9 @@ namespace Server.Ghost
                     c.Account.LoggedIn = 1;
                     Log.Success("Login Success!");
                 }
-                Log.Inform("密碼 = {0}", password);
-                //Log.Inform("encryptKey = {0}", encryptKey);
-                //Log.Inform("encryptPassword = {0}", encryptPassword);
+                //Log.Inform("密碼 = {0}", password);
+                Log.Inform("encryptKey = {0}", encryptKey);
+                Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {

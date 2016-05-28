@@ -51,6 +51,10 @@
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\Map.cs" />
+    <Compile Include="Ghost\Provider\ItemFactory.cs" />
+    <Compile Include="Ghost\Provider\MapFactory.cs" />
+    <Compile Include="Ghost\Provider\MobFactory.cs" />
+    <Compile Include="Ghost\Provider\PetFactory.cs" />
     <Compile Include="Ghost\Quest.cs" />
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
@@ -80,7 +84,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Ghost\Map\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{00970dfc-5416-4ace-bc47-5d7adbe2af8d}</Project>
