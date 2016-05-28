@@ -27,14 +27,11 @@ namespace Server.Ghost
                 var pe = new PasswordEncrypt(encryptKey);
                 string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
 
+                
                 if (!password.Equals(encryptPassword))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
-                }
-                else if (gc.Account.Banned > 0)
-                {
-                    gc.Dispose();
                 }
                 else
                 {
@@ -48,23 +45,16 @@ namespace Server.Ghost
                     CharPacket.MyChar_Info_Ack(gc, gc.Account.Characters);
                     Log.Success("Login Success!");
                 }
-                Log.Inform("密碼 = {0}", password);
+                Log.Inform("Password = {0}", password);
                 //Log.Inform("encryptKey = {0}", encryptKey);
                 //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
-                if (false)
-                {
-                    // TODO: Auto registration.
-                }
-                else
-                {
                     gc.Dispose();
                     Log.Error("Login Fail!");
                 }
             }
-        }
 
         public static void Create_MyChar_Req(InPacket lea, Client gc)
         {
@@ -130,7 +120,7 @@ namespace Server.Ghost
             chr.Items.Add(new Item(8810011, (byte)0, (byte)InventoryType.ItemType.Spend3, 10));
             chr.Items.Add(new Item(8820011, (byte)1, (byte)InventoryType.ItemType.Spend3, 10));
             chr.Storages.Add(new Storage(0));
-            chr.Skills.Add(new Skill(1 , 1, 0, 0));
+            chr.Skills.Add(new Skill(1, 1, 0, 0));
             chr.Skills.Add(new Skill(2, 1, 0, 1));
             chr.Skills.Add(new Skill(3, 1, 0, 2));
             chr.Skills.Add(new Skill(4, 1, 0, 3));

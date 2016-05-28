@@ -59,6 +59,7 @@
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Net\Handler\ActionHandler.cs" />
+    <Compile Include="Net\Handler\CouponHandler.cs" />
     <Compile Include="Net\Handler\InventoryHandler.cs" />
     <Compile Include="Net\Handler\MapHandler.cs" />
     <Compile Include="Net\Handler\MonsterHandler.cs" />

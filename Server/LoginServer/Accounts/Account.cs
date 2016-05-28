@@ -55,7 +55,7 @@ namespace Server.Accounts
         {
             dynamic datum = new Datum("accounts");
 
-            datum.userName = this.Username;
+            datum.username = this.Username;
             datum.password = this.Password;
             datum.creation = this.Creation;
             datum.isLoggedIn = this.LoggedIn;

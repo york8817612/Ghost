@@ -34,6 +34,10 @@ namespace Server.Handler
                     case 0:
                         break;
                     case 1:
+                        if (skill.SkillLevel < 5)
+                            chr.Mp -= 2;
+                        else
+                            chr.Mp -= 4;
                         break;
                     case 2:
                         break;

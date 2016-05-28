@@ -77,8 +77,8 @@ namespace Server.Ghost.Characters
             this.Items = new CharacterItems(this);
             this.Storages = new CharacterStorages(this);
             this.Skills = new CharacterSkills(this);
-            this.Quests = new CharacterQuests(this);
             this.SkillState = new Dictionary<int, Common.Threading.Delay>();
+            this.Quests = new CharacterQuests(this);
         }
 
         public void Load(bool IsFullLoad = true)

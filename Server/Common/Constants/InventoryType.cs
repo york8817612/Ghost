@@ -33,9 +33,9 @@
             Pet5 = 5        // [5]
         }
 
-        public static int getItemType(int itemid)
+        public static byte getItemType(int itemid)
         {
-            int type = 0;
+            byte type = 0;
 
             switch (itemid / 100000)
             {

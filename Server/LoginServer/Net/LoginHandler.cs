@@ -37,23 +37,18 @@ namespace Server.Ghost
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
                     Log.Error("Login Fail!");
                 }
-                else if (c.Account.Banned > 0)
-                {
-                    LoginPacket.Login_Ack(c, ServerState.LoginState.USER_LOCK);
-                }
                 else
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.OK, encryptKey, c.Account.Master > 0 ? true : false);
                     c.Account.LoggedIn = 1;
                     Log.Success("Login Success!");
                 }
-                //Log.Inform("密碼 = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("Password = {0}", password);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
-                // Auto registration
                 if (ServerConstants.AUTO_REGISTRATION == true)
                 {
                     if (username.Length < 5 || password.Length < 5)
@@ -68,13 +63,12 @@ namespace Server.Ghost
                     account.Master = 0;
                     account.CashPoint = 0;
                     account.Save();
-                    LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
-                } else
-                {
+                    LoginPacket.Login_Ack(c, ServerState.LoginState.USER_LOCK);
+                    return;
+                }
                     LoginPacket.Login_Ack(c, ServerState.LoginState.NO_USERNAME);
                 }
             }
-        }
 
         public static void ServerList_Req(InPacket lea, Client c)
         {
