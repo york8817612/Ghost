@@ -208,6 +208,9 @@ namespace Server.Ghost.Characters
             this.Skills.Save();
             this.Quests.Save();
 
+            Map map = MapFactory.GetMap(this.MapX, this.MapY);
+            map.Characters.Remove(this);
+
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
 

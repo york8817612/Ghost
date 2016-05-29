@@ -4,7 +4,6 @@ using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
-using System.IO;
 
 namespace Server.Handler
 {
@@ -13,11 +12,11 @@ namespace Server.Handler
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {
             var chr = gc.Character;
-            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            foreach (Character all in map.Characters)
-                MapPacket.removeUser(gc);
-            if (map != null)
-                map.Characters.Remove(chr);
+            //Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            //foreach (Character all in map.Characters)
+            //    MapPacket.removeUser(gc);
+            //if (map != null)
+            //    map.Characters.Remove(chr);
 
             int playerId = lea.ReadInt();
             short mapX = lea.ReadShort();
@@ -29,7 +28,7 @@ namespace Server.Handler
             chr.PlayerX = positionX;
             chr.PlayerY = positionY;
 
-            map = MapFactory.GetMap(mapX, mapY);
+            Map map = MapFactory.GetMap(mapX, mapY);
             map.Characters.Add(chr);
             foreach (Character all in map.Characters)
                 MapPacket.warpToMap(all.Client, playerId, mapX, mapY, positionX, positionY);
