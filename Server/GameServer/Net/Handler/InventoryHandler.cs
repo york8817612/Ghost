@@ -95,42 +95,6 @@ namespace Server.Handler
             switch (ItemID.ItemID)
             {
                 case 8843030: // 豬大長召喚符
-                    Monster[] monster = new Monster[50];
-                    map.Monster.Add(new Monster(0, 1003001, 30, 29200, 0, 3, 0xFF, 1, 0, chr.PlayerX, chr.PlayerY));
-                    for (int i = 1; i < 50; i++)
-                        map.Monster.Add(null);
-                    MonsterPacket.createAllMonster(gc, map, map.Monster);
-                    System.Timers.Timer tmr = new System.Timers.Timer(1000);
-                    tmr.Elapsed += delegate
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            try
-                            {
-                                if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
-                                {
-                                    map.Monster[i].State = 1;
-                                    //map.Monster[i].Direction = map.Monster[i].Direction * -1;
-                                    //Monster m = FindPath(map.Monster[i], 40, map);
-                                    //monster[i].Direction = m.Direction;
-                                    //map.Monster[i].PositionX = m.PositionX;
-                                    //map.Monster[i].PositionY = m.PositionY;
-                                    MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
-                                    continue;
-                                }
-                                Monster mon = MapHandler.FindPath(map.Monster[i], 40, map);
-                                map.Monster[i].State = 1;
-                                map.Monster[i].PositionX = mon.PositionX;
-                                map.Monster[i].PositionY = mon.PositionY;
-                                MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
-                            }
-                            catch
-                            {
-
-                            }
-                        }
-                    };
-                    tmr.Start();
                     break;
             }
         }

@@ -7,6 +7,7 @@
         public int Level { get; set; }
         public int HP { get; set; }
         public int MP { get; set; }
+        public int Exp { get; set; }
         public float Speed { get; set; }
         public int Direction { get; set; }
         public byte State { get; set; }
@@ -27,13 +28,14 @@
         00 00 10 41 // 速度 9
         */
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY)
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;
             this.Level = Level;
             this.HP = HP;
             this.MP = MP;
+            this.Exp = Exp;
             this.Speed = Speed;
             this.Direction = Driection;
             this.State = State;

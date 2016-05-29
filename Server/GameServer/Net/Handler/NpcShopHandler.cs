@@ -76,10 +76,10 @@ namespace Server.Handler
                     Log.Error("未知的物品型態:" + ItemID / 100000);
                     break;
             }
-            if (gc.Character.Money >= money)
+            if (gc.Character.Money >= (money * Quantity))
             {
-                gc.Character.Money -= money;
-                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -money);
+                gc.Character.Money -= (money * Quantity);
+                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -(money * Quantity));
                 byte Type = (byte)InventoryType.getItemType(ItemID);
                 byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
                 Item oItem = new Item(ItemID, Slot, Type, (short)Quantity);
@@ -187,7 +187,7 @@ namespace Server.Handler
 
             if (source != null)
             {
-                gc.Character.Money += (money / 5);
+                gc.Character.Money += ((money / 5) * Quantity);
                 InventoryPacket.getInvenMoney(gc, gc.Character.Money, money);
                 gc.Character.Items.RemoveItem(Type, Slot);
                 switch (Type)

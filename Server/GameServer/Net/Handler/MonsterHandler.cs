@@ -42,7 +42,7 @@ namespace Server.Handler
             {
                 Monster.State = 9;
                 map.Monster.Remove(Monster);
-                chr.Exp += 10;
+                chr.Exp += Monster.Exp;
                 if (chr.Exp >= GameConstants.getExpNeededForLevel(chr.Level))
                     chr.LevelUp();
                 StatusPacket.updateExp(gc);
