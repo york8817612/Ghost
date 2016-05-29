@@ -1,5 +1,4 @@
 ﻿using Server.Common;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -11,7 +10,7 @@ namespace Server.Ghost.Provider
         private static string openPath = Application.LaunchPath + @"\table\item.itm";
 
         //武器資料
-        //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 類型(short), 攻擊距離(short), 購買價格(int)
+        //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 類型(short), 攻擊距離(short), 攻擊速度(byte), 購買價格(int)
         public static Dictionary<int, ItemData> weaponData = new Dictionary<int, ItemData>();
         //衣服資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
@@ -84,13 +83,13 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                byte job = item.ReadByte(); // 職業?
+                byte job = item.ReadByte(); // 職業
                 byte level = item.ReadByte(); // 功力
                 short attack = item.ReadInt16(); // 類型
                 item.ReadInt16();
                 short attackRange = item.ReadInt16(); // 攻擊距離
                 item.ReadInt16();
-                item.ReadByte(); // 攻擊速度?
+                byte Speed = item.ReadByte(); // 攻擊速度
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -105,7 +104,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, attackRange, price));
+                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, attackRange, Speed, price));
             }
             //==============================================================================
             // 衣服類型開始

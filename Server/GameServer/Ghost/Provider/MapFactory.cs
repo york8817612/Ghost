@@ -900,11 +900,11 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x28);
                             str.Decode();
-                            var mobid = reader.ReadInt32();
+                            var MonsterID = reader.ReadInt32();
                             var Direction = reader.ReadByte();
-                            var speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
-                            var posX = reader.ReadInt32();
-                            var posY = reader.ReadInt32();
+                            var Speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
+                            var PosX = reader.ReadInt32();
+                            var PosY = reader.ReadInt32();
                             int ss = reader.ReadInt32();
                             int ss2 = 0;
                             do
@@ -913,7 +913,15 @@ namespace Server.Ghost.Provider
                                 reader.ReadInt32();
                                 ++ss2;
                             } while (ss2 < ss);
-                            map.Monster.Add(new Monster(i, mobid, 3, 33, 10, speed, Direction, 1, 0, posX, posY));
+
+                            char[] Value = MonsterID.ToString().ToCharArray();
+                            char[] Level = new char[4];
+                            Level[0] = Value[1];
+                            Level[1] = Value[2];
+                            Level[2] = Value[3];
+                            Level[3] = Value[4];
+
+                            map.Monster.Add(new Monster(i, MonsterID, int.Parse(new string(Level)), 33, 10, Speed, Direction, 1, 0, PosX, PosY));
                         }
                         for (int j = map.Monster.Count; j < 50; j++)
                             map.Monster.Add(null);

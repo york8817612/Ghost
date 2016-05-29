@@ -1,7 +1,9 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
+using Server.Ghost.Provider;
 using Server.Net;
+using System.Collections.Generic;
 
 namespace Server.Packet
 {
@@ -12,6 +14,7 @@ namespace Server.Packet
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_ALL))
             {
                 var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = InventoryPacket.getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteString(chr.Name, 20);
@@ -44,7 +47,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.MaxMagic); // 魔攻力(Max)
                 plew.WriteShort(chr.Magic); // 魔攻力(Min)
                 plew.WriteShort(chr.Defense); // 防禦力
-                plew.WriteByte(3); // 攻擊速度
+                plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
                 plew.WriteByte(1);
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
@@ -110,6 +113,7 @@ namespace Server.Packet
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_STATUP_ACK))
             {
                 var chr = c.Character;
+                Dictionary<InventoryType.EquipType, int> equip = InventoryPacket.getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteShort(chr.MaxHp);
@@ -123,7 +127,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.MaxMagic);
                 plew.WriteShort(chr.Magic);
                 plew.WriteShort(chr.Defense);
-                plew.WriteByte(3); // 攻擊速度
+                plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
                 plew.WriteByte(1);
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus);

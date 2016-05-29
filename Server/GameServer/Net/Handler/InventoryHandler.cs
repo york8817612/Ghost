@@ -26,10 +26,10 @@ namespace Server.Handler
                 if (SourceType == 0xFF && SorceSlot == 0xFF)
                     return;
                 Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-                InventoryPacket.charDropItem(gc, map.DropOriginalID, Source.ItemID, gc.Character.PlayerX, (short)(gc.Character.PlayerY - 50), Quantit);
+                InventoryPacket.charDropItem(gc, map.DropOriginalID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantit);
                 map.DropItem.Add(map.DropOriginalID, Source);
                 map.DropOriginalID++;
-                gc.Character.Items.RemoveItem(SourceType, SorceSlot);
+                chr.Items.RemoveItem(SourceType, SorceSlot);
             }
             else
             {
@@ -40,13 +40,13 @@ namespace Server.Handler
                 }
                 else
                 {   // 交換位置(swap)
-                    gc.Character.Items.RemoveItem(SourceType, SorceSlot);
-                    gc.Character.Items.RemoveItem(TargetType, TargetSlot);
+                    chr.Items.RemoveItem(SourceType, SorceSlot);
+                    chr.Items.RemoveItem(TargetType, TargetSlot);
                     byte swapSlot = Source.slot;
                     Source.slot = Target.slot;
                     Target.slot = swapSlot;
-                    gc.Character.Items.Add(Source);
-                    gc.Character.Items.Add(Target);
+                    chr.Items.Add(Source);
+                    chr.Items.Add(Target);
                 }
             }
             UpdateEquip(gc, SourceType, TargetType);

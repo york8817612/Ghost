@@ -14,7 +14,7 @@ namespace Server.Ghost
         public readonly byte Level;
         public readonly short Attack;
         public readonly short AttackRange;
-        public readonly float Speed;
+        public readonly byte Speed;
         public readonly int Hp;
         public readonly int Mp;
         public readonly int Price;
@@ -28,7 +28,7 @@ namespace Server.Ghost
             this.Level = 0xFF;
             this.Attack = -1;
             this.AttackRange = -1;
-            this.Speed = -1;
+            this.Speed = 0;
             this.Hp = Hp;
             this.Mp = Mp;
             this.Price = Price;
@@ -43,14 +43,14 @@ namespace Server.Ghost
             this.Level = Level;
             this.Attack = -1;
             this.AttackRange = -1;
-            this.Speed = -1;
+            this.Speed = 0;
             this.Hp = -1;
             this.Mp = -1;
             this.Price = Price;
         }
 
         // 武器
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, byte Speed, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
@@ -58,7 +58,7 @@ namespace Server.Ghost
             this.Level = Level;
             this.Attack = Attack;
             this.AttackRange = AttackRange;
-            this.Speed = -1;
+            this.Speed = Speed;
             this.Hp = -1;
             this.Mp = -1;
             this.Price = Price;
@@ -73,13 +73,13 @@ namespace Server.Ghost
             this.Level = 0xFF;
             this.Attack = -1;
             this.AttackRange = -1;
-            this.Speed = -1;
+            this.Speed = 0;
             this.Hp = -1;
             this.Mp = -1;
             this.Price = Price;
         }
 
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, float Speed, int Hp, int Mp, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, byte Speed, int Hp, int Mp, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;

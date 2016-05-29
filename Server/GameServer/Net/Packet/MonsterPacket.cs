@@ -49,7 +49,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? i : -1);
+                    plew.WriteShort(monster[i] != null ? monster[i].OriginalID : -1);
                 }
                 for (int i = 0; i < 50; i++)
                 {

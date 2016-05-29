@@ -122,7 +122,7 @@ namespace Server
                 MapFactory.Initialize();
                 Log.Success("Maps initialize Success!");
 
-                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port); // TODO: Get actual host.
+                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
                 //MapleData.Initialize();
 
                 UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
