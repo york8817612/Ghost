@@ -50,6 +50,7 @@
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
+    <Compile Include="Ghost\ItemData.cs" />
     <Compile Include="Ghost\Map.cs" />
     <Compile Include="Ghost\Provider\ItemFactory.cs" />
     <Compile Include="Ghost\Provider\MapFactory.cs" />

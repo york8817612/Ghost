@@ -1,5 +1,9 @@
-﻿using Server.Ghost.Characters;
+﻿using Server.Common;
+using Server.Ghost.Characters;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace Server.Ghost.Provider
 {
@@ -18,51 +22,51 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(100, 10));
             maps.Add(new Map(100, 100));
             maps.Add(new Map(100, 101));
-            maps.Add(new Map(100, 11));
-            maps.Add(new Map(100, 12));
-            maps.Add(new Map(100, 13));
-            maps.Add(new Map(100, 14));
-            maps.Add(new Map(100, 15));
-            maps.Add(new Map(100, 16));
-            maps.Add(new Map(100, 17));
-            maps.Add(new Map(100, 18));
-            maps.Add(new Map(100, 19));
+            //maps.Add(new Map(100, 11));
+            //maps.Add(new Map(100, 12));
+            //maps.Add(new Map(100, 13));
+            //maps.Add(new Map(100, 14));
+            //maps.Add(new Map(100, 15));
+            //maps.Add(new Map(100, 16));
+            //maps.Add(new Map(100, 17));
+            //maps.Add(new Map(100, 18));
+            //maps.Add(new Map(100, 19));
             maps.Add(new Map(100, 2));
-            maps.Add(new Map(100, 20));
-            maps.Add(new Map(100, 21));
-            maps.Add(new Map(100, 22));
-            maps.Add(new Map(100, 23));
-            maps.Add(new Map(100, 24));
-            maps.Add(new Map(100, 25));
-            maps.Add(new Map(100, 26));
-            maps.Add(new Map(100, 27));
-            maps.Add(new Map(100, 28));
-            maps.Add(new Map(100, 29));
+            //maps.Add(new Map(100, 20));
+            //maps.Add(new Map(100, 21));
+            //maps.Add(new Map(100, 22));
+            //maps.Add(new Map(100, 23));
+            //maps.Add(new Map(100, 24));
+            //maps.Add(new Map(100, 25));
+            //maps.Add(new Map(100, 26));
+            //maps.Add(new Map(100, 27));
+            //maps.Add(new Map(100, 28));
+            //maps.Add(new Map(100, 29));
             maps.Add(new Map(100, 3));
             maps.Add(new Map(100, 4));
             maps.Add(new Map(100, 40));
             maps.Add(new Map(100, 41));
-            maps.Add(new Map(100, 5));
+            //maps.Add(new Map(100, 5));
             maps.Add(new Map(1011, 1));
             maps.Add(new Map(1011, 2));
-            maps.Add(new Map(1012, 1));
-            maps.Add(new Map(1012, 2));
-            maps.Add(new Map(1013, 1));
-            maps.Add(new Map(1013, 2));
-            maps.Add(new Map(1014, 1));
-            maps.Add(new Map(1014, 2));
-            maps.Add(new Map(1015, 1));
-            maps.Add(new Map(1015, 2));
+            //maps.Add(new Map(1012, 1));
+            //maps.Add(new Map(1012, 2));
+            //maps.Add(new Map(1013, 1));
+            //maps.Add(new Map(1013, 2));
+            //maps.Add(new Map(1014, 1));
+            //maps.Add(new Map(1014, 2));
+            //maps.Add(new Map(1015, 1));
+            //maps.Add(new Map(1015, 2));
             maps.Add(new Map(1041, 1));
             maps.Add(new Map(1041, 2));
-            maps.Add(new Map(1042, 1));
-            maps.Add(new Map(1042, 2));
-            maps.Add(new Map(1043, 1));
-            maps.Add(new Map(1043, 2));
-            maps.Add(new Map(1044, 1));
-            maps.Add(new Map(1044, 2));
-            maps.Add(new Map(1045, 1));
-            maps.Add(new Map(1045, 2));
+            //maps.Add(new Map(1042, 1));
+            //maps.Add(new Map(1042, 2));
+            //maps.Add(new Map(1043, 1));
+            //maps.Add(new Map(1043, 2));
+            //maps.Add(new Map(1044, 1));
+            //maps.Add(new Map(1044, 2));
+            //maps.Add(new Map(1045, 1));
+            //maps.Add(new Map(1045, 2));
             maps.Add(new Map(10, 1));
             maps.Add(new Map(10, 2));
             maps.Add(new Map(10, 21));
@@ -80,33 +84,33 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(10, 4));
             maps.Add(new Map(10, 5));
             maps.Add(new Map(10, 60));
-            maps.Add(new Map(10, 61));
-            maps.Add(new Map(10, 62));
-            maps.Add(new Map(10, 63));
-            maps.Add(new Map(10, 64));
+            //maps.Add(new Map(10, 61));
+            //maps.Add(new Map(10, 62));
+            //maps.Add(new Map(10, 63));
+            //maps.Add(new Map(10, 64));
             maps.Add(new Map(11, 1));
             maps.Add(new Map(11, 2));
             maps.Add(new Map(11, 21));
             maps.Add(new Map(11, 3));
-            maps.Add(new Map(11, 31));
-            maps.Add(new Map(11, 32));
-            maps.Add(new Map(11, 33));
-            maps.Add(new Map(11, 34));
-            maps.Add(new Map(11, 35));
-            maps.Add(new Map(11, 36));
-            maps.Add(new Map(11, 37));
-            maps.Add(new Map(11, 38));
-            maps.Add(new Map(11, 39));
+            //maps.Add(new Map(11, 31));
+            //maps.Add(new Map(11, 32));
+            //maps.Add(new Map(11, 33));
+            //maps.Add(new Map(11, 34));
+            //maps.Add(new Map(11, 35));
+            //maps.Add(new Map(11, 36));
+            //maps.Add(new Map(11, 37));
+            //maps.Add(new Map(11, 38));
+            //maps.Add(new Map(11, 39));
             maps.Add(new Map(11, 4));
-            maps.Add(new Map(11, 41));
-            maps.Add(new Map(11, 42));
-            maps.Add(new Map(11, 43));
-            maps.Add(new Map(11, 44));
-            maps.Add(new Map(11, 45));
-            maps.Add(new Map(11, 46));
-            maps.Add(new Map(11, 47));
-            maps.Add(new Map(11, 48));
-            maps.Add(new Map(11, 49));
+            //maps.Add(new Map(11, 41));
+            //maps.Add(new Map(11, 42));
+            //maps.Add(new Map(11, 43));
+            //maps.Add(new Map(11, 44));
+            //maps.Add(new Map(11, 45));
+            //maps.Add(new Map(11, 46));
+            //maps.Add(new Map(11, 47));
+            //maps.Add(new Map(11, 48));
+            //maps.Add(new Map(11, 49));
             maps.Add(new Map(11, 5));
             maps.Add(new Map(11, 6));
             maps.Add(new Map(11, 7));
@@ -189,9 +193,9 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(1, 50));
             maps.Add(new Map(1, 51));
             maps.Add(new Map(1, 52));
-            maps.Add(new Map(1, 53));
-            maps.Add(new Map(1, 54));
-            maps.Add(new Map(1, 55));
+            //maps.Add(new Map(1, 53));
+            //maps.Add(new Map(1, 54));
+            //maps.Add(new Map(1, 55));
             maps.Add(new Map(1, 60));
             maps.Add(new Map(1, 61));
             maps.Add(new Map(1, 62));
@@ -220,7 +224,7 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(20, 72));
             maps.Add(new Map(20, 8));
             maps.Add(new Map(20, 9));
-            maps.Add(new Map(21, 0));
+            //maps.Add(new Map(21, 0));
             maps.Add(new Map(21, 1));
             maps.Add(new Map(21, 10));
             maps.Add(new Map(21, 11));
@@ -519,12 +523,508 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(9, 7));
             maps.Add(new Map(9, 8));
             maps.Add(new Map(9, 9));
+            foreach (Map map in maps)
+            {
+                LoadMapPexelsData(map);
+                ParsePrjFile(map);
+            }
         }
 
         public static Map GetMap(short mapX, short mapY)
         {
             Map map = maps.Find(i => (i.MapX == mapX && i.MapY == mapY));
             return map;
+        }
+
+        public static void LoadMapPexelsData(Map map)
+        {
+            int Height = 0;
+            int Width = 0;
+            sbyte Index;
+            sbyte Data;
+
+            string openPath = Application.LaunchPath + @"\Data\Map\t" + map.MapX + "_s" + map.MapY + ".map";
+
+            FileStream file = File.Open(openPath, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(file);
+
+            Width = br.ReadInt32();
+            Height = br.ReadInt32();
+            map.SetMapHeightWidth(Height, Width);
+            for (int f = 0; f < Width; f++)
+            {
+                for (int i = 0; i < Height; i++)
+                {
+                    br.ReadByte();
+                    br.ReadByte();
+                    Index = br.ReadSByte();
+                    map.SetMapPexel(f * 32 + f, i, Index);
+                    for (int j = 0; j < 32; j++)
+                    {
+                        Data = br.ReadSByte();
+                        map.SetMapPexel(f * 32 + f + 1 + j, i, Data);
+                    }
+                    br.ReadByte();
+                }
+            }
+
+            for (int f = 0; f < Width; f++)
+            {
+                for (int i = 0; i < Height; i++)
+                {
+                    br.ReadByte();
+                    br.ReadByte();
+                    Index = br.ReadSByte();
+                    if (Index != -1)
+                        map.SetMapPexel(f * 32 + f, i, Index);
+                    for (int j = 0; j < 32; j++)
+                    {
+                        Data = br.ReadSByte();
+                        if (Data != -1)
+                            map.SetMapPexel(f * 32 + f + 1 + j, i, Data);
+                    }
+                    br.ReadByte();
+                }
+            }
+            file.Close();
+            br.Close();
+        }
+
+        public static void ParsePrjFile(Map map)
+        {
+            string FileName = Application.LaunchPath + @"\Data\Project\t" + map.MapX + "_s" + map.MapY + ".prj";
+            using (FileStream stream = new FileStream(FileName, FileMode.Open))
+            {
+                BinaryReader reader = new BinaryReader(stream);
+                try
+                {
+                    Dictionary<int, string> prjStr = new Dictionary<int, string>();
+                    ReadString str = new ReadString();
+                    str.FiersRead = reader.ReadBytes(0xA0);
+                    str.Decode();
+                    string name = str.Name;
+                    int val1 = reader.ReadInt32();
+                    int val2 = reader.ReadInt32();
+                    int val3 = reader.ReadInt32();
+
+                    //=========================================sub_655150
+                    int strCount = reader.ReadInt32();
+
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                        }
+                    }
+                    str.FiersRead = reader.ReadBytes(0x100);
+                    str.Decode();
+                    
+                    str.FiersRead = reader.ReadBytes(0x100);
+                    str.Decode();
+                    
+
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                        }
+                    }
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                        }
+                    }
+
+                    //=========================================sub_6531D0
+                    int val5 = reader.ReadInt32();
+                    int val6 = reader.ReadInt32();
+                    int val7 = reader.ReadInt32();
+                    str.FiersRead = reader.ReadBytes(0x100);
+                    str.Decode();
+                    
+                    str.FiersRead = reader.ReadBytes(0x100);
+                    str.Decode();
+                    
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                        }
+                    }
+                    //=========================================(1)sub_652FA0
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            reader.ReadBytes(0x10);
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(2)
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(3)sub_653460
+                    //地圖物件
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadBytes(0x14);
+                        }
+                    }
+                    //=========================================(4)sub_653750
+                    //怪物
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            int mv1 = reader.ReadInt32();
+                            int mv2 = reader.ReadInt32();
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            int mv3 = reader.ReadInt32();
+                            int mv4 = reader.ReadInt32();
+                            int mv5 = reader.ReadInt32();
+                            int mv6 = reader.ReadInt32();
+                            int mv7 = reader.ReadByte();
+                            int mv8 = reader.ReadInt32();
+                            int mv9 = reader.ReadInt32();
+                            reader.ReadBytes(0x14);
+                        }
+                    }
+                    //=========================================(5)sub_653A20
+                    //讀取NPC資訊
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt16();
+                            reader.ReadInt16();
+                            reader.ReadInt32();
+                            reader.ReadBytes(0xC);
+                        }
+                    }
+                    //=========================================(6)sub_653CF0
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            str.FiersRead = reader.ReadBytes(0x100);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadBytes(0x14);
+                        }
+                    }
+                    //=========================================(7)sub_653E70
+                    strCount = reader.ReadInt32();
+                    reader.ReadInt32();
+                    reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(8)sub_653E70
+                    strCount = reader.ReadInt32();
+                    reader.ReadInt32();
+                    reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(9)sub_653E70
+                    strCount = reader.ReadInt32();
+                    reader.ReadInt32();
+                    reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(10)sub_653E70
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(11)sub_653E70
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(12)sub_653E70
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(13)sub_67B180
+                    //怪物資訊
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            var mobid = reader.ReadInt32();
+                            var Direction = reader.ReadByte();
+                            var speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
+                            var posX = reader.ReadInt32();
+                            var posY = reader.ReadInt32();
+                            int ss = reader.ReadInt32();
+                            int ss2 = 0;
+                            do
+                            {
+                                reader.ReadInt32();
+                                reader.ReadInt32();
+                                ++ss2;
+                            } while (ss2 < ss);
+                            map.Monster.Add(new Monster(i, mobid, 3, 33, 10, speed, Direction, 1, 0, posX, posY));
+                        }
+                        for (int j = map.Monster.Count; j < 50; j++)
+                            map.Monster.Add(null);
+                    }
+                    //=========================================(14)sub_653F60
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(15)sub_654050
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(16)sub_653E70
+                    strCount = reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================(17)sub_653E70
+                    strCount = reader.ReadInt32();
+                    reader.ReadInt32();
+                    reader.ReadInt32();
+                    if (strCount > 0)
+                    {
+                        for (int i = 0; i < strCount; i++)
+                        {
+                            str.FiersRead = reader.ReadBytes(0x28);
+                            str.Decode();
+                            reader.ReadInt32();
+                            reader.ReadByte();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                            reader.ReadInt32();
+                        }
+                    }
+                    //=========================================
+                    
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
+        private class ReadString
+        {
+            public byte[] FiersRead = new byte[0x100];
+            public byte[] SecondRead = new byte[0x100];
+            public string Descrption;
+            public string Name;
+
+            public void Decode()
+            {
+                int index = 0;
+                index = 0;
+                while (index < 0x100)
+                {
+                    if (FiersRead[index + 2] == 0 && FiersRead[index] == 0 && FiersRead[index + 1] == 0)
+                    {
+                        index++;
+                        break;
+                    }
+                    index++;
+                }
+                string str = Encoding.Unicode.GetString(FiersRead, 0, index);
+                Name = str;
+                str = "";
+                index = 0;
+                while (index < 0x100)
+                {
+                    if (SecondRead[index + 2] == 0 && SecondRead[index] == 0 && SecondRead[index + 1] == 0)
+                    {
+                        index++;
+                        break;
+                    }
+                    index++;
+                }
+                str = Encoding.Unicode.GetString(SecondRead, 0, index);
+                Descrption = str;
+            }
         }
     }
 }

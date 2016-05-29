@@ -12,61 +12,61 @@ namespace Server.Ghost.Provider
 
         //武器資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 類型(short), 攻擊距離(short), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, short, short, int>> weaponData = new Dictionary<int, Tuple<string, byte, byte, short, short, int>>();
+        public static Dictionary<int, ItemData> weaponData = new Dictionary<int, ItemData>();
         //衣服資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, int>> topData = new Dictionary<int, Tuple<string, byte, byte, int>>();
+        public static Dictionary<int, ItemData> topData = new Dictionary<int, ItemData>();
         //服裝資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, int>> clothingData = new Dictionary<int, Tuple<string, byte, byte, int>>();
+        public static Dictionary<int, ItemData> clothingData = new Dictionary<int, ItemData>();
         //戒指資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, int>> ringData = new Dictionary<int, Tuple<string, byte, byte, int>>();
+        public static Dictionary<int, ItemData> ringData = new Dictionary<int, ItemData>();
         //項鍊資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, int>> necklaceData = new Dictionary<int, Tuple<string, byte, byte, int>>();
+        public static Dictionary<int, ItemData> necklaceData = new Dictionary<int, ItemData>();
         //披風資料
         //物品編號(int), 物品名稱(string), 職業(byte), 功力(byte), 購買價格(int)
-        public static Dictionary<int, Tuple<string, byte, byte, int>> capeData = new Dictionary<int, Tuple<string, byte, byte, int>>();
+        public static Dictionary<int, ItemData> capeData = new Dictionary<int, ItemData>();
         //消耗品資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> useData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> useData = new Dictionary<int, ItemData>();
         //封印箱資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> soulData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> soulData = new Dictionary<int, ItemData>();
         //帽子資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> hatData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> hatData = new Dictionary<int, ItemData>();
         //髮型資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> hairData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> hairData = new Dictionary<int, ItemData>();
         //眼睛資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> eyesData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> eyesData = new Dictionary<int, ItemData>();
         //面具資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> maskData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> maskData = new Dictionary<int, ItemData>();
         //鬍子資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> beardData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> beardData = new Dictionary<int, ItemData>();
         //其他資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> etcData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> etcData = new Dictionary<int, ItemData>();
         //寵物資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> petData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> petData = new Dictionary<int, ItemData>();
         //領巾資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> scarfData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> scarfData = new Dictionary<int, ItemData>();
         //未知資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> unknownData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> unknownData = new Dictionary<int, ItemData>();
         //拼圖資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> jigsawData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> jigsawData = new Dictionary<int, ItemData>();
         //耳環資料
         //物品編號(int), 物品名稱(string), 購買價格(int)
-        public static Dictionary<int, Tuple<string, int>> earringData = new Dictionary<int, Tuple<string, int>>();
+        public static Dictionary<int, ItemData> earringData = new Dictionary<int, ItemData>();
 
 
         public static void initItem()
@@ -105,7 +105,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                weaponData.Add(itemId, new Tuple<string, byte, byte, short, short, int>(itemNameString, job, level, attack, attackRange, price));
+                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, attackRange, price));
             }
             //==============================================================================
             // 衣服類型開始
@@ -133,7 +133,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                topData.Add(itemId, new Tuple<string, byte, byte, int>(itemNameString, job, level, price));
+                topData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
             }
             //==============================================================================
             //服裝類型開始
@@ -161,7 +161,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                clothingData.Add(itemId, new Tuple<string, byte, byte, int>(itemNameString, job, level, price));
+                clothingData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
             }
             //==============================================================================
             // 戒指類型開始
@@ -192,7 +192,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                ringData.Add(itemId, new Tuple<string, byte, byte, int>(itemNameString, job, level, price));
+                ringData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
             }
             //==============================================================================
             // 項鍊類型開始
@@ -220,7 +220,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                necklaceData.Add(itemId, new Tuple<string, byte, byte, int>(itemNameString, job, level, price));
+                necklaceData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
             }
             //==============================================================================
             // 披風類型開始
@@ -249,7 +249,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                capeData.Add(itemId, new Tuple<string, byte, byte, int>(itemNameString, job, level, price));
+                capeData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
         }
             //==============================================================================
             // 消耗類型開始
@@ -260,8 +260,8 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                item.ReadInt32();
-                item.ReadInt32();
+                int hp = item.ReadInt32();
+                int mp = item.ReadInt32();
                 item.ReadInt32();
                 int price = item.ReadInt32();
                 item.ReadInt16();
@@ -271,7 +271,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                useData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                useData.Add(itemId, new ItemData(itemId, itemNameString, hp, mp, price));
             }
             //==============================================================================
             // 封印箱類型開始
@@ -289,7 +289,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                soulData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                soulData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 帽子類型開始
@@ -314,7 +314,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                hatData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                hatData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 髮型類型開始
@@ -330,7 +330,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                hairData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                hairData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 眼睛類型開始
@@ -346,7 +346,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                eyesData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                eyesData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 面具類型開始
@@ -362,7 +362,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                maskData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                maskData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 鬍子類型開始
@@ -378,7 +378,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                beardData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                beardData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 其他類型開始
@@ -396,7 +396,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                etcData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                etcData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 寵物類型開始
@@ -418,7 +418,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                petData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                petData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 領巾類型開始
@@ -439,7 +439,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                scarfData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                scarfData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 未知類型開始
@@ -469,7 +469,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(6);
 
-                unknownData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                unknownData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 拼圖類型開始
@@ -484,7 +484,7 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadByte();
 
-                jigsawData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                jigsawData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             //==============================================================================
             // 耳環類型開始
@@ -513,7 +513,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                earringData.Add(itemId, new Tuple<string, int>(itemNameString, price));
+                earringData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
             itemFile.Close();
             item.Close();

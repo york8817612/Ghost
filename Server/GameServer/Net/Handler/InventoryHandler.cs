@@ -53,14 +53,47 @@ namespace Server.Handler
         }
 
         public static void UseSpend_Req(InPacket lea, Client gc)
-            {
+        {
             var chr = gc.Character;
             byte Type = lea.ReadByte();
             byte Slot = lea.ReadByte();
-            int ItemID = chr.Items.GetItemID((InventoryType.ItemType)Type, Slot);
+            Item ItemID = chr.Items.GetItem(Type, Slot);
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            switch (ItemID)
-                    {
+            var use = ItemFactory.useData[ItemID.ItemID];
+            // 使用回復HP 跟 MP 的物品
+            if (use.Hp != -1)
+            {
+                if ((chr.MaxHp > chr.Hp + use.Hp))
+                {
+                    chr.Hp += (short)use.Hp;
+                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                    chr.Items.RemoveItem(Type, Slot);
+                }
+                else if (chr.MaxHp - chr.Hp < use.Hp)
+                {
+                    chr.Hp += (short)chr.MaxHp;
+                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                    chr.Items.RemoveItem(Type, Slot);
+                }
+            }
+            if (use.Mp != -1)
+            {
+                if ((chr.MaxMp > chr.Mp + use.Mp))
+                {
+                    chr.Mp += (short)use.Mp;
+                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                    chr.Items.RemoveItem(Type, Slot);
+                }
+                else if (chr.MaxMp - chr.Mp < use.Mp)
+                {
+                    chr.Mp += (short)chr.MaxMp;
+                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                    chr.Items.RemoveItem(Type, Slot);
+                }
+            }
+            // 其他
+            switch (ItemID.ItemID)
+            {
                 case 8843030: // 豬大長召喚符
                     Monster[] monster = new Monster[50];
                     map.Monster.Add(new Monster(0, 1003001, 30, 29200, 0, 3, 0xFF, 1, 0, chr.PlayerX, chr.PlayerY));
@@ -84,17 +117,17 @@ namespace Server.Handler
                                     //map.Monster[i].PositionY = m.PositionY;
                                     MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                                     continue;
-                    }
+                                }
                                 Monster mon = MapHandler.FindPath(map.Monster[i], 40, map);
                                 map.Monster[i].State = 1;
                                 map.Monster[i].PositionX = mon.PositionX;
                                 map.Monster[i].PositionY = mon.PositionY;
                                 MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
-            }
+                            }
                             catch
-        {
+                            {
 
-        }
+                            }
                         }
                     };
                     tmr.Start();
@@ -140,7 +173,7 @@ namespace Server.Handler
         }
 
         public static void UpdateEquip(Client gc, byte SourceType, byte TargetType = 0xFF)
-            {
+        {
             switch (SourceType)
             {
                 case 0:

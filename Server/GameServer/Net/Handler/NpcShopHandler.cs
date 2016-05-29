@@ -27,50 +27,50 @@ namespace Server.Handler
             switch (ItemID / 100000)
             {
                 case 75: // 耳環
-                    money = ItemFactory.earringData[ItemID].Item2;
+                    money = ItemFactory.earringData[ItemID].Price;
                     break;
                 case 79: // 武器
                 case 80: // 武器
-                    money = ItemFactory.weaponData[ItemID].Item6;
+                    money = ItemFactory.weaponData[ItemID].Price;
                     break;
                 case 81: // 衣服
-                    money = ItemFactory.topData[ItemID].Item4;
+                    money = ItemFactory.topData[ItemID].Price;
                     break;
                 case 84: // 披風
-                    money = ItemFactory.capeData[ItemID].Item4;
+                    money = ItemFactory.capeData[ItemID].Price;
                     break;
                 case 86: // 帽子
-                    money = ItemFactory.hatData[ItemID].Item2;
+                    money = ItemFactory.hatData[ItemID].Price;
                     break;
                 case 87: // 面具
-                    money = ItemFactory.maskData[ItemID].Item2;
+                    money = ItemFactory.maskData[ItemID].Price;
                     break;
                 case 93: // 武器
-                    money = ItemFactory.weaponData[ItemID].Item6;
+                    money = ItemFactory.weaponData[ItemID].Price;
                     break;
                 case 94: // 鬍子
-                    money = ItemFactory.beardData[ItemID].Item2;
+                    money = ItemFactory.beardData[ItemID].Price;
                     break;
                 case 95: // 服裝
-                    money = ItemFactory.clothingData[ItemID].Item4;
+                    money = ItemFactory.clothingData[ItemID].Price;
                     break;
                 case 82: // 戒指
-                    money = ItemFactory.ringData[ItemID].Item4;
+                    money = ItemFactory.ringData[ItemID].Price;
                     break;
                 case 83: // 項鍊
-                    money = ItemFactory.necklaceData[ItemID].Item4;
+                    money = ItemFactory.necklaceData[ItemID].Price;
                     break;
                 case 85: // 封印箱
-                    money = ItemFactory.soulData[ItemID].Item2;
+                    money = ItemFactory.soulData[ItemID].Price;
                     break;
                 case 11: // 拼圖
-                    money = ItemFactory.jigsawData[ItemID].Item2;
+                    money = ItemFactory.jigsawData[ItemID].Price;
                     break;
                 case 88: // 消耗
-                    money = ItemFactory.useData[ItemID].Item2;
+                    money = ItemFactory.useData[ItemID].Price;
                     break;
                 case 89: // 其他
-                    money = ItemFactory.etcData[ItemID].Item2;
+                    money = ItemFactory.etcData[ItemID].Price;
                     break;
                 default:
                     Log.Error("未知的物品型態:" + ItemID / 100000);
@@ -134,50 +134,50 @@ namespace Server.Handler
             switch (ItemID / 100000)
             {
                 case 75: // 耳環
-                    money = ItemFactory.earringData[ItemID].Item2;
+                    money = ItemFactory.earringData[ItemID].Price;
                     break;
                 case 79: // 武器
                 case 80: // 武器
-                    money = ItemFactory.weaponData[ItemID].Item6;
+                    money = ItemFactory.weaponData[ItemID].Price;
                     break;
                 case 81: // 衣服
-                    money = ItemFactory.topData[ItemID].Item4;
+                    money = ItemFactory.topData[ItemID].Price;
                     break;
                 case 84: // 披風
-                    money = ItemFactory.capeData[ItemID].Item4;
+                    money = ItemFactory.capeData[ItemID].Price;
                     break;
                 case 86: // 帽子
-                    money = ItemFactory.hatData[ItemID].Item2;
+                    money = ItemFactory.hatData[ItemID].Price;
                     break;
                 case 87: // 面具
-                    money = ItemFactory.maskData[ItemID].Item2;
+                    money = ItemFactory.maskData[ItemID].Price;
                     break;
                 case 93: // 武器
-                    money = ItemFactory.weaponData[ItemID].Item6;
+                    money = ItemFactory.weaponData[ItemID].Price;
                     break;
                 case 94: // 鬍子
-                    money = ItemFactory.beardData[ItemID].Item2;
+                    money = ItemFactory.beardData[ItemID].Price;
                     break;
                 case 95: // 服裝
-                    money = ItemFactory.clothingData[ItemID].Item4;
+                    money = ItemFactory.clothingData[ItemID].Price;
                     break;
                 case 82: // 戒指
-                    money = ItemFactory.ringData[ItemID].Item4;
+                    money = ItemFactory.ringData[ItemID].Price;
                     break;
                 case 83: // 項鍊
-                    money = ItemFactory.necklaceData[ItemID].Item4;
+                    money = ItemFactory.necklaceData[ItemID].Price;
                     break;
                 case 85: // 封印箱
-                    money = ItemFactory.soulData[ItemID].Item2;
+                    money = ItemFactory.soulData[ItemID].Price;
                     break;
                 case 11: // 拼圖
-                    money = ItemFactory.jigsawData[ItemID].Item2;
+                    money = ItemFactory.jigsawData[ItemID].Price;
                     break;
                 case 88: // 消耗
-                    money = ItemFactory.useData[ItemID].Item2;
+                    money = ItemFactory.useData[ItemID].Price;
                     break;
                 case 89: // 其他
-                    money = ItemFactory.etcData[ItemID].Item2;
+                    money = ItemFactory.etcData[ItemID].Price;
                     break;
                 default:
                     Log.Error("未知的物品型態:" + ItemID / 100000);

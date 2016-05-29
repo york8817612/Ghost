@@ -42,120 +42,44 @@ namespace Server.Handler
                 }
             }
 
-            if (mapX == 2 && mapY == 6)
-            {
-                LoadMapPexelsData(map);
-                ControlMonster(gc, map);
-            }
+            ControlMonster(gc, map);
         }
 
         public static void ControlMonster(Client gc, Map map)
         {
-            Monster[] monster = new Monster[50];
-            //for (int i = 0; i < 1; i++)
-            //{
-            if (map.Monster.Count < 1)
-            {
-                monster[0] = new Monster(0, 1000201, 3, 33, 10, 1f, 1, 1, 0, 253, 1045);
-                monster[1] = new Monster(1, 1000201, 3, 33, 10, 1f, 1, 1, 0, 1069, 952);
-                monster[2] = new Monster(2, 1000201, 3, 33, 10, 1f, 1, 1, 0, 1620, 789);
-                map.Monster.Add(monster[0]);
-                map.Monster.Add(monster[1]);
-                map.Monster.Add(monster[2]);
-                for (int i = 3; i < 50; i++)
-                    map.Monster.Add(null);
-            }
-            //}
             MonsterPacket.createAllMonster(gc, map, map.Monster);
-            //for (int i = 0; i < 1; i++)
+           
+            //System.Timers.Timer tmr = new System.Timers.Timer(1000);
+            //tmr.Elapsed += delegate
             //{
-            //    MonsterPacket.spawnMonster(gc, monster[i], 0, 0, 0, 0);
-            //}
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        try
+            //        {
+            //            if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
+            //            {
+            //                map.Monster[i].State = 1;
+            //                //map.Monster[i].Direction = map.Monster[i].Direction * -1;
+            //                //Monster m = FindPath(map.Monster[i], 40, map);
+            //                //monster[i].Direction = m.Direction;
+            //                //map.Monster[i].PositionX = m.PositionX;
+            //                //map.Monster[i].PositionY = m.PositionY;
+            //                MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
+            //                continue;
+            //            }
+            //            Monster mon = FindPath(map.Monster[i], 40, map);
+            //            map.Monster[i].State = 1;
+            //            map.Monster[i].PositionX = mon.PositionX;
+            //            map.Monster[i].PositionY = mon.PositionY;
+            //            MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
+            //        }
+            //        catch
+            //        {
 
-            //
-            System.Timers.Timer tmr = new System.Timers.Timer(1000);
-            tmr.Elapsed += delegate
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    try
-                    {
-                        if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
-                        {
-                            map.Monster[i].State = 1;
-                            //map.Monster[i].Direction = map.Monster[i].Direction * -1;
-                            //Monster m = FindPath(map.Monster[i], 40, map);
-                            //monster[i].Direction = m.Direction;
-                            //map.Monster[i].PositionX = m.PositionX;
-                            //map.Monster[i].PositionY = m.PositionY;
-                            MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
-                            continue;
-                        }
-                        Monster mon = FindPath(map.Monster[i], 40, map);
-                        map.Monster[i].State = 1;
-                        map.Monster[i].PositionX = mon.PositionX;
-                        map.Monster[i].PositionY = mon.PositionY;
-                        MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
-                    }
-                    catch
-                    {
-
-                    }
-                }
-            };
-            tmr.Start();
-        }
-
-        public static void LoadMapPexelsData(Map map)
-        {
-            int Height = 0;
-            int Width = 0;
-            sbyte Index;
-            sbyte Data;
-
-            FileStream file = File.Open(@"C:\t2_s6.map", FileMode.Open, FileAccess.ReadWrite);
-            BinaryReader br = new BinaryReader(file);
-
-            Width = br.ReadInt32();
-            Height = br.ReadInt32();
-            map.SetMapHeightWidth(Height, Width);
-            for (int f = 0; f < Width; f++)
-            {
-                for (int i = 0; i < Height; i++)
-                {
-                    br.ReadByte();
-                    br.ReadByte();
-                    Index = br.ReadSByte();
-                    map.SetMapPexel(f * 32 + f, i, Index);
-                    for (int j = 0; j < 32; j++)
-                    {
-                        Data = br.ReadSByte();
-                        map.SetMapPexel(f * 32 + f + 1 + j, i, Data);
-                    }
-                    br.ReadByte();
-                }
-            }
-
-            for (int f = 0; f < Width; f++)
-            {
-                for (int i = 0; i < Height; i++)
-                {
-                    br.ReadByte();
-                    br.ReadByte();
-                    Index = br.ReadSByte();
-                    if (Index != -1)
-                        map.SetMapPexel(f * 32 + f, i, Index);
-                    for (int j = 0; j < 32; j++)
-                    {
-                        Data = br.ReadSByte();
-                        if (Data != -1)
-                            map.SetMapPexel(f * 32 + f + 1 + j, i, Data);
-                    }
-                    br.ReadByte();
-                }
-            }
-            file.Close();
-            br.Close();
+            //        }
+            //    }
+            //};
+            //tmr.Start();
         }
 
         public static Monster FindPath(Monster monster, int Dest, Map map)
