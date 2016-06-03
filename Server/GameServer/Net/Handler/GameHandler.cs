@@ -3,6 +3,7 @@ using Server.Common.Data;
 using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Security;
+using Server.Common.Utilities;
 using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
@@ -35,7 +36,7 @@ namespace Server.Handler
                 gc.Account.Load(username);
                 var pe = new PasswordEncrypt(encryptKey);
                 string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
-                if (!password.Equals(encryptPassword))
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -53,8 +54,8 @@ namespace Server.Handler
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
                 Log.Inform("Password = {0}", password);
-                //Log.Inform("encryptKey = {0}", encryptKey);
-                //Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("encryptKey = {0}", encryptKey);
+                Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {
@@ -73,7 +74,7 @@ namespace Server.Handler
             InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
-            QuestPacket.getQuickSlot(gc);
+            GamePacket.getQuickSlot(gc, chr.Keymaps);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreMoney(gc);
@@ -135,6 +136,71 @@ namespace Server.Handler
                 default:
                     break;
             }
+        }
+
+        public static void Quick_Slot_Req(InPacket lea, Client gc)
+        {
+            var chr = gc.Character;
+            int KeymapType = lea.ReadShort();
+            int KeymapSlot = lea.ReadShort();
+            int SkillID = lea.ReadInt();
+            int SkillType = lea.ReadShort();
+            int SkillSlot = lea.ReadShort();
+            if (SkillID == -1 && SkillType == -1 && SkillSlot == -1)
+                return;
+            string QuickSlotName = "";
+            KeyValuePair<string, Shortcut> Skill = chr.Keymaps.Skill(SkillType, SkillSlot);
+            switch (KeymapType)
+            {
+                case 0:
+                    switch (KeymapSlot)
+                    {
+                        case 0:
+                            QuickSlotName = "Z";
+                            break;
+                        case 1:
+                            QuickSlotName = "X";
+                            break;
+                        case 2:
+                            QuickSlotName = "C";
+                            break;
+                        case 3:
+                            QuickSlotName = "V";
+                            break;
+                        case 4:
+                            QuickSlotName = "B";
+                            break;
+                        case 5:
+                            QuickSlotName = "N";
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (KeymapSlot)
+                    {
+                        case 0:
+                            QuickSlotName = "Insert";
+                            break;
+                        case 1:
+                            QuickSlotName = "Home";
+                            break;
+                        case 2:
+                            QuickSlotName = "PageUp";
+                            break;
+                        case 3:
+                            QuickSlotName = "Delete";
+                            break;
+                        case 4:
+                            QuickSlotName = "End";
+                            break;
+                        case 5:
+                            QuickSlotName = "PageDown";
+                            break;
+                    }
+                    break;
+            }
+            chr.Keymaps.Remove(Skill.Key);
+            chr.Keymaps.Add(QuickSlotName, new Shortcut(SkillID, (byte)SkillType, (byte)SkillSlot));
         }
 
         //private static int SearchBytes(byte[] haystack, byte[] needle)

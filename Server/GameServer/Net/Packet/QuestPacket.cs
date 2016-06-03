@@ -52,16 +52,5 @@ namespace Server.Packet
                 c.Send(plew);
             }
         }
-
-        public static void getQuickSlot(Client c)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.QUICKSLOTALL))
-            {
-                plew.WriteInt(0); // length + CRC
-                plew.WriteInt(0);
-                plew.WriteHexString("01 00 00 00 00 00 00 00 04 00 00 00 00 00 03 00 03 00 00 00 00 00 02 00 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF");
-                c.Send(plew);
-            }
-        }
     }
 }

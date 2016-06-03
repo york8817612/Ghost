@@ -538,18 +538,15 @@ namespace Server.Ghost.Provider
 
         public static void LoadMapPexelsData(Map map)
         {
-            int Height = 0;
-            int Width = 0;
-            sbyte Index;
-            sbyte Data;
-
             string openPath = Application.LaunchPath + @"\Data\Map\t" + map.MapX + "_s" + map.MapY + ".map";
 
             FileStream file = File.Open(openPath, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(file);
 
-            Width = br.ReadInt32();
-            Height = br.ReadInt32();
+            sbyte Index = 0;
+            sbyte Data;
+            int Width = br.ReadInt32();
+            int Height = br.ReadInt32();
             map.SetMapHeightWidth(Height, Width);
             for (int f = 0; f < Width; f++)
             {
@@ -568,6 +565,7 @@ namespace Server.Ghost.Provider
                 }
             }
 
+            ////////////////////////
             for (int f = 0; f < Width; f++)
             {
                 for (int i = 0; i < Height; i++)
@@ -925,9 +923,9 @@ namespace Server.Ghost.Provider
                             int MonsterExp = getMonsterExp(MonsterLevel);
                             map.Monster.Add(new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY));
                         }
-                        for (int j = map.Monster.Count; j < 50; j++)
-                            map.Monster.Add(null);
                     }
+                    for (int j = map.Monster.Count; j < 50; j++)
+                        map.Monster.Add(null);
                     //=========================================(14)sub_653F60
                     strCount = reader.ReadInt32();
                     if (strCount > 0)

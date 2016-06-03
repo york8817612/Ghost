@@ -83,6 +83,7 @@ namespace Server.Common.Net
         QUEST_ALL_REQ = 0x7A,
         QUEST_DONE_REQ = 0x7C,
         CAN_WARP_ACK_REQ = 0x85,
+        QUICK_SLOT_REQ = 0xA8,
         MOVE_ITEM_STORAGE = 0xAC,
         SAVE_MONEY = 0xAE,
         GIVE_MONEY = 0xAF,

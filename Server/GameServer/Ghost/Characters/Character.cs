@@ -64,6 +64,7 @@ namespace Server.Ghost.Characters
         public CharacterStorages Storages { get; private set; }
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
+        public CharacterKeyMap Keymaps { get; private set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 
@@ -79,6 +80,7 @@ namespace Server.Ghost.Characters
             this.Skills = new CharacterSkills(this);
             this.SkillState = new Dictionary<int, Common.Threading.Delay>();
             this.Quests = new CharacterQuests(this);
+            this.Keymaps = new CharacterKeyMap(this);
         }
 
         public void Load(bool IsFullLoad = true)
@@ -139,6 +141,7 @@ namespace Server.Ghost.Characters
             this.Storages.Load();
             this.Skills.Load();
             this.Quests.Load();
+            this.Keymaps.Load();
         }
 
         public void Save()
@@ -207,6 +210,7 @@ namespace Server.Ghost.Characters
             this.Storages.Save();
             this.Skills.Save();
             this.Quests.Save();
+            this.Keymaps.Save();
 
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             map.Characters.Remove(this);
@@ -220,6 +224,7 @@ namespace Server.Ghost.Characters
             this.Storages.Delete();
             this.Skills.Delete();
             this.Quests.Delete();
+            this.Keymaps.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 

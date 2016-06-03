@@ -15,7 +15,7 @@ namespace Server.Packet
                 int j = 0;
                 for (int i = 0; i < 50; i++)
                 {
-                    if (monster[i] != null)
+                    if (map.Monster[i] != null)
                     {
                         j++;
                     }
@@ -69,19 +69,19 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(0);
+                    plew.WriteShort(monster[i] != null ? 5 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(0);
+                    plew.WriteShort(monster[i] != null ? 6 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(0);
+                    plew.WriteShort(monster[i] != null ? 5 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(0);
+                    plew.WriteShort(monster[i] != null ? 1 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
@@ -93,7 +93,7 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteHexString("00 00");
+                    plew.WriteHexString("CB 46");
                 }
                 for (int i = 0; i < 50; i++)
                 {

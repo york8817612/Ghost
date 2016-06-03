@@ -47,6 +47,7 @@
     <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
+    <Compile Include="Ghost\Characters\CharacterKeyMap.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Ghost\Provider\MobFactory.cs" />
     <Compile Include="Ghost\Provider\PetFactory.cs" />
     <Compile Include="Ghost\Quest.cs" />
+    <Compile Include="Ghost\Shortcut.cs" />
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Net\Handler\ActionHandler.cs" />

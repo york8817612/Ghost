@@ -24,6 +24,9 @@ namespace Server.Net
                 case ClientOpcode.GAMELOG_REQ:
                     GameHandler.Game_Log_Req(ip, gc);
                     break;
+                case ClientOpcode.QUICK_SLOT_REQ:
+                    GameHandler.Quick_Slot_Req(ip, gc);
+                    break;
                 // Shop
                 case ClientOpcode.NPC_SHOP_BUY_REQ:
                     NpcShopHandler.Buy_Req(ip, gc);
