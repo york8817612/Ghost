@@ -12,8 +12,8 @@
         public int Direction { get; set; }
         public byte State { get; set; }
         public byte Effect { get; set; }
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
+        public short PositionX { get; set; }
+        public short PositionY { get; set; }
 
         /* Speed
         00 00 00 00 // Stop
@@ -28,7 +28,7 @@
         00 00 10 41 // 速度 9
         */
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY)
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, short PositionX, short PositionY)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;

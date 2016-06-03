@@ -49,6 +49,7 @@
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
     <Compile Include="Ghost\Characters\CharacterKeyMap.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
+    <Compile Include="Ghost\Map\Drop.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\ItemData.cs" />
@@ -88,9 +89,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ghost\Map\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{00970dfc-5416-4ace-bc47-5d7adbe2af8d}</Project>

@@ -614,15 +614,15 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                         }
                     }
                     str.FiersRead = reader.ReadBytes(0x100);
                     str.Decode();
-                    
+
                     str.FiersRead = reader.ReadBytes(0x100);
                     str.Decode();
-                    
+
 
                     strCount = reader.ReadInt32();
                     if (strCount > 0)
@@ -631,7 +631,7 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                         }
                     }
                     strCount = reader.ReadInt32();
@@ -641,7 +641,7 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                         }
                     }
 
@@ -651,10 +651,10 @@ namespace Server.Ghost.Provider
                     int val7 = reader.ReadInt32();
                     str.FiersRead = reader.ReadBytes(0x100);
                     str.Decode();
-                    
+
                     str.FiersRead = reader.ReadBytes(0x100);
                     str.Decode();
-                    
+
                     strCount = reader.ReadInt32();
                     if (strCount > 0)
                     {
@@ -662,7 +662,7 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                         }
                     }
                     //=========================================(1)sub_652FA0
@@ -673,7 +673,7 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             reader.ReadBytes(0x10);
                             reader.ReadInt32();
                             reader.ReadInt32();
@@ -702,15 +702,15 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             reader.ReadInt32();
                             reader.ReadInt32();
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             reader.ReadInt32();
                             reader.ReadInt32();
                             reader.ReadInt32();
@@ -727,15 +727,15 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             int mv1 = reader.ReadInt32();
                             int mv2 = reader.ReadInt32();
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             int mv3 = reader.ReadInt32();
                             int mv4 = reader.ReadInt32();
                             int mv5 = reader.ReadInt32();
@@ -755,12 +755,12 @@ namespace Server.Ghost.Provider
                         {
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             reader.ReadInt32();
                             reader.ReadInt32();
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
-                            
+
                             str.FiersRead = reader.ReadBytes(0x100);
                             str.Decode();
                             reader.ReadInt32();
@@ -921,7 +921,7 @@ namespace Server.Ghost.Provider
                             int MonsterLevel = int.Parse(new string(Level));
                             int MonsterHP = MobFactory.MonsterHP(MonsterLevel);
                             int MonsterExp = MobFactory.MonsterExp(MonsterLevel);
-                            map.Monster.Add(new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY));
+                            map.Monster.Add(new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, (short)PosX, (short)PosY));
                         }
                     }
                     for (int j = map.Monster.Count; j < 50; j++)
@@ -989,7 +989,7 @@ namespace Server.Ghost.Provider
                         }
                     }
                     //=========================================
-                    
+
                 }
                 catch (Exception)
                 {

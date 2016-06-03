@@ -57,44 +57,50 @@ namespace Server.Handler
             var chr = gc.Character;
             byte Type = lea.ReadByte();
             byte Slot = lea.ReadByte();
-            Item ItemID = chr.Items.GetItem(Type, Slot);
+            Item Item = chr.Items.GetItem(Type, Slot);
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            var use = ItemFactory.useData[ItemID.ItemID];
+            var use = ItemFactory.useData[Item.ItemID];
             // 使用回復HP 跟 MP 的物品
-            if (use.Hp != -1)
+            switch (Item.ItemID)
             {
-                if ((chr.MaxHp > chr.Hp + use.Hp))
-                {
-                    chr.Hp += (short)use.Hp;
-                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                    chr.Items.RemoveItem(Type, Slot);
-                }
-                else if (chr.MaxHp - chr.Hp < use.Hp)
-                {
-                    chr.Hp += (short)chr.MaxHp;
-                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                    chr.Items.RemoveItem(Type, Slot);
-                }
-            }
-            if (use.Mp != -1)
-            {
-                if ((chr.MaxMp > chr.Mp + use.Mp))
-                {
-                    chr.Mp += (short)use.Mp;
-                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                    chr.Items.RemoveItem(Type, Slot);
-                }
-                else if (chr.MaxMp - chr.Mp < use.Mp)
-                {
-                    chr.Mp += (short)chr.MaxMp;
-                    StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                    chr.Items.RemoveItem(Type, Slot);
-                }
-            }
-            // 其他
-            switch (ItemID.ItemID)
-            {
-                case 8843030: // 豬大長召喚符
+                case 8850021: // 清陰符
+                    chr.MapX = 1;
+                    chr.MapY = 1;
+                    chr.PlayerX = 995;
+                    chr.PlayerY = 1207;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                default:
+                    if (use.Hp != -1)
+                    {
+                        if ((chr.MaxHp > chr.Hp + use.Hp))
+                        {
+                            chr.Hp += (short)use.Hp;
+                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            chr.Items.RemoveItem(Type, Slot);
+                        }
+                        else if (chr.MaxHp - chr.Hp < use.Hp)
+                        {
+                            chr.Hp += (short)chr.MaxHp;
+                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            chr.Items.RemoveItem(Type, Slot);
+                        }
+                    }
+                    if (use.Mp != -1)
+                    {
+                        if ((chr.MaxMp > chr.Mp + use.Mp))
+                        {
+                            chr.Mp += (short)use.Mp;
+                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            chr.Items.RemoveItem(Type, Slot);
+                        }
+                        else if (chr.MaxMp - chr.Mp < use.Mp)
+                        {
+                            chr.Mp += (short)chr.MaxMp;
+                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            chr.Items.RemoveItem(Type, Slot);
+                        }
+                    }
                     break;
             }
         }
@@ -111,7 +117,7 @@ namespace Server.Handler
                 gc.Character.Items.RemoveItem(InventoryType.ItemType.Spend3, Slot);
                 foreach (Character all in MapFactory.AllCharacters)
                 {
-                    MapPacket.InvenUseSpendShout(all.Client, Message);
+                    GamePacket.InvenUseSpendShout(all.Client, Message);
                 }
                 InventoryPacket.getInvenSpend3(gc);
             }

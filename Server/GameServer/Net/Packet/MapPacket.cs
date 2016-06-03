@@ -276,20 +276,5 @@ namespace Server.Packet
                 c.Send(plew);
             }
         }
-
-        public static void InvenUseSpendShout(Client c, string message)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_USESPEND_SHOUT_ACK))
-            {
-                var chr = c.Character;
-                plew.WriteInt(0); // length + CRC
-                plew.WriteInt(0);
-                plew.WriteByte(1); // 頻道
-                plew.WriteString(chr.Name, 20);
-                plew.WriteString(message, 65);
-                plew.WriteShort(1); // 類型
-                c.Send(plew);
-            }
-        }
     }
 }

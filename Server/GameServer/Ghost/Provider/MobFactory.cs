@@ -281,5 +281,16 @@
             }
             return MonsterExp;
         }
+
+        public static void MonsterDrop(int MonsterID, Map map)
+        {
+            switch(MonsterID)
+            {
+                case 1000101:
+                    Drop Drop = new Drop(-1, 8820011, 1, -1, -1);
+                    Drop.Drops.Add(Drop);
+                    break;
+            }
+        }
     }
 }
