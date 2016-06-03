@@ -26,6 +26,29 @@ namespace Server.Ghost.Characters
             }
         }
 
+        public void Add(Quest quest)
+        {
+            quest.Parent = this;
+            this.Quests.Add(quest);
+        }
+
+        public void Remove(Quest Quest)
+        {
+            this.Quests.Remove(Quest);
+            Quest.Delete();
+        }
+
+        public List<Quest> getQuests()
+        {
+            return this.Quests;
+        }
+
+        public Quest Quest(int QuestID)
+        {
+            Quest Quest = this.Quests.Find(i => i.QuestID == QuestID);
+            return Quest;
+        }
+
         public void Save()
         {
             foreach (Quest quest in this)
@@ -40,17 +63,6 @@ namespace Server.Ghost.Characters
             {
                 quest.Delete();
             }
-        }
-
-        public void Add(Quest quest)
-        {
-            quest.Parent = this;
-            this.Quests.Add(quest);
-        }
-
-        public List<Quest> getQuests()
-        {
-            return this.Quests;
         }
 
         public IEnumerator<Quest> GetEnumerator()

@@ -81,7 +81,9 @@ namespace Server.Common.Net
         SKILL_LEVELUP_REQ = 0x74,
         USE_SKILL_REQ = 0x76,
         QUEST_ALL_REQ = 0x7A,
+        QUEST_GIVEUP_REQ = 0x7B,
         QUEST_DONE_REQ = 0x7C,
+        QUEST_UPDATE_REQ = 0x7F,
         CAN_WARP_ACK_REQ = 0x85,
         QUICK_SLOT_REQ = 0xA8,
         MOVE_ITEM_STORAGE = 0xAC,
@@ -206,8 +208,7 @@ namespace Server.Common.Net
         // 0x77,
         // 0x78
         QUEST_ALL = 0x79,
-
-        // 0x80
+        QUEST_UPDATE = 0x80,
 
         CAN_WARP_ACK = 0x86,
         // 0x87

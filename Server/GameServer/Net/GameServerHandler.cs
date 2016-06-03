@@ -63,6 +63,15 @@ namespace Server.Net
                 case ClientOpcode.QUEST_ALL_REQ:
                     QuestHandler.Quest_All_Req(ip, gc);
                     break;
+                case ClientOpcode.QUEST_GIVEUP_REQ:
+                    QuestHandler.Quest_GiveUp_Req(ip, gc);
+                    break;
+                case ClientOpcode.QUEST_DONE_REQ:
+                    QuestHandler.Quest_Done_Req(ip, gc);
+                    break;
+                case ClientOpcode.QUEST_UPDATE_REQ:
+                    QuestHandler.Quest_Update_Req(ip, gc);
+                    break;
                 // Map
                 case ClientOpcode.ENTER_WARP_ACK_REQ:
                     MapHandler.WarpToMap_Req(ip, gc);

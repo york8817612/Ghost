@@ -2,8 +2,6 @@
 using Server.Common.Data;
 using Server.Common.IO;
 using Server.Common.IO.Packet;
-using Server.Common.Security;
-using Server.Common.Utilities;
 using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
@@ -34,9 +32,9 @@ namespace Server.Handler
             try
             {
                 gc.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
-                if (!password.Equals(encryptPassword))
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(gc.Account.Password, password.ToCharArray());
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -54,8 +52,8 @@ namespace Server.Handler
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
                 Log.Inform("Password = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {

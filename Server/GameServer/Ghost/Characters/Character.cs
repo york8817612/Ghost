@@ -213,6 +213,7 @@ namespace Server.Ghost.Characters
             this.Keymaps.Save();
 
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
+            MapFactory.AllCharacters.Remove(this);
             map.Characters.Remove(this);
 
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
