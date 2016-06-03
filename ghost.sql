@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-05-07 20:08:03
+Date: 2016-06-03 20:19:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,24 +21,20 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(20) CHARACTER SET big5 NOT NULL,
+  `username` varchar(20) CHARACTER SET big5 NOT NULL,
   `password` varchar(128) CHARACTER SET big5 NOT NULL,
-  `salt` varchar(32) NOT NULL,
-  `pin` varchar(32) NOT NULL,
-  `birthday` datetime NOT NULL,
   `creation` datetime NOT NULL,
-  `gender` int(1) NOT NULL,
   `isLoggedIn` int(1) NOT NULL,
   `isBanned` int(1) NOT NULL,
   `isMaster` int(1) NOT NULL,
   `cashPoint` int(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
-INSERT INTO `accounts` VALUES ('1', 'admin', '123456', '', '', '2015-04-07 21:11:26', '2015-04-07 21:11:30', '0', '0', '0', '1', '0');
+INSERT INTO `accounts` VALUES ('1', 'admin', '123456', '2015-04-07 21:11:30', '0', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for `characters`
@@ -89,12 +85,30 @@ CREATE TABLE `characters` (
   `mapY` int(4) NOT NULL DEFAULT '0',
   `playerX` int(4) NOT NULL DEFAULT '0',
   `playerY` int(4) NOT NULL DEFAULT '0',
+  `direction` int(4) NOT NULL,
   `position` int(4) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of characters
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `coupon`
+-- ----------------------------
+DROP TABLE IF EXISTS `coupon`;
+CREATE TABLE `coupon` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL,
+  `itemID` int(8) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  `valid` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of coupon
 -- ----------------------------
 
 -- ----------------------------
@@ -109,10 +123,26 @@ CREATE TABLE `items` (
   `slot` int(3) NOT NULL,
   `type` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of items
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `keymaps`
+-- ----------------------------
+DROP TABLE IF EXISTS `keymaps`;
+CREATE TABLE `keymaps` (
+  `cid` int(11) NOT NULL,
+  `quickslot` varchar(8) CHARACTER SET big5 NOT NULL,
+  `skillID` int(6) NOT NULL,
+  `type` int(3) NOT NULL,
+  `slot` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of keymaps
 -- ----------------------------
 
 -- ----------------------------
@@ -125,7 +155,7 @@ CREATE TABLE `quests` (
   `questId` int(8) NOT NULL,
   `questState` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quests
@@ -143,8 +173,23 @@ CREATE TABLE `skills` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of skills
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `storages`
+-- ----------------------------
+DROP TABLE IF EXISTS `storages`;
+CREATE TABLE `storages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) NOT NULL,
+  `money` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of storages
 -- ----------------------------
