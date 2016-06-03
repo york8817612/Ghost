@@ -131,9 +131,36 @@ namespace Server.Packet
                 plew.WriteShort(Monster.Effect); // 怪物受到的效果(0: 無、1: 無法移動、2: 中毒、3: 黑暗、4: 未知、5: 冰凍)
                 plew.WriteInt(0);
                 plew.WriteInt(Monster.HP);
-                plew.WriteShort(0);
-                plew.WriteShort(0); // Not read
+                plew.WriteShort(HitX);
+                plew.WriteShort(HitY);
                 c.Send(plew);
+            }
+        }
+
+        public static void regenrMonster(Client c, Monster Monster)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.MON_REGEN))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(Monster.MonsterID);
+                plew.WriteByte(1);
+                plew.WriteByte(0);
+                plew.WriteByte(Monster.Direction);
+                plew.WriteByte(0);
+                plew.WriteShort(Monster.PositionX);
+                plew.WriteShort(Monster.PositionY);
+                plew.WriteShort(0);
+                plew.WriteShort(0);
+                plew.WriteInt(Monster.HP);
+                plew.WriteShort(Monster.OriginalID);
+                plew.WriteShort(5);
+                plew.WriteShort(6);
+                plew.WriteShort(5);
+                plew.WriteShort(1);
+                plew.WriteShort(0); // Byte
+                plew.WriteShort(0x630);
+                plew.WriteShort(0);
             }
         }
     }
