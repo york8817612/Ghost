@@ -443,7 +443,7 @@ namespace Server.Packet
                 plew.WriteShort(posX); // pos x // + 20
                 plew.WriteShort(posY); // pos y // + 22
                 plew.WriteInt(quantity); // 數量 // + 24
-                plew.WriteInt(); // + 28
+                plew.WriteInt(0); // + 28
 
                 c.Send(plew);
             }

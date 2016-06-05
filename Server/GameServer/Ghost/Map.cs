@@ -73,5 +73,10 @@ namespace Server.Ghost
             }
             return null;
         }
+
+        public Item getDropByOriginalID(int OriginalID)
+        {
+            return this.Item[OriginalID];
+        }
     }
 }

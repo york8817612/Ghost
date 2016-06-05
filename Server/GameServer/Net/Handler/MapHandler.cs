@@ -79,7 +79,7 @@ namespace Server.Handler
                         MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                         continue;
                     }
-                    Monster mon = FindPath(map.Monster[i], (int)(40 * map.Monster[i].Speed), map);
+                    Monster mon = UpdatePosition(map.Monster[i], (int)(40 * map.Monster[i].Speed), map);
                     map.Monster[i].State = 1;
                     map.Monster[i].PositionX = mon.PositionX;
                     map.Monster[i].PositionY = mon.PositionY;
@@ -89,7 +89,7 @@ namespace Server.Handler
             tmr.Start();
         }
 
-        public static Monster FindPath(Monster monster, int Dest, Map map)
+        public static Monster UpdatePosition(Monster monster, int Dest, Map map)
         {
             int Direction = 1;
             if (monster.Direction == 0xFF)

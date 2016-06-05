@@ -10,14 +10,6 @@ namespace Server.Handler
 {
     public static class NpcShopHandler
     {
-
-        public static void getAvatar(Client gc)
-        {
-            InventoryPacket.getInvenEquip(gc);
-            StatusPacket.getStatusInfo(gc);
-            InventoryPacket.getAvatar(gc);
-        }
-
         public static void Buy_Req(InPacket lea, Client gc)
         {
             lea.ReadInt();
@@ -78,48 +70,15 @@ namespace Server.Handler
             }
             if (gc.Character.Money >= (money * Quantity))
             {
-                gc.Character.Money -= (money * Quantity);
-                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -(money * Quantity));
                 byte Type = (byte)InventoryType.getItemType(ItemID);
                 byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
+                if ((Type == 3 && Quantity > 100) || (Type == 4 && Quantity > 100))
+                    return;
+                gc.Character.Money -= (money * Quantity);
+                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -(money * Quantity));
                 Item oItem = new Item(ItemID, Slot, Type, (short)Quantity);
                 gc.Character.Items.Add(oItem);
-
-                switch (Type)
-                {
-                    case 0:
-                        getAvatar(gc);
-                        switch (Type)
-                        {
-                            case 1:
-                                InventoryPacket.getInvenEquip1(gc);
-                                break;
-                            case 2:
-                                InventoryPacket.getInvenEquip2(gc);
-                                break;
-                        }
-                        break;
-                    case 1:
-                        if (Type == 0)
-                            getAvatar(gc);
-                        InventoryPacket.getInvenEquip1(gc);
-                        break;
-                    case 2:
-                        if (Type == 0)
-                            getAvatar(gc);
-                        InventoryPacket.getInvenEquip2(gc);
-                        break;
-                    case 3:
-                        InventoryPacket.getInvenSpend3(gc);
-                        break;
-                    case 4:
-                        InventoryPacket.getInvenOther4(gc);
-                        break;
-                    case 5:
-                        InventoryPacket.getInvenPet5(gc);
-                        break;
-                }
-
+                InventoryHandler.UpdateInventory(gc, Type);
             }
         }
 
@@ -129,6 +88,8 @@ namespace Server.Handler
             byte Type = lea.ReadByte();
             byte Slot = lea.ReadByte();
             short Quantity = lea.ReadShort();
+            if (Quantity > 100)
+                return;
 
             int money = 0;
             switch (ItemID / 100000)
@@ -190,41 +151,7 @@ namespace Server.Handler
                 gc.Character.Money += ((money / 5) * Quantity);
                 InventoryPacket.getInvenMoney(gc, gc.Character.Money, money);
                 gc.Character.Items.Remove(Type, Slot);
-                switch (Type)
-                {
-                    case 0:
-                        getAvatar(gc);
-                        switch (Type)
-                        {
-                            case 1:
-                                InventoryPacket.getInvenEquip1(gc);
-                                break;
-                            case 2:
-                                InventoryPacket.getInvenEquip2(gc);
-                                break;
-                        }
-                        break;
-                    case 1:
-                        if (Type == 0)
-                            getAvatar(gc);
-                        InventoryPacket.getInvenEquip1(gc);
-                        break;
-                    case 2:
-                        if (Type == 0)
-                            getAvatar(gc);
-                        InventoryPacket.getInvenEquip2(gc);
-                        break;
-                    case 3:
-                        InventoryPacket.getInvenSpend3(gc);
-                        break;
-                    case 4:
-                        InventoryPacket.getInvenOther4(gc);
-                        break;
-                    case 5:
-                        InventoryPacket.getInvenPet5(gc);
-                        break;
-                }
-
+                InventoryHandler.UpdateInventory(gc, Type);
             }
         }
     }
