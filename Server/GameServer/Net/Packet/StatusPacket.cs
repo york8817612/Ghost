@@ -1,6 +1,7 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
+using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using System.Collections.Generic;
@@ -95,11 +96,10 @@ namespace Server.Packet
             }
         }
 
-        public static void levelUp(Client c, int level)
+        public static void levelUp(Client c, Character chr, int level)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_LEVELUP))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID);

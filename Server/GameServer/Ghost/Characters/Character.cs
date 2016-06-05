@@ -215,6 +215,8 @@ namespace Server.Ghost.Characters
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             MapFactory.AllCharacters.Remove(this);
             map.Characters.Remove(this);
+            foreach (Character All in map.Characters)
+                MapPacket.removeUser(All.Client, this);
 
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
@@ -243,8 +245,8 @@ namespace Server.Ghost.Characters
             this.AbilityBonus += 4;
             this.SkillBonus += 2;
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
-            foreach (Character all in map.Characters)
-                StatusPacket.levelUp(Client, this.Level);
+            foreach (Character All in map.Characters)
+                StatusPacket.levelUp(All.Client, this, this.Level);
             StatusPacket.getStatusInfo(Client);
         }
     }
