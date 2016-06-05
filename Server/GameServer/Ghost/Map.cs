@@ -15,7 +15,7 @@ namespace Server.Ghost
 
         public List<Character> Characters { get; private set; }
         public List<Monster> Monster { get; set; }
-        public Dictionary<int, Item> DropItem { get; set; }
+        public Dictionary<int, Item> Item { get; set; }
 
         public Map(short MapX, short MapY)
         {
@@ -23,7 +23,7 @@ namespace Server.Ghost
             this.MapY = MapY;
             Characters = new List<Character>();
             Monster = new List<Monster>();
-            DropItem = new Dictionary<int, Item>();
+            Item = new Dictionary<int, Item>();
         }
 
         public void SetMapHeightWidth(int Height, int Width)

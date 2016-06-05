@@ -126,7 +126,7 @@ namespace Server.Packet
                 plew.WriteByte(0);
                 plew.WriteHexString("00 00 00");
                 plew.WriteInt(0);
-                plew.WriteInt(-1);
+                plew.WriteInt(CharacterID);
                 plew.WriteShort(Damage);
                 plew.WriteShort(Monster.Effect); // 怪物受到的效果(0: 無、1: 無法移動、2: 中毒、3: 黑暗、4: 未知、5: 冰凍)
                 plew.WriteInt(0);

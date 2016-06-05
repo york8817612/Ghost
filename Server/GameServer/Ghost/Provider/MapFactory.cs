@@ -902,7 +902,7 @@ namespace Server.Ghost.Provider
                             var Direction = reader.ReadByte();
                             var Speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
                             var PosX = reader.ReadInt32();
-                            var PosY = reader.ReadInt32();
+                            var PosY = reader.ReadInt32() + 37;
                             int ss = reader.ReadInt32();
                             int ss2 = 0;
                             do
@@ -921,7 +921,9 @@ namespace Server.Ghost.Provider
                             int MonsterLevel = int.Parse(new string(Level));
                             int MonsterHP = MobFactory.MonsterHP(MonsterLevel);
                             int MonsterExp = MobFactory.MonsterExp(MonsterLevel);
-                            map.Monster.Add(new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, (short)PosX, (short)PosY));
+                            if (MonsterID == 1000501 || MonsterID == 1000801 || MonsterID == 1003501)
+                                Speed = 0;
+                            map.Monster.Add(new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY));
                         }
                     }
                     for (int j = map.Monster.Count; j < 50; j++)

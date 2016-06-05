@@ -27,9 +27,9 @@ namespace Server.Handler
                     return;
                 Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
                 InventoryPacket.charDropItem(gc, map.DropOriginalID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantit);
-                map.DropItem.Add(map.DropOriginalID, Source);
+                map.Item.Add(map.DropOriginalID, Source);
                 map.DropOriginalID++;
-                chr.Items.RemoveItem(SourceType, SorceSlot);
+                chr.Items.Remove(SourceType, SorceSlot);
             }
             else
             {
@@ -40,8 +40,8 @@ namespace Server.Handler
                 }
                 else
                 {   // 交換位置(swap)
-                    chr.Items.RemoveItem(SourceType, SorceSlot);
-                    chr.Items.RemoveItem(TargetType, TargetSlot);
+                    chr.Items.Remove(SourceType, SorceSlot);
+                    chr.Items.Remove(TargetType, TargetSlot);
                     byte swapSlot = Source.slot;
                     Source.slot = Target.slot;
                     Target.slot = swapSlot;
@@ -49,7 +49,7 @@ namespace Server.Handler
                     chr.Items.Add(Target);
                 }
             }
-            UpdateEquip(gc, SourceType, TargetType);
+            UpdateInventory(gc, SourceType, TargetType);
         }
 
         public static void UseSpend_Req(InPacket lea, Client gc)
@@ -65,9 +65,34 @@ namespace Server.Handler
             {
                 case 8850021: // 清陰符
                     chr.MapX = 1;
+                    chr.MapY = 2;
+                    chr.PlayerX = 2955;
+                    chr.PlayerY = 1116;
+                    chr.Items.Remove(Type, Slot);
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                case 8850041: // 冥珠符
+                    chr.MapX = 10;
+                    chr.MapY = 3;
+                    chr.PlayerX = 1645;
+                    chr.PlayerY = 899;
+                    chr.Items.Remove(Type, Slot);
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                case 8850031: // 龍林符
+                    chr.MapX = 15;
+                    chr.MapY = 2;
+                    chr.PlayerX = 3600;
+                    chr.PlayerY = 1041;
+                    chr.Items.Remove(Type, Slot);
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                case 8850051: // 古樂符
+                    chr.MapX = 25;
                     chr.MapY = 1;
-                    chr.PlayerX = 995;
-                    chr.PlayerY = 1207;
+                    chr.PlayerX = 4237;
+                    chr.PlayerY = 1230;
+                    chr.Items.Remove(Type, Slot);
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
                 default:
@@ -77,13 +102,13 @@ namespace Server.Handler
                         {
                             chr.Hp += (short)use.Hp;
                             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                            chr.Items.RemoveItem(Type, Slot);
+                            chr.Items.Remove(Type, Slot);
                         }
                         else if (chr.MaxHp - chr.Hp < use.Hp)
                         {
                             chr.Hp += (short)chr.MaxHp;
                             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                            chr.Items.RemoveItem(Type, Slot);
+                            chr.Items.Remove(Type, Slot);
                         }
                     }
                     if (use.Mp != -1)
@@ -92,17 +117,18 @@ namespace Server.Handler
                         {
                             chr.Mp += (short)use.Mp;
                             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                            chr.Items.RemoveItem(Type, Slot);
+                            chr.Items.Remove(Type, Slot);
                         }
                         else if (chr.MaxMp - chr.Mp < use.Mp)
                         {
                             chr.Mp += (short)chr.MaxMp;
                             StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
-                            chr.Items.RemoveItem(Type, Slot);
+                            chr.Items.Remove(Type, Slot);
                         }
                     }
                     break;
             }
+            UpdateInventory(gc, Type);
         }
 
         public static void InvenUseSpendShout_Req(InPacket lea, Client gc)
@@ -114,7 +140,7 @@ namespace Server.Handler
             lea.ReadByte();
             if (Slot >= 0 && Slot < 24 && Message.Length <= 60)
             {
-                gc.Character.Items.RemoveItem(InventoryType.ItemType.Spend3, Slot);
+                gc.Character.Items.Remove(InventoryType.ItemType.Spend3, Slot);
                 foreach (Character all in MapFactory.AllCharacters)
                 {
                     GamePacket.InvenUseSpendShout(all.Client, Message);
@@ -134,15 +160,15 @@ namespace Server.Handler
 
             Item oItem = new Item(ItemID, Slot, (byte)Type, 1);
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            if (!map.DropItem.ContainsKey(OriginalID))
+            if (!map.Item.ContainsKey(OriginalID))
                 return;
             chr.Items.Add(oItem);
             InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, 1);
-            map.DropItem.Remove(OriginalID);
-            UpdateEquip(gc, Type);
+            map.Item.Remove(OriginalID);
+            UpdateInventory(gc, Type);
         }
 
-        public static void UpdateEquip(Client gc, byte SourceType, byte TargetType = 0xFF)
+        public static void UpdateInventory(Client gc, byte SourceType, byte TargetType = 0xFF)
         {
             switch (SourceType)
             {

@@ -189,7 +189,7 @@ namespace Server.Handler
             {
                 gc.Character.Money += ((money / 5) * Quantity);
                 InventoryPacket.getInvenMoney(gc, gc.Character.Money, money);
-                gc.Character.Items.RemoveItem(Type, Slot);
+                gc.Character.Items.Remove(Type, Slot);
                 switch (Type)
                 {
                     case 0:

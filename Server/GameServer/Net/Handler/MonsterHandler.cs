@@ -2,6 +2,7 @@
 using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Ghost;
+using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
@@ -48,11 +49,17 @@ namespace Server.Handler
                 StatusPacket.updateExp(gc);
             } else
             {
-                Monster.State = 7;
-                if ((chr.PlayerX < HitX && Monster.Direction == 1) || (chr.PlayerX > HitX && Monster.Direction == -1))
-                    Monster.Direction = Monster.Direction * -1;
+                if (Monster.MonsterID != 1000501 || Monster.MonsterID != 1000801)
+                    Monster.State = 7;
+                else
+                    Monster.State = 1;
+                if (chr.PlayerX < HitX && Monster.Direction == 1)
+                    Monster.Direction = 0xFF;
+                else if (chr.PlayerX > HitX && Monster.Direction == 0xFF)
+                    Monster.Direction = 1;
             }
-            MonsterPacket.spawnMonster(gc, Monster, CharacterID, Damage, HitX, HitY);
+            foreach (Character All in map.Characters)
+                MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, Damage, HitX, HitY);
         }
     }
 }

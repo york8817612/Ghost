@@ -62,6 +62,20 @@ namespace Server.Ghost.Characters
             }
         }
 
+        public void Remove(byte type, byte slot)
+        {
+            Item item = this.Items.Find(i => (i.type == type && i.slot == slot));
+            this.Items.Remove(item);
+            item.Delete();
+        }
+
+        public void Remove(InventoryType.ItemType type, byte slot)
+        {
+            Item item = this.Items.Find(i => (i.type == (byte)type && i.slot == slot));
+            this.Items.Remove(item);
+            item.Delete();
+        }
+
         public List<Item> getItems()
         {
             return this.Items;
@@ -87,20 +101,6 @@ namespace Server.Ghost.Characters
             if (item == null)
                 return 0;
             return item.Quantity;
-        }
-
-        public void RemoveItem(byte type, byte slot)
-        {
-            Item item = this.Items.Find(i => (i.type == type && i.slot == slot));
-            this.Items.Remove(item);
-            item.Delete();
-        }
-
-        public void RemoveItem(InventoryType.ItemType type, byte slot)
-        {
-            Item item = this.Items.Find(i => (i.type == (byte)type && i.slot == slot));
-            this.Items.Remove(item);
-            item.Delete();
         }
 
         public byte GetNextFreeSlot(InventoryType.ItemType type)

@@ -2,6 +2,7 @@
 using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Ghost;
+using Server.Ghost.Characters;
 using Server.Net;
 using System.Collections.Generic;
 
@@ -30,11 +31,10 @@ namespace Server.Packet
             }
         }
 
-        public static void warpToMap(Client c, int playerId, short mapX, short mapY, short positionX, short positionY)
+        public static void warpToMap(Client c, Character chr, int playerId, short mapX, short mapY, short positionX, short positionY)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.ENTER_WARP_ACK))
             {
-                var chr = c.Character;
                 Dictionary<InventoryType.EquipType, int> equip = InventoryPacket.getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
@@ -112,11 +112,10 @@ namespace Server.Packet
             }
         }
 
-        public static void removeUser(Client c)
+        public static void removeUser(Client c, Character chr)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.LEAVE_WARP_ACK))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID); // 玩家ID
@@ -124,20 +123,19 @@ namespace Server.Packet
             }
         }
 
-        public static void createUser(Client c, Map map)
+        public static void createUser(Client c, Character myCharacter, Map map)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.USER_CREATE))
             {
-                var myCharacter = c.Character;
                 var chr = map.Characters;
+                chr.Remove(myCharacter);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(map.GetMapCharactersTotal() - 1); // 玩家數量 - 1
-                for (int i = 0; i < map.GetMapCharactersTotal() - 1; i++)
+                for (int i = 0; i < map.GetMapCharactersTotal(); i++)
                 {
                     if (chr[i].CharacterID == myCharacter.CharacterID)
                         continue;
-
                     Dictionary<InventoryType.EquipType, int> equip = null;
                     try
                     {
@@ -230,6 +228,7 @@ namespace Server.Packet
                     plew.WriteByte(0);
                     plew.WriteShort(0);
                 }
+                chr.Add(myCharacter);
                 c.Send(plew);
             }
         }
