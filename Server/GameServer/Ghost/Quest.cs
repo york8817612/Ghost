@@ -10,6 +10,7 @@ namespace Server.Ghost
         public int ID { get; private set; }
         public int QuestID { get; set; }
         public byte QuestState { get; set; }
+        public int KillMonster { get; set; }
 
         public bool Assigned { get; set; }
 
@@ -32,6 +33,7 @@ namespace Server.Ghost
         {
             this.QuestID = QuestID;
             this.QuestState = 0x20;
+            this.KillMonster = 0;
         }
 
         public Quest(dynamic datum)

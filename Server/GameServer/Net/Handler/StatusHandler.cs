@@ -56,7 +56,7 @@ namespace Server.Handler
                     break;
             }
             chr.AbilityBonus--;
-            StatusPacket.updateStat(gc);
+            StatusPacket.UpdateStat(gc);
         }
     }
 }

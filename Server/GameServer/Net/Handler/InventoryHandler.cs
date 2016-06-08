@@ -27,7 +27,7 @@ namespace Server.Handler
                     return;
                 Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
                 InventoryPacket.charDropItem(gc, map.DropOriginalID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity);
-                map.Item.Add(map.DropOriginalID, Source);
+                map.CharacterItem.Add(map.DropOriginalID, Source);
                 map.DropOriginalID++;
                 chr.Items.Remove(SourceType, SorceSlot, Quantity);
             }
@@ -97,12 +97,12 @@ namespace Server.Handler
                         if ((chr.MaxHp > chr.Hp + use.Hp))
                         {
                             chr.Hp += (short)use.Hp;
-                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
                         }
                         else if (chr.MaxHp - chr.Hp < use.Hp)
                         {
                             chr.Hp = (short)chr.MaxHp;
-                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
                         }
                     }
                     if (use.Mp != -1)
@@ -110,12 +110,12 @@ namespace Server.Handler
                         if ((chr.MaxMp > chr.Mp + use.Mp))
                         {
                             chr.Mp += (short)use.Mp;
-                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
                         }
                         else if (chr.MaxMp - chr.Mp < use.Mp)
                         {
                             chr.Mp = (short)chr.MaxMp;
-                            StatusPacket.updateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
                         }
                     }
                     break;
@@ -152,12 +152,12 @@ namespace Server.Handler
             var chr = gc.Character;
 
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            if (!map.Item.ContainsKey(OriginalID))
+            if (!map.CharacterItem.ContainsKey(OriginalID))
                 return;
             Item oItem = new Item(ItemID, Slot, (byte)Type, map.getDropByOriginalID(OriginalID).Quantity);
             chr.Items.Add(oItem);
             InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
-            map.Item.Remove(OriginalID);
+            map.CharacterItem.Remove(OriginalID);
             UpdateInventory(gc, Type);
         }
 

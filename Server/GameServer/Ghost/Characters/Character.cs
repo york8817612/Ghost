@@ -246,7 +246,7 @@ namespace Server.Ghost.Characters
             this.SkillBonus += 2;
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             foreach (Character All in map.Characters)
-                StatusPacket.levelUp(All.Client, this, this.Level);
+                StatusPacket.LevelUp(All.Client, this, this.Level);
             StatusPacket.getStatusInfo(Client);
         }
     }

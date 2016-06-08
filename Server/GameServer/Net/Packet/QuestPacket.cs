@@ -66,6 +66,7 @@ namespace Server.Packet
                 plew.WriteShort(QuestID);
                 plew.WriteByte(StateA);
                 plew.WriteByte(StateB);
+                c.Send(plew);
             }
         }
     }

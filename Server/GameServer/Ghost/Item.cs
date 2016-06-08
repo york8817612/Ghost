@@ -12,8 +12,8 @@ namespace Server.Ghost
         public int ItemID { get; private set; }
         private short maxPerStack;
         private short quantity;
-        public byte slot { get; set; }
         public byte type { get; set; }
+        public byte slot { get; set; }
 
         public bool Assigned { get; set; }
 

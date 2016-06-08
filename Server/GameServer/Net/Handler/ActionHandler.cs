@@ -1,5 +1,6 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Net;
+using Server.Packet;
 using System;
 
 namespace Server.Handler
@@ -64,6 +65,12 @@ namespace Server.Handler
                     Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
                 }
             }
+        }
+
+        public static void p_Dead_c(InPacket lea, Client c)
+        {
+            int CharacterID = lea.ReadInt();
+            MapPacket.userDead(c);
         }
 
         public static void p_Move(InPacket lea, Client c)

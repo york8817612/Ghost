@@ -182,8 +182,8 @@ namespace Server.Common.Net
         CHAR_LVEXP = 0x5B,
         CHAR_SET_AVATAR = 0x5C,
         CHAR_LEVELUP = 0x5D,
+        CHAR_FAME = 0x5E,
 
-        CHAR_FAME = 0x5F,
         CHAR_STATUP_ACK = 0x60,
         CHAR_HIDE = 0x61,
 

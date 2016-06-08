@@ -144,7 +144,7 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(Monster.MonsterID);
-                plew.WriteByte(1);
+                plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(Monster.Direction);
                 plew.WriteByte(0);
@@ -161,6 +161,7 @@ namespace Server.Packet
                 plew.WriteShort(0); // Byte
                 plew.WriteShort(0x630);
                 plew.WriteShort(0);
+                c.Send(plew);
             }
         }
     }

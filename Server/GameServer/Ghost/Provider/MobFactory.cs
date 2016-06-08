@@ -16,6 +16,9 @@
                 case 3: // 美人魚
                     MonsterHP = 100;
                     break;
+                case 4:
+                    MonsterHP = 120;
+                    break;
                 case 5: // 蘆花
                     MonsterHP = 160;
                     break;
@@ -27,6 +30,9 @@
                     break;
                 case 8:
                     MonsterHP = 250;
+                    break;
+                case 9:
+                    MonsterHP = 280;
                     break;
                 case 10: // 毛毛(Boss)
                     MonsterHP = 700;
@@ -282,13 +288,27 @@
             return MonsterExp;
         }
 
-        public static void MonsterDrop(int MonsterID, Map map)
+        public static void InitializeMonsterDrop(Monster Monster)
         {
-            switch(MonsterID)
+            switch (Monster.MonsterID)
             {
-                case 1000101:
-                    Drop Drop = new Drop(-1, 8820011, 1, -1, -1);
-                    Drop.Drops.Add(Drop);
+                case 1000101: // 賴打
+                    Monster.Drops.Add(new Drop(0, 9800001, 1)); // 錢
+                    Monster.Drops.Add(new Drop(1, 8820011, 1)); // 紅水(小)
+                    Monster.Drops.Add(new Drop(2, 8810011, 1)); // 藍水(小)
+                    Monster.Drops.Add(new Drop(3, 8130011, 1)); // 道士平服(男)
+                    Monster.Drops.Add(new Drop(4, 8120012, 1)); // 刺客平服(女)
+                    Monster.Drops.Add(new Drop(5, 8910011, 1)); // 木炭
+                    Monster.Drops.Add(new Drop(6, 8510011, 1)); // 封印箱
+                    break;
+                case 1000201: // 大目仔
+                    Monster.Drops.Add(new Drop(0, 9800001, 1)); // 錢
+                    Monster.Drops.Add(new Drop(1, 8820011, 1)); // 紅水(小)
+                    Monster.Drops.Add(new Drop(2, 8810011, 1)); // 藍水(小)
+                    Monster.Drops.Add(new Drop(3, 8130012, 1)); // 道士平服(女)
+                    Monster.Drops.Add(new Drop(4, 8110012, 1)); // 武士平服(女)
+                    Monster.Drops.Add(new Drop(5, 8910021, 1)); // 大目仔的眼珠
+                    Monster.Drops.Add(new Drop(6, 8510011, 1)); // 封印箱
                     break;
             }
         }

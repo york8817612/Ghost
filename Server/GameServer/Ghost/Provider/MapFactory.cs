@@ -922,11 +922,12 @@ namespace Server.Ghost.Provider
                             int MonsterLevel = int.Parse(new string(Level));
                             int MonsterHP = MobFactory.MonsterHP(MonsterLevel);
                             int MonsterExp = MobFactory.MonsterExp(MonsterLevel);
-                            Monster m = new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY);
+                            Monster m = new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY, true);
                             map.Monster.Add(m);
                             MapHandler.UpdatePosition(m, (int)(40 * map.Monster[i].Speed), map);
-                            if (MonsterID == 1000501 || MonsterID == 1000801 || MonsterID == 1003501)
+                            if (MonsterID == 1000501 || MonsterID == 1000801 || MonsterID == 1003501 || MonsterID == 1004502)
                                 m.Speed = 0;
+                            MobFactory.InitializeMonsterDrop(m);
                         }
                     }
                     for (int j = map.Monster.Count; j < 50; j++)

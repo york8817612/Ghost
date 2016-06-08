@@ -139,7 +139,8 @@ namespace Server.Packet
                     try
                     {
                         equip = InventoryPacket.getEquip(chr[i]);
-                    } catch
+                    }
+                    catch
                     {
                         equip = null;
                     }
@@ -163,7 +164,7 @@ namespace Server.Packet
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);   // 臉下[Face2]
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0);       // 頭部[Hat]
                     plew.WriteInt(chr[i].Eyes);                                                                                   // 眼睛[Eyes]
-                    plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0 ); // 衣服[Outfit]
+                    plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0); // 衣服[Outfit]
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);   // 服裝[Dress]
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0); // 武器[Weapon]
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0); // 披風[Mantle]
@@ -239,13 +240,13 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID); // 玩家ID
-                plew.WriteShort(1);
-                plew.WriteShort(1);
+                plew.WriteShort(chr.MapX);
+                plew.WriteShort(chr.MapY);
                 plew.WriteShort(chr.PlayerX); // 玩家 PositionX
                 plew.WriteShort(chr.PlayerY); // 玩家 PositionY
 
-                plew.WriteShort(1);
-                plew.WriteShort(1);
+                plew.WriteShort(chr.MapX);
+                plew.WriteShort(chr.MapY);
                 plew.WriteShort(chr.PlayerX); // 玩家 PositionX
                 plew.WriteShort(chr.PlayerY); // 玩家 PositionY
 
@@ -270,6 +271,39 @@ namespace Server.Packet
                 plew.WriteShort(positionX);
                 plew.WriteShort(positionY);
 
+                c.Send(plew);
+            }
+        }
+
+        public static void MonsterDrop(Client c, Monster Monster)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.MON_DROP_ITEM))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                for (int i = 0; i < 7; i++)
+                {
+                    plew.WriteInt(i < Monster.Drops.Count ? Monster.Drops[i].ID : 0);
+                }
+                for (int i = 0; i < 7; i++)
+                {
+                    plew.WriteInt(i < Monster.Drops.Count ? Monster.Drops[i].ItemID : 0);
+                }
+                for (int i = 0; i < 7; i++)
+                {
+                    plew.WriteShort(i < Monster.Drops.Count ? Monster.Drops[i].PositionX : 0);
+                }
+                for (int i = 0; i < 7; i++)
+                {
+                    plew.WriteShort(i < Monster.Drops.Count ? Monster.Drops[i].PositionY : 0);
+                }
+                plew.WriteInt(chr.CharacterID);
+                for (int i = 0; i < 7; i++)
+                {
+                    plew.WriteInt(i < Monster.Drops.Count ? Monster.Drops[i].Quantity : 0);
+                }
+                plew.WriteHexString("00 00 00 00 00 00 00 00");
                 c.Send(plew);
             }
         }

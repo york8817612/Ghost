@@ -42,17 +42,23 @@ namespace Server.Handler
             if (Monster.HP <= 0)
             {
                 Monster.State = 9;
-                map.Monster.Remove(Monster);
+                //map.Monster.Remove(Monster);
+                Monster.IsAlive = false;
                 chr.Exp += Monster.Exp;
                 if (chr.Exp >= GameConstants.getExpNeededForLevel(chr.Level))
                     chr.LevelUp();
-                StatusPacket.updateExp(gc);
-            } else
+                StatusPacket.UpdateExp(gc);
+                for (int i = 0; i < Monster.Drops.Count; i++)
+                {
+                    Monster.Drops[i].PositionX = Monster.PositionX + i;
+                    Monster.Drops[i].PositionY = Monster.PositionY - 50;
+                    map.MonsterDrop.Add(new Item(Monster.Drops[i].ItemID, 0x63, 0x63, Monster.Drops[i].Quantity));
+                    MapPacket.MonsterDrop(gc, Monster);
+                }
+            }
+            else
             {
-                if (Monster.MonsterID != 1000501 || Monster.MonsterID != 1000801)
-                    Monster.State = 7;
-                else
-                    Monster.State = 1;
+                Monster.State = 7;
                 if (chr.PlayerX < HitX && Monster.Direction == 1)
                     Monster.Direction = 0xFF;
                 else if (chr.PlayerX > HitX && Monster.Direction == 0xFF)

@@ -68,12 +68,14 @@ namespace Server.Handler
                 }
                 for (int i = 0; i < j; i++)
                 {
+                    if (map.Monster[i].IsAlive == false)
+                        continue;
                     if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
                     {
                         map.Monster[i].State = 1;
                         //map.Monster[i].Direction = map.Monster[i].Direction * -1;
-                        //Monster m = FindPath(map.Monster[i], 40, map);
-                        //monster[i].Direction = m.Direction;
+                        //Monster m = UpdatePosition(map.Monster[i], 40, map);
+                        //map.Monster[i].Direction = m.Direction;
                         //map.Monster[i].PositionX = m.PositionX;
                         //map.Monster[i].PositionY = m.PositionY;
                         MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
@@ -87,6 +89,27 @@ namespace Server.Handler
                 }
             };
             tmr.Start();
+
+            System.Timers.Timer tmr2 = new System.Timers.Timer(10000);
+            tmr2.Elapsed += delegate
+            {
+                if (gc.Character.MapX != map.MapX || gc.Character.MapY != map.MapY)
+                {
+                    tmr2.Stop();
+                    return;
+                }
+                for (int i = 0; i < j; i++)
+                {
+                    if (map.Monster[i].IsAlive == false)
+                    {
+                        map.Monster[i].HP = MobFactory.MonsterHP(map.Monster[i].Level);
+                        MonsterPacket.regenrMonster(gc, map.Monster[i]);
+                        map.Monster[i].IsAlive = true;
+                        map.Monster[i].State = 1;
+                    }
+                }
+            };
+            tmr2.Start();
         }
 
         public static Monster UpdatePosition(Monster monster, int Dest, Map map)

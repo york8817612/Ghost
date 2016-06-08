@@ -66,7 +66,7 @@ namespace Server.Packet
             }
         }
 
-        public static void updateHpMp(Client c, int updateHp, short updateMp, short updateMaxFury)
+        public static void UpdateHpMp(Client c, int updateHp, short updateMp, short updateMaxFury)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HPSP))
             {
@@ -80,7 +80,7 @@ namespace Server.Packet
             }
         }
 
-        public static void updateExp(Client c)
+        public static void UpdateExp(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_LVEXP))
             {
@@ -96,7 +96,7 @@ namespace Server.Packet
             }
         }
 
-        public static void levelUp(Client c, Character chr, int level)
+        public static void LevelUp(Client c, Character chr, int level)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_LEVELUP))
             {
@@ -108,7 +108,18 @@ namespace Server.Packet
             }
         }
 
-        public static void updateStat(Client c)
+        public static void UpdateFame(Client c, int fame)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_FAME))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(fame);
+                c.Send(plew);
+            }
+        }
+
+        public static void UpdateStat(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_STATUP_ACK))
             {
@@ -139,6 +150,19 @@ namespace Server.Packet
                 plew.WriteShort(chr.UpgradeAttack);
                 plew.WriteShort(chr.UpgradeMagic);
                 plew.WriteShort(chr.UpgradeDefense);
+                c.Send(plew);
+            }
+        }
+
+        public static void Hide(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HIDE))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(chr.CharacterID);
+                plew.WriteInt(10207); // 技能ID(霧影術)
                 c.Send(plew);
             }
         }

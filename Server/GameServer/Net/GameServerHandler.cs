@@ -106,6 +106,11 @@ namespace Server.Net
                 case ClientOpcode.P_SPEED_C:
                     ActionHandler.p_Speed_c(ip, gc);
                     break;
+                case ClientOpcode.P_DAMAGE_C:
+                    break;
+                case ClientOpcode.P_DEAD_C:
+                    ActionHandler.p_Dead_c(ip, gc);
+                    break;
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
                     break;

@@ -8,19 +8,14 @@ namespace Server.Ghost
         public int OwnerID { get; set; }
         public int ItemID { get; set; }
         public short Quantity { get; set; }
-        public short PositionX { get; set; }
-        public short PositionY { get; set; }
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
 
-        public List<Drop> Drops { get; set; }
-
-        public Drop(int OwnerID, int ItemID, short Quantity, short PositionX, short PositionY)
+        public Drop(int ID, int ItemID, short Quantity)
         {
-            this.OwnerID = OwnerID;
+            this.ID = ID;
             this.ItemID = ItemID;
             this.Quantity = Quantity;
-            this.PositionX = PositionX;
-            this.PositionY = PositionY;
-            this.Drops = new List<Drop>();
         }
     }
 }

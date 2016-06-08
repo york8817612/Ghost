@@ -1,4 +1,6 @@
-﻿namespace Server.Ghost
+﻿using System.Collections.Generic;
+
+namespace Server.Ghost
 {
     public class Monster
     {
@@ -15,6 +17,10 @@
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
+        public bool IsAlive { get; set; }
+
+        public List<Drop> Drops { get; set; }
+
         /* Speed
         00 00 00 00 // Stop
         00 00 C0 3F // 速度 1.5
@@ -28,7 +34,11 @@
         00 00 10 41 // 速度 9
         */
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY)
+        /* State
+        06 // 煞
+        */
+
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY, bool IsAlive)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;
@@ -42,6 +52,8 @@
             this.Effect = Effect;
             this.PositionX = PositionX;
             this.PositionY = PositionY;
+            this.IsAlive = IsAlive;
+            this.Drops = new List<Drop>();
         }
     }
 }
