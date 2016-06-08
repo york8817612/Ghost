@@ -81,11 +81,10 @@ namespace Server.Handler
                         MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                         continue;
                     }
-                    Monster mon = UpdatePosition(map.Monster[i], (int)(40 * map.Monster[i].Speed), map);
-                    map.Monster[i].State = 1;
-                    map.Monster[i].PositionX = mon.PositionX;
-                    map.Monster[i].PositionY = mon.PositionY;
-                    MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
+                    int Direction = map.Monster[i].Direction;
+                    Monster Monster = UpdatePosition(map.Monster[i], (int)(40 * map.Monster[i].Speed), map);
+                    if (Direction != Monster.Direction)
+                        MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                 }
             };
             tmr.Start();
@@ -106,6 +105,7 @@ namespace Server.Handler
                         MonsterPacket.regenrMonster(gc, map.Monster[i]);
                         map.Monster[i].IsAlive = true;
                         map.Monster[i].State = 1;
+                        MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                     }
                 }
             };
