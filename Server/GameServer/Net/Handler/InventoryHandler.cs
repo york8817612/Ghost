@@ -37,6 +37,8 @@ namespace Server.Handler
                 {
                     Source.type = TargetType;
                     Source.slot = TargetSlot;
+                    if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
+                        UpdateCharacterInventoryStatus(gc, Source.ItemID, SourceType > 0);
                 }
                 else
                 {   // 交換位置(swap)
@@ -47,7 +49,9 @@ namespace Server.Handler
                     Target.slot = swapSlot;
                     chr.Items.Add(Source);
                     chr.Items.Add(Target);
-                }
+                    if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
+                        UpdateCharacterInventoryStatus(gc, Target.ItemID, TargetType == 0);
+                }                
             }
             UpdateInventory(gc, SourceType, TargetType);
         }
@@ -122,6 +126,7 @@ namespace Server.Handler
             }
             chr.Items.Remove(Type, Slot, 1);
             UpdateInventory(gc, Type);
+
         }
 
         public static void InvenUseSpendShout_Req(InPacket lea, Client gc)
@@ -159,6 +164,32 @@ namespace Server.Handler
             InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
             map.CharacterItem.Remove(OriginalID);
             UpdateInventory(gc, Type);
+        }
+
+        public static void UpdateCharacterInventoryStatus(Client gc, int item, bool equiped)
+        {
+            ItemData idata = ItemFactory.GetItemData(item);
+            Character chr = gc.Character;
+            if (idata.Attack != -1)
+            {
+                if (equiped)
+                {
+                    chr.Attack += idata.Attack;
+                    chr.MaxAttack += idata.Attack;
+                } else
+                {
+                    chr.Attack -= idata.Attack;
+                    chr.MaxAttack -= idata.Attack;
+                }
+            }
+            if (idata.Defense != -1)
+            {
+                if (equiped)
+                    chr.Defense += idata.Defense;
+                else
+                    chr.Defense -= idata.Defense;
+            }
+            StatusPacket.UpdateStat(gc);
         }
 
         public static void UpdateInventory(Client gc, byte SourceType, byte TargetType = 0xFF)

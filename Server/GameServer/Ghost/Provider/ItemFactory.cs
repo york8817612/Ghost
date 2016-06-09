@@ -67,8 +67,9 @@ namespace Server.Ghost.Provider
         //物品編號(int), 物品名稱(string), 購買價格(int)
         public static Dictionary<int, ItemData> earringData = new Dictionary<int, ItemData>();
 
+        public static List<Dictionary<int, ItemData>> all = new List<Dictionary<int, ItemData>>();
 
-        public static void initItem()
+        public static void Initialize()
         {
             FileStream itemFile = File.Open(openPath, FileMode.Open, FileAccess.ReadWrite);
             BinaryReader item = new BinaryReader(itemFile, Encoding.GetEncoding("UTF-16LE"));
@@ -106,6 +107,7 @@ namespace Server.Ghost.Provider
 
                 weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, attackRange, Speed, price));
             }
+            all.Add(weaponData);
             //==============================================================================
             // 衣服類型開始
             int topCount = item.ReadInt32(); // 衣服數量
@@ -117,7 +119,7 @@ namespace Server.Ghost.Provider
                 item.ReadByte();
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -126,14 +128,15 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadInt16();
                 int price = item.ReadInt32(); // 購買價格
-                item.ReadByte();
+                byte fusion = item.ReadByte();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                topData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
+                topData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
             }
+            all.Add(topData);
             //==============================================================================
             //服裝類型開始
             int clothingCount = item.ReadInt32(); // 服裝數量
@@ -145,7 +148,7 @@ namespace Server.Ghost.Provider
                 item.ReadByte();
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -160,8 +163,9 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                clothingData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
+                clothingData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
             }
+            all.Add(clothingData);
             //==============================================================================
             // 戒指類型開始
             int ringCount = item.ReadInt32(); // 戒指數量
@@ -172,7 +176,7 @@ namespace Server.Ghost.Provider
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -191,8 +195,9 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                ringData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
+                ringData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
             }
+            all.Add(ringData);
             //==============================================================================
             // 項鍊類型開始
             int necklaceCount = item.ReadInt32(); // 項鍊數量
@@ -203,7 +208,7 @@ namespace Server.Ghost.Provider
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -219,8 +224,9 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                necklaceData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
+                necklaceData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
             }
+            all.Add(necklaceData);
             //==============================================================================
             // 披風類型開始
             int capeCount = item.ReadInt32(); // 披風數量
@@ -231,7 +237,7 @@ namespace Server.Ghost.Provider
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -248,8 +254,9 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                capeData.Add(itemId, new ItemData(itemId, itemNameString, job, level, price));
+                capeData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
         }
+            all.Add(capeData);
             //==============================================================================
             // 消耗類型開始
             int useCount = item.ReadInt32(); // 消耗道具數量
@@ -272,6 +279,7 @@ namespace Server.Ghost.Provider
 
                 useData.Add(itemId, new ItemData(itemId, itemNameString, hp, mp, price));
             }
+            all.Add(useData);
             //==============================================================================
             // 封印箱類型開始
             int soulCount = item.ReadInt32(); // 封印箱數量
@@ -290,6 +298,7 @@ namespace Server.Ghost.Provider
 
                 soulData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(soulData);
             //==============================================================================
             // 帽子類型開始
             int hatCount = item.ReadInt32(); // 帽子數量
@@ -299,7 +308,7 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                item.ReadInt16();
+                short defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -313,8 +322,9 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                hatData.Add(itemId, new ItemData(itemId, itemNameString, price));
+                hatData.Add(itemId, new ItemData(itemId, itemNameString, 0xFF, 0xFF, defense, price));
             }
+            all.Add(hatData);
             //==============================================================================
             // 髮型類型開始
             int hairCount = item.ReadInt32(); // 髮型數量
@@ -331,6 +341,7 @@ namespace Server.Ghost.Provider
 
                 hairData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(hairData);
             //==============================================================================
             // 眼睛類型開始
             int eyesCount = item.ReadInt32(); // 眼睛數量
@@ -347,6 +358,7 @@ namespace Server.Ghost.Provider
 
                 eyesData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(eyesData);
             //==============================================================================
             // 面具類型開始
             int maskCount = item.ReadInt32(); // 面具數量
@@ -363,6 +375,7 @@ namespace Server.Ghost.Provider
 
                 maskData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(maskData);
             //==============================================================================
             // 鬍子類型開始
             int beardCount = item.ReadInt32(); // 鬍子數量
@@ -379,6 +392,7 @@ namespace Server.Ghost.Provider
 
                 beardData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(beardData);
             //==============================================================================
             // 其他類型開始
             int etcCount = item.ReadInt32(); // 其他數量
@@ -397,6 +411,7 @@ namespace Server.Ghost.Provider
 
                 etcData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(etcData);
             //==============================================================================
             // 寵物類型開始
             int petCount = item.ReadInt32(); // 寵物類型數量
@@ -419,6 +434,7 @@ namespace Server.Ghost.Provider
 
                 petData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(petData);
             //==============================================================================
             // 領巾類型開始
             int scarfCount = item.ReadInt32(); // 領巾類型數量
@@ -440,6 +456,7 @@ namespace Server.Ghost.Provider
 
                 scarfData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(scarfData);
             //==============================================================================
             // 未知類型開始
             int unknownCount = item.ReadInt32(); // 未知數量
@@ -470,6 +487,7 @@ namespace Server.Ghost.Provider
 
                 unknownData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(unknownData);
             //==============================================================================
             // 拼圖類型開始
             int jigsawCount = item.ReadInt32(); // 拼圖數量
@@ -485,6 +503,7 @@ namespace Server.Ghost.Provider
 
                 jigsawData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(jigsawData);
             //==============================================================================
             // 耳環類型開始
             int earringCount = item.ReadInt32(); // 耳環數量
@@ -514,8 +533,21 @@ namespace Server.Ghost.Provider
 
                 earringData.Add(itemId, new ItemData(itemId, itemNameString, price));
             }
+            all.Add(earringData);
             itemFile.Close();
             item.Close();
+        }
+
+        public static ItemData GetItemData(int item)
+        {
+            foreach (Dictionary<int, ItemData> idata in all)
+            {
+                if (idata.ContainsKey(item))
+                {
+                    return idata[item];
+                }
+            }
+            return null;
         }
     }
 }

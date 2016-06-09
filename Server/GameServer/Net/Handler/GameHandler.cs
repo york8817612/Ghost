@@ -66,7 +66,7 @@ namespace Server.Handler
             chr.CharacterID = gc.CharacterID;
             MapFactory.AllCharacters.Add(chr);
 
-            StatusPacket.updateHpMp(gc, 0, 0, 0);
+            StatusPacket.UpdateHpMp(gc, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
@@ -130,7 +130,7 @@ namespace Server.Handler
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
                     break;
                 case "//test":
-                    StatusPacket.updateHpMp(gc, 0, 0, 0);
+                    StatusPacket.UpdateHpMp(gc, 0, 0, 0);
                     break;
                 default:
                     break;

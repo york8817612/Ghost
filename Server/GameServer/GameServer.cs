@@ -116,11 +116,12 @@ namespace Server
 
                 Database.Test();
                 Database.Analyze(true);
-
-                ItemFactory.initItem();
-                Log.Success("Items initialize Success!");
+                Log.Load("Items Initialize");
+                ItemFactory.Initialize();
+                Log.Success("\r\n");
+                Log.Load("Maps Initialize");
                 MapFactory.Initialize();
-                Log.Success("Maps initialize Success!");
+                Log.Success("\r\n");
 
                 GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
                 //MapleData.Initialize();

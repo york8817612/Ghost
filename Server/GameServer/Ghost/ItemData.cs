@@ -14,6 +14,7 @@ namespace Server.Ghost
         public readonly byte Level;
         public readonly short Attack;
         public readonly short AttackRange;
+        public readonly short Defense;
         public readonly byte Speed;
         public readonly int Hp;
         public readonly int Mp;
@@ -28,6 +29,7 @@ namespace Server.Ghost
             this.Level = 0xFF;
             this.Attack = -1;
             this.AttackRange = -1;
+            this.Defense = -1;
             this.Speed = 0;
             this.Hp = Hp;
             this.Mp = Mp;
@@ -35,7 +37,7 @@ namespace Server.Ghost
         }
 
         // 其他裝備
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Defense, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
@@ -43,6 +45,7 @@ namespace Server.Ghost
             this.Level = Level;
             this.Attack = -1;
             this.AttackRange = -1;
+            this.Defense = Defense;
             this.Speed = 0;
             this.Hp = -1;
             this.Mp = -1;
@@ -58,6 +61,7 @@ namespace Server.Ghost
             this.Level = Level;
             this.Attack = Attack;
             this.AttackRange = AttackRange;
+            this.Defense = -1;
             this.Speed = Speed;
             this.Hp = -1;
             this.Mp = -1;
@@ -73,6 +77,7 @@ namespace Server.Ghost
             this.Level = 0xFF;
             this.Attack = -1;
             this.AttackRange = -1;
+            this.Defense = -1;
             this.Speed = 0;
             this.Hp = -1;
             this.Mp = -1;
@@ -87,6 +92,7 @@ namespace Server.Ghost
             this.Level = Level;
             this.Attack = Attack;
             this.AttackRange = AttackRange;
+            this.Defense = -1;
             this.Speed = Speed;
             this.Hp = Hp;
             this.Mp = Mp;
