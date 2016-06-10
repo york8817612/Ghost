@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-06-03 20:19:41
+Date: 2016-06-10 20:09:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `accounts` (
   `isMaster` int(1) NOT NULL,
   `cashPoint` int(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of accounts
@@ -88,7 +88,7 @@ CREATE TABLE `characters` (
   `direction` int(4) NOT NULL,
   `position` int(4) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of characters
@@ -123,7 +123,7 @@ CREATE TABLE `items` (
   `slot` int(3) NOT NULL,
   `type` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of items
@@ -155,7 +155,7 @@ CREATE TABLE `quests` (
   `questId` int(8) NOT NULL,
   `questState` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quests
@@ -173,7 +173,7 @@ CREATE TABLE `skills` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of skills
@@ -186,9 +186,13 @@ DROP TABLE IF EXISTS `storages`;
 CREATE TABLE `storages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
-  `money` int(10) NOT NULL DEFAULT '0',
+  `itemID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `type` int(3) NOT NULL,
+  `slot` int(3) NOT NULL,
+  `money` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of storages
