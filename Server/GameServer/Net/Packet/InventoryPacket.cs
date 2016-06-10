@@ -423,8 +423,7 @@ namespace Server.Packet
                     plew.WriteShort(0); // 精力
                     plew.WriteShort(0);
                     plew.WriteShort(0); // 防禦力
-                    plew.WriteInt(0);
-                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
                 c.Send(plew);
             }

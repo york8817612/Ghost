@@ -19,6 +19,7 @@ namespace Server.Handler
             chr.Storages.Add(new Storage(Source.ItemID, Quantity, TargetType, TargetSlot, 0));
             chr.Items.Remove((byte)SourceType, (byte)SourceSlot, Quantity);
             InventoryPacket.getStoreInfo(gc);
+            InventoryHandler.UpdateInventory(gc, (byte)SourceType);
         }
 
         public static void saveStorageMoney(InPacket lea, Client gc)
@@ -33,7 +34,6 @@ namespace Server.Handler
             chr.Save();
             InventoryPacket.getInvenMoney(gc, chr.Money, -money);
             InventoryPacket.getStoreMoney(gc);
-
         }
 
         public static void giveStorageMoney(InPacket lea, Client gc)
