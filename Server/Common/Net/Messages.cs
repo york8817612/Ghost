@@ -49,19 +49,22 @@ namespace Server.Common.Net
         LOGIN_SERVER = 0x55AA,
         SERVER = 0x4D,
 
-        // Char
+        // CharServer
         MYCHAR_INFO_REQ = 0x8,
         CREATE_MYCHAR_REQ = 0xA,
         CHECK_SAMENAME_REQ = 0xC,
         DELETE_MYCHAR_REQ = 0xE,
 
-        // Game
+        // GameServer
         COMMAND_REQ = 0x10,
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
+        // Map
         ENTER_WARP_ACK_REQ = 0x1D,
+        // NpcShop
         NPC_SHOP_BUY_REQ = 0x22,
         NPC_SHOP_SELL_REQ = 0x23,
+        // Action
         P_MOVE_C = 0x27,
         P_SPEED_C = 0x29,
         P_JUMP_C = 0x2A,
@@ -71,27 +74,45 @@ namespace Server.Common.Net
         P_SPELL_C = 0x2E,
         P_DEAD_C = 0x2F,
         P_SKILL_C = 0x31,
-
+        // Monster
         ATTACK_MONSTER_REQ = 0x45,
+        // Inventory
         PICKUP_ITEM = 0x4C,
         MOVE_ITEM_REQ = 0x6C,
         USE_SPEND_REQ = 0x6F,
+        // Status
         PLAYER_DAMAGE_REQ = 0x70,
         CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,
         USE_SKILL_REQ = 0x76,
+        // Quest
         QUEST_ALL_REQ = 0x7A,
         QUEST_GIVEUP_REQ = 0x7B,
         QUEST_DONE_REQ = 0x7C,
+        QUEST_RETURN_REQ = 0x7D,
         QUEST_UPDATE_REQ = 0x7F,
+        // Map
         CAN_WARP_ACK_REQ = 0x85,
+        // QuickSlot
         QUICK_SLOT_REQ = 0xA8,
-        MOVE_ITEM_STORAGE = 0xAC,
-        SAVE_MONEY = 0xAE,
-        GIVE_MONEY = 0xAF,
+        // STORAGE
+        MOVE_ITEM_STORAGE_REQ = 0xAC,
+        SAVE_MONEY_REQ = 0xAE,
+        GIVE_MONEY_REQ = 0xAF,
+        // PlayerShop
+        PSHOP_OPEN_REQ = 0xCD,
+        PSHOP_SELLSTART_REQ = 0xCF,
+        PSHOP_SELLEND_REQ = 0xD1,
+        PSHOP_INFO_REQ = 0xD3,
+        PSHOP_BUYACK_REQ = 0xD5,
+        // Action
         P_MOVE = 0xDD,
+        // Fish
+        FISH_REQ = 0xE0,
+        // UseShout
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
+        // Pet
         PET_MOVE_C = 0x10B,
         PET_MOVETO_C = 0x10C,
         PET_MOVEBIRD_C = 0x10D,
@@ -105,7 +126,9 @@ namespace Server.Common.Net
         PET_SKILL_C = 0x116,
         PET_WARP_C = 0x117,
         PET_SAY_C = 0x118,
+        // Coupon
         CASH_SN = 0x11D,
+        //
         SP_SPEED_C = 0x18D,
         SP_MOVE_C = 0x18E,
         SP_JUMP_C = 0x18F,
@@ -117,7 +140,7 @@ namespace Server.Common.Net
 
     public enum LoginServerOpcode : byte
     {
-        // Login
+        // LoginServer
         LOGIN_ACK = 0x31,
         SERVERLIST_ACK = 0x33,
         GAME_ACK = 0x35,
@@ -125,13 +148,13 @@ namespace Server.Common.Net
 
     public enum ServerOpcode : ushort
     {
-        // Char
+        // CharServer
         MYCHAR_INFO_ACK = 0x9,
         CREATE_MYCHAR_ACK = 0xB,
         CHECK_SAMENAME_ACK = 0xD,
         DELETE_MYCHAR_ACK = 0xF,
 
-        // Game
+        // GameServer
         NOTICE = 0x12,
         // 0x13
         GAMELOG = 0x14,
@@ -209,6 +232,8 @@ namespace Server.Common.Net
         // 0x78
         QUEST_ALL = 0x79,
         QUEST_UPDATE = 0x80,
+
+        MESSAGE = 0x84,
 
         CAN_WARP_ACK = 0x86,
         // 0x87
@@ -390,8 +415,8 @@ namespace Server.Common.Net
         CHAR_SKILL_31402 = 0x180,
         CHAR_SKILL_32402 = 0x181,
 
-        // 0x183
-        // 0x184
+        PUZZLE = 0x183,
+        PUZZLE_UPDATE = 0x184,
         // 0x185
         // 0x186
         // 0x187

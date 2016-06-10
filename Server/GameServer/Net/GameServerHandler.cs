@@ -114,6 +114,25 @@ namespace Server.Net
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
                     break;
+                // PlayerShop
+                case ClientOpcode.PSHOP_OPEN_REQ:
+                    PlayerShopHandler.OpenShop_Req(ip, gc);
+                    break;
+                case ClientOpcode.PSHOP_SELLSTART_REQ:
+                    PlayerShopHandler.SellStart_Req(ip, gc);
+                    break;
+                case ClientOpcode.PSHOP_SELLEND_REQ:
+                    PlayerShopHandler.SellEnd_Req(ip, gc);
+                    break;
+                case ClientOpcode.PSHOP_INFO_REQ:
+                    // 未完成
+                    break;
+                case ClientOpcode.PSHOP_BUYACK_REQ:
+                    PlayerShopHandler.Buy_Req(ip, gc);
+                    break;
+                // Fish
+                case ClientOpcode.FISH_REQ:
+                    break;
             }
         }
     }

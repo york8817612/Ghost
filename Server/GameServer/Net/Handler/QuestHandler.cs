@@ -6,7 +6,7 @@ using Server.Packet;
 
 namespace Server.Handler
 {
-    class QuestHandler
+    public static class QuestHandler
     {
         public static void Quest_All_Req(InPacket lea, Client gc)
         {
@@ -67,7 +67,7 @@ namespace Server.Handler
             Quest Quest = chr.Quests.Quest(QuestID);
             if (Quest.RequireMonster > 0)
                 Quest.CompleteMonster++;
-            QuestPacket.UpdateQuest(gc, Quest.CompleteMonster, QuestID, (byte)1, Quest.CompleteMonster == Quest.RequireMonster ? (byte)0 : (byte)1);
+            QuestPacket.UpdateQuest(gc, Quest.CompleteMonster, QuestID, (byte)1, Quest.CompleteMonster == Quest.RequireMonster ? (byte)1 : (byte)0);
         }
 
         public static void Quest_Done_Req(InPacket lea, Client gc)
@@ -91,20 +91,50 @@ namespace Server.Handler
                     chr.AbilityBonus = 40;
                     switch (Quest.QuestID)
                     {
-                        case 16:
+                        case 16: // 武士(1)
+                            chr.Attack = 9;
+                            chr.MaxAttack = 11;
+                            chr.Magic = 4;
+                            chr.MaxMagic = 4;
+                            chr.Defense = 12;
                             chr.Class = 1;
+                            GamePacket.Message(gc, 11);
                             break;
-                        case 19:
+                        case 19: // 刺客(2)
+                            chr.Attack = 9;
+                            chr.MaxAttack = 11;
+                            chr.Magic = 4;
+                            chr.MaxMagic = 4;
+                            chr.Defense = 12;
                             chr.Class = 2;
+                            GamePacket.Message(gc, 12);
                             break;
-                        case 21:
+                        case 21: // 道士(3)
+                            chr.Attack = 8;
+                            chr.MaxAttack = 10;
+                            chr.Magic = 11;
+                            chr.MaxMagic = 13;
+                            chr.Defense = 14;
                             chr.Class = 3;
+                            GamePacket.Message(gc, 13);
                             break;
-                        case 351:
+                        case 351: // 力士(4)
+                            chr.Attack = 9;
+                            chr.MaxAttack = 11;
+                            chr.Magic = 4;
+                            chr.MaxMagic = 4;
+                            chr.Defense = 12;
                             chr.Class = 4;
+                            GamePacket.Message(gc, 58);
                             break;
-                        case 612:
+                        case 612: // 射手(5)
+                            chr.Attack = 9;
+                            chr.MaxAttack = 11;
+                            chr.Magic = 4;
+                            chr.MaxMagic = 4;
+                            chr.Defense = 12;
                             chr.Class = 5;
+                            GamePacket.Message(gc, 136);
                             break;
                     }
                     StatusPacket.getStatusInfo(gc);
@@ -112,130 +142,141 @@ namespace Server.Handler
                 // 技能任務(武士)
                 case 22: // 利刃術
                     chr.Skills.Add(new Skill(10101, 1, 1, 0));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 23: // 霸刀術
                     chr.Skills.Add(new Skill(10102, 1, 1, 1));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 24: // 劍氣穿心
                     chr.Skills.Add(new Skill(10105, 1, 1, 2));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 25: // 烈空斬
                     chr.Skills.Add(new Skill(10103, 1, 1, 3));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 26: // 開山突擊
                     chr.Skills.Add(new Skill(10106, 1, 1, 4));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 27: // 點穴定身
                     chr.Skills.Add(new Skill(10108, 1, 1, 5));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 28: // 狂暴怒氣
                     chr.Skills.Add(new Skill(10107, 1, 1, 6));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 29: // 氣力轉換
                     chr.Skills.Add(new Skill(10104, 1, 1, 7));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 30: // 強氣護體
                     chr.Skills.Add(new Skill(10109, 1, 1, 8));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 31: // 強化格檔
                     chr.Skills.Add(new Skill(10110, 1, 1, 9));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 // 技能任務(刺客)
                 case 32: // 鬼手術
                     chr.Skills.Add(new Skill(10201, 1, 1, 0));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 33: // 利爪術
                     chr.Skills.Add(new Skill(10202, 1, 1, 1));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 34: // 索命貫擊
                     chr.Skills.Add(new Skill(10203, 1, 1, 2));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 35: // 崩擊爪
                     chr.Skills.Add(new Skill(10206, 1, 1, 3));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 36: // 雙鏢飛擊
                     chr.Skills.Add(new Skill(10209, 1, 1, 4));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 37: // 疾刺爪
                     chr.Skills.Add(new Skill(10208, 1, 1, 5));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 38: // 餵毒術
                     chr.Skills.Add(new Skill(10204, 1, 1, 6));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 39: // 解毒術
                     chr.Skills.Add(new Skill(10205, 1, 1, 7));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 40: // 霧影術
                     chr.Skills.Add(new Skill(10207, 1, 1, 8));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 41: // 閃擊技
                     chr.Skills.Add(new Skill(10210, 1, 1, 9));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 // 技能任務(射手)
                 case 613: // 恨夜擊弓
                     chr.Skills.Add(new Skill(10501, 1, 1, 0));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 614: // 崩天擊砲
                     chr.Skills.Add(new Skill(10502, 1, 1, 1));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 615: // 派蚣觸
                     chr.Skills.Add(new Skill(10503, 1, 1, 2));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 616: // 拂焦狂彈
                     chr.Skills.Add(new Skill(10504, 1, 1, 3));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 617: // 鷹爪飛弓
                     chr.Skills.Add(new Skill(10505, 1, 1, 4));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 618: // 軸還飛擊
                     chr.Skills.Add(new Skill(10506, 1, 1, 5));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 619: // 鎮水液彈
                     chr.Skills.Add(new Skill(10507, 1, 1, 6));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 620: // 觀首真眼
                     chr.Skills.Add(new Skill(10508, 1, 1, 7));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 621: // 舞影走
                     chr.Skills.Add(new Skill(10509, 1, 1, 8));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 case 622: // 飛鳥壁護
                     chr.Skills.Add(new Skill(10510, 1, 1, 9));
-                    SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+                    LearnSkill(gc);
                     break;
                 default:
                     break;
             }
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
+        }
+
+        public static void Quest_Return_Req(InPacket lea, Client gc)
+        {
+            var chr = gc.Character;
+            lea.ReadInt();
+            int QuestID = lea.ReadShort();
+            Quest Quest = chr.Quests.Quest(QuestID);
+            if (Quest.QuestState == 0x32)
+                return;
+            QuestPacket.UpdateQuest(gc, Quest.CompleteMonster, QuestID, 1, 1);
         }
 
         public static void Quest_GiveUp_Req(InPacket lea, Client gc)
@@ -246,6 +287,13 @@ namespace Server.Handler
             Quest.QuestState = 0x20;
             chr.Quests.Remove(Quest);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
+        }
+
+        public static void LearnSkill(Client gc)
+        {
+            var chr = gc.Character;
+            SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+            GamePacket.Message(gc, 10);
         }
     }
 }

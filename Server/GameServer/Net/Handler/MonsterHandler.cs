@@ -10,7 +10,7 @@ using System;
 
 namespace Server.Handler
 {
-    class MonsterHandler
+    public static class MonsterHandler
     {
         public static void AttackMonster_Req(InPacket lea, Client gc)
         {

@@ -73,7 +73,7 @@ namespace Server.Handler
             InventoryPacket.getCharacterEquip(gc);
             //GamePacket.getCharacterInvenAll(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
-            GamePacket.getQuickSlot(gc, chr.Keymaps);
+            GamePacket.getQuickSlot(gc, chr.Keymap);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreInfo(gc);
             InventoryPacket.getStoreMoney(gc);
@@ -148,7 +148,7 @@ namespace Server.Handler
             if (SkillID == -1 && SkillType == -1 && SkillSlot == -1)
                 return;
             string QuickSlotName = "";
-            KeyValuePair<string, Shortcut> Skill = chr.Keymaps.Skill(SkillType, SkillSlot);
+            KeyValuePair<string, Shortcut> Skill = chr.Keymap.Skill(SkillType, SkillSlot);
             switch (KeymapType)
             {
                 case 0:
@@ -198,8 +198,8 @@ namespace Server.Handler
                     }
                     break;
             }
-            chr.Keymaps.Remove(Skill.Key);
-            chr.Keymaps.Add(QuickSlotName, new Shortcut(SkillID, (byte)SkillType, (byte)SkillSlot));
+            chr.Keymap.Remove(Skill.Key);
+            chr.Keymap.Add(QuickSlotName, new Shortcut(SkillID, (byte)SkillType, (byte)SkillSlot));
         }
 
         //private static int SearchBytes(byte[] haystack, byte[] needle)

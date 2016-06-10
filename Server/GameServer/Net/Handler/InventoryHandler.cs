@@ -8,7 +8,7 @@ using Server.Packet;
 
 namespace Server.Handler
 {
-    class InventoryHandler
+    public static class InventoryHandler
     {
         public static void MoveItem_Req(InPacket lea, Client gc)
         {

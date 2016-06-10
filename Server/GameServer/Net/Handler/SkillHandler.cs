@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Server.Handler
 {
-    class SkillHandler
+    public static class SkillHandler
     {
         public static void UseSkill_Req(InPacket lea, Client gc)
         {

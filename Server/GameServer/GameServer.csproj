@@ -68,6 +68,7 @@
     <Compile Include="Net\Handler\MapHandler.cs" />
     <Compile Include="Net\Handler\MonsterHandler.cs" />
     <Compile Include="Net\Handler\NpcShopHandler.cs" />
+    <Compile Include="Net\Handler\PlayerShopHandler.cs" />
     <Compile Include="Net\Handler\QuestHandler.cs" />
     <Compile Include="Net\Handler\SkillHandler.cs" />
     <Compile Include="Net\Handler\StatusHandler.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Net\Packet\InventoryPacket.cs" />
     <Compile Include="Net\Packet\MapPacket.cs" />
     <Compile Include="Net\Packet\MonsterPacket.cs" />
+    <Compile Include="Net\Packet\PlayerShopPacket.cs" />
     <Compile Include="Net\Packet\QuestPacket.cs" />
     <Compile Include="Net\Packet\SkillPacket.cs" />
     <Compile Include="Net\Packet\StatusPacket.cs" />

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Server.Handler
 {
-    class MapHandler
+    public static class MapHandler
     {
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {

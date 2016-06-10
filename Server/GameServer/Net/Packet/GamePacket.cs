@@ -29,6 +29,19 @@ namespace Server.Packet
             }
         }
 
+        public static void getNotice(Client c, byte type, string message)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.NOTICE))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteByte(type);
+                plew.WriteString(message, 67);
+
+                c.Send(plew);
+            }
+        }
+
         public static void InvenUseSpendShout(Client c, string message)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_USESPEND_SHOUT_ACK))
@@ -44,27 +57,15 @@ namespace Server.Packet
             }
         }
 
-        public static void getNotice(Client c, byte type, string message)
+        public static void Message(Client c, int Message)
         {
-            using (OutPacket plew = new OutPacket(ServerOpcode.NOTICE))
+            using (OutPacket plew = new OutPacket(ServerOpcode.MESSAGE))
             {
+                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteByte(type);
-                plew.WriteString(message, 67);
-
-                c.Send(plew);
-            }
-        }
-
-        public static void FW_DISCOUNTFACTION(Client c)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.FW_DISCOUNTFACTION))
-            {
-                plew.WriteInt(0); // length + CRC
-                plew.WriteInt(0);
-                plew.WriteHexString("00 00 00 00 64 00 00 00 00 00 00 00 64 00 00 00 00 70 40 00 E8 03 D2 A8 74 A9 00 00 84 D1");
-
+                plew.WriteInt(31102);
+                plew.WriteInt(Message);
                 c.Send(plew);
             }
         }
@@ -204,6 +205,41 @@ namespace Server.Packet
                 plew.WriteInt(-1); // 技能ID
                 plew.WriteShort(-1); // 技能類型
                 plew.WriteShort(-1); // 技能欄位
+                c.Send(plew);
+            }
+        }
+
+        public static void FW_DISCOUNTFACTION(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.FW_DISCOUNTFACTION))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteHexString("00 00 00 00 64 00 00 00 00 00 00 00 64 00 00 00 00 70 40 00 E8 03 D2 A8 74 A9 00 00 84 D1");
+
+                c.Send(plew);
+            }
+        }
+
+        public static void PuzzleInfo(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.PUZZLE))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteHexString("40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40");
+                c.Send(plew);
+            }
+        }
+
+        public static void PuzzleUpdate(Client c)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.PUZZLE_UPDATE))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteHexString("31 4D 0F 00"); // 怪物ID
+                plew.WriteHexString("20 00 43 E4");
                 c.Send(plew);
             }
         }
