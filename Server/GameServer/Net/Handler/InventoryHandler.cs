@@ -44,14 +44,20 @@ namespace Server.Handler
                 {   // 交換位置(swap)
                     chr.Items.Remove(SourceType, SorceSlot);
                     chr.Items.Remove(TargetType, TargetSlot);
+                    // 類型
+                    byte swapType = Source.type;
+                    Source.type = Target.type;
+                    Target.type = swapType;
+                    // 欄位
                     byte swapSlot = Source.slot;
                     Source.slot = Target.slot;
                     Target.slot = swapSlot;
+                    //
                     chr.Items.Add(Source);
                     chr.Items.Add(Target);
                     if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
                         UpdateCharacterInventoryStatus(gc, Target.ItemID, TargetType == 0);
-                }                
+                }
             }
             UpdateInventory(gc, SourceType, TargetType);
         }
