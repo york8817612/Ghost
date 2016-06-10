@@ -35,8 +35,11 @@ namespace Server.Common.Security
                     Position += 4;
                     ResultPosition += 7;
                 } while (Position < Length);
-                for (int i = 1; i < 256 - Length; i++)
-                    Data2[Length + i] = EncryptPassword[Length + i];
+                if (EncryptPassword != null)
+                {
+                    for (int i = 1; i < 256 - Length; i++)
+                        Data2[Length + i] = EncryptPassword[Length + i];
+                }
             }
             return new string(Result);
         }

@@ -12,8 +12,12 @@ namespace Server.Ghost
         public Account Account { get; private set; }
         public byte WorldID { get; private set; }
         public byte GameID { get; private set; }
+        public int RetryLoginCount { get; set; }
 
-        public Client(Socket socket) : base(socket) { }
+        public Client(Socket socket) : base(socket)
+        {
+            this.RetryLoginCount = 0;
+        }
 
         protected override void Register()
         {

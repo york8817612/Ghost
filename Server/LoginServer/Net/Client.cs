@@ -16,6 +16,7 @@ namespace Server.Ghost
         public Account Account { get; private set; }
         public string[] MacAddresses { get; private set; }
         public long SessionID { get; private set; }
+        public int RetryLoginCount { get; set; }
 
         public World World
         {
@@ -45,6 +46,7 @@ namespace Server.Ghost
             : base(socket)
         {
             this.SessionID = Randomizer.NextLong();
+            this.RetryLoginCount = 0;
         }
 
         protected override void Register()

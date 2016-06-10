@@ -21,11 +21,13 @@ namespace Server.Net
         public int CharacterID { get; private set; }
         public string[] IP { get; private set; }
         public long SessionID { get; private set; }
+        public int RetryLoginCount { get; set; }
 
         public Client(Socket socket, UdpClient udp) : base(socket, udp) { }
 
         protected override void Register()
         {
+            this.RetryLoginCount = 0;
             GameServer.Clients.Add(this);
             this.CharacterID = ++i;
             this.SessionID = Randomizer.NextLong();

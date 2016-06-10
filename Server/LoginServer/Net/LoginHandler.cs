@@ -28,14 +28,13 @@ namespace Server.Ghost
             {
                 c.Account.Load(username);
                 var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(c.Account.Password, password.ToCharArray());
-                if (password.Length > 14)
-                    PasswordEncrypt.Data2 = null;
+                string encryptPassword = pe.encrypt(c.Account.Password, c.RetryLoginCount > 0 ? password.ToCharArray() : null);
 
                 if (!password.Equals(encryptPassword))
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
                     Log.Error("Login Fail!");
+                    c.RetryLoginCount += 1;
                 }
                 else
                 {
