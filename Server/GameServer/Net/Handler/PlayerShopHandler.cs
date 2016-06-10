@@ -1,7 +1,7 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Ghost.Characters;
 using Server.Net;
-using Server.Net.Packet;
+using Server.Packet;
 
 namespace Server.Handler
 {

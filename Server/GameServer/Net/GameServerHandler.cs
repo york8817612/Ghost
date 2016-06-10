@@ -84,12 +84,12 @@ namespace Server.Net
                     MonsterHandler.AttackMonster_Req(ip, gc);
                     break;
                 // Storage
-                case ClientOpcode.MOVE_ITEM_STORAGE:
+                case ClientOpcode.MOVE_ITEM_STORAGE_REQ:
                     break;
-                case ClientOpcode.SAVE_MONEY:
+                case ClientOpcode.SAVE_MONEY_REQ:
                     StorageHandler.saveStorageMoney(ip, gc);
                     break;
-                case ClientOpcode.GIVE_MONEY:
+                case ClientOpcode.GIVE_MONEY_REQ:
                     StorageHandler.giveStorageMoney(ip, gc);
                     break;
                 // Coupon

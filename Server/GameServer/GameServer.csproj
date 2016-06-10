@@ -48,6 +48,7 @@
     <Compile Include="GameServer.cs" />
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
     <Compile Include="Ghost\Characters\CharacterKeyMap.cs" />
+    <Compile Include="Ghost\Characters\CharacterShop.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Map\Drop.cs" />
     <Compile Include="Ghost\Item.cs" />
