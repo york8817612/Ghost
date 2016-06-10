@@ -8,6 +8,10 @@ namespace Server.Ghost
         public CharacterStorages Parent { get; set; }
 
         public int ID { get; private set; }
+        public int ItemID { get; set; }
+        public int Quantity { get; set; }
+        public int Type { get; set; }
+        public int Slot { get; set; }
         public int Money { get; set; }
 
         public bool Assigned { get; set; }
@@ -33,11 +37,19 @@ namespace Server.Ghost
             this.ID = datum.id;
             this.Assigned = true;
 
+            this.ItemID = datum.itemID;
+            this.Quantity = datum.quantity;
+            this.Type = datum.type;
+            this.Slot = datum.slot;
             this.Money = datum.money;
         }
 
-        public Storage(int money)
+        public Storage(int ItemID, int Quantity, int Type, int Slot, int money)
         {
+            this.ItemID = ItemID;
+            this.Quantity = Quantity;
+            this.Type = Type;
+            this.Slot = Slot;
             this.Money = money;
         }
 
@@ -46,6 +58,10 @@ namespace Server.Ghost
             dynamic datum = new Datum("Storages");
 
             datum.cid = this.Character.ID;
+            datum.itemID = this.ItemID;
+            datum.quantity = this.Quantity;
+            datum.type = this.Type;
+            datum.slot = this.Slot;
             datum.money = this.Money;
 
             if (this.Assigned)
@@ -56,7 +72,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Storages", "id", "cid = '{0}' && money = '{1}'", this.Character.ID, this.Money);
+                this.ID = Database.Fetch("Storages", "id", "cid = '{0}' && itemID = '{1}' && quantity = '{2}' && type = '{3}' && slot = '{4}' && money = '{5}'", this.Character.ID, this.ItemID, this.Quantity, this.Type, this.Slot, this.Money);
 
                 this.Assigned = true;
             }

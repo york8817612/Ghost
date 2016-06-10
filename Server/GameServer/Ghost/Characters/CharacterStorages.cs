@@ -50,6 +50,22 @@ namespace Server.Ghost
             this.Storages.Add(storage);
         }
 
+        public int GetItemID(byte type, byte slot)
+        {
+            Storage Storage = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)type && i.Slot == slot));
+            if (Storage == null)
+                return 0;
+            return Storage.ItemID;
+        }
+
+        public int GetItemQuantity(byte type, byte slot)
+        {
+            Storage Storage = this.Storages.Find(i => (i.Type == (byte)type && i.Slot == slot));
+            if (Storage == null)
+                return 0;
+            return Storage.Quantity;
+        }
+
         public List<Storage> getStorages()
         {
             return this.Storages;

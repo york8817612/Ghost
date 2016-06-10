@@ -50,7 +50,7 @@ namespace Server.Handler
                 StatusPacket.UpdateExp(gc);
                 for (int i = 0; i < Monster.Drops.Count; i++)
                 {
-                    Monster.Drops[i].PositionX = Monster.PositionX + i;
+                    Monster.Drops[i].PositionX = Monster.PositionX;
                     Monster.Drops[i].PositionY = Monster.PositionY - 50;
                     map.MonsterDrop.Add(new Item(Monster.Drops[i].ItemID, 0x63, 0x63, Monster.Drops[i].Quantity));
                     MapPacket.MonsterDrop(gc, Monster);

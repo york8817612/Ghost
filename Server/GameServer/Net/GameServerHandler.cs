@@ -85,6 +85,7 @@ namespace Server.Net
                     break;
                 // Storage
                 case ClientOpcode.MOVE_ITEM_STORAGE_REQ:
+                    StorageHandler.moveItemToStorage(ip, gc);
                     break;
                 case ClientOpcode.SAVE_MONEY_REQ:
                     StorageHandler.saveStorageMoney(ip, gc);

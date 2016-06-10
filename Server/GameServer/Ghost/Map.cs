@@ -11,7 +11,7 @@ namespace Server.Ghost
         public int MapHeight { get; set; }
         public int MapWidth { get; set; }
         public sbyte[][] MapPexels;
-        public int DropOriginalID { get; set; }
+        public int ObjectID { get; set; }
 
         public List<Character> Characters { get; private set; }
         public List<Monster> Monster { get; set; }

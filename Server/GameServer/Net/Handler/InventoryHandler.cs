@@ -13,23 +13,23 @@ namespace Server.Handler
         public static void MoveItem_Req(InPacket lea, Client gc)
         {
             byte SourceType = lea.ReadByte();
-            byte SorceSlot = lea.ReadByte();
+            byte SourceSlot = lea.ReadByte();
             byte TargetType = lea.ReadByte();
             byte TargetSlot = lea.ReadByte();
             int Quantity = lea.ReadInt();
-            Item Source = gc.Character.Items.GetItem(SourceType, SorceSlot);
+            Item Source = gc.Character.Items.GetItem(SourceType, SourceSlot);
             Item Target = gc.Character.Items.GetItem(TargetType, TargetSlot);
             var chr = gc.Character;
 
             if (TargetType == 0x63 && TargetSlot == 0x63)
             {
-                if (SourceType == 0xFF && SorceSlot == 0xFF)
+                if (SourceType == 0xFF && SourceSlot == 0xFF)
                     return;
                 Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-                InventoryPacket.charDropItem(gc, map.DropOriginalID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity);
-                map.CharacterItem.Add(map.DropOriginalID, Source);
-                map.DropOriginalID++;
-                chr.Items.Remove(SourceType, SorceSlot, Quantity);
+                InventoryPacket.charDropItem(gc, map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
+                map.CharacterItem.Add(map.ObjectID, Source);
+                map.ObjectID++;
+                chr.Items.Remove(SourceType, SourceSlot, Quantity == 0 ? 1 : Quantity);
             }
             else
             {
@@ -42,7 +42,7 @@ namespace Server.Handler
                 }
                 else
                 {   // 交換位置(swap)
-                    chr.Items.Remove(SourceType, SorceSlot);
+                    chr.Items.Remove(SourceType, SourceSlot);
                     chr.Items.Remove(TargetType, TargetSlot);
                     // 類型
                     byte swapType = Source.type;
@@ -56,7 +56,10 @@ namespace Server.Handler
                     chr.Items.Add(Source);
                     chr.Items.Add(Target);
                     if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
-                        UpdateCharacterInventoryStatus(gc, Target.ItemID, TargetType == 0);
+                    {
+                        UpdateCharacterInventoryStatus(gc, Target.ItemID, false);
+                        UpdateCharacterInventoryStatus(gc, Source.ItemID, true);
+                    }
                 }
             }
             UpdateInventory(gc, SourceType, TargetType);
