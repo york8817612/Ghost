@@ -78,6 +78,7 @@
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Net\Client.cs" />
     <Compile Include="Net\Handler\GameHandler.cs" />
+    <Compile Include="Net\Handler\TradeHandler.cs" />
     <Compile Include="Net\Packet\GamePacket.cs" />
     <Compile Include="Ghost\Monster.cs" />
     <Compile Include="Net\Packet\InventoryPacket.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Net\Packet\StatusPacket.cs" />
     <Compile Include="Net\GameServerHandler.cs" />
     <Compile Include="Net\Packet\StoragePacket.cs" />
+    <Compile Include="Net\Packet\TradePacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
