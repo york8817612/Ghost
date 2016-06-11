@@ -72,9 +72,8 @@ namespace Server.Handler
             InventoryPacket.getCharacterEquip(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
             GamePacket.getQuickSlot(gc, chr.Keymap);
-            InventoryPacket.getStoreInfo(gc);
-            InventoryPacket.getStoreInfo(gc);
-            InventoryPacket.getStoreMoney(gc);
+            StoragePacket.getStoreInfo(gc);
+            StoragePacket.getStoreMoney(gc);
             MapPacket.enterMapStart(gc);
             InventoryPacket.getInvenEquip(gc);
             InventoryPacket.getInvenEquip1(gc);
@@ -128,7 +127,13 @@ namespace Server.Handler
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
                     break;
                 case "//test":
-                    StatusPacket.UpdateHpMp(gc, 0, 0, 0);
+                    PartyPacket.PartyUpdate(gc);
+                    break;
+                case "//test2":
+                    PartyPacket.PartyInvite(gc, 1, 1);
+                    break;
+                case "//test3":
+                    PartyPacket.PartyInvite(gc, 1 , 0);
                     break;
                 default:
                     break;

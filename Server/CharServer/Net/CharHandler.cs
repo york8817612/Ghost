@@ -95,11 +95,11 @@ namespace Server.Ghost
             chr.MaxFury = 1200;
             chr.Exp = 0;
             chr.Money = 0;
-            chr.Attack = 1;
-            chr.MaxAttack = 10;
-            chr.Magic = 1;
-            chr.MaxMagic = 3;
-            chr.Defense = 10;
+            chr.Attack = 9;
+            chr.MaxAttack = 11;
+            chr.Magic = 4;
+            chr.MaxMagic = 4;
+            chr.Defense = 12;
             chr.JumpHeight = 3;
 
             int pos = 1;
@@ -124,6 +124,9 @@ namespace Server.Ghost
             chr.Skills.Add(new Skill(2, 1, 0, 1));
             chr.Skills.Add(new Skill(3, 1, 0, 2));
             chr.Skills.Add(new Skill(4, 1, 0, 3));
+            chr.Keymap.Add("Z", new Shortcut(1, 0, 0));
+            chr.Keymap.Add("X", new Shortcut(4, 0, 3));
+            chr.Keymap.Add("C", new Shortcut(3, 0, 2));
 
 
             if ((gc.Account.Characters.Count + 1) <= 4)

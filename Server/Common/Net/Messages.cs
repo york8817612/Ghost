@@ -93,10 +93,15 @@ namespace Server.Common.Net
         QUEST_UPDATE_REQ = 0x7F,
         // Map
         CAN_WARP_ACK_REQ = 0x85,
+        // Party
+        PARTY_INVITE_REQ = 0x9B,
+        // 0x9F 離開隊伍
+        // 0xA0 驅逐隊員
         // QuickSlot
         QUICK_SLOT_REQ = 0xA8,
         // STORAGE
         MOVE_ITEM_STORAGE_REQ = 0xAC,
+        MOVE_ITEM_TO_BAG_REQ = 0xAD,
         SAVE_MONEY_REQ = 0xAE,
         GIVE_MONEY_REQ = 0xAF,
         // PlayerShop
@@ -248,12 +253,12 @@ namespace Server.Common.Net
         // 0x98 // 交易成功
         // 0x9A
         // 0x9B
-        // 0x9C
-        // 0x9D
+        PARTY_INVITE = 0x9C,
+        PARTY_UPDATE = 0x9D,
 
         // 0xA0 // 離開隊伍
-        // 0xA1
-        // 0xA2 // 隊伍解散
+        PARTY_HP_UPDATE= 0xA1,
+        PARTY_DISMISS = 0xA2,
 
         PVP_REQ = 0xA4,
         PVP_ACK = 0xA5,
