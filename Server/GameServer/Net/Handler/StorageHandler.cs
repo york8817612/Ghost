@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Net;
 using Server.Packet;
@@ -18,8 +19,26 @@ namespace Server.Handler
             Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
             chr.Storages.Add(new Storage(Source.ItemID, Quantity, TargetType, TargetSlot, 0));
             chr.Items.Remove((byte)SourceType, (byte)SourceSlot, Quantity);
-            InventoryPacket.getStoreInfo(gc);
+            chr.Save();
+            StoragePacket.getStoreInfo(gc);
             InventoryHandler.UpdateInventory(gc, (byte)SourceType);
+        }
+
+        public static void moveItemToBag(InPacket lea, Client gc)
+        {
+            int SourceType = lea.ReadShort();
+            int SourceSlot = lea.ReadShort();
+            int TargetSlot = lea.ReadShort();
+            lea.ReadShort();
+            int Quantity = lea.ReadInt();
+            var chr = gc.Character;
+            Storage Source = chr.Storages.GetItem((byte)SourceType, (byte)SourceSlot);
+            byte TargetType = InventoryType.getItemType(Source.ItemID);
+            chr.Storages.Remove((byte)Source.Type, (byte)Source.Slot, Quantity);
+            chr.Items.Add(new Item(Source.ItemID, (byte)TargetSlot, TargetType, (short)Quantity));
+            chr.Save();
+            StoragePacket.getStoreInfo(gc);
+            InventoryHandler.UpdateInventory(gc, TargetType);
         }
 
         public static void saveStorageMoney(InPacket lea, Client gc)
@@ -33,7 +52,7 @@ namespace Server.Handler
             chr.Money -= money;
             chr.Save();
             InventoryPacket.getInvenMoney(gc, chr.Money, -money);
-            InventoryPacket.getStoreMoney(gc);
+            StoragePacket.getStoreMoney(gc);
         }
 
         public static void giveStorageMoney(InPacket lea, Client gc)
@@ -47,7 +66,7 @@ namespace Server.Handler
             chr.Money += money;
             chr.Save();
             InventoryPacket.getInvenMoney(gc, chr.Money, money);
-            InventoryPacket.getStoreMoney(gc);
+            StoragePacket.getStoreMoney(gc);
         }
     }
 }

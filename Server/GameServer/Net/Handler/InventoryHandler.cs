@@ -161,9 +161,18 @@ namespace Server.Handler
             int OriginalID = lea.ReadInt();
             int ItemID = lea.ReadInt();
             lea.ReadInt();
+            var chr = gc.Character;
+
+            if (OriginalID == 0 && ItemID == 9800001)
+            {
+                chr.Money += 10;
+                InventoryPacket.getInvenMoney(gc, chr.Money, 10);
+                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, 10);
+                return;
+            }
+
             byte Type = InventoryType.getItemType(ItemID);
             byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-            var chr = gc.Character;
 
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             if (!map.CharacterItem.ContainsKey(OriginalID))

@@ -87,6 +87,9 @@ namespace Server.Net
                 case ClientOpcode.MOVE_ITEM_STORAGE_REQ:
                     StorageHandler.moveItemToStorage(ip, gc);
                     break;
+                case ClientOpcode.MOVE_ITEM_TO_BAG_REQ:
+                    StorageHandler.moveItemToBag(ip, gc);
+                    break;
                 case ClientOpcode.SAVE_MONEY_REQ:
                     StorageHandler.saveStorageMoney(ip, gc);
                     break;
@@ -114,6 +117,10 @@ namespace Server.Net
                     break;
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
+                    break;
+                // Party
+                case ClientOpcode.PARTY_INVITE_REQ:
+                    PartyHandler.PartyInvite(ip, gc);
                     break;
                 // PlayerShop
                 case ClientOpcode.PSHOP_OPEN_REQ:
