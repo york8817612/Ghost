@@ -253,7 +253,7 @@ namespace Server.Common.Net
         TRADE_SUCCESS = 0x98,
         // 0x9A
         // 0x9B
-        PARTY_OPERATE = 0x9C,
+        PARTY_INVITE = 0x9C,
         PARTY_UPDATE = 0x9D,
 
         // 0xA0 // 離開隊伍
@@ -536,6 +536,5 @@ namespace Server.Common.Net
         SOULSTACKWAR_RANKING_ACK = 0x20C,
 
         SOULSTACKWAR_READY = 0x212,
-        PARTY_INVITE = 0x213,
     }
 }
