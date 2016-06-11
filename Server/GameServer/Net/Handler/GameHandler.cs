@@ -24,7 +24,6 @@ namespace Server.Handler
             int encryptKey = int.Parse(data[1]);
             string username = data[2];
             string password = data[4];
-            //lea.Skip(206);
             int selectCharacter = lea.ReadByte();
             IPAddress hostid = lea.ReadIPAddress();
 
@@ -71,7 +70,6 @@ namespace Server.Handler
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
             InventoryPacket.getCharacterEquip(gc);
-            //GamePacket.getCharacterInvenAll(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
             GamePacket.getQuickSlot(gc, chr.Keymap);
             InventoryPacket.getStoreInfo(gc);

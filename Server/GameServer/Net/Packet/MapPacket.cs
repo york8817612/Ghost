@@ -301,9 +301,14 @@ namespace Server.Packet
                 plew.WriteInt(chr.CharacterID);
                 for (int i = 0; i < 7; i++)
                 {
+                    plew.WriteByte(i < Monster.Drops.Count ? Monster.Drops[i].Quantity : 0);
+                }
+                plew.WriteByte(0);
+                for (int i = 0; i < 7; i++)
+                {
                     plew.WriteInt(i < Monster.Drops.Count ? Monster.Drops[i].Quantity : 0);
                 }
-                plew.WriteHexString("00 00 00 00 00 00 00 00");
+                
                 c.Send(plew);
             }
         }
