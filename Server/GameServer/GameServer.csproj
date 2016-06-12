@@ -71,6 +71,7 @@
     <Compile Include="Net\Handler\NpcShopHandler.cs" />
     <Compile Include="Net\Handler\PartyHandler.cs" />
     <Compile Include="Net\Handler\PlayerShopHandler.cs" />
+    <Compile Include="Net\Handler\PvPHandler.cs" />
     <Compile Include="Net\Handler\QuestHandler.cs" />
     <Compile Include="Net\Handler\SkillHandler.cs" />
     <Compile Include="Net\Handler\StatusHandler.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Net\Client.cs" />
     <Compile Include="Net\Handler\GameHandler.cs" />
     <Compile Include="Net\Handler\TradeHandler.cs" />
+    <Compile Include="Net\Packet\CashShopPacket.cs" />
     <Compile Include="Net\Packet\GamePacket.cs" />
     <Compile Include="Ghost\Monster.cs" />
     <Compile Include="Net\Packet\InventoryPacket.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Net\Packet\MonsterPacket.cs" />
     <Compile Include="Net\Packet\PartyPacket.cs" />
     <Compile Include="Net\Packet\PlayerShopPacket.cs" />
+    <Compile Include="Net\Packet\PvPPacket.cs" />
     <Compile Include="Net\Packet\QuestPacket.cs" />
     <Compile Include="Net\Packet\SkillPacket.cs" />
     <Compile Include="Net\Packet\StatusPacket.cs" />
