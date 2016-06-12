@@ -1,7 +1,13 @@
-﻿namespace Server.Ghost.Provider
+﻿using Server.Common.Data;
+using Server.Common.IO;
+using System.Collections.Generic;
+
+namespace Server.Ghost.Provider
 {
     public class MobFactory
     {
+        public static List<Loot> Drop_Data = new List<Loot>();
+
         public static int MonsterHP(int MonsterLevel)
         {
             int MonsterHP = int.MaxValue;
@@ -288,28 +294,14 @@
             return MonsterExp;
         }
 
-        public static void InitializeMonsterDrop(Monster Monster)
+        public static void InitializeMonsterDrop()
         {
-            switch (Monster.MonsterID)
+            using (Log.Load("Loading Drops"))
             {
-                case 1000101: // 賴打
-                    Monster.Drops.Add(new Drop(0, 9800001, 1)); // 錢
-                    Monster.Drops.Add(new Drop(1, 8820011, 1)); // 紅水(小)
-                    Monster.Drops.Add(new Drop(2, 8810011, 1)); // 藍水(小)
-                    Monster.Drops.Add(new Drop(3, 8130011, 1)); // 道士平服(男)
-                    Monster.Drops.Add(new Drop(4, 8120012, 1)); // 刺客平服(女)
-                    Monster.Drops.Add(new Drop(5, 8910011, 1)); // 木炭
-                    Monster.Drops.Add(new Drop(6, 8510011, 1)); // 封印箱
-                    break;
-                case 1000201: // 大目仔
-                    Monster.Drops.Add(new Drop(0, 9800001, 1)); // 錢
-                    Monster.Drops.Add(new Drop(1, 8820011, 1)); // 紅水(小)
-                    Monster.Drops.Add(new Drop(2, 8810011, 1)); // 藍水(小)
-                    Monster.Drops.Add(new Drop(3, 8130012, 1)); // 道士平服(女)
-                    Monster.Drops.Add(new Drop(4, 8110012, 1)); // 武士平服(女)
-                    Monster.Drops.Add(new Drop(5, 8910021, 1)); // 大目仔的眼珠
-                    Monster.Drops.Add(new Drop(6, 8510011, 1)); // 封印箱
-                    break;
+                foreach (dynamic datum in new Datums("drop_data").Populate())
+                {
+                    Drop_Data.Add(new Loot(datum));
+                }
             }
         }
     }

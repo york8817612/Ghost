@@ -55,6 +55,7 @@
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />
     <Compile Include="Ghost\ItemData.cs" />
     <Compile Include="Ghost\Map.cs" />
+    <Compile Include="Ghost\Map\Loot.cs" />
     <Compile Include="Ghost\Provider\ItemFactory.cs" />
     <Compile Include="Ghost\Provider\MapFactory.cs" />
     <Compile Include="Ghost\Provider\MobFactory.cs" />
