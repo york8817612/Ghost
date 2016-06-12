@@ -38,7 +38,7 @@ namespace Server.Ghost
             {
                 if (maxPerStack == 0)
                 {
-                    maxPerStack = 1;
+                    maxPerStack = 100;
                 }
                 return maxPerStack;
             }
@@ -82,6 +82,9 @@ namespace Server.Ghost
                 case 3:
                 case 4:
                     this.MaxPerStack = 100;
+                    break;
+                case 0x63:
+                    this.MaxPerStack = Int16.MaxValue;
                     break;
             }
             this.Quantity = quantity;

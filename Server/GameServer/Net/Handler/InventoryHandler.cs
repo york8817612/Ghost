@@ -41,20 +41,42 @@ namespace Server.Handler
                         UpdateCharacterInventoryStatus(gc, Source.ItemID, SourceType > 0);
                 }
                 else
-                {   // 交換位置(swap)
-                    chr.Items.Remove(SourceType, SourceSlot);
-                    chr.Items.Remove(TargetType, TargetSlot);
-                    // 類型
-                    byte swapType = Source.type;
-                    Source.type = Target.type;
-                    Target.type = swapType;
-                    // 欄位
-                    byte swapSlot = Source.slot;
-                    Source.slot = Target.slot;
-                    Target.slot = swapSlot;
-                    //
-                    chr.Items.Add(Source);
-                    chr.Items.Add(Target);
+                {
+                    if ((SourceType == TargetType) 
+                        && ((TargetType == (byte)InventoryType.ItemType.Spend3) 
+                        || (TargetType == (byte)InventoryType.ItemType.Other4)) 
+                        && (Source.ItemID == Target.ItemID))
+                    {
+                        // 合併消費物品跟其他物品
+                        if (chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity + Source.Quantity > 100)
+                        {
+                            short newqu = (short)(Source.Quantity - (100 - chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity));
+                            chr.Items[(InventoryType.ItemType)Source.type, Source.slot].Quantity = newqu;
+                            chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity = 100;
+                        }
+                        else
+                        {
+                            chr.Items.Remove(SourceType, SourceSlot);
+                            chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity += Source.Quantity;
+                        }
+                    }
+                    else
+                    {
+                        // 交換位置(swap)
+                        chr.Items.Remove(SourceType, SourceSlot);
+                        chr.Items.Remove(TargetType, TargetSlot);
+                        // 類型
+                        byte swapType = Source.type;
+                        Source.type = Target.type;
+                        Target.type = swapType;
+                        // 欄位
+                        byte swapSlot = Source.slot;
+                        Source.slot = Target.slot;
+                        Target.slot = swapSlot;
+                        //
+                        chr.Items.Add(Source);
+                        chr.Items.Add(Target);
+                    }
                     if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
                     {
                         UpdateCharacterInventoryStatus(gc, Target.ItemID, false);
@@ -110,12 +132,12 @@ namespace Server.Handler
                         if ((chr.MaxHp > chr.Hp + use.Hp))
                         {
                             chr.Hp += (short)use.Hp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
                         }
                         else if (chr.MaxHp - chr.Hp < use.Hp)
                         {
                             chr.Hp = (short)chr.MaxHp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
                         }
                     }
                     if (use.Mp != -1)
@@ -123,12 +145,12 @@ namespace Server.Handler
                         if ((chr.MaxMp > chr.Mp + use.Mp))
                         {
                             chr.Mp += (short)use.Mp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
                         }
                         else if (chr.MaxMp - chr.Mp < use.Mp)
                         {
                             chr.Mp = (short)chr.MaxMp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, 0);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
                         }
                     }
                     break;
@@ -162,23 +184,57 @@ namespace Server.Handler
             int ItemID = lea.ReadInt();
             lea.ReadInt();
             var chr = gc.Character;
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
 
-            if (OriginalID == 0 && ItemID == 9800001)
+            // 檢取靈魂
+            if (ItemID >= 9900001 && ItemID <= 9900004)
             {
-                chr.Money += 10;
-                InventoryPacket.getInvenMoney(gc, chr.Money, 10);
-                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, 10);
+                if (map.getDropByOriginalID(OriginalID) == null)
+                    return;
+                chr.Fury += map.getDropByOriginalID(OriginalID).Quantity;
+                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
+                return;
+            }
+            // 檢取錢
+            if (ItemID >= 9800001 && ItemID <= 9800005)
+            {
+                if (map.getDropByOriginalID(OriginalID) == null)
+                    return;
+                chr.Money += map.getDropByOriginalID(OriginalID).Quantity;
+                InventoryPacket.getInvenMoney(gc, chr.Money, map.getDropByOriginalID(OriginalID).Quantity);
+                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
                 return;
             }
 
-            byte Type = InventoryType.getItemType(ItemID);
-            byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-
-            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             if (!map.CharacterItem.ContainsKey(OriginalID))
                 return;
-            Item oItem = new Item(ItemID, Slot, (byte)Type, map.getDropByOriginalID(OriginalID).Quantity);
-            chr.Items.Add(oItem);
+
+            byte Type = InventoryType.getItemType(ItemID);
+
+            Item finditem = null;
+            foreach (Item it in gc.Character.Items)
+            {
+                if (it.ItemID == ItemID)
+                {
+                    finditem = it;
+                }
+            }
+
+            if (((Type == (byte)InventoryType.ItemType.Spend3) 
+                || (Type == (byte)InventoryType.ItemType.Other4)) 
+                && (finditem != null) 
+                && (finditem.Quantity + map.getDropByOriginalID(OriginalID).Quantity) <= 100)
+            {
+                // 合併消費物品跟其他物品
+                chr.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity += map.getDropByOriginalID(OriginalID).Quantity;
+            }
+            else
+            {
+                byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
+                Item oItem = new Item(ItemID, Slot, (byte)Type, map.getDropByOriginalID(OriginalID).Quantity);
+                chr.Items.Add(oItem);
+            }
             InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
             map.CharacterItem.Remove(OriginalID);
             UpdateInventory(gc, Type);

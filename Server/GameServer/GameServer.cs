@@ -116,15 +116,16 @@ namespace Server
 
                 Database.Test();
                 Database.Analyze(true);
+
+                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
+
                 Log.Load("Items Initialize");
                 ItemFactory.Initialize();
                 Log.Success("\r\n");
                 Log.Load("Maps Initialize");
                 MapFactory.Initialize();
                 Log.Success("\r\n");
-
-                GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
-                //MapleData.Initialize();
+                MobFactory.InitializeMonsterDrop();
 
                 UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
                 UdpListener = new UdpClient(UdpRemoteEndPoint);

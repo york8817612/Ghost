@@ -71,13 +71,40 @@ namespace Server.Handler
             if (gc.Character.Money >= (money * Quantity))
             {
                 byte Type = (byte)InventoryType.getItemType(ItemID);
-                byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-                if ((Type == 3 && Quantity > 100) || (Type == 4 && Quantity > 100))
-                    return;
+
+                Item finditem = null;
+                foreach (Item it in gc.Character.Items)
+                {
+                    if (it.ItemID == ItemID)
+                    {
+                        finditem = it;
+                    }
+                }
+                if (((Type == (byte)InventoryType.ItemType.Spend3) || (Type == (byte)InventoryType.ItemType.Other4)) && (finditem != null))
+                {
+                    // 合併消費物品跟其他物品
+                    if ((finditem.Quantity + Quantity) > 100)
+                    {
+                        int newqu = Quantity - (100 - finditem.Quantity);
+                        gc.Character.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity = (short)100;
+                        byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
+                        Item oItem = new Item(ItemID, Slot, Type, (short)newqu);
+                        gc.Character.Items.Add(oItem);
+                    }
+                    else
+                    {
+                        gc.Character.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity += (short)Quantity;
+                    }
+                }
+                else
+                {
+                    byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
+                    Item oItem = new Item(ItemID, Slot, Type, (short)Quantity);
+                    gc.Character.Items.Add(oItem);
+                }
+
                 gc.Character.Money -= (money * Quantity);
-                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -(money * Quantity));
-                Item oItem = new Item(ItemID, Slot, Type, (short)Quantity);
-                gc.Character.Items.Add(oItem);
+                InventoryPacket.getInvenMoney(gc, gc.Character.Money, -(money * Quantity));                
                 InventoryHandler.UpdateInventory(gc, Type);
             }
         }
@@ -148,9 +175,20 @@ namespace Server.Handler
 
             if (source != null)
             {
+                if (source.Quantity > Quantity)
+                {
+                    if (Quantity <= 0)
+                        return;
+                    gc.Character.Items[(InventoryType.ItemType)source.type, source.slot].Quantity -= Quantity;
+                }
+                else
+                {
+                    if (Quantity > source.Quantity)
+                        return;
+                    gc.Character.Items.Remove(Type, Slot);
+                }
                 gc.Character.Money += ((money / 5) * Quantity);
                 InventoryPacket.getInvenMoney(gc, gc.Character.Money, money);
-                gc.Character.Items.Remove(Type, Slot);
                 InventoryHandler.UpdateInventory(gc, Type);
             }
         }

@@ -927,7 +927,6 @@ namespace Server.Ghost.Provider
                             MapHandler.UpdatePosition(m, (int)(40 * map.Monster[i].Speed), map);
                             if (MonsterID == 1000501 || MonsterID == 1000801 || MonsterID == 1003501 || MonsterID == 1004502)
                                 m.Speed = 0;
-                            MobFactory.InitializeMonsterDrop(m);
                         }
                     }
                     for (int j = map.Monster.Count; j < 50; j++)

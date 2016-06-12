@@ -67,5 +67,26 @@
 
             return type;
         }
+
+        public static int getMoneyStyle(int money)
+        {
+            if (money > 0 && money <= 51)
+            {
+                return 9800001; // 銅錢
+            }
+            else if (money > 51 && money <= 500)
+            {
+                return 9800002; // 銀錢
+            }
+            else if (money > 500 && money <= 1000)
+            {
+                return 9800003; // 金錢
+            }
+            else if (money > 1000 && money <= 5000)
+            {
+                return 9800004; // 銀元寶
+            }
+            return 9800005; // 金元寶
+        }
     }
 }
