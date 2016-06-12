@@ -66,7 +66,7 @@ namespace Server.Packet
             }
         }
 
-        public static void UpdateHpMp(Client c, int updateHp, short updateMp, short updateMaxFury)
+        public static void UpdateHpMp(Client c, int updateHp, short updateMp, short updateFury, short updateMaxFury)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HPSP))
             {
@@ -74,8 +74,8 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 plew.WriteShort(updateHp);
                 plew.WriteShort(updateMp);
+                plew.WriteShort(updateFury);
                 plew.WriteShort(updateMaxFury);
-                plew.WriteShort(0);
                 c.Send(plew);
             }
         }

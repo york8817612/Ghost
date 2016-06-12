@@ -71,7 +71,7 @@ namespace Server.Handler
                                 }
                                 chr.Hp += (short)addHp;
                                 chr.Mp += (short)addMp;
-                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                             }
                             );
                             chr.SkillState[skill.SkillID].Execute();
@@ -84,7 +84,7 @@ namespace Server.Handler
                         break;
                     case 4:
                         chr.Mp -= (short)5;
-                        StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                        StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         break;
                     default:
                         Log.Inform("[使用技能] SkillID = {0}", skill.SkillID);

@@ -5,6 +5,7 @@ using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
+using System;
 
 namespace Server.Handler
 {
@@ -132,12 +133,12 @@ namespace Server.Handler
                         if ((chr.MaxHp > chr.Hp + use.Hp))
                         {
                             chr.Hp += (short)use.Hp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         }
                         else if (chr.MaxHp - chr.Hp < use.Hp)
                         {
                             chr.Hp = (short)chr.MaxHp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         }
                     }
                     if (use.Mp != -1)
@@ -145,12 +146,12 @@ namespace Server.Handler
                         if ((chr.MaxMp > chr.Mp + use.Mp))
                         {
                             chr.Mp += (short)use.Mp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         }
                         else if (chr.MaxMp - chr.Mp < use.Mp)
                         {
                             chr.Mp = (short)chr.MaxMp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
+                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         }
                     }
                     break;
@@ -186,24 +187,46 @@ namespace Server.Handler
             var chr = gc.Character;
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
 
-            // 檢取靈魂
+            // 撿取靈魂
             if (ItemID >= 9900001 && ItemID <= 9900004)
             {
                 if (map.getDropByOriginalID(OriginalID) == null)
                     return;
-                chr.Fury += map.getDropByOriginalID(OriginalID).Quantity;
-                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury);
-                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
+                switch (ItemID)
+                {
+                    case 9900001: // Blue
+                        chr.Mp += (short)(chr.MaxMp * 0.2);
+                        if (chr.Mp > chr.MaxMp)
+                            chr.Mp = chr.MaxMp;
+                        break;
+                    case 9900002: // Green
+                        chr.Mp += (short)(chr.MaxMp * 0.4);
+                        if (chr.Mp > chr.MaxMp)
+                            chr.Mp = chr.MaxMp;
+                        break;
+                    case 9900003: // Red
+                        Random rd = new Random();
+                        int number = rd.Next(3, 7); // 範圍：3 ~ 6
+                        chr.Fury += (short)(chr.MaxFury / 100 * number);
+                        if (chr.Fury > chr.MaxFury)
+                            chr.Fury = chr.MaxFury;
+                        break;
+                    case 9900004: // Purple
+                        // TODO: +封印量
+                        break;
+                }
+                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
                 return;
             }
-            // 檢取錢
+            // 撿取錢
             if (ItemID >= 9800001 && ItemID <= 9800005)
             {
                 if (map.getDropByOriginalID(OriginalID) == null)
                     return;
                 chr.Money += map.getDropByOriginalID(OriginalID).Quantity;
                 InventoryPacket.getInvenMoney(gc, chr.Money, map.getDropByOriginalID(OriginalID).Quantity);
-                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
+                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
                 return;
             }
 
@@ -235,7 +258,7 @@ namespace Server.Handler
                 Item oItem = new Item(ItemID, Slot, (byte)Type, map.getDropByOriginalID(OriginalID).Quantity);
                 chr.Items.Add(oItem);
             }
-            InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID, map.getDropByOriginalID(OriginalID).Quantity);
+            InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
             map.CharacterItem.Remove(OriginalID);
             UpdateInventory(gc, Type);
         }

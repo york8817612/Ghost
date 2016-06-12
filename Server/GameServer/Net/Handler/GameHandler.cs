@@ -65,7 +65,7 @@ namespace Server.Handler
             chr.CharacterID = gc.CharacterID;
             MapFactory.AllCharacters.Add(chr);
 
-            StatusPacket.UpdateHpMp(gc, 0, 0, 0);
+            StatusPacket.UpdateHpMp(gc, 0, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);

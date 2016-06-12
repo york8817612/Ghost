@@ -325,11 +325,12 @@ namespace Server.Packet
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_PET5))
             {
+                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 寵物編號
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Pet5, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 寵物名稱
@@ -423,7 +424,7 @@ namespace Server.Packet
             }
         }
 
-        public static void clearDropItem(Client c, int cid, int oid, int iid, int quantity)
+        public static void clearDropItem(Client c, int cid, int oid, int iid)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CLEAR_DROP_ITEM))
             {
@@ -433,7 +434,7 @@ namespace Server.Packet
                 plew.WriteInt(cid); // 角色 id // + 12
                 plew.WriteInt(oid); // 掉落 id  // + 16
                 plew.WriteInt(iid); // 物品 id // + 20
-                plew.WriteHexString("00 01 FF FF"); // 數量 // + 24
+                plew.WriteHexString("00 01 FF FF"); // + 24
 
                 c.Send(plew);
             }
