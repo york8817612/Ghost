@@ -245,12 +245,12 @@ namespace Server.Common.Net
         CONDITION_CLEAR = 0x88,
 
         // 0x92
-        // 0x93
-        // 0x94 // 交易準備
-        // 0x95 // 交易確認
+        TRADE_INVITE = 0x93,
+        TRADE_READY = 0x94,
+        TRADE_CONFIRM = 0x95,
         // 0x96 // 交易取消
         // 0x97 // 交易失敗
-        // 0x98 // 交易成功
+        TRADE_SUCCESS = 0x98,
         // 0x9A
         // 0x9B
         PARTY_INVITE = 0x9C,

@@ -94,7 +94,7 @@ namespace Server.Handler
 
                 for (int i = 0; i < Monster.Drops.Count; i++)
                 {
-                    Monster.Drops[i].PositionX = Monster.PositionX - (5 * i);
+                    Monster.Drops[i].PositionX = Monster.PositionX;
                     Monster.Drops[i].PositionY = Monster.PositionY - 50;
                     Item it = new Item(Monster.Drops[i].ItemID, 0x63, 0x63, Monster.Drops[i].Quantity);
                     Monster.Drops[i].ID = map.ObjectID;
