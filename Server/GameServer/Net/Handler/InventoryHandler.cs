@@ -287,37 +287,21 @@ namespace Server.Handler
         {
             ItemData idata = ItemFactory.GetItemData(itemID);
             Character chr = gc.Character;
-            if (idata.Attack != -1)
+            if (idata.Attack != -1 || idata.MagicAttack != -1)
             {
                 if (equiped)
                 {
-                    if (GameConstants.isPhysicalWeapon(itemID))
-                    {
-                        // 物理攻擊力武器
-                        chr.Attack += idata.Attack;
-                        chr.MaxAttack += idata.Attack;
-                    }
-                    else
-                    {
-                        // 魔法攻擊力武器
-                        chr.Magic += idata.Attack;
-                        chr.MaxMagic += idata.Attack;
-                    }
+                    chr.Attack += idata.Attack;
+                    chr.MaxAttack += idata.Attack;
+                    chr.Magic += idata.MagicAttack;
+                    chr.MaxMagic += idata.MagicAttack;
                 }
                 else
                 {
-                    if (GameConstants.isPhysicalWeapon(itemID))
-                    {
-                        // 物理攻擊力武器
-                        chr.Attack -= idata.Attack;
-                        chr.MaxAttack -= idata.Attack;
-                    }
-                    else
-                    {
-                        // 魔法攻擊力武器
-                        chr.Magic -= idata.Attack;
-                        chr.MaxMagic -= idata.Attack;
-                    }
+                    chr.Attack -= idata.Attack;
+                    chr.MaxAttack -= idata.Attack;
+                    chr.Magic -= idata.MagicAttack;
+                    chr.MaxMagic -= idata.MagicAttack;
                 }
             }
             if (idata.Defense != -1)

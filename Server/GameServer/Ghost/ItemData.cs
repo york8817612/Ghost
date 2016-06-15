@@ -7,6 +7,7 @@
         public readonly byte Job;
         public readonly byte Level;
         public readonly short Attack;
+        public readonly short MagicAttack;
         public readonly short AttackRange;
         public readonly short Defense;
         public readonly byte Speed;
@@ -47,13 +48,14 @@
         }
 
         // 武器
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, byte Speed, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
             this.Job = Job;
             this.Level = Level;
             this.Attack = Attack;
+            this.MagicAttack = MagicAttack;
             this.AttackRange = AttackRange;
             this.Defense = -1;
             this.Speed = Speed;
@@ -78,13 +80,14 @@
             this.Price = Price;
         }
 
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short AttackRange, byte Speed, int Hp, int Mp, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, int Hp, int Mp, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
             this.Job = Job;
             this.Level = Level;
             this.Attack = Attack;
+            this.MagicAttack = MagicAttack;
             this.AttackRange = AttackRange;
             this.Defense = -1;
             this.Speed = Speed;

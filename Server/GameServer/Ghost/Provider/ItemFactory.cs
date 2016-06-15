@@ -87,7 +87,7 @@ namespace Server.Ghost.Provider
                 byte job = item.ReadByte(); // 職業
                 byte level = item.ReadByte(); // 功力
                 short attack = item.ReadInt16(); // 類型
-                item.ReadInt16();
+                short MagicAttack = item.ReadInt16();
                 short attackRange = item.ReadInt16(); // 攻擊距離
                 item.ReadInt16();
                 byte Speed = item.ReadByte(); // 攻擊速度
@@ -105,7 +105,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, attackRange, Speed, price));
+                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, MagicAttack, attackRange, Speed, price));
             }
             all.Add(weaponData);
             //==============================================================================
