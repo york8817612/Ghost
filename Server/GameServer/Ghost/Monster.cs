@@ -8,12 +8,20 @@ namespace Server.Ghost
         public int MonsterID { get; set; }
         public int Level { get; set; }
         public int HP { get; set; }
+        public int MaxHP { get; set; }
         public int MP { get; set; }
         public int Exp { get; set; }
         public float Speed { get; set; }
         public int Direction { get; set; }
+        public byte MoveType { get; set; }
+        public byte AttackType { get; set; }
+        public int Attack1 { get; set; }
+        public int Attack2 { get; set; }
+        public int CrashAttack { get; set; }
+        public int Defense { get; set; }
         public byte State { get; set; }
         public byte Effect { get; set; }
+        public byte AddEffect { get; set; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
 
@@ -38,18 +46,26 @@ namespace Server.Ghost
         06 // 煞
         */
 
-        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MP, int Exp, float Speed, int Driection, byte State, byte Effect, int PositionX, int PositionY, bool IsAlive)
+        public Monster(int OriginalID, int MonsterID, int Level, int HP, int MaxHP, int MP, int Exp, float Speed, int Driection, byte MoveType, byte AttackType, int Attack1, int Attack2, int CrashAttack, int Defense, byte State, byte Effect, byte AddEffect, int PositionX, int PositionY, bool IsAlive)
         {
             this.OriginalID = OriginalID;
             this.MonsterID = MonsterID;
             this.Level = Level;
             this.HP = HP;
+            this.MaxHP = MaxHP;
             this.MP = MP;
             this.Exp = Exp;
             this.Speed = Speed;
             this.Direction = Driection;
+            this.MoveType = MoveType;
+            this.AttackType = AttackType;
+            this.Attack1 = Attack1;
+            this.Attack2 = Attack2;
+            this.CrashAttack = CrashAttack;
+            this.Defense = Defense;
             this.State = State;
             this.Effect = Effect;
+            this.AddEffect = AddEffect;
             this.PositionX = PositionX;
             this.PositionY = PositionY;
             this.IsAlive = IsAlive;

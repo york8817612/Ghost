@@ -50,10 +50,10 @@ namespace Server.Packet
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLevel);
                 plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF); // 變身效果
-                plew.WriteByte(0xFF);
-                plew.WriteHexString("00 00 3A 01");
+                plew.WriteByte(0xFF); // 光圈
+                plew.WriteByte(0xFF); // 透明
+                plew.WriteByte(0xFF); // 憤怒
+                plew.WriteHexString("00 00 00 00");
                 plew.WriteInt(chr.Hair);                                                                                        // 頭髮
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);       // 臉上
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);     // 臉下
@@ -67,13 +67,13 @@ namespace Server.Packet
                 //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);         // 玩物
                 // 寵物
-                plew.WriteString("", 20); // PetName
-                plew.WriteInt(0); // PetLevel
-                plew.WriteInt(0); // PetHP
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(0);
+                plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
+                plew.WriteInt(chr.Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetLevel
+                plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetHP
+                plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(chr.Pets.DecorateID((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
                 // 玩物
                 plew.WriteString("", 20); // ToyName
                 plew.WriteInt(0); // ToyLevel
@@ -173,11 +173,11 @@ namespace Server.Packet
                     plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);       // 玩物[Toy]
 
                     // 寵物
-                    plew.WriteString("", 20); // PetName
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
+                    plew.WriteString(chr[i].Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
+                    plew.WriteInt(chr[i].Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                    plew.WriteInt(chr[i].Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                    plew.WriteInt(chr[i].Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                    plew.WriteInt(chr[i].Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
                     plew.WriteInt(0);
 
                     // 玩物
@@ -221,7 +221,7 @@ namespace Server.Packet
                     plew.WriteByte(0); // 泡泡效果
                     plew.WriteByte(0);
                     plew.WriteShort(0);
-                    plew.WriteShort(-1);// 玩家ID [Map Number]
+                    plew.WriteShort(chr[i].CharacterID);// 玩家ID [Map Number]
                     plew.WriteByte(-1);
                     plew.WriteByte(0);
                     plew.WriteByte(0);

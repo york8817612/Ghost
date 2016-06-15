@@ -42,6 +42,9 @@ namespace Server.Net
                 case ClientOpcode.MOVE_ITEM_REQ:
                     InventoryHandler.MoveItem_Req(ip, gc);
                     break;
+                case ClientOpcode.INVEN_SELECTSLOT_REQ:
+                    InventoryHandler.SelectSlot_Req(ip, gc);
+                    break;
                 case ClientOpcode.USE_SPEND_REQ:
                     InventoryHandler.UseSpend_Req(ip, gc);
                     break;
@@ -68,6 +71,12 @@ namespace Server.Net
                     break;
                 case ClientOpcode.QUEST_DONE_REQ:
                     QuestHandler.Quest_Done_Req(ip, gc);
+                    break;
+                case ClientOpcode.QUEST_RETURN_REQ:
+                    QuestHandler.Quest_Return_Req(ip, gc);
+                    break;
+                case ClientOpcode.QUEST_DONE2_REQ:
+                    QuestHandler.Quest_Done2_Req(ip, gc);
                     break;
                 case ClientOpcode.QUEST_UPDATE_REQ:
                     QuestHandler.Quest_Update_Req(ip, gc);
@@ -111,12 +120,19 @@ namespace Server.Net
                     ActionHandler.p_Speed_c(ip, gc);
                     break;
                 case ClientOpcode.P_DAMAGE_C:
+                    ActionHandler.p_Damage_c(ip, gc);
                     break;
                 case ClientOpcode.P_DEAD_C:
                     ActionHandler.p_Dead_c(ip, gc);
                     break;
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
+                    break;
+                case ClientOpcode.PET_MOVE_C:
+                    ActionHandler.Pet_Move_C(ip, gc);
+                    break;
+                case ClientOpcode.PET_ATTACK_C:
+                    ActionHandler.Pet_Attack_C(ip, gc);
                     break;
                 // Party
                 case ClientOpcode.PARTY_INVITE_REQ:

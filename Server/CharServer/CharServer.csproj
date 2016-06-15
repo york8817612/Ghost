@@ -48,6 +48,7 @@
     <Compile Include="Characters\CharacterItems.cs" />
     <Compile Include="Characters\CharacterSkills.cs" />
     <Compile Include="Characters\CharacterStorages.cs" />
+    <Compile Include="Characters\CharacterUseSlot.cs" />
     <Compile Include="CharServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Item.cs" />

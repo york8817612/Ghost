@@ -3,7 +3,6 @@ using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Ghost.Characters;
 using Server.Net;
-using System.Net;
 
 namespace Server.Packet
 {

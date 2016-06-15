@@ -1,6 +1,5 @@
 ﻿using Server.Common.Constants;
 using Server.Common.Data;
-using Server.Common.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -64,26 +63,33 @@ namespace Server.Ghost.Characters
 
         public void Remove(byte type, byte slot)
         {
-            Item item = this.Items.Find(i => (i.type == type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == type && i.Slot == slot));
             this.Items.Remove(item);
             item.Delete();
         }
 
         public void Remove(InventoryType.ItemType type, byte slot)
         {
-            Item item = this.Items.Find(i => (i.type == (byte)type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             this.Items.Remove(item);
             item.Delete();
         }
 
         public void Remove(byte type, byte slot, int Quantity)
         {
-            Item item = this.Items.Find(i => (i.type == type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == type && i.Slot == slot));
             int SourceQuantity = item.Quantity;
             item.Quantity = (short)Quantity;
             this.Remove(type, slot);
             int AddQuantity = SourceQuantity - item.Quantity;
-            this.Add(new Item(item.ItemID, item.slot, item.type, (short)AddQuantity));
+            this.Add(new Item(item.ItemID, item.Slot, item.Type, (short)AddQuantity));
+        }
+
+        public void Remove(int ItemID)
+        {
+            Item item = this.Items.Find(i => (i.ItemID == ItemID));
+            this.Items.Remove(item);
+            item.Delete();
         }
 
         public List<Item> getItems()
@@ -93,13 +99,13 @@ namespace Server.Ghost.Characters
 
         public Item GetItem(byte type, byte slot)
         {
-            Item item = this.Items.Find(i => (i.type == type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == type && i.Slot == slot));
             return item;
         }
 
         public int GetItemID(InventoryType.ItemType type, byte slot)
         {
-            Item item = this.Items.Find(i => (i.type == (byte)type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
                 return 0;
             return item.ItemID;
@@ -107,7 +113,7 @@ namespace Server.Ghost.Characters
 
         public int GetItemQuantity(InventoryType.ItemType type, byte slot)
         {
-            Item item = this.Items.Find(i => (i.type == (byte)type && i.slot == slot));
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
                 return 0;
             return item.Quantity;
@@ -132,7 +138,7 @@ namespace Server.Ghost.Characters
 
             foreach (Item item in this)
             {
-                if (item.type == (byte)type)
+                if (item.Type == (byte)type)
                 {
                     count++;
                 }
@@ -147,7 +153,7 @@ namespace Server.Ghost.Characters
             {
                 foreach (Item item in this)
                 {
-                    if (item.type == (byte)type && item.slot == slot)
+                    if (item.Type == (byte)type && item.Slot == slot)
                     {
                         return item;
                     }

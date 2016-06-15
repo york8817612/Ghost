@@ -58,14 +58,20 @@ namespace Server.Ghost.Characters
         public short SkillBonus { get; set; }
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
+
+        public bool IsAlive { get; set; }
+
         public IPAddress IP { get; set; }
 
         public CharacterItems Items { get; private set; }
+        public CharacterPets Pets { get; private set; }
         public CharacterStorages Storages { get; private set; }
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
         public CharacterKeyMap Keymap { get; private set; }
         public CharacterShop Shop { get; set; }
+
+        public CharacterUseSlot UseSlot { get; private set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 
@@ -77,11 +83,14 @@ namespace Server.Ghost.Characters
             this.Client = gc;
 
             this.Items = new CharacterItems(this);
+            this.Pets = new CharacterPets(this);
             this.Storages = new CharacterStorages(this);
             this.Skills = new CharacterSkills(this);
             this.SkillState = new Dictionary<int, Common.Threading.Delay>();
             this.Quests = new CharacterQuests(this);
             this.Keymap = new CharacterKeyMap(this);
+            this.UseSlot = new CharacterUseSlot(this);
+            this.IsAlive = true;
         }
 
         public void Load(bool IsFullLoad = true)
@@ -139,10 +148,12 @@ namespace Server.Ghost.Characters
             this.Position = (byte)datum.position;
 
             this.Items.Load();
+            this.Pets.Load();
             this.Storages.Load();
             this.Skills.Load();
             this.Quests.Load();
             this.Keymap.Load();
+            this.UseSlot.Load();
         }
 
         public void Save()
@@ -208,10 +219,12 @@ namespace Server.Ghost.Characters
             }
 
             this.Items.Save();
+            this.Pets.Save();
             this.Storages.Save();
             this.Skills.Save();
             this.Quests.Save();
             this.Keymap.Save();
+            this.UseSlot.Save();
 
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             MapFactory.AllCharacters.Remove(this);
@@ -225,10 +238,12 @@ namespace Server.Ghost.Characters
         public void Delete()
         {
             this.Items.Delete();
+            this.Pets.Delete();
             this.Storages.Delete();
             this.Skills.Delete();
             this.Quests.Delete();
             this.Keymap.Delete();
+            this.UseSlot.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 

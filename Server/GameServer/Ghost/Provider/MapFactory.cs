@@ -903,7 +903,7 @@ namespace Server.Ghost.Provider
                             var Direction = reader.ReadByte();
                             var Speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
                             var PosX = reader.ReadInt32();
-                            var PosY = reader.ReadInt32() + 37;
+                            var PosY = reader.ReadInt32() + 40;
                             int ss = reader.ReadInt32();
                             int ss2 = 0;
                             do
@@ -920,13 +920,18 @@ namespace Server.Ghost.Provider
                             Level[2] = Value[3];
                             Level[3] = Value[4];
                             int MonsterLevel = int.Parse(new string(Level));
-                            int MonsterHP = MobFactory.MonsterHP(MonsterLevel);
-                            int MonsterExp = MobFactory.MonsterExp(MonsterLevel);
-                            Monster m = new Monster(i, MonsterID, MonsterLevel, MonsterHP, 0, MonsterExp, Speed, Direction, 1, 0, PosX, PosY, true);
+                            int MaxHP = MobFactory.MonsterMaxHP(MonsterLevel);
+                            int Exp = MobFactory.MonsterExp(MonsterLevel);
+                            byte MoveType = MobFactory.MoveType(MonsterID);
+                            byte AttackType = MobFactory.MoveType(MonsterID);
+                            int Attack1 = MobFactory.Attack1(MonsterID);
+                            int Attack2 = MobFactory.Attack2(MonsterID);
+                            int CrashAttack = MobFactory.CrashAttack(MonsterID);
+                            int Defense = MobFactory.Defense(MonsterID);
+                            byte AddEffect = MobFactory.AddEffect(MonsterID);
+                            Monster m = new Monster(i, MonsterID, MonsterLevel, MaxHP, MaxHP, 0, Exp, Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, 1, 0, AddEffect, PosX, PosY, true);
                             map.Monster.Add(m);
                             MapHandler.UpdatePosition(m, (int)(40 * map.Monster[i].Speed), map);
-                            if (MonsterID == 1000501 || MonsterID == 1000801 || MonsterID == 1003501 || MonsterID == 1004502)
-                                m.Speed = 0;
                         }
                     }
                     for (int j = map.Monster.Count; j < 50; j++)

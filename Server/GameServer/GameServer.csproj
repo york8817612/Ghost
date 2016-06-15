@@ -44,12 +44,15 @@
     <Compile Include="Ghost\Accounts\Account.cs" />
     <Compile Include="Ghost\Accounts\NoAccountException.cs" />
     <Compile Include="Ghost\Characters\Character.cs" />
+    <Compile Include="Ghost\Characters\CharacterPets.cs" />
     <Compile Include="Ghost\Characters\CharacterItems.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
     <Compile Include="Ghost\Characters\CharacterKeyMap.cs" />
     <Compile Include="Ghost\Characters\CharacterShop.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
+    <Compile Include="Ghost\Characters\CharacterUseSlot.cs" />
+    <Compile Include="Ghost\Pet.cs" />
     <Compile Include="Ghost\Map\Drop.cs" />
     <Compile Include="Ghost\Item.cs" />
     <Compile Include="Ghost\Characters\CharacterSkills.cs" />

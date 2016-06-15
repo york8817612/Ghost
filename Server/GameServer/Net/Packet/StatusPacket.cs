@@ -49,7 +49,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Magic); // 魔攻力(Min)
                 plew.WriteShort(chr.Defense); // 防禦力
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
-                plew.WriteByte(1);
+                plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].AttackRange : 0); // 攻擊距離
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
                 plew.WriteShort(chr.SkillBonus); // 技能上升值
@@ -139,7 +139,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Magic);
                 plew.WriteShort(chr.Defense);
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
-                plew.WriteByte(1);
+                plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].AttackRange : 0); // 攻擊距離
                 plew.WriteShort(0);
                 plew.WriteShort(chr.AbilityBonus);
                 plew.WriteShort(chr.SkillBonus);

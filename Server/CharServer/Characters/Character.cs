@@ -60,6 +60,8 @@ namespace Server.Characters
         public CharacterSkills Skills { get; private set; }
         public CharacterKeyMap Keymap { get; private set; }
 
+        public CharacterUseSlot UseSlot { get; private set; }
+
         private bool Assigned { get; set; }
 
         public Character(int id = 0, Client gc = null)
@@ -71,6 +73,7 @@ namespace Server.Characters
             this.Storages = new CharacterStorages(this);
             this.Skills = new CharacterSkills(this);
             this.Keymap = new CharacterKeyMap(this);
+            this.UseSlot = new CharacterUseSlot(this);
         }
 
         public void Load(bool IsFullLoad = true)
@@ -131,6 +134,7 @@ namespace Server.Characters
             this.Storages.Load();
             this.Skills.Load();
             this.Keymap.Load();
+            this.UseSlot.Load();
         }
 
         public void Save()
@@ -199,6 +203,7 @@ namespace Server.Characters
             this.Storages.Save();
             this.Skills.Save();
             this.Keymap.Save();
+            this.UseSlot.Save();
 
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
@@ -209,6 +214,7 @@ namespace Server.Characters
             this.Storages.Delete();
             this.Skills.Delete();
             this.Keymap.Delete();
+            this.UseSlot.Delete();
 
             Database.Delete("Characters", "id = '{0}'", this.ID);
 

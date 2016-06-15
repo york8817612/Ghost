@@ -12,8 +12,8 @@ namespace Server.Ghost
         public int ItemID { get; private set; }
         private short maxPerStack;
         private short quantity;
-        public byte type { get; set; }
-        public byte slot { get; set; }
+        public byte Type { get; set; }
+        public byte Slot { get; set; }
 
         public bool Assigned { get; set; }
 
@@ -88,8 +88,8 @@ namespace Server.Ghost
                     break;
             }
             this.Quantity = quantity;
-            this.slot = slot;
-            this.type = type;
+            this.Slot = slot;
+            this.Type = type;
         }
 
         public Item(dynamic datum)
@@ -113,8 +113,8 @@ namespace Server.Ghost
                     break;
             }
             this.Quantity = (short)datum.quantity;
-            this.slot = (byte)datum.slot;
-            this.type = (byte)datum.type;
+            this.Slot = (byte)datum.slot;
+            this.Type = (byte)datum.type;
         }
 
         public void Save()
@@ -124,8 +124,8 @@ namespace Server.Ghost
             datum.cid = this.Character.ID;
             datum.itemId = this.ItemID;
             datum.quantity = this.Quantity;
-            datum.slot = this.slot;
-            datum.type = this.type;
+            datum.slot = this.Slot;
+            datum.type = this.Type;
 
             if (this.Assigned)
             {
@@ -135,7 +135,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && quantity = '{2}' && slot = '{3}' && type = '{4}'", this.Character.ID, this.ItemID, this.quantity, this.slot, this.type);
+                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && quantity = '{2}' && slot = '{3}' && type = '{4}'", this.Character.ID, this.ItemID, this.quantity, this.Slot, this.Type);
 
                 this.Assigned = true;
             }

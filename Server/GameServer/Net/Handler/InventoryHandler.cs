@@ -34,31 +34,42 @@ namespace Server.Handler
             }
             else
             {
-                if (gc.Character.Items.GetItem(TargetType, TargetSlot) == null)
+                if (chr.Items.GetItem(TargetType, TargetSlot) == null)
                 {
-                    Source.type = TargetType;
-                    Source.slot = TargetSlot;
-                    if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
-                        UpdateCharacterInventoryStatus(gc, Source.ItemID, SourceType > 0);
+                    if (SourceType != 5)
+                    {
+                        // 普通物品
+                        Source.Type = TargetType;
+                        Source.Slot = TargetSlot;
+                        if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
+                            UpdateCharacterInventoryStatus(gc, Source.ItemID, SourceType > 0);
+                    }
+                    else
+                    {
+                        // 寵物
+                        Pet Src = chr.Pets.Pet(SourceType, SourceSlot);
+                        Src.Type = TargetType;
+                        Src.Slot = TargetSlot;
+                    }
                 }
                 else
                 {
-                    if ((SourceType == TargetType) 
-                        && ((TargetType == (byte)InventoryType.ItemType.Spend3) 
-                        || (TargetType == (byte)InventoryType.ItemType.Other4)) 
+                    if ((SourceType == TargetType)
+                        && ((TargetType == (byte)InventoryType.ItemType.Spend3)
+                        || (TargetType == (byte)InventoryType.ItemType.Other4))
                         && (Source.ItemID == Target.ItemID))
                     {
                         // 合併消費物品跟其他物品
-                        if (chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity + Source.Quantity > 100)
+                        if (chr.Items[(InventoryType.ItemType)Target.Type, Target.Slot].Quantity + Source.Quantity > 100)
                         {
-                            short newqu = (short)(Source.Quantity - (100 - chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity));
-                            chr.Items[(InventoryType.ItemType)Source.type, Source.slot].Quantity = newqu;
-                            chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity = 100;
+                            short newqu = (short)(Source.Quantity - (100 - chr.Items[(InventoryType.ItemType)Target.Type, Target.Slot].Quantity));
+                            chr.Items[(InventoryType.ItemType)Source.Type, Source.Slot].Quantity = newqu;
+                            chr.Items[(InventoryType.ItemType)Target.Type, Target.Slot].Quantity = 100;
                         }
                         else
                         {
                             chr.Items.Remove(SourceType, SourceSlot);
-                            chr.Items[(InventoryType.ItemType)Target.type, Target.slot].Quantity += Source.Quantity;
+                            chr.Items[(InventoryType.ItemType)Target.Type, Target.Slot].Quantity += Source.Quantity;
                         }
                     }
                     else
@@ -67,13 +78,13 @@ namespace Server.Handler
                         chr.Items.Remove(SourceType, SourceSlot);
                         chr.Items.Remove(TargetType, TargetSlot);
                         // 類型
-                        byte swapType = Source.type;
-                        Source.type = Target.type;
-                        Target.type = swapType;
+                        byte swapType = Source.Type;
+                        Source.Type = Target.Type;
+                        Target.Type = swapType;
                         // 欄位
-                        byte swapSlot = Source.slot;
-                        Source.slot = Target.slot;
-                        Target.slot = swapSlot;
+                        byte swapSlot = Source.Slot;
+                        Source.Slot = Target.Slot;
+                        Target.Slot = swapSlot;
                         //
                         chr.Items.Add(Source);
                         chr.Items.Add(Target);
@@ -86,6 +97,15 @@ namespace Server.Handler
                 }
             }
             UpdateInventory(gc, SourceType, TargetType);
+        }
+
+        public static void SelectSlot_Req(InPacket lea, Client c)
+        {
+            int Slot = lea.ReadInt();
+            var chr = c.Character;
+            chr.UseSlot.Remove((byte)InventoryType.ItemType.Spend3);
+            chr.UseSlot.Add((byte)InventoryType.ItemType.Spend3, (byte)Slot);
+            InventoryPacket.SelectSlot(c, Slot);
         }
 
         public static void UseSpend_Req(InPacket lea, Client gc)
@@ -244,13 +264,13 @@ namespace Server.Handler
                 }
             }
 
-            if (((Type == (byte)InventoryType.ItemType.Spend3) 
-                || (Type == (byte)InventoryType.ItemType.Other4)) 
-                && (finditem != null) 
+            if (((Type == (byte)InventoryType.ItemType.Spend3)
+                || (Type == (byte)InventoryType.ItemType.Other4))
+                && (finditem != null)
                 && (finditem.Quantity + map.getDropByOriginalID(OriginalID).Quantity) <= 100)
             {
                 // 合併消費物品跟其他物品
-                chr.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity += map.getDropByOriginalID(OriginalID).Quantity;
+                chr.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity += map.getDropByOriginalID(OriginalID).Quantity;
             }
             else
             {
@@ -263,20 +283,41 @@ namespace Server.Handler
             UpdateInventory(gc, Type);
         }
 
-        public static void UpdateCharacterInventoryStatus(Client gc, int item, bool equiped)
+        public static void UpdateCharacterInventoryStatus(Client gc, int itemID, bool equiped)
         {
-            ItemData idata = ItemFactory.GetItemData(item);
+            ItemData idata = ItemFactory.GetItemData(itemID);
             Character chr = gc.Character;
             if (idata.Attack != -1)
             {
                 if (equiped)
                 {
-                    chr.Attack += idata.Attack;
-                    chr.MaxAttack += idata.Attack;
-                } else
+                    if (GameConstants.isPhysicalWeapon(itemID))
+                    {
+                        // 物理攻擊力武器
+                        chr.Attack += idata.Attack;
+                        chr.MaxAttack += idata.Attack;
+                    }
+                    else
+                    {
+                        // 魔法攻擊力武器
+                        chr.Magic += idata.Attack;
+                        chr.MaxMagic += idata.Attack;
+                    }
+                }
+                else
                 {
-                    chr.Attack -= idata.Attack;
-                    chr.MaxAttack -= idata.Attack;
+                    if (GameConstants.isPhysicalWeapon(itemID))
+                    {
+                        // 物理攻擊力武器
+                        chr.Attack -= idata.Attack;
+                        chr.MaxAttack -= idata.Attack;
+                    }
+                    else
+                    {
+                        // 魔法攻擊力武器
+                        chr.Magic -= idata.Attack;
+                        chr.MaxMagic -= idata.Attack;
+                    }
                 }
             }
             if (idata.Defense != -1)
@@ -322,6 +363,8 @@ namespace Server.Handler
                     InventoryPacket.getInvenOther4(gc);
                     break;
                 case 5:
+                    if (TargetType == 0)
+                        UpdateAvatar(gc);
                     InventoryPacket.getInvenPet5(gc);
                     break;
             }

@@ -10,6 +10,7 @@ namespace Server.Ghost
         public int ID { get; private set; }
         public int QuestID { get; set; }
         public byte QuestState { get; set; }
+        public byte QuestStage { get; set; }
         public int RequireMonster { get; set; }
         public int CompleteMonster { get; set; }
 

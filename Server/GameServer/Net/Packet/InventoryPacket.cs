@@ -33,13 +33,13 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
 
                 // 寵物
-                plew.WriteString("", 20); // PetName
-                plew.WriteInt(0); // PetLevel
-                plew.WriteInt(0); // PetHP
-                plew.WriteInt(0); // PetMaxMP
-                plew.WriteInt(0); // PetExp
-                plew.WriteInt(0); // PetDeco
-                plew.WriteInt(-1); // PetSlot
+                plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
+                plew.WriteInt(chr.Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetLevel
+                plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetHP
+                plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetMaxMP
+                plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetExp
+                plew.WriteInt(chr.Pets.DecorateID((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetDeco
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : -1); // PetSlot
                 // 玩物
                 plew.WriteString("", 20); // ToyName
                 plew.WriteByte(0); // ToyLevel
@@ -158,13 +158,13 @@ namespace Server.Packet
                 }
 
                 //寵物
-                plew.WriteString("", 20); // PetName
-                plew.WriteByte(0); // PetLevel
+                plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
+                plew.WriteByte(chr.Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetLevel
                 plew.WriteByte(0);
-                plew.WriteInt(0); // PetHP
-                plew.WriteInt(0);
-                plew.WriteInt(0);
-                plew.WriteInt(-1);
+                plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetHP
+                plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : -1);
                 plew.WriteInt(-1);
                 plew.WriteInt(-1); // 寵物截止日期
                 plew.WriteByte(0);
@@ -289,7 +289,8 @@ namespace Server.Packet
                 { // 截止日期
                     plew.WriteInt(0);
                 }
-                plew.WriteHexString("03 FF FF FF");
+                plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
+                plew.WriteHexString("FF FF FF");
                 c.Send(plew);
             }
         }
@@ -330,35 +331,35 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 寵物編號
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Pet5, i));
+                    plew.WriteInt(chr.Pets.ItemID((byte)InventoryType.ItemType.Pet5, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 寵物名稱
-                    plew.WriteString("", 20);
+                    plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Pet5, i), 20);
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 寵物等級
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Pets.Level((byte)InventoryType.ItemType.Pet5, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 寵物血量
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Pet5, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 寵物經驗值
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 截止日期
                     plew.WriteInt(-1);
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 
-                    plew.WriteShort(0);
+                    plew.WriteShort(chr.Pets.ItemID((byte)InventoryType.ItemType.Pet5, i) == 0 ? 0 : 1);
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
@@ -377,6 +378,17 @@ namespace Server.Packet
                     plew.WriteShort(0);
                 }
 
+                c.Send(plew);
+            }
+        }
+
+        public static void SelectSlot(Client c, int Slot)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_SELECTSLOT_ACK))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(Slot);
                 c.Send(plew);
             }
         }
@@ -447,9 +459,9 @@ namespace Server.Packet
             {
                 foreach (Item im in chr.Items)
                 {
-                    if (im.type != (byte)InventoryType.ItemType.Equip)
+                    if (im.Type != (byte)InventoryType.ItemType.Equip)
                         continue;
-                    switch (im.slot)
+                    switch (im.Slot)
                     {
                         case (byte)InventoryType.EquipType.Weapon:
                             equip.Add(InventoryType.EquipType.Weapon, im.ItemID);
@@ -481,9 +493,6 @@ namespace Server.Packet
                         case (byte)InventoryType.EquipType.Face:
                             equip.Add(InventoryType.EquipType.Face, im.ItemID);
                             break;
-                        case (byte)InventoryType.EquipType.Pet:
-                            equip.Add(InventoryType.EquipType.Pet, im.ItemID);
-                            break;
                         case (byte)InventoryType.EquipType.Dress:
                             equip.Add(InventoryType.EquipType.Dress, im.ItemID);
                             break;
@@ -498,6 +507,17 @@ namespace Server.Packet
                             break;
                         case (byte)InventoryType.EquipType.Toy:
                             equip.Add(InventoryType.EquipType.Toy, im.ItemID);
+                            break;
+                    }
+                }
+                foreach (Pet Pet in chr.Pets)
+                {
+                    if (Pet.Type != (byte)InventoryType.ItemType.Equip)
+                        continue;
+                    switch (Pet.Slot)
+                    {
+                        case (byte)InventoryType.EquipType.Pet:
+                            equip.Add(InventoryType.EquipType.Pet, Pet.ItemID);
                             break;
                     }
                 }

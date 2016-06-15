@@ -53,6 +53,33 @@ namespace Server.Ghost.Characters
             return this.Skills;
         }
 
+        public byte GetNextFreeSlot(byte type)
+        {
+            for (byte i = 0; i < 10; i++)
+            {
+                if (this[type, i] == null)
+                {
+                    return i;
+                }
+            }
+            throw new SkillFullException();
+        }
+
+        public Skill this[byte Type, byte Slot]
+        {
+            get
+            {
+                foreach (Skill Skill in this)
+                {
+                    if (Skill.Type == Type && Skill.Slot == Slot)
+                    {
+                        return Skill;
+                    }
+                }
+                return null;
+            }
+        }
+
         public IEnumerator<Skill> GetEnumerator()
         {
             return this.Skills.GetEnumerator();

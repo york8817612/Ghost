@@ -57,6 +57,7 @@
     <Compile Include="Data\Meta.cs" />
     <Compile Include="Data\RowNotUniqueException.cs" />
     <Compile Include="IO\HackException.cs" />
+    <Compile Include="IO\SkillFullException.cs" />
     <Compile Include="IO\InventoryFullException.cs" />
     <Compile Include="IO\Log.cs" />
     <Compile Include="IO\LogLevel.cs" />

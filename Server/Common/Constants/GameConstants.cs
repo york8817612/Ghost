@@ -18,5 +18,12 @@
             }
             return exp[level - 1];
         }
+
+        public static bool isPhysicalWeapon(int ItemID)
+        {
+            if (ItemID >= 8050101 && ItemID <= 8061531)
+                return false;
+            return true;
+        }
     }
 }

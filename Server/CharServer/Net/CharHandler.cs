@@ -127,7 +127,8 @@ namespace Server.Ghost
             chr.Keymap.Add("Z", new Shortcut(1, 0, 0));
             chr.Keymap.Add("X", new Shortcut(4, 0, 3));
             chr.Keymap.Add("C", new Shortcut(3, 0, 2));
-
+            chr.UseSlot.Add((byte)InventoryType.ItemType.Spend3, 0xFF);
+            chr.UseSlot.Add((byte)InventoryType.ItemType.Pet5, 0xFF);
 
             if ((gc.Account.Characters.Count + 1) <= 4)
             {

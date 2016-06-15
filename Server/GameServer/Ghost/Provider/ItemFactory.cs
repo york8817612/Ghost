@@ -538,13 +538,13 @@ namespace Server.Ghost.Provider
             item.Close();
         }
 
-        public static ItemData GetItemData(int item)
+        public static ItemData GetItemData(int itemID)
         {
             foreach (Dictionary<int, ItemData> idata in all)
             {
-                if (idata.ContainsKey(item))
+                if (idata.ContainsKey(itemID))
                 {
-                    return idata[item];
+                    return idata[itemID];
                 }
             }
             return null;

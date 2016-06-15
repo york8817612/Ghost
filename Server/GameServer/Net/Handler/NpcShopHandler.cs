@@ -86,14 +86,14 @@ namespace Server.Handler
                     if ((finditem.Quantity + Quantity) > 100)
                     {
                         int newqu = Quantity - (100 - finditem.Quantity);
-                        gc.Character.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity = (short)100;
+                        gc.Character.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity = (short)100;
                         byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
                         Item oItem = new Item(ItemID, Slot, Type, (short)newqu);
                         gc.Character.Items.Add(oItem);
                     }
                     else
                     {
-                        gc.Character.Items[(InventoryType.ItemType)finditem.type, finditem.slot].Quantity += (short)Quantity;
+                        gc.Character.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity += (short)Quantity;
                     }
                 }
                 else
@@ -179,7 +179,7 @@ namespace Server.Handler
                 {
                     if (Quantity <= 0)
                         return;
-                    gc.Character.Items[(InventoryType.ItemType)source.type, source.slot].Quantity -= Quantity;
+                    gc.Character.Items[(InventoryType.ItemType)source.Type, source.Slot].Quantity -= Quantity;
                 }
                 else
                 {

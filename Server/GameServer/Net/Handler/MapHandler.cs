@@ -72,12 +72,8 @@ namespace Server.Handler
                         continue;
                     if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
                     {
-                        map.Monster[i].State = 1;
-                        //map.Monster[i].Direction = map.Monster[i].Direction * -1;
-                        //Monster m = UpdatePosition(map.Monster[i], 40, map);
-                        //map.Monster[i].Direction = m.Direction;
-                        //map.Monster[i].PositionX = m.PositionX;
-                        //map.Monster[i].PositionY = m.PositionY;
+                        if (map.Monster[i].AttackType > 0)
+                            map.Monster[i].State = 3;
                         MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                         continue;
                     }
@@ -101,7 +97,7 @@ namespace Server.Handler
                 {
                     if (map.Monster[i].IsAlive == false)
                     {
-                        map.Monster[i].HP = MobFactory.MonsterHP(map.Monster[i].Level);
+                        map.Monster[i].HP = MobFactory.MonsterMaxHP(map.Monster[i].Level);
                         MonsterPacket.regenrMonster(gc, map.Monster[i]);
                         map.Monster[i].IsAlive = true;
                         map.Monster[i].State = 1;
@@ -192,12 +188,20 @@ namespace Server.Handler
 
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)
         {
-            short mapX = lea.ReadShort();
+            var chr = gc.Character;
+            int mapX = (chr.IsAlive == true ? lea.ReadShort() : lea.ReadInt());
             short mapY = lea.ReadShort();
             short positionX = lea.ReadShort();
             short positionY = lea.ReadShort();
             bool isAvailableMap = true;
-            MapPacket.warpToMapAuth(gc, isAvailableMap, mapX, mapY, positionX, positionY);
+            if (chr.IsAlive == false)
+            {
+                chr.Hp = 1;
+                chr.Mp = 1;
+                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                chr.IsAlive = true;
+            }
+            MapPacket.warpToMapAuth(gc, isAvailableMap, (short)mapX, mapY, positionX, positionY);
         }
     }
 }

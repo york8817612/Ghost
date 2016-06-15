@@ -8,14 +8,14 @@ namespace Server.Packet
 {
     public static class MonsterPacket
     {
-        public static void createAllMonster(Client c, Map map, List<Monster> monster)
+        public static void createAllMonster(Client c, Map Map, List<Monster> Monster)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.MON_ALLCREATE))
             {
                 int j = 0;
                 for (int i = 0; i < 50; i++)
                 {
-                    if (map.Monster[i] != null)
+                    if (Map.Monster[i] != null)
                     {
                         j++;
                     }
@@ -25,43 +25,39 @@ namespace Server.Packet
                 plew.WriteInt(j); // 怪物數量
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(monster[i] != null ? 1 : 0);
+                    plew.WriteByte(Monster[i] != null ? 1 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(monster[i] != null ? monster[i].Level : 0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].Level : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].AddEffect : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(monster[i] != null ? monster[i].Direction : 0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].Direction : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(monster[i] != null ? 1 : 0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].MoveType : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].AttackType : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? monster[i].OriginalID : -1);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].OriginalID : -1);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? monster[i].PositionX : 0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].PositionX : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? monster[i].PositionY : 0);
-                }
-                for (int i = 0; i < 50; i++)
-                {
-                    plew.WriteInt(0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].PositionY : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
@@ -69,27 +65,31 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? 5 : 0);
+                    plew.WriteInt(0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? 6 : 0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].Attack1 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? 5 : 0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].Attack2 : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteShort(monster[i] != null ? 1 : 0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].CrashAttack : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteInt(monster[i] != null ? monster[i].MonsterID : 0);
+                    plew.WriteShort(Monster[i] != null ? Monster[i].Defense : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteFloat(monster[i] != null ? monster[i].Speed : 0);
+                    plew.WriteInt(Monster[i] != null ? Monster[i].MonsterID : 0);
+                }
+                for (int i = 0; i < 50; i++)
+                {
+                    plew.WriteFloat(Monster[i] != null ? Monster[i].Speed : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
@@ -97,11 +97,11 @@ namespace Server.Packet
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteInt(0);
+                    plew.WriteInt(Monster[i] != null ? Monster[i].MaxHP : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteInt(monster[i] != null ? monster[i].HP : 0);
+                    plew.WriteInt(Monster[i] != null ? Monster[i].HP : 0);
                 }
                 c.Send(plew);
             }
@@ -144,21 +144,21 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(Monster.MonsterID);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
+                plew.WriteByte(Monster.Level);
+                plew.WriteByte(Monster.AddEffect);
                 plew.WriteByte(Monster.Direction);
-                plew.WriteByte(0);
+                plew.WriteByte(Monster.MoveType);
                 plew.WriteShort(Monster.PositionX);
                 plew.WriteShort(Monster.PositionY);
                 plew.WriteShort(0);
                 plew.WriteShort(0);
                 plew.WriteInt(Monster.HP);
                 plew.WriteShort(Monster.OriginalID);
-                plew.WriteShort(5);
-                plew.WriteShort(6);
-                plew.WriteShort(5);
-                plew.WriteShort(1);
-                plew.WriteShort(0); // Byte
+                plew.WriteShort(Monster.Attack1);
+                plew.WriteShort(Monster.Attack2);
+                plew.WriteShort(Monster.CrashAttack);
+                plew.WriteShort(Monster.Defense);
+                plew.WriteShort(Monster.AttackType); // Byte
                 plew.WriteShort(0x630);
                 plew.WriteShort(0);
                 c.Send(plew);

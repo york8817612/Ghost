@@ -110,11 +110,11 @@ namespace Server.Ghost
             plew.WriteByte(chr != null ? chr.Class : 0);
             plew.WriteByte(chr != null ? chr.ClassLevel : 0);
             plew.WriteByte(0);
+            plew.WriteByte(chr != null ? chr.MapX : 0);
+            plew.WriteByte(chr != null ? chr.MapY : 0);
             plew.WriteByte(0);
-            plew.WriteByte(0);
-            plew.WriteByte(0);
-            plew.WriteShort(chr != null ? 1 : 0);
-            plew.WriteShort(chr != null ? 1 : 0);
+            plew.WriteShort(chr != null ? chr.PlayerX : 0);
+            plew.WriteShort(chr != null ? chr.PlayerY : 0);
             Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
             plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0); // 武器[Weapon] 8010101
             plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0); // [Outfit]     8160351

@@ -79,6 +79,7 @@ namespace Server.Common.Net
         // Inventory
         PICKUP_ITEM = 0x4C,
         MOVE_ITEM_REQ = 0x6C,
+        INVEN_SELECTSLOT_REQ = 0x6D,
         USE_SPEND_REQ = 0x6F,
         // Status
         PLAYER_DAMAGE_REQ = 0x70,
@@ -90,6 +91,7 @@ namespace Server.Common.Net
         QUEST_GIVEUP_REQ = 0x7B,
         QUEST_DONE_REQ = 0x7C,
         QUEST_RETURN_REQ = 0x7D,
+        QUEST_DONE2_REQ = 0x7E,
         QUEST_UPDATE_REQ = 0x7F,
         // Map
         CAN_WARP_ACK_REQ = 0x85,

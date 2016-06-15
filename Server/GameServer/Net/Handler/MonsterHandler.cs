@@ -8,7 +8,6 @@ using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System;
-using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -43,6 +42,8 @@ namespace Server.Handler
             }
             if (Monster.HP <= 0)
             {
+                if (Monster.IsAlive == false)
+                    return;
                 Monster.State = 9;
                 //map.Monster.Remove(Monster);
                 Monster.IsAlive = false;
