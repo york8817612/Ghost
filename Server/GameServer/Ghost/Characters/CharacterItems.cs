@@ -24,6 +24,7 @@ namespace Server.Ghost.Characters
             this.MaxSlots.Add(InventoryType.ItemType.Spend3, 24);
             this.MaxSlots.Add(InventoryType.ItemType.Other4, 24);
             this.MaxSlots.Add(InventoryType.ItemType.Pet5, 24);
+            this.MaxSlots.Add(InventoryType.ItemType.Cash, 20);
 
             this.Items = new List<Item>();
         }
@@ -82,7 +83,7 @@ namespace Server.Ghost.Characters
             item.Quantity = (short)Quantity;
             this.Remove(type, slot);
             int AddQuantity = SourceQuantity - item.Quantity;
-            this.Add(new Item(item.ItemID, item.Slot, item.Type, (short)AddQuantity));
+            this.Add(new Item(item.ItemID, item.Type, item.Slot, (short)AddQuantity));
         }
 
         public void Remove(int ItemID)
@@ -111,12 +112,36 @@ namespace Server.Ghost.Characters
             return item.ItemID;
         }
 
-        public int GetItemQuantity(InventoryType.ItemType type, byte slot)
+        public int GetQuantity(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
                 return 0;
             return item.Quantity;
+        }
+
+        public byte GetIsLocked(InventoryType.ItemType type, byte slot)
+        {
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
+            if (item == null)
+                return 0;
+            return item.IsLocked;
+        }
+
+        public int GetIcon(InventoryType.ItemType type, byte slot)
+        {
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
+            if (item == null)
+                return 0;
+            return item.Icon;
+        }
+
+        public int GetTerm(InventoryType.ItemType type, byte slot)
+        {
+            Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
+            if (item == null)
+                return 0;
+            return item.Term;
         }
 
         public byte GetNextFreeSlot(InventoryType.ItemType type)

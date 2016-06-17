@@ -88,7 +88,7 @@ namespace Server.Handler
                         int newqu = Quantity - (100 - finditem.Quantity);
                         gc.Character.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity = (short)100;
                         byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-                        Item oItem = new Item(ItemID, Slot, Type, (short)newqu);
+                        Item oItem = new Item(ItemID, Type, Slot, (short)newqu);
                         gc.Character.Items.Add(oItem);
                     }
                     else
@@ -99,7 +99,7 @@ namespace Server.Handler
                 else
                 {
                     byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-                    Item oItem = new Item(ItemID, Slot, Type, (short)Quantity);
+                    Item oItem = new Item(ItemID, Type, Slot, (short)Quantity);
                     gc.Character.Items.Add(oItem);
                 }
 

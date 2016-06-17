@@ -157,6 +157,19 @@ namespace Server.Net
                 // Fish
                 case ClientOpcode.FISH_REQ:
                     break;
+                // CashShop
+                case ClientOpcode.CASHSHOP_LIST_REQ:
+                    CashShopHandler.CashShopList_Req(ip, gc);
+                    break;
+                case ClientOpcode.CASH_MGAMECASH_REQ:
+                    CashShopHandler.MgameCash_Req(ip, gc);
+                    break;
+                case ClientOpcode.CASH_BUY_REQ:
+                    CashShopHandler.BuyCommodity_Req(ip, gc);
+                    break;
+                case ClientOpcode.CASH_TO_INVEN_REQ:
+                    CashShopHandler.CommodityToInventory_Req(ip, gc);
+                    break;
             }
         }
     }

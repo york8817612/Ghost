@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Server.Ghost.Provider
 {
-    public class ItemFactory
+    public static class ItemFactory
     {
         private static string openPath = Application.LaunchPath + @"\table\item.itm";
 

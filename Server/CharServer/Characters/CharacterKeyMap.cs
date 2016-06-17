@@ -1,5 +1,4 @@
 ﻿using Server.Common.Data;
-using Server.Ghost;
 using System.Collections.Generic;
 
 namespace Server.Characters

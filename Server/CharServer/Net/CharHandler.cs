@@ -114,11 +114,11 @@ namespace Server.Ghost
 
             chr.Position = (byte)(pos);
 
-            chr.Items.Add(new Item(weapon, (byte)InventoryType.EquipType.Weapon, (byte)InventoryType.ItemType.Equip));
-            chr.Items.Add(new Item(outfit, (byte)InventoryType.EquipType.Outfit, (byte)InventoryType.ItemType.Equip));
-            chr.Items.Add(new Item(seal, (byte)InventoryType.EquipType.Seal, (byte)InventoryType.ItemType.Equip));
-            chr.Items.Add(new Item(8810011, (byte)0, (byte)InventoryType.ItemType.Spend3, 10));
-            chr.Items.Add(new Item(8820011, (byte)1, (byte)InventoryType.ItemType.Spend3, 10));
+            chr.Items.Add(new Item(weapon, (byte)(InventoryType.ItemType.Equip), (byte)InventoryType.EquipType.Weapon));
+            chr.Items.Add(new Item(outfit, (byte)(InventoryType.ItemType.Equip), (byte)InventoryType.EquipType.Outfit));
+            chr.Items.Add(new Item(seal, (byte)(InventoryType.ItemType.Equip), (byte)InventoryType.EquipType.Seal));
+            chr.Items.Add(new Item(8810011, (byte)InventoryType.ItemType.Spend3, 0, 10));
+            chr.Items.Add(new Item(8820011, (byte)InventoryType.ItemType.Spend3, 1, 10));
             chr.Storages.Add(new Storage(0));
             chr.Skills.Add(new Skill(1, 1, 0, 0));
             chr.Skills.Add(new Skill(2, 1, 0, 1));

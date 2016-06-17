@@ -67,21 +67,23 @@ namespace Server.Handler
 
             StatusPacket.UpdateHpMp(gc, 0, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
-            QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             StatusPacket.getStatusInfo(gc);
             InventoryPacket.getCharacterEquip(gc);
             SkillPacket.getSkillInfo(gc, chr.Skills.getSkills());
+            QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
             GamePacket.getQuickSlot(gc, chr.Keymap);
             StoragePacket.getStoreInfo(gc);
             StoragePacket.getStoreMoney(gc);
             MapPacket.enterMapStart(gc);
+            InventoryPacket.getInvenCash(gc);
+            CashShopPacket.MgameCash(gc);
+            CashShopPacket.GuiHonCash(gc);
             InventoryPacket.getInvenEquip(gc);
             InventoryPacket.getInvenEquip1(gc);
             InventoryPacket.getInvenEquip2(gc);
             InventoryPacket.getInvenSpend3(gc);
             InventoryPacket.getInvenOther4(gc);
             InventoryPacket.getInvenPet5(gc);
-            InventoryPacket.getInvenCash(gc);
         }
 
         public static void Command_Req(InPacket lea, Client gc)
@@ -105,7 +107,7 @@ namespace Server.Handler
                 case "//item":
                     if (cmd.Length != 2)
                         break;
-                    chr.Items.Add(new Item(int.Parse(cmd[1]), chr.Items.GetNextFreeSlot((InventoryType.ItemType)InventoryType.getItemType(int.Parse(cmd[1]))), InventoryType.getItemType(int.Parse(cmd[1]))));
+                    chr.Items.Add(new Item(int.Parse(cmd[1]), InventoryType.getItemType(int.Parse(cmd[1])), chr.Items.GetNextFreeSlot((InventoryType.ItemType)InventoryType.getItemType(int.Parse(cmd[1])))));
                     InventoryPacket.getInvenEquip1(gc);
                     InventoryPacket.getInvenEquip2(gc);
                     InventoryPacket.getInvenSpend3(gc);

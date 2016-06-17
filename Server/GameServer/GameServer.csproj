@@ -52,6 +52,7 @@
     <Compile Include="Ghost\Characters\CharacterShop.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Characters\CharacterUseSlot.cs" />
+    <Compile Include="Ghost\Commodity.cs" />
     <Compile Include="Ghost\Pet.cs" />
     <Compile Include="Ghost\Map\Drop.cs" />
     <Compile Include="Ghost\Item.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Ghost\ItemData.cs" />
     <Compile Include="Ghost\Map.cs" />
     <Compile Include="Ghost\Map\Loot.cs" />
+    <Compile Include="Ghost\Provider\CashShopFactory.cs" />
     <Compile Include="Ghost\Provider\ItemFactory.cs" />
     <Compile Include="Ghost\Provider\MapFactory.cs" />
     <Compile Include="Ghost\Provider\MobFactory.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Net\Handler\ActionHandler.cs" />
+    <Compile Include="Net\Handler\CashShopHandler.cs" />
     <Compile Include="Net\Handler\CouponHandler.cs" />
     <Compile Include="Net\Handler\InventoryHandler.cs" />
     <Compile Include="Net\Handler\MapHandler.cs" />

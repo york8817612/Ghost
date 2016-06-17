@@ -60,7 +60,9 @@ namespace Server.Ghost
                     account.LoggedIn = 0;
                     account.Banned = 0;
                     account.Master = 0;
-                    account.CashPoint = 0;
+                    account.GamePoints = 0;
+                    account.GiftPoints = 0;
+                    account.BonusPoints = 0;
                     account.Save();
                     LoginPacket.Login_Ack(c, ServerState.LoginState.USER_LOCK);
                     return;

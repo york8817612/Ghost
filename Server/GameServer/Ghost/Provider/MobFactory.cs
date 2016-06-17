@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Server.Ghost.Provider
 {
-    public class MobFactory
+    public static class MobFactory
     {
         public static List<Loot> Drop_Data = new List<Loot>();
 

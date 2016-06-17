@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.Ghost.Provider
 {
-    public class PetFactory
+    public static class PetFactory
     {
     }
 }

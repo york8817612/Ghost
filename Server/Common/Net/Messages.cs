@@ -116,6 +116,11 @@ namespace Server.Common.Net
         P_MOVE = 0xDD,
         // Fish
         FISH_REQ = 0xE0,
+        // CashShop
+        CASHSHOP_LIST_REQ = 0xE4,
+        CASH_MGAMECASH_REQ = 0xE5,
+        CASH_BUY_REQ = 0xE7,
+        CASH_TO_INVEN_REQ = 0xEF,
         // UseShout
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,

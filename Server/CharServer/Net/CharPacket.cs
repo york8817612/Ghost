@@ -134,9 +134,9 @@ namespace Server.Ghost
             {
                 foreach (Item im in chr.Items)
                 {
-                    if (im.type != (byte)InventoryType.ItemType.Equip)
+                    if (im.Type != (byte)InventoryType.ItemType.Equip)
                         continue;
-                    switch (im.slot)
+                    switch (im.Slot)
                     {
                         case (byte)InventoryType.EquipType.Weapon:
                             equip.Add(InventoryType.EquipType.Weapon, im.ItemID);

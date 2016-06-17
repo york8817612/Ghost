@@ -1,4 +1,4 @@
-﻿namespace Server.Ghost
+﻿namespace Server
 {
     public sealed class Shortcut
     {

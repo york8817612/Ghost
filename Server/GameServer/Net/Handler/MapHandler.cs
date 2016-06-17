@@ -23,6 +23,20 @@ namespace Server.Handler
             short mapY = lea.ReadShort();
             short positionX = lea.ReadShort();
             short positionY = lea.ReadShort();
+
+            if (mapX == 77 && mapY == 1)
+            {
+                CashShopPacket.CashShopList1(gc); // 人物
+                CashShopPacket.CashShopList2(gc); // 裝備
+                CashShopPacket.CashShopList3(gc); // 能力
+                CashShopPacket.CashShopList4(gc); // 靈物
+                CashShopPacket.CashShopList5(gc); // 寶牌
+                CashShopPacket.CashShopList6(gc);
+                CashShopPacket.CashShopList7(gc); // 紅利積點
+                CashShopPacket.CashShopList8(gc);
+                CashShopPacket.CashShopList9(gc);
+            }
+
             chr.MapX = mapX;
             chr.MapY = mapY;
             chr.PlayerX = positionX;
@@ -54,6 +68,15 @@ namespace Server.Handler
             }
             Thread thread = new Thread(() => ControlMonster(gc, map, j));
             thread.Start();
+
+            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+            InventoryPacket.getAvatar(gc);
+
+            if (mapX == 77 && mapY == 1)
+            {
+                CashShopPacket.MgameCash(gc);
+                CashShopPacket.GuiHonCash(gc);
+            }
         }
 
         public static void ControlMonster(Client gc, Map map, int j)

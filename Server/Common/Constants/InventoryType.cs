@@ -30,7 +30,8 @@
             Equip2 = 2,     // [2]
             Spend3 = 3,     // [3]
             Other4 = 4,     // [4]
-            Pet5 = 5        // [5]
+            Pet5 = 5,       // [5]
+            Cash = 6        // [購物商城倉庫]
         }
 
         public static byte getItemType(int itemid)
@@ -43,7 +44,6 @@
                 case 79: // 武器
                 case 80: // 武器
                 case 81: // 衣服
-                case 84: // 披風
                 case 86: // 帽子
                 case 87: // 面具
                 case 93: // 武器
@@ -53,6 +53,7 @@
                     break;
                 case 82: // 戒指
                 case 83: // 項鍊
+                case 84: // 披風
                 case 85: // 封印箱
                     type = 2;
                     break;

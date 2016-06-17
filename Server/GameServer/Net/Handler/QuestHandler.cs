@@ -22,73 +22,73 @@ namespace Server.Handler
             {
                 // 
                 case 3: // [委託送書]
-                    chr.Items.Add(new Item(8990002, Slot, 4));
+                    chr.Items.Add(new Item(8990002, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 4: // [委託送書2]
-                    chr.Items.Add(new Item(8990003, Slot, 4));
+                    chr.Items.Add(new Item(8990003, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 18: // [守衛的慰勞品2]
-                    chr.Items.Add(new Item(8990004, Slot, 4));
+                    chr.Items.Add(new Item(8990004, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 
                 // 技能任務(武士)
                 case 22: // [利刃術]
-                    chr.Items.Add(new Item(8990006, Slot, 4));
+                    chr.Items.Add(new Item(8990006, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 23: // [霸刀術]
-                    chr.Items.Add(new Item(8990009, Slot, 4));
+                    chr.Items.Add(new Item(8990009, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 
                 // 技能任務(刺客)
                 case 32: // [鬼手術]
-                    chr.Items.Add(new Item(8990007, Slot, 4));
+                    chr.Items.Add(new Item(8990007, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 33: // [利爪術] [Test]
-                    chr.Items.Add(new Item(8990010, Slot, 4));
+                    chr.Items.Add(new Item(8990010, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 
                 // 技能任務(道士)
                 case 42: // [扇魂術]
-                    chr.Items.Add(new Item(8990008, Slot, 4));
+                    chr.Items.Add(new Item(8990008, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 43: // [杖擊術]
-                    chr.Items.Add(new Item(8990011, Slot, 4));
+                    chr.Items.Add(new Item(8990011, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 
                 // 技能任務(力士)
                 case 352: // [ 光熱地斧 ]
-                    chr.Items.Add(new Item(8990076, Slot, 4));
+                    chr.Items.Add(new Item(8990076, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 353: // [ 光熱地斧 ]
-                    chr.Items.Add(new Item(8990077, Slot, 4));
+                    chr.Items.Add(new Item(8990077, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 
                 // 
                 case 52: // [送通知單]
-                    chr.Items.Add(new Item(8990012, Slot, 4));
+                    chr.Items.Add(new Item(8990012, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 53: // [守衛的請託]
-                    chr.Items.Add(new Item(8990013, Slot, 4));
+                    chr.Items.Add(new Item(8990013, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 59: // [遞送中藥材]
-                    chr.Items.Add(new Item(8990018, Slot, 4));
+                    chr.Items.Add(new Item(8990018, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 60: // [選擇派系]
-                    chr.Items.Add(new Item(8990019, Slot, 4));
+                    chr.Items.Add(new Item(8990019, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 // 怪物 x 1

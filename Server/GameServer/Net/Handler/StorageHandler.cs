@@ -35,7 +35,7 @@ namespace Server.Handler
             Storage Source = chr.Storages.GetItem((byte)SourceType, (byte)SourceSlot);
             byte TargetType = InventoryType.getItemType(Source.ItemID);
             chr.Storages.Remove((byte)Source.Type, (byte)Source.Slot, Quantity);
-            chr.Items.Add(new Item(Source.ItemID, (byte)TargetSlot, TargetType, (short)Quantity));
+            chr.Items.Add(new Item(Source.ItemID, TargetType, (byte)TargetSlot, (short)Quantity));
             chr.Save();
             StoragePacket.getStoreInfo(gc);
             InventoryHandler.UpdateInventory(gc, TargetType);

@@ -126,6 +126,16 @@ namespace Server
                 MapFactory.Initialize();
                 Log.Success("\r\n");
                 MobFactory.InitializeMonsterDrop();
+                CashShopFactory.InitializeHatCommodity();
+                CashShopFactory.InitializeMantleCommodity();
+                CashShopFactory.InitializeBoyDressCommodity();
+                CashShopFactory.InitializeGirlDressCommodity();
+                CashShopFactory.InitializeBoyHairCommodity();
+                CashShopFactory.InitializeGirlHairCommodity();
+                CashShopFactory.InitializeFace1Commodity();
+                CashShopFactory.InitializeFace2Commodity();
+                CashShopFactory.InitializeBoyEyesCommodity();
+                CashShopFactory.InitializeGirlEyesCommodity();
 
                 UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
                 UdpListener = new UdpClient(UdpRemoteEndPoint);

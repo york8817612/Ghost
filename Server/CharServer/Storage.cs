@@ -1,6 +1,5 @@
 ﻿using Server.Characters;
 using Server.Common.Data;
-using Server.Ghost;
 
 namespace Server
 {

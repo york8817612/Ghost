@@ -17,7 +17,9 @@ namespace Server.Accounts
         public int LoggedIn { get; set; }
         public int Banned { get; set; }
         public int Master { get; set; }
-        public int CashPoint { get; set; }
+        public int GamePoints { get; set; }
+        public int GiftPoints { get; set; }
+        public int BonusPoints { get; set; }
 
         private bool Assigned { get; set; }
 
@@ -48,7 +50,9 @@ namespace Server.Accounts
             this.LoggedIn = datum.isLoggedIn;
             this.Banned = datum.isBanned;
             this.Master = datum.isMaster;
-            this.CashPoint = datum.cashPoint;
+            this.GamePoints = datum.gamePoints;
+            this.GiftPoints = datum.giftPoints;
+            this.BonusPoints = datum.bonusPoints;
         }
 
         public void Save()
@@ -61,7 +65,9 @@ namespace Server.Accounts
             datum.isLoggedIn = this.LoggedIn;
             datum.isBanned = this.Banned;
             datum.isMaster = this.Master;
-            datum.cashPoint = this.CashPoint;
+            datum.gamePoints = this.GamePoints;
+            datum.giftPoints = this.GiftPoints;
+            datum.bonusPoints = this.BonusPoints;
 
             if (this.Assigned)
             {

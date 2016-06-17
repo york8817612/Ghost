@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Server.Ghost.Provider
 {
-    public class MapFactory
+    public static class MapFactory
     {
         private static List<Map> maps { get; set; }
         public static List<Character> AllCharacters = new List<Character>();

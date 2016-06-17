@@ -18,7 +18,7 @@ namespace Server.Handler
                 if (Code.Equals(datum.code) && datum.valid == 1)
                 {
                     byte Type = InventoryType.getItemType(datum.itemID);
-                    chr.Items.Add(new Item(datum.itemID, chr.Items.GetNextFreeSlot((InventoryType.ItemType)Type), InventoryType.getItemType(datum.itemID), (short)datum.quantity));
+                    chr.Items.Add(new Item(datum.itemID, InventoryType.getItemType(datum.itemID), chr.Items.GetNextFreeSlot((InventoryType.ItemType)Type), (short)datum.quantity));
                     InventoryHandler.UpdateInventory(gc, Type);
                     InventoryPacket.clearDropItem(gc, chr.CharacterID, -1, datum.itemID);
                     datum.valid = 0;

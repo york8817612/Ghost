@@ -96,6 +96,8 @@ namespace Server.Handler
                     }
                 }
             }
+            if (Source.IsLocked == 1)
+                Source.IsLocked = 0;
             UpdateInventory(gc, SourceType, TargetType);
         }
 
@@ -275,7 +277,7 @@ namespace Server.Handler
             else
             {
                 byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-                Item oItem = new Item(ItemID, Slot, (byte)Type, map.getDropByOriginalID(OriginalID).Quantity);
+                Item oItem = new Item(ItemID, Type, Slot, map.getDropByOriginalID(OriginalID).Quantity);
                 chr.Items.Add(oItem);
             }
             InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);

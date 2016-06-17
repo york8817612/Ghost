@@ -10,6 +10,40 @@ namespace Server.Packet
 {
     public static class InventoryPacket
     {
+        public static void clearDropItem(Client c, int cid, int oid, int iid)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CLEAR_DROP_ITEM))
+            {
+                // 4D 00 4E 00 //  + 0
+                plew.WriteInt(0); // length + CRC // + 4
+                plew.WriteInt(0); // + 8
+                plew.WriteInt(cid); // 角色 id // + 12
+                plew.WriteInt(oid); // 掉落 id  // + 16
+                plew.WriteInt(iid); // 物品 id // + 20
+                plew.WriteHexString("00 01 FF FF"); // + 24
+
+                c.Send(plew);
+            }
+        }
+
+        public static void charDropItem(Client c, int oid, int iid, short posX, short posY, int quantity)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_DROP_ITEM))
+            {
+                // 4D 00 4E 00 //  + 0
+                plew.WriteInt(0); // length + CRC // + 4
+                plew.WriteInt(0); // + 8
+                plew.WriteInt(oid); // 掉落 id // + 12
+                plew.WriteInt(iid); // 物品 id // + 16
+                plew.WriteShort(posX); // pos x // + 20
+                plew.WriteShort(posY); // pos y // + 22
+                plew.WriteInt(0); // + 24
+                plew.WriteInt(quantity); // 數量 + 28
+
+                c.Send(plew);
+            }
+        }
+
         public static void getAvatar(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_SET_AVATAR))
@@ -42,8 +76,7 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : -1); // PetSlot
                 // 玩物
                 plew.WriteString("", 20); // ToyName
-                plew.WriteByte(0); // ToyLevel
-                plew.WriteHexString("00 00 00");
+                plew.WriteInt(0); // ToyLevel
                 plew.WriteInt(0); // ToyHP
                 plew.WriteInt(0); // ToyMaxMP
                 plew.WriteInt(0); // ToyExp
@@ -207,20 +240,20 @@ namespace Server.Packet
                 { // 
                     plew.WriteShort(0);
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Equip1, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip1, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 物品標誌
-                    plew.WriteShort(0);
+                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 960 Bytes
+                { // 480 Bytes
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
                 c.Send(plew);
@@ -250,17 +283,21 @@ namespace Server.Packet
                 { // 封印量
                     plew.WriteShort(0);
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Equip2, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip2, i));
+                }
+                for (byte i = 0; i < 24; i++)
+                { // 物品標誌
+                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 物品標誌
-                    plew.WriteShort(0);
+                { // 480 Bytes
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
                 c.Send(plew);
             }
@@ -279,18 +316,24 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteShort(chr.Items.GetItemQuantity(InventoryType.ItemType.Spend3, i));
+                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Spend3, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Spend3, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(0);
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Spend3, i));
                 }
                 plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
-                plew.WriteHexString("FF FF FF");
+                plew.WriteByte(0xFF);
+                for (int i = 0; i < 24; i++)
+                {
+                    plew.WriteShort(0);
+                }
+                plew.WriteByte(0xFF);
+                plew.WriteByte(0xFF);
                 c.Send(plew);
             }
         }
@@ -308,15 +351,19 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteShort(chr.Items.GetItemQuantity(InventoryType.ItemType.Other4, i));
+                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Other4, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Other4, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(-1);
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Other4, i));
+                }
+                for (byte i = 0; i < 24; i++)
+                { // 物品Icon
+                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Other4, i));
                 }
                 c.Send(plew);
             }
@@ -382,6 +429,19 @@ namespace Server.Packet
             }
         }
 
+        public static void getInvenMoney(Client c, int money, int pickup)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_MONEY))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteLong(money);
+                plew.WriteLong(pickup);
+
+                c.Send(plew);
+            }
+        }
+
         public static void SelectSlot(Client c, int Slot)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_SELECTSLOT_ACK))
@@ -397,57 +457,41 @@ namespace Server.Packet
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_CASH))
             {
+                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 18 08 00 00 00 00 00 01 18 08 00 70 40 00 E8 03 D2 A8 74 A9 00 00 70 19");
-
-                c.Send(plew);
-            }
-        }
-
-        public static void getInvenMoney(Client c, int money, int pickup)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_MONEY))
-            {
-                plew.WriteInt(0); // length + CRC
-                plew.WriteInt(0);
-                plew.WriteLong(money);
-                plew.WriteLong(pickup);
-
-                c.Send(plew);
-            }
-        }
-
-        public static void charDropItem(Client c, int oid, int iid, short posX, short posY, int quantity)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_DROP_ITEM))
-            {
-                // 4D 00 4E 00 //  + 0
-                plew.WriteInt(0); // length + CRC // + 4
-                plew.WriteInt(0); // + 8
-                plew.WriteInt(oid); // 掉落 id // + 12
-                plew.WriteInt(iid); // 物品 id // + 16
-                plew.WriteShort(posX); // pos x // + 20
-                plew.WriteShort(posY); // pos y // + 22
-                plew.WriteInt(0); // + 24
-                plew.WriteInt(quantity); // 數量 + 28
-
-                c.Send(plew);
-            }
-        }
-
-        public static void clearDropItem(Client c, int cid, int oid, int iid)
-        {
-            using (OutPacket plew = new OutPacket(ServerOpcode.CLEAR_DROP_ITEM))
-            {
-                // 4D 00 4E 00 //  + 0
-                plew.WriteInt(0); // length + CRC // + 4
-                plew.WriteInt(0); // + 8
-                plew.WriteInt(cid); // 角色 id // + 12
-                plew.WriteInt(oid); // 掉落 id  // + 16
-                plew.WriteInt(iid); // 物品 id // + 20
-                plew.WriteHexString("00 01 FF FF"); // + 24
-
+                for (byte i = 0; i < 20; i++)
+                {
+                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Cash, i)); // 物品ID
+                }
+                for (int i = 0; i < 20; i++)
+                { // 剩餘合成回數
+                    plew.WriteByte(0);
+                }
+                for (int i = 0; i < 20; i++)
+                { // 
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
+                }
+                for (int i = 0; i < 20; i++)
+                { // 靈丹剩餘體力
+                    plew.WriteInt(0);
+                }
+                for (byte i = 0; i < 20; i++)
+                { // 數量
+                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Cash, i));
+                }
+                for (byte i = 0; i < 20; i++)
+                { // 物品Lock
+                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Cash, i));
+                }
+                for (byte i = 0; i < 20; i++)
+                { // 截止日期
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Cash, i));
+                }
+                for (int i = 0; i < 20; i++)
+                { // 400 Bytes
+                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
+                }
                 c.Send(plew);
             }
         }
