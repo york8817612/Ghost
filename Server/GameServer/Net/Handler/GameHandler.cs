@@ -128,15 +128,15 @@ namespace Server.Handler
                         break;
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
                     break;
-                case "//test":
-                    PartyPacket.PartyUpdate(gc);
-                    break;
-                case "//test2":
-                    PartyPacket.PartyInvite(gc, 1, 1);
-                    break;
-                case "//test3":
-                    PartyPacket.PartyInvite(gc, 1 , 0);
-                    break;
+                //case "//test":
+                //    PartyPacket.PartyInvite(gc);
+                //    break;
+                //case "//test2":
+                //    PartyPacket.PartyInvite(gc, 1, 1);
+                //    break;
+                //case "//test3":
+                //    PartyPacket.PartyInvite(gc, 1 , 0);
+                //    break;
                 default:
                     break;
             }

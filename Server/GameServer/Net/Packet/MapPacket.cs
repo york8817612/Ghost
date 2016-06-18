@@ -88,10 +88,10 @@ namespace Server.Packet
                 plew.WriteByte(chr.IP.GetAddressBytes()[1]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[2]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[3]);
-                plew.WriteByte(192);
-                plew.WriteByte(168);
-                plew.WriteByte(1);
-                plew.WriteByte(101);
+                plew.WriteByte(chr.IP.GetAddressBytes()[0]);
+                plew.WriteByte(chr.IP.GetAddressBytes()[1]);
+                plew.WriteByte(chr.IP.GetAddressBytes()[2]);
+                plew.WriteByte(chr.IP.GetAddressBytes()[3]);
                 plew.WriteHexString("1F 40"); // Port
                 plew.WriteShort(0);
                 plew.WriteShort(0);

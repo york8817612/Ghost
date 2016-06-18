@@ -96,8 +96,11 @@ namespace Server.Handler
                     }
                 }
             }
-            if (Source.IsLocked == 1)
-                Source.IsLocked = 0;
+            if (SourceType != 5)
+            {
+                if (Source.IsLocked == 1)
+                    Source.IsLocked = 0;
+            }
             UpdateInventory(gc, SourceType, TargetType);
         }
 
@@ -149,6 +152,13 @@ namespace Server.Handler
                     chr.PlayerY = 1230;
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
+                case 8850061: // 無名符
+                    chr.MapX = 16;
+                    chr.MapY = 1;
+                    chr.PlayerX = 2005;
+                    chr.PlayerY = 1101;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
                 default:
                     if (use.Hp != -1)
                     {
@@ -180,7 +190,18 @@ namespace Server.Handler
             }
             chr.Items.Remove(Type, Slot, 1);
             UpdateInventory(gc, Type);
+        }
 
+        public static void InvenUseSpendStart_Req(InPacket lea, Client c)
+        {
+            short PositionX = lea.ReadShort();
+            short PositionY = lea.ReadShort();
+            int Slot = lea.ReadInt();
+            var chr = c.Character;
+            Item Item = chr.Items.GetItem((byte)InventoryType.ItemType.Spend3, (byte)Slot);
+            InventoryPacket.UseSpendStart(c, PositionX, PositionY, Item.ItemID, (byte)InventoryType.ItemType.Spend3, Slot);
+            chr.Items.Remove((byte)InventoryType.ItemType.Spend3, (byte)Slot, 1);
+            UpdateInventory(c, (byte)InventoryType.ItemType.Spend3);
         }
 
         public static void InvenUseSpendShout_Req(InPacket lea, Client gc)

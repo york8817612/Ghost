@@ -48,22 +48,6 @@ namespace Server.Ghost.Characters
             this.Pets.Add(Pet);
         }
 
-        public Pet this[InventoryType.ItemType type, byte slot]
-        {
-            get
-            {
-                foreach (Pet Pet in this)
-                {
-                    if (Pet.Slot == slot)
-                    {
-                        return Pet;
-                    }
-                }
-
-                return null;
-            }
-        }
-
         public List<Pet> getPets()
         {
             return this.Pets;
@@ -137,6 +121,35 @@ namespace Server.Ghost.Characters
             if (Pet == null)
                 return 0;
             return Pet.OriginalSlot;
+        }
+
+        public byte GetNextFreeSlot(InventoryType.ItemType Type)
+        {
+            for (byte i = 0; i < 24; i++)
+            {
+                if (this[Type, i] == null)
+                {
+                    return i;
+                }
+            }
+
+            throw new InventoryFullException();
+        }
+
+        public Pet this[InventoryType.ItemType type, byte slot]
+        {
+            get
+            {
+                foreach (Pet Pet in this)
+                {
+                    if (Pet.Type == (byte)type && Pet.Slot == slot)
+                    {
+                        return Pet;
+                    }
+                }
+
+                return null;
+            }
         }
 
         public IEnumerator<Pet> GetEnumerator()

@@ -82,7 +82,7 @@ namespace Server.Common.Net
         INVEN_SELECTSLOT_REQ = 0x6D,
         USE_SPEND_REQ = 0x6F,
         // Status
-        PLAYER_DAMAGE_REQ = 0x70,
+        INVEN_USESPEND_REQ = 0x70,
         CHAR_STATUP_REQ = 0x5F,
         SKILL_LEVELUP_REQ = 0x74,
         USE_SKILL_REQ = 0x76,
@@ -97,6 +97,7 @@ namespace Server.Common.Net
         CAN_WARP_ACK_REQ = 0x85,
         // Party
         PARTY_INVITE_REQ = 0x9B,
+        PARTY_INVITE_RESPONSES_REQ = 0x9C,
         // 0x9F 離開隊伍
         // 0xA0 驅逐隊員
         // QuickSlot
@@ -259,8 +260,8 @@ namespace Server.Common.Net
         // 0x97 // 交易失敗
         TRADE_SUCCESS = 0x98,
         // 0x9A
-        // 0x9B
-        PARTY_INVITE = 0x9C,
+        PARTY_INVITE = 0x9B,
+        PARTY_INVITE_RESPONSES = 0x9C,
         PARTY_UPDATE = 0x9D,
 
         // 0xA0 // 離開隊伍

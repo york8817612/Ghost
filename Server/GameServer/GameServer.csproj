@@ -50,6 +50,7 @@
     <Compile Include="Ghost\Characters\CharacterQuests.cs" />
     <Compile Include="Ghost\Characters\CharacterKeyMap.cs" />
     <Compile Include="Ghost\Characters\CharacterShop.cs" />
+    <Compile Include="Ghost\Characters\CharacterParty.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
     <Compile Include="Ghost\Characters\CharacterUseSlot.cs" />
     <Compile Include="Ghost\Commodity.cs" />
@@ -67,11 +68,13 @@
     <Compile Include="Ghost\Provider\PetFactory.cs" />
     <Compile Include="Ghost\Quest.cs" />
     <Compile Include="Ghost\Shortcut.cs" />
+    <Compile Include="Ghost\PartyMember.cs" />
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Net\Handler\ActionHandler.cs" />
     <Compile Include="Net\Handler\CashShopHandler.cs" />
     <Compile Include="Net\Handler\CouponHandler.cs" />
+    <Compile Include="Net\Handler\FishHandler.cs" />
     <Compile Include="Net\Handler\InventoryHandler.cs" />
     <Compile Include="Net\Handler\MapHandler.cs" />
     <Compile Include="Net\Handler\MonsterHandler.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Net\Handler\GameHandler.cs" />
     <Compile Include="Net\Handler\TradeHandler.cs" />
     <Compile Include="Net\Packet\CashShopPacket.cs" />
+    <Compile Include="Net\Packet\FishPacket.cs" />
     <Compile Include="Net\Packet\GamePacket.cs" />
     <Compile Include="Ghost\Monster.cs" />
     <Compile Include="Net\Packet\InventoryPacket.cs" />

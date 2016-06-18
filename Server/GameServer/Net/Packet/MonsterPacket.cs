@@ -25,7 +25,7 @@ namespace Server.Packet
                 plew.WriteInt(j); // 怪物數量
                 for (int i = 0; i < 50; i++)
                 {
-                    plew.WriteByte(Monster[i] != null ? 1 : 0);
+                    plew.WriteByte(Monster[i] != null ? Monster[i].State : 0);
                 }
                 for (int i = 0; i < 50; i++)
                 {

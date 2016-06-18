@@ -214,6 +214,15 @@ namespace Server.Handler
         public static void QuestCompleteHandler(Client gc, int QuestID)
         {
             var chr = gc.Character;
+            int WeaponID = 0;
+            foreach (Item item in chr.Items)
+            {
+                if (item.Type == (byte)InventoryType.ItemType.Equip && item.Slot == (byte)InventoryType.EquipType.Weapon)
+                {
+                    WeaponID = item.ItemID;
+                    break;
+                }
+            }
             switch (QuestID)
             {
                 // 轉職任務
@@ -230,48 +239,58 @@ namespace Server.Handler
                     switch (QuestID)
                     {
                         case 16: // 武士(1)
-                            chr.Attack = 9;
-                            chr.MaxAttack = 11;
+                            chr.Attack = 3;
+                            chr.MaxAttack = 5;
                             chr.Magic = 4;
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 1;
+                            if (WeaponID != 0)
+                                 InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
                             GamePacket.Message(gc, 11);
                             break;
                         case 19: // 刺客(2)
-                            chr.Attack = 9;
-                            chr.MaxAttack = 11;
+                            chr.Attack = 3;
+                            chr.MaxAttack = 5;
                             chr.Magic = 4;
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 2;
+                            if (WeaponID != 0)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
                             GamePacket.Message(gc, 12);
                             break;
                         case 21: // 道士(3)
-                            chr.Attack = 8;
-                            chr.MaxAttack = 10;
-                            chr.Magic = 11;
-                            chr.MaxMagic = 13;
-                            chr.Defense = 14;
+                            chr.Attack = 3;
+                            chr.MaxAttack = 5;
+                            chr.Magic = 4;
+                            chr.MaxMagic = 4;
+                            chr.Defense = 12;
                             chr.Class = 3;
+                            if (WeaponID != 0)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
                             GamePacket.Message(gc, 13);
                             break;
                         case 351: // 力士(4)
-                            chr.Attack = 9;
-                            chr.MaxAttack = 11;
+                            chr.Attack = 3;
+                            chr.MaxAttack = 5;
                             chr.Magic = 4;
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 4;
+                            if (WeaponID != 0)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
                             GamePacket.Message(gc, 58);
                             break;
                         case 612: // 射手(5)
-                            chr.Attack = 9;
-                            chr.MaxAttack = 11;
+                            chr.Attack = 3;
+                            chr.MaxAttack = 5;
                             chr.Magic = 4;
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 5;
+                            if (WeaponID != 0)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
                             GamePacket.Message(gc, 136);
                             break;
                     }

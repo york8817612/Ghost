@@ -246,7 +246,7 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip1, i));
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip1, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Equip1, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品標誌
@@ -289,7 +289,7 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip2, i));
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip2, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品標誌
@@ -324,7 +324,7 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Spend3, i));
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Spend3, i));
                 }
                 plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
                 plew.WriteByte(0xFF);
@@ -453,6 +453,24 @@ namespace Server.Packet
             }
         }
 
+        public static void UseSpendStart(Client c, short PositionX, short PositionY, int ItemID, int Type, int Slot)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_USESPEND_START))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(chr.CharacterID);
+                plew.WriteShort(PositionX);
+                plew.WriteShort(PositionY);
+                plew.WriteInt(ItemID);
+                plew.WriteByte(Type);
+                plew.WriteByte(Slot);
+                plew.WriteShort(0);
+                c.Send(plew);
+            }
+        }
+
         public static void getInvenCash(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_CASH))
@@ -486,7 +504,7 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 20; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Cash, i));
+                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Cash, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Cash, i));
                 }
                 for (int i = 0; i < 20; i++)
                 { // 400 Bytes

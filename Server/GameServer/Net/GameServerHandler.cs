@@ -48,6 +48,9 @@ namespace Server.Net
                 case ClientOpcode.USE_SPEND_REQ:
                     InventoryHandler.UseSpend_Req(ip, gc);
                     break;
+                case ClientOpcode.INVEN_USESPEND_REQ:
+                    InventoryHandler.InvenUseSpendStart_Req(ip, gc);
+                    break;
                 case ClientOpcode.INVEN_USESPEND_SHOUT_REQ:
                 case ClientOpcode.INVEN_USESPEND_SHOUT_ALL_REQ:
                     InventoryHandler.InvenUseSpendShout_Req(ip, gc);
@@ -138,6 +141,9 @@ namespace Server.Net
                 case ClientOpcode.PARTY_INVITE_REQ:
                     PartyHandler.PartyInvite(ip, gc);
                     break;
+                case ClientOpcode.PARTY_INVITE_RESPONSES_REQ:
+                    PartyHandler.PartyInviteResponses(ip, gc);
+                    break;
                 // PlayerShop
                 case ClientOpcode.PSHOP_OPEN_REQ:
                     PlayerShopHandler.OpenShop_Req(ip, gc);
@@ -156,6 +162,7 @@ namespace Server.Net
                     break;
                 // Fish
                 case ClientOpcode.FISH_REQ:
+                    FishHandler.Fish_Req(ip, gc);
                     break;
                 // CashShop
                 case ClientOpcode.CASHSHOP_LIST_REQ:

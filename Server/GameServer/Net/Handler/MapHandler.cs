@@ -96,7 +96,14 @@ namespace Server.Handler
                     if (map.Monster[i].State == 7 || map.Monster[i].State == 9)
                     {
                         if (map.Monster[i].AttackType > 0)
+                        {
                             map.Monster[i].State = 3;
+                            MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
+                        }
+                        if (map.Monster[i].MoveType == 0)
+                            map.Monster[i].State = 0;
+                        else
+                            map.Monster[i].State = 1;
                         MonsterPacket.spawnMonster(gc, map.Monster[i], 0, 0, 0, 0);
                         continue;
                     }

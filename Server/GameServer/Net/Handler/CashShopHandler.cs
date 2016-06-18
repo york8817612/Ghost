@@ -49,6 +49,17 @@ namespace Server.Handler
                 InventoryPacket.getInvenCash(c);
                 InventoryHandler.UpdateInventory(c, (byte)InventoryType.ItemType.Equip);
                 return;
+            } else if (Source.ItemID / 100000 == 92)
+            {
+                // 寵物
+                chr.Pets.Add(new Pet(Source.ItemID, 0, "", 1, 100, 100, 0, (byte)InventoryType.ItemType.Pet5, chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5), chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5)));
+                chr.Items.Remove(Source.Type, Source.Slot);
+                chr.Pets.Save();
+                chr.Items.Save();
+                CashShopPacket.CommodityToInventory(c);
+                InventoryPacket.getInvenCash(c);
+                InventoryHandler.UpdateInventory(c, (byte)InventoryType.ItemType.Pet5);
+                return;
             }
 
             byte TargetType = InventoryType.getItemType(Source.ItemID);

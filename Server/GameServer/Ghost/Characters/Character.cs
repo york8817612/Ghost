@@ -60,6 +60,7 @@ namespace Server.Ghost.Characters
         public byte Position { get; set; }
 
         public bool IsAlive { get; set; }
+        public bool IsFishing { get; set; }
 
         public IPAddress IP { get; set; }
 
@@ -72,6 +73,7 @@ namespace Server.Ghost.Characters
         public CharacterShop Shop { get; set; }
 
         public CharacterUseSlot UseSlot { get; private set; }
+        public CharacterParty Party { get; private set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 
@@ -91,6 +93,7 @@ namespace Server.Ghost.Characters
             this.Keymap = new CharacterKeyMap(this);
             this.UseSlot = new CharacterUseSlot(this);
             this.IsAlive = true;
+            this.IsFishing = false;
         }
 
         public void Load(bool IsFullLoad = true)
@@ -258,8 +261,17 @@ namespace Server.Ghost.Characters
             this.MaxMp += 15;
             this.Hp = this.MaxHp;
             this.Mp = this.MaxMp;
-            this.AbilityBonus += 4;
-            this.SkillBonus += 2;
+
+            if (this.Level % 10 != 0)
+                this.AbilityBonus += 4;
+            else
+                this.AbilityBonus += 8;
+
+            if (this.Level % 5 != 0)
+                this.SkillBonus += 2;
+            else
+                this.SkillBonus += 4;
+
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             foreach (Character All in map.Characters)
                 StatusPacket.LevelUp(All.Client, this, this.Level);

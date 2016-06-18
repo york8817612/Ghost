@@ -930,6 +930,11 @@ namespace Server.Ghost.Provider
                             int Defense = MobFactory.Defense(MonsterID);
                             byte AddEffect = MobFactory.AddEffect(MonsterID);
                             Monster m = new Monster(i, MonsterID, MonsterLevel, MaxHP, MaxHP, 0, Exp, Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, 1, 0, AddEffect, PosX, PosY, true);
+                            if (m.MoveType == 0)
+                            {
+                                m.Speed = 0;
+                                m.State = 0;
+                            }
                             map.Monster.Add(m);
                             MapHandler.UpdatePosition(m, (int)(40 * map.Monster[i].Speed), map);
                         }
