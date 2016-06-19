@@ -2,7 +2,7 @@
 {
     public class ServerConstants
     {
-        public static readonly string SERVER_IP = "183.179.181.65";
+        public static readonly string SERVER_IP = "127.0.0.1";
         public static readonly bool AUTO_REGISTRATION = false;
         public static readonly int CHANNEL_DEFAULT = 18;
         public static readonly int CHANNEL_LOAD = 300;

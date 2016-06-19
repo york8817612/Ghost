@@ -32,9 +32,9 @@ namespace Server.Handler
             try
             {
                 gc.Account.Load(username);
-                //var pe = new PasswordEncrypt(encryptKey);
-                //string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
-                if (!password.Equals(gc.Account.Password))
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
+                if (!password.Equals(encryptPassword))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -52,8 +52,8 @@ namespace Server.Handler
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
                 Log.Inform("Password = {0}", password);
-                //Log.Inform("encryptKey = {0}", encryptKey);
-                //Log.Inform("encryptPassword = {0}", encryptPassword);
+                Log.Inform("encryptKey = {0}", encryptKey);
+                Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {

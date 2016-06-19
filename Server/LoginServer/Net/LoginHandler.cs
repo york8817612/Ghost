@@ -27,10 +27,10 @@ namespace Server.Ghost
             try
             {
                 c.Account.Load(username);
-                //var pe = new PasswordEncrypt(encryptKey);
-                //string encryptPassword = pe.encrypt(c.Account.Password, c.RetryLoginCount > 0 ? password.ToCharArray() : null);
+                var pe = new PasswordEncrypt(encryptKey);
+                string encryptPassword = pe.encrypt(c.Account.Password, c.RetryLoginCount > 0 ? password.ToCharArray() : null);
 
-                if (!password.Equals(c.Account.Password))
+                if (!password.Equals(encryptPassword))
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.PASSWORD_ERROR);
                     Log.Error("Login Fail!");
