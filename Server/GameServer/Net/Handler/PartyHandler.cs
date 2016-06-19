@@ -13,24 +13,64 @@ namespace Server.Handler
         {
             int CharacterID = lea.ReadInt();
             Map map = MapFactory.GetMap(c.Character.MapX, c.Character.MapY);
+
+            Character Other = null;
             foreach (Character chr in map.Characters)
             {
                 if (chr.CharacterID == CharacterID)
                 {
+                    Other = chr;
                     PartyPacket.PartyInvite(chr.Client, c.Character.CharacterID);
-                    c.Character.Party.getMembers().Add(new PartyMember(chr.CharacterID, chr.Name, chr.Level, chr.MaxHp, chr.Hp, chr.MaxMp, chr.Mp));
-                    chr.Party.getMembers().Add(new PartyMember(c.Character.CharacterID, c.Character.Name, c.Character.Level, c.Character.MaxHp, c.Character.Hp, c.Character.MaxMp, c.Character.Mp));
                     break;
                 }
+            }
+            if (Other != null)
+            {
+                c.Character.Party = new CharacterParty(c.Character);
+                Other.Party = new CharacterParty(Other);
+
+                c.Character.Party.getMembers().Add(new Member(c.Character)); // 個人
+                c.Character.Party.getMembers().Add(new Member(Other)); // 他人
+
+                Other.Party.getMembers().Add(new Member(c.Character));
+                Other.Party.getMembers().Add(new Member(Other));
             }
         }
 
         public static void PartyInviteResponses(InPacket lea, Client c)
         {
+            // Bug
+
             int Respons = lea.ReadInt();
-            PartyPacket.PartyInviteResponses(c,c.Character.CharacterID, Respons);
+            PartyPacket.PartyInviteResponses(c, Respons);
             if (Respons == 1)
-                PartyPacket.PartyUpdate(c);
+            {
+                foreach (Member Member in c.Character.Party.getMembers())
+                {
+                    PartyPacket.PartyUpdate(Member.Character.Client);
+                }
+            }
+        }
+
+        public static void PartyLeave(InPacket lea, Client c)
+        {
+            // Bug
+
+            Member MyCharacter = null;
+            foreach (Member Member in c.Character.Party.getMembers())
+            {
+                if (Member.Character.CharacterID == c.Character.CharacterID)
+                    MyCharacter = Member;
+            }
+            foreach (Member Member in c.Character.Party.getMembers())
+            {
+                if (Member.Character.CharacterID != c.Character.CharacterID)
+                {
+                    Member.Character.Party.getMembers().Remove(MyCharacter);
+                    PartyPacket.PartyUpdate(Member.Character.Client);
+                }
+            }
+            c.Character.Party = null;
         }
     }
 }

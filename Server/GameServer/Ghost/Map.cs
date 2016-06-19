@@ -1,4 +1,7 @@
 ﻿using Server.Ghost.Characters;
+using Server.Ghost.Provider;
+using Server.Net;
+using Server.Packet;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +20,9 @@ namespace Server.Ghost
         public List<Monster> Monster { get; set; }
         public Dictionary<int, Item> CharacterItem { get; set; }
         public List<Item> MonsterDrop { get; set; }
+
+        private System.Timers.Timer tmr = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmr2 = new System.Timers.Timer(10000);
 
         public Map(short MapX, short MapY)
         {
@@ -79,6 +85,161 @@ namespace Server.Ghost
         public Item getDropByOriginalID(int OriginalID)
         {
             return this.CharacterItem[OriginalID];
+        }
+
+        public void ControlMonster(Client gc, int j)
+        {
+            if (this.GetMapCharactersTotal() > 1)
+                return;
+
+            tmr.Elapsed += delegate
+            {
+                if (this.GetMapCharactersTotal() < 1)
+                {
+                    tmr.Stop();
+                    return;
+                }
+                for (int i = 0; i < j; i++)
+                {
+                    if (this.Monster[i].IsAlive == false)
+                        continue;
+                    if (this.Monster[i].State == 7 || this.Monster[i].State == 9)
+                    {
+                        if (this.Monster[i].AttackType > 0)
+                        {
+                            this.Monster[i].State = 3;
+                            foreach (Character All in this.Characters)
+                            {
+                                MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                            }
+                        }
+                        //if (this.Monster[i].MoveType == 0)
+                        //    this.Monster[i].State = 0;
+                        //else
+                            this.Monster[i].State = 1;
+                        foreach (Character All in this.Characters)
+                        {
+                            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                        }
+                        continue;
+                    }
+                    //int Direction = this.Monster[i].Direction;
+                    Monster Monster = UpdatePosition(this.Monster[i], (int)(40 * this.Monster[i].Speed));
+                    //if (Direction != Monster.Direction)
+                    //{
+                        foreach (Character All in this.Characters)
+                        {
+                            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                        }
+                    //}
+                }
+            };
+            tmr.Start();
+
+            tmr2.Elapsed += delegate
+            {
+                if (this.GetMapCharactersTotal() < 1)
+                {
+                    tmr2.Stop();
+                    return;
+                }
+                for (int i = 0; i < j; i++)
+                {
+                    if (this.Monster[i].IsAlive == false)
+                    {
+                        this.Monster[i].HP = MobFactory.MonsterMaxHP(this.Monster[i].Level);
+                        foreach (Character All in this.Characters)
+                        {
+                            MonsterPacket.regenrMonster(All.Client, this.Monster[i]);
+                        }
+                        this.Monster[i].IsAlive = true;
+                        this.Monster[i].State = 1;
+                        foreach (Character All in this.Characters)
+                        {
+                            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                        }
+                    }
+                }
+            };
+            tmr2.Start();
+        }
+
+        public Monster UpdatePosition(Monster monster, int Dest)
+        {
+            int Direction = 1;
+            if (monster.Direction == 0xFF)
+                Direction = -1;
+
+            sbyte PexInf;
+            for (int i = Dest; i > 0; i--)
+            {
+                if (monster.PositionX <= 25 || monster.PositionX >= this.GetMapWidth() - 25)
+                {
+                    Direction = Direction * (-1);
+                    //monster.Direction = Direction;
+                    monster.PositionX = monster.PositionX + Direction;
+                    break;
+                }
+                //Strat Walking in Facing
+
+                //If We Get Cell -1
+                //Get Cell Data IF Cell Data !4(Wall) -> Fix Y Pos Try Look UP For Cell, Not Found Try Look Down, Not Found Reverc Facing
+
+                sbyte Curr = this.GetMapPexel(monster.PositionX, monster.PositionY);
+                monster.PositionX = monster.PositionX + Direction;
+                sbyte Next = this.GetMapPexel(monster.PositionX, monster.PositionY);
+
+                if (Next == -1)
+                {
+                    PexInf = this.GetPexInfo(monster.PositionX, monster.PositionY);
+                    if (PexInf == 4)
+                    {
+                        Direction = Direction * (-1);
+                        //monster.Direction = Direction;
+                        monster.PositionX = monster.PositionX + Direction;
+                        continue;
+                    }
+                    monster.PositionY = (monster.PositionY / 32) * 32;
+                    monster.PositionY += Curr;
+                    monster.PositionY = (int)((((float)monster.PositionY / 32) - 0.01) * 32);
+                    sbyte Next_ = this.GetMapPexel(monster.PositionX, monster.PositionY);
+                    //It Need Be In Below Cell
+                    if (Next_ == -1 && Curr == 0x1F)
+                    {
+                        monster.PositionY = (monster.PositionY / 32);
+                        monster.PositionY += 1;
+                        monster.PositionY *= 32;
+                        //Pos.y = (int)((((float)Pos.y/32)-0.01)*32);
+                        sbyte Next__ = this.GetMapPexel(monster.PositionX, monster.PositionY);
+                        if (Next__ != -1)
+                            continue;
+                    }
+                    if (Next_ == -1)
+                    {
+                        Direction = Direction * (-1);
+                        //monster.Direction = Direction;
+                        monster.PositionX = monster.PositionX + Direction;
+                        break;
+                    }
+                    continue;
+                }
+            }
+            //Before Return Val Fix the Y	
+            sbyte Curr_ = this.GetMapPexel(monster.PositionX, monster.PositionY);
+            if (Curr_ != 0)
+            {
+                monster.PositionY = (monster.PositionY / 32) * 32;
+                monster.PositionY += Curr_;
+                monster.PositionY = (int)((((float)monster.PositionY / 32) - 0.01) * 32);
+                sbyte Next = this.GetMapPexel(monster.PositionX, monster.PositionY);
+            }
+
+            if (Direction == 1)
+                monster.Direction = 0x1;
+            else
+                monster.Direction = 0xFF;
+
+            return monster;
         }
     }
 }

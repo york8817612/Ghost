@@ -50,7 +50,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Defense); // 防禦力
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].AttackRange : 0); // 攻擊距離
-                plew.WriteShort(0);
+                plew.WriteShort(chr.Avoid); // 迴避率
                 plew.WriteShort(chr.AbilityBonus); // 能力上升值
                 plew.WriteShort(chr.SkillBonus); // 技能上升值
                 plew.WriteShort(chr.UpgradeStr); // 力量+
@@ -140,7 +140,7 @@ namespace Server.Packet
                 plew.WriteShort(chr.Defense);
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].Speed : 0); // 攻擊速度
                 plew.WriteByte(equip.ContainsKey(InventoryType.EquipType.Weapon) ? ItemFactory.weaponData[equip[InventoryType.EquipType.Weapon]].AttackRange : 0); // 攻擊距離
-                plew.WriteShort(0);
+                plew.WriteShort(chr.Avoid);
                 plew.WriteShort(chr.AbilityBonus);
                 plew.WriteShort(chr.SkillBonus);
                 plew.WriteShort(chr.UpgradeStr);

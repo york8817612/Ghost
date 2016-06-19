@@ -1,6 +1,8 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
 using Server.Ghost;
+using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System;
@@ -12,6 +14,8 @@ namespace Server.Handler
         public static void Fish_Req(InPacket lea, Client c)
         {
             var chr = c.Character;
+            int CharacterID = chr.CharacterID;
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             int State = 0;
 
             if (!chr.IsFishing)
@@ -21,7 +25,10 @@ namespace Server.Handler
 
             State = CheckBait(c);
 
-            FishPacket.Fish(c, State, chr.IsFishing);
+            foreach (Character All in map.Characters)
+            {
+                FishPacket.Fish(All.Client, CharacterID, State, chr.IsFishing);
+            }
 
             int[] reward = { 8810012, 8820012, 8820022, 8810022, 8820032, 8810032, 8820042, 8810042, 8820052, 8810052, 8820062, 8810062, 8970001, 8970002, 8970003, 8970004, 8970005, 8970006, 8970007, 8970008, 8970009, 8970010, 8970011, 8970012 };
 
@@ -47,7 +54,10 @@ namespace Server.Handler
                     State = CheckBait(c);
                     if (State != 0)
                     {
-                        FishPacket.Fish(c, State, chr.IsFishing);
+                        foreach (Character All in map.Characters)
+                        {
+                            FishPacket.Fish(All.Client, CharacterID, State, chr.IsFishing);
+                        }
                         FishTimer.Stop();
                     }
                 }
@@ -55,7 +65,10 @@ namespace Server.Handler
                 {
                     State = -3;
                     chr.IsFishing = false;
-                    FishPacket.Fish(c, State, chr.IsFishing);
+                    foreach (Character All in map.Characters)
+                    {
+                        FishPacket.Fish(All.Client, CharacterID, State, chr.IsFishing);
+                    }
                     FishTimer.Stop();
                 }
             };

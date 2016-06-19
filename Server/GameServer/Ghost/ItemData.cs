@@ -6,17 +6,23 @@
         public readonly string ItemName;
         public readonly byte Job;
         public readonly byte Level;
-        public readonly short Attack;
-        public readonly short MagicAttack;
-        public readonly short AttackRange;
-        public readonly short Defense;
+        public readonly short Str = -1;
+        public readonly short Dex = -1;
+        public readonly short Vit = -1;
+        public readonly short Int = -1;
+        public readonly short Attack = -1;
+        public readonly short Magic = -1;
+        public readonly short Avoid = -1;
+        public readonly short Defense = -1;
+        public readonly short Hp = -1;
+        public readonly short Mp = -1;
+        public readonly short AttackRange = -1;
         public readonly byte Speed;
-        public readonly int Hp;
-        public readonly int Mp;
+        public readonly byte Refining;
         public readonly int Price;
 
         // 消耗品
-        public ItemData(int ItemID, string ItemName, int Hp, int Mp, int Price)
+        public ItemData(int ItemID, string ItemName, short Hp, short Mp, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
@@ -55,12 +61,51 @@
             this.Job = Job;
             this.Level = Level;
             this.Attack = Attack;
-            this.MagicAttack = MagicAttack;
+            this.Magic = MagicAttack;
             this.AttackRange = AttackRange;
             this.Defense = -1;
             this.Speed = Speed;
             this.Hp = -1;
             this.Mp = -1;
+            this.Price = Price;
+        }
+
+        // 戒指
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Str, short Dex, short Vit, short Int, short MagicAttack, short Avoid, short Attack, short Defense, short Hp, short Mp, byte Refining, int Price)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Job = Job;
+            this.Level = Level;
+            this.Str = Str;
+            this.Dex = Dex;
+            this.Vit = Vit;
+            this.Int = Int;
+            this.Magic = MagicAttack;
+            this.Avoid = Avoid;
+            this.Attack = Attack;
+            this.AttackRange = -1;
+            this.Defense = Defense;
+            this.Speed = 0;
+            this.Hp = Hp;
+            this.Mp = Mp;
+            this.Refining = Refining;
+            this.Price = Price;
+        }
+
+        // 項鍊
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Defense, short Hp, short Mp, int Price)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Job = Job;
+            this.Level = Level;
+            this.Attack = -1;
+            this.AttackRange = -1;
+            this.Defense = Defense;
+            this.Speed = 0;
+            this.Hp = Hp;
+            this.Mp = Mp;
             this.Price = Price;
         }
 
@@ -80,14 +125,14 @@
             this.Price = Price;
         }
 
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, int Hp, int Mp, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, short Hp, short Mp, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
             this.Job = Job;
             this.Level = Level;
             this.Attack = Attack;
-            this.MagicAttack = MagicAttack;
+            this.Magic = MagicAttack;
             this.AttackRange = AttackRange;
             this.Defense = -1;
             this.Speed = Speed;

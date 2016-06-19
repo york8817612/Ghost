@@ -52,6 +52,7 @@ namespace Server.Ghost.Characters
         public short Magic { get; set; }
         public short MaxMagic { get; set; }
         public short UpgradeMagic { get; set; }
+        public short Avoid { get; set; }
         public short Defense { get; set; }
         public short UpgradeDefense { get; set; }
         public short AbilityBonus { get; set; }
@@ -73,7 +74,7 @@ namespace Server.Ghost.Characters
         public CharacterShop Shop { get; set; }
 
         public CharacterUseSlot UseSlot { get; private set; }
-        public CharacterParty Party { get; private set; }
+        public CharacterParty Party { get; set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 
@@ -139,6 +140,7 @@ namespace Server.Ghost.Characters
             this.Magic = (short)datum.magic;
             this.MaxMagic = (short)datum.maxMagic;
             this.UpgradeMagic = (short)datum.upgradeMagic;
+            this.Avoid = (short)datum.avoid;
             this.Defense = (short)datum.defense;
             this.UpgradeDefense = (short)datum.upgradeDefense;
             this.AbilityBonus = (short)datum.abilityBonus;
@@ -197,6 +199,7 @@ namespace Server.Ghost.Characters
             datum.magic = this.Magic;
             datum.maxMagic = this.MaxMagic;
             datum.upgradeMagic = this.UpgradeMagic;
+            datum.avoid = this.Avoid;
             datum.defense = this.Defense;
             datum.upgradeDefense = this.UpgradeDefense;
             datum.abilityBonus = this.AbilityBonus;

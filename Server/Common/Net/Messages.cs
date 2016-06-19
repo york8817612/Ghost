@@ -82,8 +82,10 @@ namespace Server.Common.Net
         INVEN_SELECTSLOT_REQ = 0x6D,
         USE_SPEND_REQ = 0x6F,
         // Status
-        INVEN_USESPEND_REQ = 0x70,
+        CHAR_DAMAGE_REQ = 0x46,
+        CHAR_DEAD_REQ = 0x47,
         CHAR_STATUP_REQ = 0x5F,
+        INVEN_USESPEND_REQ = 0x70,
         SKILL_LEVELUP_REQ = 0x74,
         USE_SKILL_REQ = 0x76,
         // Quest
@@ -98,7 +100,7 @@ namespace Server.Common.Net
         // Party
         PARTY_INVITE_REQ = 0x9B,
         PARTY_INVITE_RESPONSES_REQ = 0x9C,
-        // 0x9F 離開隊伍
+        PARTY_LEAVE = 0x9F,
         // 0xA0 驅逐隊員
         // QuickSlot
         QUICK_SLOT_REQ = 0xA8,

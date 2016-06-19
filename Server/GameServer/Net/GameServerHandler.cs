@@ -35,6 +35,12 @@ namespace Server.Net
                     NpcShopHandler.Sell_Req(ip, gc);
                     break;
                 // State
+                case ClientOpcode.CHAR_DAMAGE_REQ:
+                    StatusHandler.Char_Damage_Req(ip, gc);
+                    break;
+                case ClientOpcode.CHAR_DEAD_REQ:
+                    StatusHandler.Char_Dead_Req(ip, gc);
+                    break;
                 case ClientOpcode.CHAR_STATUP_REQ:
                     StatusHandler.Char_Statup_Req(ip, gc);
                     break;
@@ -122,12 +128,12 @@ namespace Server.Net
                 case ClientOpcode.P_SPEED_C:
                     ActionHandler.p_Speed_c(ip, gc);
                     break;
-                case ClientOpcode.P_DAMAGE_C:
-                    ActionHandler.p_Damage_c(ip, gc);
-                    break;
-                case ClientOpcode.P_DEAD_C:
-                    ActionHandler.p_Dead_c(ip, gc);
-                    break;
+                //case ClientOpcode.P_DAMAGE_C:
+                //    ActionHandler.p_Damage_c(ip, gc);
+                //    break;
+                //case ClientOpcode.P_DEAD_C:
+                //    ActionHandler.p_Dead_c(ip, gc);
+                //    break;
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
                     break;
@@ -143,6 +149,9 @@ namespace Server.Net
                     break;
                 case ClientOpcode.PARTY_INVITE_RESPONSES_REQ:
                     PartyHandler.PartyInviteResponses(ip, gc);
+                    break;
+                case ClientOpcode.PARTY_LEAVE:
+                    PartyHandler.PartyLeave(ip, gc);
                     break;
                 // PlayerShop
                 case ClientOpcode.PSHOP_OPEN_REQ:

@@ -68,7 +68,7 @@
     <Compile Include="Ghost\Provider\PetFactory.cs" />
     <Compile Include="Ghost\Quest.cs" />
     <Compile Include="Ghost\Shortcut.cs" />
-    <Compile Include="Ghost\PartyMember.cs" />
+    <Compile Include="Ghost\Member.cs" />
     <Compile Include="Ghost\Skill.cs" />
     <Compile Include="Ghost\Storage.cs" />
     <Compile Include="Net\Handler\ActionHandler.cs" />

@@ -138,7 +138,7 @@ namespace Server.Ghost.Provider
             }
             all.Add(topData);
             //==============================================================================
-            //服裝類型開始
+            // 服裝類型開始
             int clothingCount = item.ReadInt32(); // 服裝數量
             for (int i = 0; i < clothingCount; i++)
             {
@@ -171,31 +171,31 @@ namespace Server.Ghost.Provider
             int ringCount = item.ReadInt32(); // 戒指數量
             for (int i = 0; i < ringCount; i++)
             {
-                int itemId = item.ReadInt32(); // 物品編號
+                int ItemId = item.ReadInt32(); // 物品編號
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
-                byte job = item.ReadByte();
-                byte level = item.ReadByte();
-                short defense = item.ReadInt16();
+                byte Job = item.ReadByte();
+                byte Level = item.ReadByte();
+                short Str = item.ReadInt16();
+                short Dex = item.ReadInt16();
+                short Vit = item.ReadInt16();
+                short Int = item.ReadInt16();
+                short Magic = item.ReadInt16();
+                short Avoid = item.ReadInt16();
+                short Attack = item.ReadInt16();
+                short Defense = item.ReadInt16();
+                short Hp = item.ReadInt16();
+                short Mp = item.ReadInt16();
+                int Price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                int price = item.ReadInt32();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadByte();
+                byte Refining = item.ReadByte();
                 item.ReadBytes(10);
                 item.ReadBytes(5);
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                ringData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
+                ringData.Add(ItemId, new ItemData(ItemId, itemNameString, Job, Level, Str, Dex, Vit, Int, Magic, Avoid, Attack, Defense, Hp, Mp, Refining, Price));
             }
             all.Add(ringData);
             //==============================================================================
@@ -203,19 +203,19 @@ namespace Server.Ghost.Provider
             int necklaceCount = item.ReadInt32(); // 項鍊數量
             for (int i = 0; i < necklaceCount; i++)
             {
-                int itemId = item.ReadInt32(); // 物品編號
-                byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
-                string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
-                byte job = item.ReadByte();
-                byte level = item.ReadByte();
-                short defense = item.ReadInt16();
+                int ItemId = item.ReadInt32(); // 物品編號
+                byte[] ItemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
+                string ItemNameString = Encoding.GetEncoding("UTF-16LE").GetString(ItemNameByteArray); // 物品名稱 (Byte[] => String)
+                byte Job = item.ReadByte();
+                byte Level = item.ReadByte();
+                short Defense = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                int price = item.ReadInt32();
+                short Hp = item.ReadInt16();
+                short Mp = item.ReadInt16();
+                int Price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadByte();
@@ -224,7 +224,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                necklaceData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
+                necklaceData.Add(ItemId, new ItemData(ItemId, ItemNameString, Job, Level, Defense, Hp, Mp, Price));
             }
             all.Add(necklaceData);
             //==============================================================================
@@ -266,8 +266,8 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                int hp = item.ReadInt32();
-                int mp = item.ReadInt32();
+                int Hp = item.ReadInt32();
+                int Mp = item.ReadInt32();
                 item.ReadInt32();
                 int price = item.ReadInt32();
                 item.ReadInt16();
@@ -277,7 +277,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                useData.Add(itemId, new ItemData(itemId, itemNameString, hp, mp, price));
+                useData.Add(itemId, new ItemData(itemId, itemNameString, (short)Hp, (short)Mp, price));
             }
             all.Add(useData);
             //==============================================================================
@@ -330,16 +330,16 @@ namespace Server.Ghost.Provider
             int hairCount = item.ReadInt32(); // 髮型數量
             for (int i = 0; i < hairCount; i++)
             {
-                int itemId = item.ReadInt32(); // 物品編號
-                byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
-                string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
-                item.ReadByte();
-                int price = item.ReadInt32();
+                int ItemId = item.ReadInt32(); // 物品編號
+                byte[] ItemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
+                string ItemNameString = Encoding.GetEncoding("UTF-16LE").GetString(ItemNameByteArray); // 物品名稱 (Byte[] => String)
+                byte Gender = item.ReadByte();
+                int Price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                hairData.Add(itemId, new ItemData(itemId, itemNameString, price));
+                hairData.Add(ItemId, new ItemData(ItemId, ItemNameString, Price));
             }
             all.Add(hairData);
             //==============================================================================
@@ -347,16 +347,16 @@ namespace Server.Ghost.Provider
             int eyesCount = item.ReadInt32(); // 眼睛數量
             for (int i = 0; i < eyesCount; i++)
             {
-                int itemId = item.ReadInt32(); // 物品編號
-                byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
-                string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
-                item.ReadByte();
-                int price = item.ReadInt32();
+                int ItemId = item.ReadInt32(); // 物品編號
+                byte[] ItemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
+                string ItemNameString = Encoding.GetEncoding("UTF-16LE").GetString(ItemNameByteArray); // 物品名稱 (Byte[] => String)
+                byte Gender = item.ReadByte();
+                int Price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                eyesData.Add(itemId, new ItemData(itemId, itemNameString, price));
+                eyesData.Add(ItemId, new ItemData(ItemId, ItemNameString, Price));
             }
             all.Add(eyesData);
             //==============================================================================

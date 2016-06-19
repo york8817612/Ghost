@@ -102,7 +102,10 @@ namespace Server.Handler
                     map.CharacterItem.Add(map.ObjectID, it);
                     map.ObjectID++;
                 }
-                MapPacket.MonsterDrop(gc, Monster);
+                foreach (Character All in map.Characters)
+                {
+                    MapPacket.MonsterDrop(All.Client, Monster);
+                }
             }
             else
             {

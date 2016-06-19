@@ -24,11 +24,11 @@ namespace Server.Ghost
             try
             {
                 gc.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
 
                 
-                if (!password.Equals(encryptPassword))
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");

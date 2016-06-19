@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.IO.Packet;
 using Server.Net;
 using Server.Packet;
 
@@ -6,6 +7,43 @@ namespace Server.Handler
 {
     public static class StatusHandler
     {
+        public static void Char_Damage_Req(InPacket lea, Client c)
+        {
+            short Damage = lea.ReadShort();
+            var chr = c.Character;
+            chr.Hp -= Damage;
+            if (chr.Hp <= 0)
+            {
+                chr.IsAlive = false;
+                chr.Hp = 1;
+                chr.Mp = 1;
+                chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
+                if (chr.Exp < 0)
+                    chr.Exp = 0;
+                MapPacket.userDead(c);
+                StatusPacket.UpdateExp(c);
+                return;
+            }
+            StatusPacket.UpdateHpMp(c, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+        }
+
+        public static void Char_Dead_Req(InPacket lea, Client c)
+        {
+            var chr = c.Character;
+            if (chr.IsAlive == true)
+            {
+                chr.IsAlive = false;
+                chr.Hp = 1;
+                chr.Mp = 1;
+                chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
+                if (chr.Exp < 0)
+                    chr.Exp = 0;
+                MapPacket.userDead(c);
+                StatusPacket.UpdateExp(c);
+            }
+            StatusPacket.getStatusInfo(c);
+        }
+
         public static void Char_Statup_Req(InPacket lea, Client gc)
         {
             int stat = lea.ReadInt();

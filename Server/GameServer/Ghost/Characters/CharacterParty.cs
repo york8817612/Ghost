@@ -3,26 +3,26 @@ using System.Collections.Generic;
 
 namespace Server.Ghost.Characters
 {
-    public class CharacterParty : IEnumerable<PartyMember>
+    public class CharacterParty : IEnumerable<Member>
     {
         public Character Parent { get; private set; }
 
-        private List<PartyMember> Members { get; set; }
+        private List<Member> Members { get; set; }
 
         public CharacterParty(Character parent)
             : base()
         {
             this.Parent = parent;
 
-            this.Members = new List<PartyMember>();
+            this.Members = new List<Member>();
         }
 
-        public List<PartyMember> getMembers()
+        public List<Member> getMembers()
         {
             return this.Members;
         }
 
-        public IEnumerator<PartyMember> GetEnumerator()
+        public IEnumerator<Member> GetEnumerator()
         {
             return this.Members.GetEnumerator();
         }

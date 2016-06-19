@@ -18,14 +18,13 @@ namespace Server.Packet
             }
         }
 
-        public static void PartyInviteResponses(Client c, int CharacterID, int Respons)
+        public static void PartyInviteResponses(Client c, int Respons)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.PARTY_INVITE_RESPONSES))
             {
                 var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(CharacterID);
                 plew.WriteInt(Respons); // 【0 : %s 取消了加入隊伍的邀請"】【1 : %s 加入了隊伍】
                 c.Send(plew);
             }
@@ -41,22 +40,22 @@ namespace Server.Packet
                 for (int i = 0; i < 6; i++)
                 {
                     // 個人 + 其他 5 名隊員
-                    plew.WriteInt(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].CharacterID : -1);
-                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Level : 0);
-                    plew.WriteString((i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Name : ""), 20);
-                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].MaxHp : 0);
-                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Hp : 0);
-                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].MaxMp : 0);
-                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Mp : 0); // 尚未確認
+                    plew.WriteInt(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.CharacterID : -1);
+                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.Level : 0);
+                    plew.WriteString((i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.Name : ""), 20);
+                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.MaxHp : 0);
+                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.Hp : 0);
+                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.MaxMp : 0);
+                    plew.WriteShort(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.Mp : 0); // 尚未確認
                     plew.WriteHexString("1F 40");
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[0] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[1] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[2] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[3] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[0] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[1] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[2] : 0);
-                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].IP.GetAddressBytes()[3] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[0] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[1] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[2] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[3] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[0] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[1] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[2] : 0);
+                    plew.WriteByte(i < chr.Party.getMembers().Count ? chr.Party.getMembers()[i].Character.IP.GetAddressBytes()[3] : 0);
                 }
                 c.Send(plew);
             }

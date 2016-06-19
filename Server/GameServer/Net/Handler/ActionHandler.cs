@@ -74,19 +74,19 @@ namespace Server.Handler
 
         public static void p_Damage_c(InPacket lea, Client c)
         {
-            int CharacterID = lea.ReadInt();
-            short Damage = lea.ReadShort();
-            var chr = c.Character;
-            chr.Hp -= Damage;
+            //int CharacterID = lea.ReadInt();
+            //short Damage = lea.ReadShort();
+            //var chr = c.Character;
+            //chr.Hp -= Damage;
         }
 
         public static void p_Dead_c(InPacket lea, Client c)
         {
-            var chr = c.Character;
-            int CharacterID = lea.ReadInt();
-            MapPacket.userDead(c);
-            chr.IsAlive = false;
-            chr.Exp -= (int)(chr.Exp * 0.2);
+            //var chr = c.Character;
+            //int CharacterID = lea.ReadInt();
+            //MapPacket.userDead(c);
+            //chr.IsAlive = false;
+            //chr.Exp -= (int)(chr.Exp * 0.2);
         }
 
         public static void p_Move(InPacket lea, Client c)
@@ -190,7 +190,10 @@ namespace Server.Handler
                     map.CharacterItem.Add(map.ObjectID, it);
                     map.ObjectID++;
                 }
-                MapPacket.MonsterDrop(c, Monster);
+                foreach (Character All in map.Characters)
+                {
+                    MapPacket.MonsterDrop(All.Client, Monster);
+                }
             }
             else
             {

@@ -27,7 +27,10 @@ namespace Server.Handler
                 if (SourceType == 0xFF && SourceSlot == 0xFF)
                     return;
                 Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-                InventoryPacket.charDropItem(gc, map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
+                foreach (Character All in map.Characters)
+                {
+                    InventoryPacket.charDropItem(All.Client, map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
+                }
                 map.CharacterItem.Add(map.ObjectID, Source);
                 map.ObjectID++;
                 chr.Items.Remove(SourceType, SourceSlot, Quantity == 0 ? 1 : Quantity);
@@ -259,7 +262,10 @@ namespace Server.Handler
                         break;
                 }
                 StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
+                foreach (Character All in map.Characters)
+                {
+                    InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+                }
                 return;
             }
             // 撿取錢
@@ -269,7 +275,10 @@ namespace Server.Handler
                     return;
                 chr.Money += map.getDropByOriginalID(OriginalID).Quantity;
                 InventoryPacket.getInvenMoney(gc, chr.Money, map.getDropByOriginalID(OriginalID).Quantity);
-                InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
+                foreach (Character All in map.Characters)
+                {
+                    InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+                }
                 return;
             }
 
@@ -301,7 +310,10 @@ namespace Server.Handler
                 Item oItem = new Item(ItemID, Type, Slot, map.getDropByOriginalID(OriginalID).Quantity);
                 chr.Items.Add(oItem);
             }
-            InventoryPacket.clearDropItem(gc, chr.CharacterID, OriginalID, ItemID);
+            foreach (Character All in map.Characters)
+            {
+                InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+            }
             map.CharacterItem.Remove(OriginalID);
             UpdateInventory(gc, Type);
         }
@@ -310,23 +322,101 @@ namespace Server.Handler
         {
             ItemData idata = ItemFactory.GetItemData(itemID);
             Character chr = gc.Character;
-            if (idata.Attack != -1 || idata.MagicAttack != -1)
+            // Hp
+            if (idata.Hp != -1)
+            {
+                if (equiped)
+                {
+                    chr.MaxHp += idata.Hp;
+                }
+                else
+                {
+                    chr.MaxHp -= idata.Hp;
+                    chr.Hp = chr.MaxHp;
+                }
+            }
+            // Mp
+            if (idata.Mp != -1)
+            {
+                if (equiped)
+                {
+                    chr.MaxMp += idata.Mp;
+                }
+                else
+                {
+                    chr.MaxMp -= idata.Mp;
+                    chr.Mp = chr.MaxMp;
+                }
+            }
+            // 力量
+            if (idata.Str != -1)
+            {
+                if (equiped)
+                    chr.UpgradeStr += idata.Str;
+                else
+                    chr.UpgradeStr -= idata.Str;
+            }
+            // 精力
+            if (idata.Dex != -1)
+            {
+                if (equiped)
+                    chr.UpgradeDex += idata.Dex;
+                else
+                    chr.UpgradeDex -= idata.Dex;
+            }
+            // 氣力
+            if (idata.Vit != -1)
+            {
+                if (equiped)
+                    chr.UpgradeVit += idata.Vit;
+                else
+                    chr.UpgradeVit -= idata.Vit;
+            }
+            // 智力
+            if (idata.Int != -1)
+            {
+                if (equiped)
+                    chr.UpgradeInt += idata.Int;
+                else
+                    chr.UpgradeInt -= idata.Int;
+            }
+            // 物理攻擊力
+            if (idata.Attack != -1)
             {
                 if (equiped)
                 {
                     chr.Attack += idata.Attack;
                     chr.MaxAttack += idata.Attack;
-                    chr.Magic += idata.MagicAttack;
-                    chr.MaxMagic += idata.MagicAttack;
                 }
                 else
                 {
                     chr.Attack -= idata.Attack;
                     chr.MaxAttack -= idata.Attack;
-                    chr.Magic -= idata.MagicAttack;
-                    chr.MaxMagic -= idata.MagicAttack;
                 }
             }
+            // 魔法攻擊力
+            if (idata.Magic != -1)
+            {
+                if (equiped)
+                {
+                    chr.Magic += idata.Magic;
+                    chr.MaxMagic += idata.Magic;
+                }
+                else
+                {
+                    chr.Magic -= idata.Magic;
+                    chr.MaxMagic -= idata.Magic;
+                }
+            }
+            // 迴避率
+            if (idata.Avoid != -1)
+            {
+                if (equiped)
+                    chr.Avoid += idata.Avoid;
+                else
+                    chr.Avoid -= idata.Avoid;
+            }
+            // 防禦力
             if (idata.Defense != -1)
             {
                 if (equiped)
