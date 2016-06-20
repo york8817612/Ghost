@@ -52,6 +52,7 @@
     <Compile Include="Ghost\Characters\CharacterShop.cs" />
     <Compile Include="Ghost\Characters\CharacterParty.cs" />
     <Compile Include="Ghost\Characters\CharacterStorages.cs" />
+    <Compile Include="Ghost\Characters\CharacterTrade.cs" />
     <Compile Include="Ghost\Characters\CharacterUseSlot.cs" />
     <Compile Include="Ghost\Commodity.cs" />
     <Compile Include="Ghost\Pet.cs" />

@@ -143,6 +143,25 @@ namespace Server.Net
                 case ClientOpcode.PET_ATTACK_C:
                     ActionHandler.Pet_Attack_C(ip, gc);
                     break;
+                // Trade
+                case ClientOpcode.TRADE_INVITE_REQ:
+                    TradeHandler.TradeInvite(ip, gc);
+                    break;
+                case ClientOpcode.TRADE_INVITE_RESPONSE_REQ:
+                    TradeHandler.TradeInviteResponses(ip, gc);
+                    break;
+                case ClientOpcode.TRADE_READY_REQ:
+                    TradeHandler.TradeReady(ip, gc);
+                    break;
+                case ClientOpcode.TRADE_CONFIRM_REQ:
+                    TradeHandler.TradeConfirm(ip, gc);
+                    break;
+                case ClientOpcode.TRADE_CANCEL_REQ:
+                    TradeHandler.TradeCancel(ip, gc);
+                    break;
+                case ClientOpcode.TRADE_PUT_REQ:
+                    TradeHandler.TradePutItem(ip, gc);
+                    break;
                 // Party
                 case ClientOpcode.PARTY_INVITE_REQ:
                     PartyHandler.PartyInvite(ip, gc);

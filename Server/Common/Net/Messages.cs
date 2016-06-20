@@ -97,6 +97,13 @@ namespace Server.Common.Net
         QUEST_UPDATE_REQ = 0x7F,
         // Map
         CAN_WARP_ACK_REQ = 0x85,
+        // Trade
+        TRADE_INVITE_REQ = 0x92,
+        TRADE_INVITE_RESPONSE_REQ = 0x93,
+        TRADE_READY_REQ = 0x94,
+        TRADE_CONFIRM_REQ = 0x95,
+        TRADE_CANCEL_REQ = 0x96,
+        TRADE_PUT_REQ = 0x99,
         // Party
         PARTY_INVITE_REQ = 0x9B,
         PARTY_INVITE_RESPONSES_REQ = 0x9C,
@@ -255,13 +262,14 @@ namespace Server.Common.Net
         CONDITION_CLEAR = 0x88,
 
         // 0x92
-        TRADE_INVITE = 0x93,
+        TRADE_INVITE = 0x92,
+        TRADE_INVITE_RESPONSES = 0x93,
         TRADE_READY = 0x94,
         TRADE_CONFIRM = 0x95,
-        // 0x96 // 交易取消
-        // 0x97 // 交易失敗
+        TRADE_CANCEL = 0x96,
+        TRADE_FAIL = 0x97,
         TRADE_SUCCESS = 0x98,
-        // 0x9A
+        TRADE_PUT = 0x9A,
         PARTY_INVITE = 0x9B,
         PARTY_INVITE_RESPONSES = 0x9C,
         PARTY_UPDATE = 0x9D,

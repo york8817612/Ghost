@@ -71,10 +71,13 @@ namespace Server.Ghost.Characters
         public CharacterSkills Skills { get; private set; }
         public CharacterQuests Quests { get; private set; }
         public CharacterKeyMap Keymap { get; private set; }
+        public CharacterTrade Trade { get; set; }
         public CharacterShop Shop { get; set; }
 
         public CharacterUseSlot UseSlot { get; private set; }
         public CharacterParty Party { get; set; }
+
+        public Character Trader { get; set;}
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 

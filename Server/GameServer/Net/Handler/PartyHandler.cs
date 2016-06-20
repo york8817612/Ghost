@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.IO;
+using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;
 using Server.Ghost.Provider;
@@ -39,10 +40,13 @@ namespace Server.Handler
 
         public static void PartyInviteResponses(InPacket lea, Client c)
         {
-            // Bug
-
             int Respons = lea.ReadInt();
-            PartyPacket.PartyInviteResponses(c, Respons);
+            foreach (Member Member in c.Character.Party.getMembers())
+            {
+                if (Member.Character.CharacterID == c.Character.CharacterID)
+                    continue;
+                PartyPacket.PartyInviteResponses(Member.Character.Client, Respons);
+            }
             if (Respons == 1)
             {
                 foreach (Member Member in c.Character.Party.getMembers())
@@ -55,18 +59,13 @@ namespace Server.Handler
         public static void PartyLeave(InPacket lea, Client c)
         {
             // Bug
-
-            Member MyCharacter = null;
-            foreach (Member Member in c.Character.Party.getMembers())
-            {
-                if (Member.Character.CharacterID == c.Character.CharacterID)
-                    MyCharacter = Member;
-            }
+            Member MyCharacter = c.Character.Party.getMembers().Find(i => (i.Character.CharacterID == c.Character.CharacterID));
             foreach (Member Member in c.Character.Party.getMembers())
             {
                 if (Member.Character.CharacterID != c.Character.CharacterID)
                 {
                     Member.Character.Party.getMembers().Remove(MyCharacter);
+                    Log.Error("Value2 = {0}", Member.Character.Party.getMembers().Count);
                     PartyPacket.PartyUpdate(Member.Character.Client);
                 }
             }
