@@ -1,5 +1,6 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Common.Net;
+using Server.Ghost.Characters;
 using Server.Net;
 
 namespace Server.Packet
@@ -17,11 +18,10 @@ namespace Server.Packet
             }
         }
 
-        public static void SellStart(Client c, string Name)
+        public static void SellStart(Client c, Character chr, string Name)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.PSHOP_SELLSTARTACK))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID);
@@ -31,11 +31,10 @@ namespace Server.Packet
             }
         }
 
-        public static void SellEnd(Client c)
+        public static void SellEnd(Client c, Character chr)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.PSHOP_SELLEND))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID);
@@ -50,32 +49,43 @@ namespace Server.Packet
                 var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(0); // ID
-                plew.WriteInt(0); // Gold
+                plew.WriteInt(chr.CharacterID);
+                plew.WriteInt(chr.Shop.Money);
                 plew.WriteInt(0);
                 for (int i = 0; i < 12; i++)
                 {
-                    plew.WriteShort(chr.Shop.getType(i));
-                    plew.WriteShort(chr.Shop.getSlot(i));
-                    plew.WriteInt(chr.Shop.getQuantity(i));
-                    plew.WriteInt(chr.Shop.getPrice(i));
+                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.getSourceType(i) : -1);
+                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.getSourceSlot(i) : -1);
+                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.getQuantity(i) : 0);
+                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.getPrice(i) : 0);
                 }
                 c.Send(plew);
             }
         }
 
-        public static void ShopInfo(Client c)
+        public static void ShopInfo(Client c, Character Seller, int CharacterID)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.PSHOP_INFOACK))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(0); // ID
-                plew.WriteString(chr.Shop.Name, 40);
+                plew.WriteInt(CharacterID);
+                plew.WriteString(Seller.Shop.Name, 40);
                 for (int i = 0; i < 12; i++)
                 {
-                    // 未完成
+                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.getItemID(i) : 0);
+                    plew.WriteShort(0);
+                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.getQuantity(i) : 0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteShort(0);
+                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.getIsLocked(i) : 0);
+                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.getPrice(i) : 0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
+                    plew.WriteInt(0);
                 }
                 c.Send(plew);
             }

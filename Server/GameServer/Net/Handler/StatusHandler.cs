@@ -22,6 +22,13 @@ namespace Server.Handler
                     chr.Exp = 0;
                 MapPacket.userDead(c);
                 StatusPacket.UpdateExp(c);
+                if (chr.Competitor != null)
+                {
+                    PvPPacket.PvPEnd(c, chr.Competitor.CharacterID);
+                    PvPPacket.PvPEnd(chr.Competitor.Client, chr.Competitor.CharacterID);
+                    chr.Competitor = null;
+                    chr.Competitor.Competitor = null;
+                }
                 return;
             }
             StatusPacket.UpdateHpMp(c, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
@@ -40,6 +47,13 @@ namespace Server.Handler
                     chr.Exp = 0;
                 MapPacket.userDead(c);
                 StatusPacket.UpdateExp(c);
+                if (chr.Competitor != null)
+                {
+                    PvPPacket.PvPEnd(c, chr.Competitor.CharacterID);
+                    PvPPacket.PvPEnd(chr.Competitor.Client, chr.Competitor.CharacterID);
+                    chr.Competitor = null;
+                    chr.Competitor.Competitor = null;
+                }
             }
             StatusPacket.getStatusInfo(c);
         }

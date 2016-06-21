@@ -78,6 +78,7 @@ namespace Server.Ghost.Characters
         public CharacterParty Party { get; set; }
 
         public Character Trader { get; set;}
+        public Character Competitor { get; set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
 

@@ -52,8 +52,8 @@ namespace Server.Handler
                     gc.SetCharacter(gc.Account.Characters[selectCharacter]);
                 }
                 Log.Inform("Password = {0}", password);
-                Log.Inform("encryptKey = {0}", encryptKey);
-                Log.Inform("encryptPassword = {0}", encryptPassword);
+                //Log.Inform("encryptKey = {0}", encryptKey);
+                //Log.Inform("encryptPassword = {0}", encryptPassword);
             }
             catch (NoAccountException)
             {

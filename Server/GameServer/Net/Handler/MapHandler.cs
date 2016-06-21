@@ -4,7 +4,6 @@ using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
-using System.Threading;
 
 namespace Server.Handler
 {

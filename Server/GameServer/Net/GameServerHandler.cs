@@ -172,6 +172,13 @@ namespace Server.Net
                 case ClientOpcode.PARTY_LEAVE:
                     PartyHandler.PartyLeave(ip, gc);
                     break;
+                // PvP
+                case ClientOpcode.PVP_REQ:
+                    PvPHandler.PvPInvite(ip, gc);
+                    break;
+                case ClientOpcode.PVP_ACK_REQ:
+                    PvPHandler.PvPInviteResponses(ip, gc);
+                    break;
                 // PlayerShop
                 case ClientOpcode.PSHOP_OPEN_REQ:
                     PlayerShopHandler.OpenShop_Req(ip, gc);
@@ -183,7 +190,7 @@ namespace Server.Net
                     PlayerShopHandler.SellEnd_Req(ip, gc);
                     break;
                 case ClientOpcode.PSHOP_INFO_REQ:
-                    // 未完成
+                    PlayerShopHandler.ShopInfo_Req(ip, gc);
                     break;
                 case ClientOpcode.PSHOP_BUYACK_REQ:
                     PlayerShopHandler.Buy_Req(ip, gc);

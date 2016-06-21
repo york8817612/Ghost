@@ -109,6 +109,9 @@ namespace Server.Common.Net
         PARTY_INVITE_RESPONSES_REQ = 0x9C,
         PARTY_LEAVE = 0x9F,
         // 0xA0 驅逐隊員
+        //
+        PVP_REQ = 0xA4,
+        PVP_ACK_REQ = 0xA5,
         // QuickSlot
         QUICK_SLOT_REQ = 0xA8,
         // STORAGE

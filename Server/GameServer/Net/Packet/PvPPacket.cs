@@ -18,15 +18,28 @@ namespace Server.Packet
             }
         }
 
-        public static void PvPStart(Client c, int CharacterID_1, int CharacterID_2)
+        public static void PvPInviteResponses(Client c, int CharacterID, int Respons)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.PVP_ACK))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(CharacterID);
+                plew.WriteInt(Respons);
+                c.Send(plew);
+            }
+        }
+
+        public static void PvPStart(Client c, int CharacterID, int CompetitorID)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.PVP_START))
             {
                 var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(CharacterID_1);
-                plew.WriteInt(CharacterID_2);
+                plew.WriteInt(CharacterID);
+                plew.WriteInt(CompetitorID);
                 plew.WriteInt(82);
                 c.Send(plew);
             }

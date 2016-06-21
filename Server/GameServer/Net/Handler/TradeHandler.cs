@@ -59,6 +59,18 @@ namespace Server.Handler
             int k = 0;
             int m = 0;
             int l = 0;
+
+            // 個人
+            chr.Money += chr.Trader.Trade.Money;
+            // 對方
+            chr.Trader.Money += chr.Trade.Money;
+            // 個人
+            if (chr.Trader.Trade.Money > 0)
+                InventoryPacket.getInvenMoney(c, chr.Money, chr.Trader.Trade.Money);
+            // 對方
+            if (chr.Trade.Money > 0)
+                InventoryPacket.getInvenMoney(chr.Trader.Client, chr.Trader.Money, chr.Trade.Money);
+
             try
             { // 交易成功
                 // 個人接收
@@ -145,6 +157,17 @@ namespace Server.Handler
             int j = 0;
 
             // 個人
+            chr.Money += chr.Trade.Money;
+            // 對方
+            chr.Trader.Money += chr.Trader.Trade.Money;
+            // 個人
+            if (chr.Trade.Money > 0)
+                InventoryPacket.getInvenMoney(c, chr.Money, chr.Trade.Money);
+            // 對方
+            if (chr.Trader.Trade.Money > 0)
+                InventoryPacket.getInvenMoney(chr.Trader.Client, chr.Trader.Money, chr.Trader.Trade.Money);
+
+            // 個人
             foreach (Item Item in chr.Trade.Item)
             {
                 Item i = chr.Items.GetItem(Item.Type, Item.Slot);
@@ -206,15 +229,19 @@ namespace Server.Handler
             int SourceType = lea.ReadShort();
             int SourceSlot = lea.ReadShort();
             int Quantity = lea.ReadInt();
-            Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
-            chr.Trade.SourceQuantity.Add(Source.Quantity);
 
             if (SourceType == 0x64 && SourceSlot == 0x64)
             {   // Money欄位
                 chr.Money -= Quantity;
                 chr.Trade.Money = Quantity;
                 InventoryPacket.getInvenMoney(c, chr.Money, -Quantity);
+                TradePacket.TradePutItem(c);
+                TradePacket.TradePutItem(chr.Trader.Client);
+                return;
             }
+
+            Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
+            chr.Trade.SourceQuantity.Add(Source.Quantity);
 
             if (Source != null)
             {
@@ -222,10 +249,9 @@ namespace Server.Handler
                 chr.Trade.TargetQuantity.Add((short)Quantity);
                 chr.Items.Remove((byte)SourceType, (byte)SourceSlot, Quantity);
                 InventoryHandler.UpdateInventory(c, (byte)SourceType);
+                TradePacket.TradePutItem(c);
+                TradePacket.TradePutItem(chr.Trader.Client);
             }
-
-            TradePacket.TradePutItem(c);
-            TradePacket.TradePutItem(chr.Trader.Client);
         }
 
         public static void TradeSuccessful(InPacket lea, Client c)

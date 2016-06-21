@@ -15,6 +15,7 @@ namespace Server.Ghost
         public int MapWidth { get; set; }
         public sbyte[][] MapPexels;
         public int ObjectID { get; set; }
+        public bool IsControling { get; set; }
 
         public List<Character> Characters { get; private set; }
         public List<Monster> Monster { get; set; }
@@ -89,8 +90,10 @@ namespace Server.Ghost
 
         public void ControlMonster(Client gc, int j)
         {
-            if (this.GetMapCharactersTotal() > 1)
+            if (this.IsControling == true)
                 return;
+
+            this.IsControling = true;
 
             tmr.Elapsed += delegate
             {
