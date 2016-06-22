@@ -194,9 +194,9 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(1, 50));
             maps.Add(new Map(1, 51));
             maps.Add(new Map(1, 52));
-            //maps.Add(new Map(1, 53));
-            //maps.Add(new Map(1, 54));
-            //maps.Add(new Map(1, 55));
+            maps.Add(new Map(1, 53));
+            maps.Add(new Map(1, 54));
+            maps.Add(new Map(1, 55));
             maps.Add(new Map(1, 60));
             maps.Add(new Map(1, 61));
             maps.Add(new Map(1, 62));
@@ -526,6 +526,8 @@ namespace Server.Ghost.Provider
             maps.Add(new Map(9, 9));
             foreach (Map map in maps)
             {
+                if ((map.MapX == 1 && map.MapY == 53) || (map.MapX == 1 && map.MapY == 54) || (map.MapX == 1 && map.MapY == 55))
+                    continue;
                 LoadMapPexelsData(map);
                 ParsePrjFile(map);
             }

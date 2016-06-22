@@ -44,11 +44,10 @@ namespace Server.Packet
             }
         }
 
-        public static void getAvatar(Client c)
+        public static void getAvatar(Client c, Character chr)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_SET_AVATAR))
             {
-                var chr = c.Character;
                 Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
@@ -453,11 +452,10 @@ namespace Server.Packet
             }
         }
 
-        public static void UseSpendStart(Client c, short PositionX, short PositionY, int ItemID, int Type, int Slot)
+        public static void UseSpendStart(Client c, Character chr, short PositionX, short PositionY, int ItemID, int Type, int Slot)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_USESPEND_START))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID);

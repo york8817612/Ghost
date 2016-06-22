@@ -166,5 +166,19 @@ namespace Server.Packet
                 c.Send(plew);
             }
         }
+
+        public static void Fury(Client c, int Type)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_USERSP_ACK))
+            {
+                var chr = c.Character;
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteShort(chr.CharacterID);
+                plew.WriteShort(Type);
+                plew.WriteInt(0);
+                c.Send(plew);
+            }
+        }
     }
 }

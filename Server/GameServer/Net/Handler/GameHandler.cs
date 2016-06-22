@@ -203,7 +203,7 @@ namespace Server.Handler
                     }
                     break;
             }
-            chr.Keymap.Remove(Skill.Key);
+            chr.Keymap.Remove(QuickSlotName);
             chr.Keymap.Add(QuickSlotName, new Shortcut(SkillID, (byte)SkillType, (byte)SkillSlot));
         }
 

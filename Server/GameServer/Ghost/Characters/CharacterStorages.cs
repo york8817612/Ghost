@@ -57,14 +57,11 @@ namespace Server.Ghost
             item.Delete();
         }
 
-        public void Remove(byte type, byte slot, int Quantity)
+        public void Remove(byte Type, byte Slot, int Quantity)
         {
-            Storage item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
-            int SourceQuantity = item.Quantity;
-            item.Quantity = (short)Quantity;
-            this.Remove(type, slot);
-            int AddQuantity = SourceQuantity - item.Quantity;
-            this.Add(new Storage(item.ItemID, AddQuantity, item.Type, item.Slot, 0));
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == Type && i.Slot == Slot));
+            this.Remove(Type, Slot);
+            this.Add(new Storage(Item.ItemID, (Item.Quantity - Quantity), Type, Slot, 0));
         }
 
         public Storage GetItem(byte type, byte slot)
@@ -83,7 +80,7 @@ namespace Server.Ghost
 
         public int GetItemQuantity(byte type, byte slot)
         {
-            Storage Storage = this.Storages.Find(i => (i.Type == type && i.Slot == slot));
+            Storage Storage = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
             if (Storage == null)
                 return 0;
             return Storage.Quantity;

@@ -201,8 +201,10 @@ namespace Server.Handler
             short PositionY = lea.ReadShort();
             int Slot = lea.ReadInt();
             var chr = c.Character;
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             Item Item = chr.Items.GetItem((byte)InventoryType.ItemType.Spend3, (byte)Slot);
-            InventoryPacket.UseSpendStart(c, PositionX, PositionY, Item.ItemID, (byte)InventoryType.ItemType.Spend3, Slot);
+            foreach (Character All in map.Characters)
+                InventoryPacket.UseSpendStart(All.Client, chr, PositionX, PositionY, Item.ItemID, (byte)InventoryType.ItemType.Spend3, Slot);
             chr.Items.Remove((byte)InventoryType.ItemType.Spend3, (byte)Slot, 1);
             UpdateInventory(c, (byte)InventoryType.ItemType.Spend3);
         }
@@ -214,12 +216,14 @@ namespace Server.Handler
             lea.ReadInt();
             lea.ReadByte();
             lea.ReadByte();
+            var chr = gc.Character;
+
             if (Slot >= 0 && Slot < 24 && Message.Length <= 60)
             {
                 gc.Character.Items.Remove(InventoryType.ItemType.Spend3, Slot);
-                foreach (Character all in MapFactory.AllCharacters)
+                foreach (Character All in MapFactory.AllCharacters)
                 {
-                    GamePacket.InvenUseSpendShout(all.Client, Message);
+                    GamePacket.InvenUseSpendShout(All.Client, chr, Message);
                 }
                 InventoryPacket.getInvenSpend3(gc);
             }
@@ -469,9 +473,12 @@ namespace Server.Handler
 
         public static void UpdateAvatar(Client gc)
         {
+            var chr = gc.Character;
+            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             InventoryPacket.getInvenEquip(gc);
             StatusPacket.getStatusInfo(gc);
-            InventoryPacket.getAvatar(gc);
+            foreach (Character All in map.Characters)
+                InventoryPacket.getAvatar(All.Client, chr);
         }
     }
 }

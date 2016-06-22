@@ -12,18 +12,18 @@ namespace Server.Handler
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {
             var chr = gc.Character;
-            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            map.Characters.Remove(chr);
-            foreach (Character All in map.Characters)
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            Map.Characters.Remove(chr);
+            foreach (Character All in Map.Characters)
                 MapPacket.removeUser(All.Client, chr);
 
-            int playerId = lea.ReadInt();
-            short mapX = lea.ReadShort();
-            short mapY = lea.ReadShort();
-            short positionX = lea.ReadShort();
-            short positionY = lea.ReadShort();
+            int CharacterID = lea.ReadInt();
+            short MapX = lea.ReadShort();
+            short MapY = lea.ReadShort();
+            short PositionX = lea.ReadShort();
+            short PositionY = lea.ReadShort();
 
-            if (mapX == 77 && mapY == 1)
+            if (MapX == 77 && MapY == 1)
             {
                 CashShopPacket.CashShopList1(gc); // 人物
                 CashShopPacket.CashShopList2(gc); // 裝備
@@ -36,31 +36,34 @@ namespace Server.Handler
                 CashShopPacket.CashShopList9(gc);
             }
 
-            chr.MapX = mapX;
-            chr.MapY = mapY;
-            chr.PlayerX = positionX;
-            chr.PlayerY = positionY;
+            chr.MapX = MapX;
+            chr.MapY = MapY;
+            chr.PlayerX = PositionX;
+            chr.PlayerY = PositionY;
 
-            map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            map.Characters.Add(chr);
-            foreach (Character All in map.Characters)
-                MapPacket.warpToMap(All.Client, chr, playerId, mapX, mapY, positionX, positionY);
+            Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            Map.Characters.Add(chr);
+            foreach (Character All in Map.Characters)
+                MapPacket.warpToMap(All.Client, chr, CharacterID, MapX, MapY, PositionX, PositionY);
 
-            if (map.GetMapCharactersTotal() > 1)
+            if (Map.GetMapCharactersTotal() > 1)
             {
-                foreach (Character All in map.Characters)
+                foreach (Character All in Map.Characters)
                 {
-                    MapPacket.createUser(All.Client, chr, map);
+                    MapPacket.createUser(All.Client, chr, Map);
                 }
             }
 
-            MonsterPacket.createAllMonster(gc, map, map.Monster);
+            if ((Map.MapX == 1 && Map.MapY == 53) || (Map.MapX == 1 && Map.MapY == 54) || (Map.MapX == 1 && Map.MapY == 55))
+                return;
+            
+            MonsterPacket.createAllMonster(gc, Map, Map.Monster);
 
             int j = 0;
 
             for (int i = 0; i < 50; i++)
             {
-                if (map.Monster[i] != null)
+                if (Map.Monster[i] != null)
                 {
                     j++;
                 }
@@ -77,13 +80,13 @@ namespace Server.Handler
 
             //if (map.GetMapCharactersTotal() < 1)
             //{
-                map.ControlMonster(gc, j);
+                Map.ControlMonster(gc, j);
             //}
 
-            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-            InventoryPacket.getAvatar(gc);
+            //StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+            //InventoryPacket.getAvatar(gc, chr);
 
-            if (mapX == 77 && mapY == 1)
+            if (MapX == 77 && MapY == 1)
             {
                 CashShopPacket.MgameCash(gc);
                 CashShopPacket.GuiHonCash(gc);

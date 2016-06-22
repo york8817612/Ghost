@@ -76,14 +76,11 @@ namespace Server.Ghost.Characters
             item.Delete();
         }
 
-        public void Remove(byte type, byte slot, int Quantity)
+        public void Remove(byte Type, byte Slot, int Quantity)
         {
-            Item item = this.Items.Find(i => (i.Type == type && i.Slot == slot));
-            int SourceQuantity = item.Quantity;
-            item.Quantity = (short)Quantity;
-            this.Remove(type, slot);
-            int AddQuantity = SourceQuantity - item.Quantity;
-            this.Add(new Item(item.ItemID, item.Type, item.Slot, (short)AddQuantity));
+            Item Item = this.Items.Find(i => (i.Type == Type && i.Slot == Slot));
+            this.Remove(Type, Slot);
+            this.Add(new Item(Item.ItemID, Type, Slot, (short)(Item.Quantity - Quantity)));
         }
 
         public void Remove(int ItemID)

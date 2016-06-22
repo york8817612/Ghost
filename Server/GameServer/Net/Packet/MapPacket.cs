@@ -149,10 +149,10 @@ namespace Server.Packet
                     plew.WriteString(i < map.GetMapCharactersTotal() ? chr[i].Title : "", 20); // 玩家稱號
                     plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].PlayerX : 0); // 玩家 PositionX
                     plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].PlayerY : 0); // 玩家 PositionY
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Gender : 0); // 性別(1)
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Gender : 1); // 性別(1)
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Level : 0); // 等級
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Class : 0); // 職業
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].ClassLevel : 0); // (-1)
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].ClassLevel : 0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? -1 : 0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
@@ -201,7 +201,7 @@ namespace Server.Packet
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[2] : 0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[3] : 0);
 
-                    plew.WriteHexString("1F 40");
+                    plew.WriteHexString(i < map.GetMapCharactersTotal() ? "1F 40" : "00 00");
                     // 個人商店
                     plew.WriteString(i < map.GetMapCharactersTotal() ? (chr[i].Shop != null ? chr[i].Shop.Name : "") : "", 40); // 個人商店名稱
 
@@ -221,8 +221,8 @@ namespace Server.Packet
                     plew.WriteByte(0); // 泡泡效果
                     plew.WriteByte(0);
                     plew.WriteShort(0);
-                    plew.WriteShort(0);// 玩家ID [Map Number]
-                    plew.WriteByte(0);
+                    plew.WriteShort(-1);// 玩家ID [Map Number]
+                    plew.WriteByte(-1);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);

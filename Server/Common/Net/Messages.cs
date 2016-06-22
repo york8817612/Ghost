@@ -59,12 +59,9 @@ namespace Server.Common.Net
         COMMAND_REQ = 0x10,
         CHAT_REQ = 0x17,
         GAMELOG_REQ = 0x18,
-        // Map
         ENTER_WARP_ACK_REQ = 0x1D,
-        // NpcShop
         NPC_SHOP_BUY_REQ = 0x22,
         NPC_SHOP_SELL_REQ = 0x23,
-        // Action
         P_MOVE_C = 0x27,
         P_SPEED_C = 0x29,
         P_JUMP_C = 0x2A,
@@ -74,37 +71,35 @@ namespace Server.Common.Net
         P_SPELL_C = 0x2E,
         P_DEAD_C = 0x2F,
         P_SKILL_C = 0x31,
-        // Monster
         ATTACK_MONSTER_REQ = 0x45,
-        // Inventory
+        CHAR_DAMAGE_REQ = 0x46,
+        CHAR_DEAD_REQ = 0x47,
         PICKUP_ITEM = 0x4C,
+        CHAR_STATUP_REQ = 0x5F,
+        CHAR_FURY = 0x62,
         MOVE_ITEM_REQ = 0x6C,
         INVEN_SELECTSLOT_REQ = 0x6D,
         USE_SPEND_REQ = 0x6F,
-        // Status
-        CHAR_DAMAGE_REQ = 0x46,
-        CHAR_DEAD_REQ = 0x47,
-        CHAR_STATUP_REQ = 0x5F,
         INVEN_USESPEND_REQ = 0x70,
         SKILL_LEVELUP_REQ = 0x74,
         USE_SKILL_REQ = 0x76,
-        // Quest
+        //
         QUEST_ALL_REQ = 0x7A,
         QUEST_GIVEUP_REQ = 0x7B,
         QUEST_DONE_REQ = 0x7C,
         QUEST_RETURN_REQ = 0x7D,
         QUEST_DONE2_REQ = 0x7E,
         QUEST_UPDATE_REQ = 0x7F,
-        // Map
+        //
         CAN_WARP_ACK_REQ = 0x85,
-        // Trade
+        //
         TRADE_INVITE_REQ = 0x92,
         TRADE_INVITE_RESPONSE_REQ = 0x93,
         TRADE_READY_REQ = 0x94,
         TRADE_CONFIRM_REQ = 0x95,
         TRADE_CANCEL_REQ = 0x96,
         TRADE_PUT_REQ = 0x99,
-        // Party
+        //
         PARTY_INVITE_REQ = 0x9B,
         PARTY_INVITE_RESPONSES_REQ = 0x9C,
         PARTY_LEAVE = 0x9F,
@@ -112,32 +107,31 @@ namespace Server.Common.Net
         //
         PVP_REQ = 0xA4,
         PVP_ACK_REQ = 0xA5,
-        // QuickSlot
+        //
         QUICK_SLOT_REQ = 0xA8,
-        // STORAGE
+        //
         MOVE_ITEM_STORAGE_REQ = 0xAC,
         MOVE_ITEM_TO_BAG_REQ = 0xAD,
         SAVE_MONEY_REQ = 0xAE,
         GIVE_MONEY_REQ = 0xAF,
-        // PlayerShop
+        //
         PSHOP_OPEN_REQ = 0xCD,
         PSHOP_SELLSTART_REQ = 0xCF,
         PSHOP_SELLEND_REQ = 0xD1,
         PSHOP_INFO_REQ = 0xD3,
         PSHOP_BUYACK_REQ = 0xD5,
-        // Action
+        //
         P_MOVE = 0xDD,
-        // Fish
+        //
         FISH_REQ = 0xE0,
-        // CashShop
+        //
         CASHSHOP_LIST_REQ = 0xE4,
         CASH_MGAMECASH_REQ = 0xE5,
         CASH_BUY_REQ = 0xE7,
         CASH_TO_INVEN_REQ = 0xEF,
-        // UseShout
+        //
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
-        INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
-        // Pet
+        //
         PET_MOVE_C = 0x10B,
         PET_MOVETO_C = 0x10C,
         PET_MOVEBIRD_C = 0x10D,
@@ -151,8 +145,10 @@ namespace Server.Common.Net
         PET_SKILL_C = 0x116,
         PET_WARP_C = 0x117,
         PET_SAY_C = 0x118,
-        // Coupon
+        //
         CASH_SN = 0x11D,
+        //
+        INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
         //
         SP_SPEED_C = 0x18D,
         SP_MOVE_C = 0x18E,

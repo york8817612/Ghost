@@ -34,7 +34,7 @@ namespace Server.Net
                 case ClientOpcode.NPC_SHOP_SELL_REQ:
                     NpcShopHandler.Sell_Req(ip, gc);
                     break;
-                // State
+                // Status
                 case ClientOpcode.CHAR_DAMAGE_REQ:
                     StatusHandler.Char_Damage_Req(ip, gc);
                     break;
@@ -43,6 +43,9 @@ namespace Server.Net
                     break;
                 case ClientOpcode.CHAR_STATUP_REQ:
                     StatusHandler.Char_Statup_Req(ip, gc);
+                    break;
+                case ClientOpcode.CHAR_FURY:
+                    StatusHandler.Char_Fury_Req(ip, gc);
                     break;
                 // Inventory
                 case ClientOpcode.MOVE_ITEM_REQ:

@@ -60,8 +60,13 @@ namespace Server.Ghost.Characters
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
 
+        public bool IsFuring { get; set; }
         public bool IsAlive { get; set; }
         public bool IsFishing { get; set; }
+
+        public short FuryAttack { get; set; }
+        public short FuryMagic { get; set; }
+        public short FuryDefense { get; set; }
 
         public IPAddress IP { get; set; }
 
@@ -168,6 +173,13 @@ namespace Server.Ghost.Characters
         public void Save()
         {
             dynamic datum = new Datum("Characters");
+
+            if (this.IsFuring)
+            {
+                this.UpgradeAttack -= this.FuryAttack;
+                this.UpgradeMagic -= this.FuryMagic;
+                this.UpgradeDefense -= this.FuryDefense;
+            }
 
             datum.accountId = this.AccountID;
             datum.worldId = this.WorldID;

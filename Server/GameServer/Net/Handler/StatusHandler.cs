@@ -110,5 +110,47 @@ namespace Server.Handler
             chr.AbilityBonus--;
             StatusPacket.UpdateStat(gc);
         }
+
+        public static void Char_Fury_Req(InPacket lea, Client c)
+        {
+            var chr = c.Character;
+
+            if (chr.IsFuring == true || chr.Fury != chr.MaxFury)
+                return;
+
+            short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
+            short UpgradeMagic = (short)(chr.MaxMagic * 0.2);
+            short UpgradeDefense = (short)(chr.Defense * 0.2);
+
+            chr.IsFuring = true;
+            chr.FuryAttack = UpgradeAttack;
+            chr.FuryMagic = UpgradeMagic;
+            chr.FuryDefense = UpgradeDefense;
+
+            chr.UpgradeAttack += UpgradeAttack;
+            chr.UpgradeMagic += UpgradeMagic;
+            chr.UpgradeDefense += UpgradeDefense;
+
+            StatusPacket.getStatusInfo(c);
+
+            int Type = lea.ReadInt();
+
+            StatusPacket.Fury(c, Type);
+
+            chr.Fury = 0;
+
+            System.Timers.Timer tmr = new System.Timers.Timer(30000);
+            tmr.Elapsed += delegate
+            {
+                tmr.Stop();
+                chr.IsFuring = false;
+                chr.UpgradeAttack -= UpgradeAttack;
+                chr.UpgradeMagic -= UpgradeMagic;
+                chr.UpgradeDefense -= UpgradeDefense;
+                StatusPacket.getStatusInfo(c);
+                StatusPacket.Fury(c, 0);
+            };
+            tmr.Start();
+        }
     }
 }

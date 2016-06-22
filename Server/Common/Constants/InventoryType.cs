@@ -47,7 +47,6 @@
                 case 86: // 帽子
                 case 87: // 面具
                 case 93: // 武器
-                case 94: // 鬍子
                 case 95: // 服裝
                     type = 1;
                     break;
@@ -55,6 +54,7 @@
                 case 83: // 項鍊
                 case 84: // 披風
                 case 85: // 封印箱
+                case 94: // 鬍子
                     type = 2;
                     break;
                 case 11: // 拼圖

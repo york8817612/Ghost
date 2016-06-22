@@ -225,6 +225,56 @@ namespace Server.Handler
             }
             switch (QuestID)
             {
+                case 2: // [蒐集美人魚鱗片]
+                    chr.Money += 200;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 200);
+                    break;
+                case 3: // [委託送書]
+                    chr.Money += 300;
+                    chr.Exp += 30;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 300);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 4: // [委託送書2]
+                    chr.Money += 400;
+                    chr.Exp += 30;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 400);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 5: // [農夫的請託]
+                    chr.Money += 600;
+                    chr.Exp += 50;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 600);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 6: // [金係係武器店的工作服]
+                    chr.Money += 1200;
+                    chr.Exp += 200;
+                    chr.Fame += 5;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1200);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 5);
+                    break;
+                case 7: // [寶芝林的藥材]
+                    chr.Money += 1500;
+                    chr.Exp += 300;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1200);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 52: // [送通知單]
+                    chr.Money += 500;
+                    chr.Exp += 40;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 500);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
                 // 轉職任務
                 case 16: // 武士(1)
                 case 19: // 刺客(2)

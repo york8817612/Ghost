@@ -41,11 +41,10 @@ namespace Server.Packet
             }
         }
 
-        public static void InvenUseSpendShout(Client c, string message)
+        public static void InvenUseSpendShout(Client c, Character chr, string message)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.INVEN_USESPEND_SHOUT_ACK))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteByte(1); // 頻道
