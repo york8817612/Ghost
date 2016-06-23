@@ -1,9 +1,12 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
+using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
+using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -34,6 +37,29 @@ namespace Server.Handler
                 CashShopPacket.CashShopList7(gc); // 紅利積點
                 CashShopPacket.CashShopList8(gc);
                 CashShopPacket.CashShopList9(gc);
+                CashShopPacket.MgameCash(gc);
+                CashShopPacket.GuiHonCash(gc);
+
+                // 接收禮物
+                List<int> Gifts = new List<int>();
+                
+                foreach (dynamic datum in new Datums("Gifts").Populate())
+                {
+                    if (chr.Name.Equals(datum.name) && datum.receive == 0)
+                    {
+                        Gifts.Add(datum.itemID);
+                        datum.receive = 1;
+                        datum.Update("id = '{0}'", datum.id);
+                    }
+                }
+                foreach (int ItemID in Gifts)
+                {
+                    chr.Items.Add(new Item(ItemID, true, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash)));
+                    chr.Items.Save();
+                }
+                InventoryPacket.getInvenCash(gc);
+                MapPacket.warpToMap(gc, chr, CharacterID, MapX, MapY, PositionX, PositionY);
+                return;
             }
 
             chr.MapX = MapX;
@@ -85,12 +111,6 @@ namespace Server.Handler
 
             //StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
             //InventoryPacket.getAvatar(gc, chr);
-
-            if (MapX == 77 && MapY == 1)
-            {
-                CashShopPacket.MgameCash(gc);
-                CashShopPacket.GuiHonCash(gc);
-            }
         }
 
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)

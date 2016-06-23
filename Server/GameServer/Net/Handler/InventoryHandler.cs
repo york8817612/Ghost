@@ -39,7 +39,7 @@ namespace Server.Handler
             {
                 if (chr.Items.GetItem(TargetType, TargetSlot) == null)
                 {
-                    if (SourceType != 5)
+                    if (SourceType != 5 && TargetType != 5)
                     {
                         // 普通物品
                         Source.Type = TargetType;
@@ -51,8 +51,35 @@ namespace Server.Handler
                     {
                         // 寵物
                         Pet Src = chr.Pets.Pet(SourceType, SourceSlot);
-                        Src.Type = TargetType;
-                        Src.Slot = TargetSlot;
+                        Pet Tar = chr.Pets.Pet(TargetType, TargetSlot);
+
+                        if (SourceType == 5)
+                            chr.UseSlot[(byte)InventoryType.ItemType.Pet5] = Src.Slot;
+                        else if (TargetType == 5)
+                            chr.UseSlot[(byte)InventoryType.ItemType.Pet5] = 0xFF;
+
+                        if (chr.Pets.Pet(TargetType, TargetSlot) == null)
+                        {
+                            Src.Type = TargetType;
+                            Src.Slot = TargetSlot;
+                        }
+                        else
+                        {
+                            // 交換位置(swap)
+                            chr.Pets.Remove(SourceType, SourceSlot);
+                            chr.Pets.Remove(TargetType, TargetSlot);
+                            // 類型
+                            byte swapType = Src.Type;
+                            Src.Type = Tar.Type;
+                            Tar.Type = swapType;
+                            // 欄位
+                            byte swapSlot = Src.Slot;
+                            Src.Slot = Tar.Slot;
+                            Tar.Slot = swapSlot;
+                            //
+                            chr.Pets.Add(Src);
+                            chr.Pets.Add(Tar);
+                        }
                     }
                 }
                 else
@@ -99,7 +126,7 @@ namespace Server.Handler
                     }
                 }
             }
-            if (SourceType != 5)
+            if (SourceType != 5 && TargetType != 5)
             {
                 if (Source.IsLocked == 1)
                     Source.IsLocked = 0;
@@ -444,6 +471,9 @@ namespace Server.Handler
                             break;
                         case 2:
                             InventoryPacket.getInvenEquip2(gc);
+                            break;
+                        case 5:
+                            InventoryPacket.getInvenPet5(gc);
                             break;
                     }
                     break;

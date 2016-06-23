@@ -264,7 +264,22 @@ namespace Server.Handler
                 case 7: // [寶芝林的藥材]
                     chr.Money += 1500;
                     chr.Exp += 300;
-                    InventoryPacket.getInvenMoney(gc, chr.Money, 1200);
+                    chr.Items.Add(new Item(8810011, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 20));
+                    chr.Items.Add(new Item(8820011, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 40));
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1500);
+                    StatusPacket.UpdateExp(gc);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 11: // [守衛的慰勞品]
+                    chr.Exp += 100;
+                    chr.Fame += 2;
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 14: // [封印豬大長]
+                    chr.Money += 54000;
+                    chr.Exp += 5000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 54000);
                     StatusPacket.UpdateExp(gc);
                     break;
                 case 52: // [送通知單]
@@ -274,6 +289,77 @@ namespace Server.Handler
                     InventoryPacket.getInvenMoney(gc, chr.Money, 500);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 53: // [守衛的請託]
+                    chr.Money += 500;
+                    chr.Exp += 40;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 500);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 55: // [害了了防具店的衣服材料]
+                    chr.Money += 10000;
+                    chr.Items.Add(new Item(8510031, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 10000);
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 56: // [金係係武器店的關節炎]
+                    chr.Money += 30000;
+                    chr.Exp += 8000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 30000);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 58: // [封印狗骨頭]
+                    chr.Money += 270000;
+                    chr.Exp += 15000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 270000);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 59: // [遞送中藥材]
+                    chr.Money += 60000;
+                    chr.Exp += 20000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 60000);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 114: // [新外型]
+                    chr.Money += 10000;
+                    chr.Fame += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 10000);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 115: // [老父親的白內障]
+                    chr.Exp += 1000;
+                    chr.Fame += 2;
+                    chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
+                    chr.Items.Add(new Item(8850021, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 3));
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 116: // [幫忙家務事1]
+                    chr.Exp += 1500;
+                    chr.Fame += 1;
+                    chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 10));
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 128: // [職務代理]
+                    chr.Fame += 1;
+                    chr.Items.Add(new Item(8810031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
+                    chr.Items.Add(new Item(8310241, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    StatusPacket.UpdateFame(gc, 1);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 129: // [有去無回]
+                    chr.Money += 50000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 50000);
+                    break;
+                case 675: // [ 往黃泉之路1 ]
+                    chr.Exp += 1500;
+                    StatusPacket.UpdateExp(gc);
                     break;
                 // 轉職任務
                 case 16: // 武士(1)

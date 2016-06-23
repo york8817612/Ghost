@@ -212,8 +212,14 @@ namespace Server.Net
                 case ClientOpcode.CASH_BUY_REQ:
                     CashShopHandler.BuyCommodity_Req(ip, gc);
                     break;
+                case ClientOpcode.CASH_GIFT_REQ:
+                    CashShopHandler.Gifts_Req(ip, gc);
+                    break;
                 case ClientOpcode.CASH_TO_INVEN_REQ:
                     CashShopHandler.CommodityToInventory_Req(ip, gc);
+                    break;
+                case ClientOpcode.CASH_CHECKCHARNAME_REQ:
+                    CashShopHandler.CheckName_Req(ip, gc);
                     break;
             }
         }

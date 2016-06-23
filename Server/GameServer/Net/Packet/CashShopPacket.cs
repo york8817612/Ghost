@@ -18,6 +18,17 @@ namespace Server.Packet
             }
         }
 
+        public static void Gifts(Client c, int Type)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CASH_GIFT_ACK))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(Type);
+                c.Send(plew);
+            }
+        }
+
         public static void CommodityToInventory(Client c)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CASH_TO_INVEN_ACK))
@@ -52,6 +63,17 @@ namespace Server.Packet
             }
         }
 
+        public static void CheckName(Client c, int Type)
+        {
+            using (OutPacket plew = new OutPacket(ServerOpcode.CASH_CHECKCHARNAME_ACK))
+            {
+                plew.WriteInt(0); // length + CRC
+                plew.WriteInt(0);
+                plew.WriteInt(Type);
+                c.Send(plew);
+            }
+        }
+
         public static void CashShopList1(Client c)
         {
             // 人物
@@ -63,78 +85,78 @@ namespace Server.Packet
                 // 眼睛(男)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.BoyEyes.Count ? CashShopFactory.BoyEyes[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.BoyEyesList.Count ? CashShopFactory.BoyEyesList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.BoyEyes.Count ? CashShopFactory.BoyEyes[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.BoyEyes.Count ? CashShopFactory.BoyEyes[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.BoyEyes.Count ? CashShopFactory.BoyEyes[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.BoyEyes.Count ? CashShopFactory.BoyEyes[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.BoyEyesList.Count ? CashShopFactory.BoyEyesList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.BoyEyesList.Count ? CashShopFactory.BoyEyesList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.BoyEyesList.Count ? CashShopFactory.BoyEyesList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.BoyEyesList.Count ? CashShopFactory.BoyEyesList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 眼睛(女)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.GirlEyes.Count ? CashShopFactory.GirlEyes[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.GirlEyesList.Count ? CashShopFactory.GirlEyesList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.GirlEyes.Count ? CashShopFactory.GirlEyes[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.GirlEyes.Count ? CashShopFactory.GirlEyes[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.GirlEyes.Count ? CashShopFactory.GirlEyes[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.GirlEyes.Count ? CashShopFactory.GirlEyes[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.GirlEyesList.Count ? CashShopFactory.GirlEyesList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.GirlEyesList.Count ? CashShopFactory.GirlEyesList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.GirlEyesList.Count ? CashShopFactory.GirlEyesList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.GirlEyesList.Count ? CashShopFactory.GirlEyesList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 髮型(男)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.BoyHair.Count ? CashShopFactory.BoyHair[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.BoyHairList.Count ? CashShopFactory.BoyHairList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.BoyHair.Count ? CashShopFactory.BoyHair[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.BoyHair.Count ? CashShopFactory.BoyHair[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.BoyHair.Count ? CashShopFactory.BoyHair[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.BoyHair.Count ? CashShopFactory.BoyHair[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.BoyHairList.Count ? CashShopFactory.BoyHairList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.BoyHairList.Count ? CashShopFactory.BoyHairList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.BoyHairList.Count ? CashShopFactory.BoyHairList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.BoyHairList.Count ? CashShopFactory.BoyHairList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 髮型(女)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.GirlHair.Count ? CashShopFactory.GirlHair[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.GirlHairList.Count ? CashShopFactory.GirlHairList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.GirlHair.Count ? CashShopFactory.GirlHair[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.GirlHair.Count ? CashShopFactory.GirlHair[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.GirlHair.Count ? CashShopFactory.GirlHair[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.GirlHair.Count ? CashShopFactory.GirlHair[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.GirlHairList.Count ? CashShopFactory.GirlHairList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.GirlHairList.Count ? CashShopFactory.GirlHairList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.GirlHairList.Count ? CashShopFactory.GirlHairList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.GirlHairList.Count ? CashShopFactory.GirlHairList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 臉部(上)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.Face1.Count ? CashShopFactory.Face1[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.Face1List.Count ? CashShopFactory.Face1List[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.Face1.Count ? CashShopFactory.Face1[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.Face1.Count ? CashShopFactory.Face1[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.Face1.Count ? CashShopFactory.Face1[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.Face1.Count ? CashShopFactory.Face1[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.Face1List.Count ? CashShopFactory.Face1List[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.Face1List.Count ? CashShopFactory.Face1List[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.Face1List.Count ? CashShopFactory.Face1List[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.Face1List.Count ? CashShopFactory.Face1List[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 臉部(下)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.Face2.Count ? CashShopFactory.Face2[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.Face2List.Count ? CashShopFactory.Face2List[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.Face2.Count ? CashShopFactory.Face2[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.Face2.Count ? CashShopFactory.Face2[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.Face2.Count ? CashShopFactory.Face2[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.Face2.Count ? CashShopFactory.Face2[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.Face2List.Count ? CashShopFactory.Face2List[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.Face2List.Count ? CashShopFactory.Face2List[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.Face2List.Count ? CashShopFactory.Face2List[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.Face2List.Count ? CashShopFactory.Face2List[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 帽子
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.Hat.Count ? CashShopFactory.Hat[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.HatList.Count ? CashShopFactory.HatList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.Hat.Count ? CashShopFactory.Hat[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.Hat.Count ? CashShopFactory.Hat[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.Hat.Count ? CashShopFactory.Hat[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.Hat.Count ? CashShopFactory.Hat[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.HatList.Count ? CashShopFactory.HatList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.HatList.Count ? CashShopFactory.HatList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.HatList.Count ? CashShopFactory.HatList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.HatList.Count ? CashShopFactory.HatList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 c.Send(plew);
@@ -152,34 +174,34 @@ namespace Server.Packet
                 // 服裝(男)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.BoyDress.Count ? CashShopFactory.BoyDress[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.BoyDressList.Count ? CashShopFactory.BoyDressList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.BoyDress.Count ? CashShopFactory.BoyDress[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.BoyDress.Count ? CashShopFactory.BoyDress[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.BoyDress.Count ? CashShopFactory.BoyDress[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.BoyDress.Count ? CashShopFactory.BoyDress[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.BoyDressList.Count ? CashShopFactory.BoyDressList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.BoyDressList.Count ? CashShopFactory.BoyDressList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.BoyDressList.Count ? CashShopFactory.BoyDressList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.BoyDressList.Count ? CashShopFactory.BoyDressList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 服裝(女)
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.GirlDress.Count ? CashShopFactory.GirlDress[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.GirlDressList.Count ? CashShopFactory.GirlDressList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.GirlDress.Count ? CashShopFactory.GirlDress[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.GirlDress.Count ? CashShopFactory.GirlDress[i].Term : 0); // 期限
-                    plew.WriteInt(i < CashShopFactory.GirlDress.Count ? CashShopFactory.GirlDress[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.GirlDress.Count ? CashShopFactory.GirlDress[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.GirlDressList.Count ? CashShopFactory.GirlDressList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.GirlDressList.Count ? CashShopFactory.GirlDressList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.GirlDressList.Count ? CashShopFactory.GirlDressList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.GirlDressList.Count ? CashShopFactory.GirlDressList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 披風
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i < CashShopFactory.Mantle.Count ? CashShopFactory.Mantle[i].ItemID : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.MantleList.Count ? CashShopFactory.MantleList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i < CashShopFactory.Mantle.Count ? CashShopFactory.Mantle[i].BargainPrice : 0); // 售價
-                    plew.WriteInt(i < CashShopFactory.Mantle.Count ? CashShopFactory.Mantle[i].Term : -1); // 期限
-                    plew.WriteInt(i < CashShopFactory.Mantle.Count ? CashShopFactory.Mantle[i].Price : 0); // 原價
-                    plew.WriteInt(i < CashShopFactory.Mantle.Count ? CashShopFactory.Mantle[i].Flag : 0);
+                    plew.WriteInt(i < CashShopFactory.MantleList.Count ? CashShopFactory.MantleList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.MantleList.Count ? CashShopFactory.MantleList[i].Term : -1); // 期限
+                    plew.WriteInt(i < CashShopFactory.MantleList.Count ? CashShopFactory.MantleList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.MantleList.Count ? CashShopFactory.MantleList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 福袋
@@ -219,22 +241,22 @@ namespace Server.Packet
                 // 符咒
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i == 0 ? 8843030 : 0); // 物品ID
+                    plew.WriteInt(0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i == 0 ? 100 : 0); // 售價
+                    plew.WriteInt(0); // 售價
                     plew.WriteInt(-1); // 期限
-                    plew.WriteInt(i == 0 ? 100 : 0); // 原價
+                    plew.WriteInt(0); // 原價
                     plew.WriteInt(0);
                     plew.WriteInt(0);
                 }
                 // 靈丹
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i == 0 ? 8843001 : 0); // 物品ID
+                    plew.WriteInt(0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i == 0 ? 100 : 0); // 售價
+                    plew.WriteInt(0); // 售價
                     plew.WriteInt(-1); // 期限
-                    plew.WriteInt(i == 0 ? 100 : 0); // 原價
+                    plew.WriteInt(0); // 原價
                     plew.WriteInt(0);
                     plew.WriteInt(0);
                 }
@@ -264,22 +286,22 @@ namespace Server.Packet
                 // 靈物
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i == 0 ? 9212011 : 0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.PetList.Count ? CashShopFactory.PetList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i == 0 ? 300 : 0); // 售價
-                    plew.WriteInt(-1); // 期限
-                    plew.WriteInt(i == 0 ? 300 : 0); // 原價
-                    plew.WriteInt(0);
+                    plew.WriteInt(i < CashShopFactory.PetList.Count ? CashShopFactory.PetList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.PetList.Count ? CashShopFactory.PetList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.PetList.Count ? CashShopFactory.PetList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.PetList.Count ? CashShopFactory.PetList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 靈物裝備
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(i == 0 ? 9220011 : 0); // 物品ID
+                    plew.WriteInt(0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(i == 0 ? 100 : 0); // 售價
+                    plew.WriteInt(0); // 售價
                     plew.WriteInt(-1); // 期限
-                    plew.WriteInt(i == 0 ? 100 : 0); // 原價
+                    plew.WriteInt(0); // 原價
                     plew.WriteInt(0);
                     plew.WriteInt(0);
                 }

@@ -72,7 +72,7 @@ namespace Server.Packet
                 plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetMaxMP
                 plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetExp
                 plew.WriteInt(chr.Pets.DecorateID((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetDeco
-                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : -1); // PetSlot
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.UseSlot[(byte)InventoryType.ItemType.Pet5] : -1); // PetSlot
                 // 玩物
                 plew.WriteString("", 20); // ToyName
                 plew.WriteInt(0); // ToyLevel
@@ -196,7 +196,7 @@ namespace Server.Packet
                 plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet)); // PetHP
                 plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
                 plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
-                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : -1);
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.UseSlot[(byte)InventoryType.ItemType.Pet5] : -1);
                 plew.WriteInt(-1);
                 plew.WriteInt(-1); // 寵物截止日期
                 plew.WriteByte(0);

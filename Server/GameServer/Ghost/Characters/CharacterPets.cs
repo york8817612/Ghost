@@ -28,9 +28,9 @@ namespace Server.Ghost.Characters
 
         public void Save()
         {
-            foreach (Pet item in this)
+            foreach (Pet Pet in this)
             {
-                item.Save();
+                Pet.Save();
             }
         }
 
@@ -46,6 +46,13 @@ namespace Server.Ghost.Characters
         {
             Pet.Parent = this;
             this.Pets.Add(Pet);
+        }
+
+        public void Remove(byte Type, byte Slot)
+        {
+            Pet Pet = this.Pets.Find(i => (i.Type == Type && i.Slot == Slot));
+            this.Pets.Remove(Pet);
+            Pet.Delete();
         }
 
         public List<Pet> getPets()
@@ -113,14 +120,6 @@ namespace Server.Ghost.Characters
             if (Pet == null)
                 return 0;
             return Pet.Exp;
-        }
-
-        public int OriginalSlot(byte Type, int Slot)
-        {
-            Pet Pet = this.Pets.Find(i => (i.Type == Type && i.Slot == Slot));
-            if (Pet == null)
-                return 0;
-            return Pet.OriginalSlot;
         }
 
         public byte GetNextFreeSlot(InventoryType.ItemType Type)

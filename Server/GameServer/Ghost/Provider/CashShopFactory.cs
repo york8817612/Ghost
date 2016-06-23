@@ -6,16 +6,30 @@ namespace Server.Ghost.Provider
 {
     public static class CashShopFactory
     {
-        public static List<Commodity> Hat = new List<Commodity>();
-        public static List<Commodity> BoyDress = new List<Commodity>();
-        public static List<Commodity> GirlDress = new List<Commodity>();
-        public static List<Commodity> Mantle = new List<Commodity>();
-        public static List<Commodity> BoyHair = new List<Commodity>();
-        public static List<Commodity> GirlHair = new List<Commodity>();
-        public static List<Commodity> Face1 = new List<Commodity>();
-        public static List<Commodity> Face2 = new List<Commodity>();
-        public static List<Commodity> BoyEyes = new List<Commodity>();
-        public static List<Commodity> GirlEyes = new List<Commodity>();
+        public static List<Commodity> HatList = new List<Commodity>();
+        public static List<Commodity> BoyDressList = new List<Commodity>();
+        public static List<Commodity> GirlDressList = new List<Commodity>();
+        public static List<Commodity> MantleList = new List<Commodity>();
+        public static List<Commodity> BoyHairList = new List<Commodity>();
+        public static List<Commodity> GirlHairList = new List<Commodity>();
+        public static List<Commodity> Face1List = new List<Commodity>();
+        public static List<Commodity> Face2List = new List<Commodity>();
+        public static List<Commodity> BoyEyesList = new List<Commodity>();
+        public static List<Commodity> GirlEyesList = new List<Commodity>();
+        public static List<Commodity> PetList = new List<Commodity>();
+
+        public static Dictionary<int, Commodity> Hat = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> BoyDress = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> GirlDress = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> Mantle = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> BoyHair = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> GirlHair = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> Face1 = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> Face2 = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> BoyEyes = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> GirlEyes = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> Pet = new Dictionary<int, Commodity>();
+        public static List<Dictionary<int, Commodity>> All = new List<Dictionary<int, Commodity>>();
 
         public static void InitializeHatCommodity()
         {
@@ -23,8 +37,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("HatCommodity").Populate())
                 {
-                    Hat.Add(new Commodity(datum));
+                    HatList.Add(new Commodity(datum));
+                    Hat.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(Hat);
             }
         }
 
@@ -34,8 +50,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("BoyDressCommodity").Populate())
                 {
-                    BoyDress.Add(new Commodity(datum));
+                    BoyDressList.Add(new Commodity(datum));
+                    BoyDress.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(BoyDress);
             }
         }
 
@@ -45,8 +63,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("GirlDressCommodity").Populate())
                 {
-                    GirlDress.Add(new Commodity(datum));
+                    GirlDressList.Add(new Commodity(datum));
+                    GirlDress.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(GirlDress);
             }
         }
 
@@ -56,8 +76,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("MantleCommodity").Populate())
                 {
-                    Mantle.Add(new Commodity(datum));
+                    MantleList.Add(new Commodity(datum));
+                    Mantle.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(Mantle);
             }
         }
 
@@ -67,8 +89,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("BoyHairCommodity").Populate())
                 {
-                    BoyHair.Add(new Commodity(datum));
+                    BoyHairList.Add(new Commodity(datum));
+                    BoyHair.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(BoyHair);
             }
         }
 
@@ -78,8 +102,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("GirlHairCommodity").Populate())
                 {
-                    GirlHair.Add(new Commodity(datum));
+                    GirlHairList.Add(new Commodity(datum));
+                    GirlHair.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(GirlHair);
             }
         }
 
@@ -89,8 +115,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("Face1Commodity").Populate())
                 {
-                    Face1.Add(new Commodity(datum));
+                    Face1List.Add(new Commodity(datum));
+                    Face1.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(Face1);
             }
         }
 
@@ -100,8 +128,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("Face2Commodity").Populate())
                 {
-                    Face2.Add(new Commodity(datum));
+                    Face2List.Add(new Commodity(datum));
+                    Face2.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(Face2);
             }
         }
 
@@ -111,8 +141,10 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("BoyEyesCommodity").Populate())
                 {
-                    BoyEyes.Add(new Commodity(datum));
+                    BoyEyesList.Add(new Commodity(datum));
+                    BoyEyes.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(BoyEyes);
             }
         }
 
@@ -122,9 +154,34 @@ namespace Server.Ghost.Provider
             {
                 foreach (dynamic datum in new Datums("GirlEyesCommodity").Populate())
                 {
-                    GirlEyes.Add(new Commodity(datum));
+                    GirlEyesList.Add(new Commodity(datum));
+                    GirlEyes.Add(datum.itemID, new Commodity(datum));
                 }
+                All.Add(GirlEyes);
             }
+        }
+
+        public static void InitializePetCommodity()
+        {
+            using (Log.Load("Loading PetCommodity"))
+            {
+                foreach (dynamic datum in new Datums("PetCommodity").Populate())
+                {
+                    PetList.Add(new Commodity(datum));
+                    Pet.Add(datum.itemID, new Commodity(datum));
+                }
+                All.Add(Pet);
+            }
+        }
+
+        public static Commodity GetItemData(int ItemID)
+        {
+            foreach (Dictionary<int, Commodity> Data in All)
+            {
+                if (Data.ContainsKey(ItemID))
+                    return Data[ItemID];
+            }
+            return null;
         }
     }
 }

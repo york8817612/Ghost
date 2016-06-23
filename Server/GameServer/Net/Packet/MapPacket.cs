@@ -73,7 +73,7 @@ namespace Server.Packet
                 plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
                 plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
                 plew.WriteInt(chr.Pets.DecorateID((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
-                plew.WriteInt(chr.Pets.OriginalSlot((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet));
+                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? chr.UseSlot[(byte)InventoryType.ItemType.Pet5] : 0);
                 // 玩物
                 plew.WriteString("", 20); // ToyName
                 plew.WriteInt(0); // ToyLevel
@@ -131,7 +131,7 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(map.GetMapCharactersTotal() - 1); // 玩家數量 - 1
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < map.GetMapCharactersTotal(); i++)
                 {
                     Dictionary<InventoryType.EquipType, int> equip = null;
                     try

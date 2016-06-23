@@ -128,7 +128,9 @@ namespace Server.Common.Net
         CASHSHOP_LIST_REQ = 0xE4,
         CASH_MGAMECASH_REQ = 0xE5,
         CASH_BUY_REQ = 0xE7,
+        CASH_GIFT_REQ = 0xE9,
         CASH_TO_INVEN_REQ = 0xEF,
+        CASH_CHECKCHARNAME_REQ = 0xFC,
         //
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         //

@@ -93,15 +93,17 @@ namespace Server.Ghost
             if (this.IsControling == true)
                 return;
 
+            var chr = gc.Character;
+
             this.IsControling = true;
 
             tmr.Elapsed += delegate
             {
-                if (this.GetMapCharactersTotal() < 1)
-                {
-                    tmr.Stop();
-                    return;
-                }
+                //if (this.GetMapCharactersTotal() < 1)
+                //{
+                //    tmr.Stop();
+                //    return;
+                //}
                 for (int i = 0; i < j; i++)
                 {
                     if (this.Monster[i].IsAlive == false)
@@ -113,39 +115,36 @@ namespace Server.Ghost
                             this.Monster[i].State = 3;
                             foreach (Character All in this.Characters)
                             {
-                                MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                                if (All.MapX == this.MapX && All.MapY == this.MapY)
+                                    MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
                             }
                         }
-                        //if (this.Monster[i].MoveType == 0)
-                        //    this.Monster[i].State = 0;
-                        //else
-                            this.Monster[i].State = 1;
+                        this.Monster[i].State = 1;
                         foreach (Character All in this.Characters)
                         {
-                            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                            if (All.MapX == this.MapX && All.MapY == this.MapY)
+                                MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
                         }
                         continue;
                     }
-                    //int Direction = this.Monster[i].Direction;
+                    int Direction = this.Monster[i].Direction;
                     Monster Monster = UpdatePosition(this.Monster[i], (int)(40 * this.Monster[i].Speed));
-                    //if (Direction != Monster.Direction)
-                    //{
-                        foreach (Character All in this.Characters)
-                        {
+                    foreach (Character All in this.Characters)
+                    {
+                        if (Direction != Monster.Direction && All.MapX == this.MapX && All.MapY == this.MapY)
                             MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
-                        }
-                    //}
+                    }
                 }
             };
             tmr.Start();
 
             tmr2.Elapsed += delegate
             {
-                if (this.GetMapCharactersTotal() < 1)
-                {
-                    tmr2.Stop();
-                    return;
-                }
+                //if (this.GetMapCharactersTotal() < 1)
+                //{
+                //    tmr2.Stop();
+                //    return;
+                //}
                 for (int i = 0; i < j; i++)
                 {
                     if (this.Monster[i].IsAlive == false)
@@ -153,13 +152,15 @@ namespace Server.Ghost
                         this.Monster[i].HP = MobFactory.MonsterMaxHP(this.Monster[i].Level);
                         foreach (Character All in this.Characters)
                         {
-                            MonsterPacket.regenrMonster(All.Client, this.Monster[i]);
+                            if (All.MapX == this.MapX && All.MapY == this.MapY)
+                                MonsterPacket.regenrMonster(All.Client, this.Monster[i]);
                         }
                         this.Monster[i].IsAlive = true;
                         this.Monster[i].State = 1;
                         foreach (Character All in this.Characters)
                         {
-                            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                            if (All.MapX == this.MapX && All.MapY == this.MapY)
+                                MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
                         }
                     }
                 }

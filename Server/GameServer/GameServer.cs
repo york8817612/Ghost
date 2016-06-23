@@ -136,6 +136,7 @@ namespace Server
                 CashShopFactory.InitializeFace2Commodity();
                 CashShopFactory.InitializeBoyEyesCommodity();
                 CashShopFactory.InitializeGirlEyesCommodity();
+                CashShopFactory.InitializePetCommodity();
 
                 UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
                 UdpListener = new UdpClient(UdpRemoteEndPoint);

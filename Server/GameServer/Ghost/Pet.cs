@@ -17,7 +17,6 @@ namespace Server.Ghost
         public int Exp { get; set; }
         public byte Type { get; set; }
         public byte Slot { get; set; }
-        public byte OriginalSlot { get; set; }
 
         public bool Assigned { get; set; }
 
@@ -36,7 +35,7 @@ namespace Server.Ghost
             }
         }
 
-        public Pet(int ItemID, int DecorateID, string Name, int Level, int Hp, int Mp, int Exp, byte Type, byte Slot, byte OriginalSlot)
+        public Pet(int ItemID, int DecorateID, string Name, int Level, int Hp, int Mp, int Exp, byte Type, byte Slot)
         {
             this.ItemID = ItemID;
             this.DecorateID = DecorateID;
@@ -47,7 +46,6 @@ namespace Server.Ghost
             this.Exp = Exp;
             this.Type = Type;
             this.Slot = Slot;
-            this.OriginalSlot = OriginalSlot;
         }
 
         public Pet(dynamic datum)
@@ -64,7 +62,6 @@ namespace Server.Ghost
             this.Exp = datum.exp;
             this.Type = (byte)datum.type;
             this.Slot = (byte)datum.slot;
-            this.OriginalSlot = (byte)datum.originalSlot;
         }
 
         public void Save()
@@ -81,7 +78,6 @@ namespace Server.Ghost
             datum.exp = this.Exp;
             datum.type = this.Type;
             datum.slot = this.Slot;
-            datum.originalSlot = this.OriginalSlot;
 
             if (this.Assigned)
             {
@@ -91,7 +87,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Pets", "id", "cid = '{0}' && itemId = '{1}' && decorateId = '{2}' && name = '{3}' && level = '{4}' && hp = '{5}' && mp = '{6}' && exp = '{7}' && type = '{8}' && slot = '{9}' && originalSlot = '{10}'", this.Character.ID, this.ItemID, this.DecorateID, this.Name, this.Level, this.Hp, this.Mp, this.Exp, this.Type, this.Slot, this.OriginalSlot);
+                this.ID = Database.Fetch("Pets", "id", "cid = '{0}' && itemId = '{1}' && decorateId = '{2}' && name = '{3}' && level = '{4}' && hp = '{5}' && mp = '{6}' && exp = '{7}' && type = '{8}' && slot = '{9}'", this.Character.ID, this.ItemID, this.DecorateID, this.Name, this.Level, this.Hp, this.Mp, this.Exp, this.Type, this.Slot);
 
                 this.Assigned = true;
             }

@@ -40,21 +40,21 @@
 
             switch (itemid / 100000)
             {
-                case 75: // 耳環
                 case 79: // 武器
                 case 80: // 武器
                 case 81: // 衣服
-                case 86: // 帽子
-                case 87: // 面具
                 case 93: // 武器
                 case 95: // 服裝
                     type = 1;
                     break;
+                case 75: // 耳環
                 case 82: // 戒指
                 case 83: // 項鍊
                 case 84: // 披風
                 case 85: // 封印箱
-                case 94: // 鬍子
+                case 86: // 頭部
+                case 87: // 臉上
+                case 94: // 臉下
                     type = 2;
                     break;
                 case 11: // 拼圖
@@ -64,8 +64,10 @@
                 case 89: // 其他
                     type = 4;
                     break;
+                case 92: // 寵物
+                    type = 5;
+                    break;
             }
-
             return type;
         }
 

@@ -1,8 +1,11 @@
 ﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Common.IO.Packet;
 using Server.Ghost;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
+using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -10,18 +13,48 @@ namespace Server.Handler
     {
         public static void CashShopList_Req(InPacket lea, Client c)
         {
+        }
+
+        public static void BuyCommodity_Req(InPacket lea, Client c)
+        {
+            int ItemID = lea.ReadInt();
+            string Name = lea.ReadString(62);
             var chr = c.Character;
-            //if (chr.MapX != 77 && chr.MapY != 1)
-            //    return;
-            //CashShopPacket.CashShopList1(c); // 人物
-            //CashShopPacket.CashShopList2(c); // 裝備
-            //CashShopPacket.CashShopList3(c); // 能力
-            //CashShopPacket.CashShopList4(c); // 靈物
-            //CashShopPacket.CashShopList5(c); // 寶牌
-            //CashShopPacket.CashShopList6(c);
-            //CashShopPacket.CashShopList7(c); // 紅利積點
-            //CashShopPacket.CashShopList8(c);
-            //CashShopPacket.CashShopList9(c);
+
+            if (CashShopFactory.GetItemData(ItemID) == null)
+                return;
+
+            c.Account.GamePoints -= CashShopFactory.GetItemData(ItemID).BargainPrice;
+            chr.Items.Add(new Item(ItemID, (ItemID / 100000) == 92 ? false : true, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash)));
+            chr.Items.Save();
+            CashShopPacket.BuyCommodity(c);
+            CashShopPacket.MgameCash(c);
+            CashShopPacket.GuiHonCash(c);
+            InventoryPacket.getInvenCash(c);
+        }
+
+        public static void Gifts_Req(InPacket lea, Client c)
+        {
+            int ItemID = lea.ReadInt();
+            string ItemName = lea.ReadString(62);
+            string CharacterName = lea.ReadString(20);
+            int Type = 1;
+
+            if (CashShopFactory.GetItemData(ItemID) == null)
+                return;
+
+            c.Account.GamePoints -= CashShopFactory.GetItemData(ItemID).BargainPrice;
+
+            dynamic datum = new Datum("gifts");
+            datum.name = CharacterName;
+            datum.itemID = ItemID;
+            datum.itemName = ItemName;
+            datum.receive = 0;
+            datum.Insert();
+
+            CashShopPacket.Gifts(c, Type);
+            CashShopPacket.MgameCash(c);
+            CashShopPacket.GuiHonCash(c);
         }
 
         public static void CommodityToInventory_Req(InPacket lea, Client c)
@@ -52,7 +85,7 @@ namespace Server.Handler
             } else if (Source.ItemID / 100000 == 92)
             {
                 // 寵物
-                chr.Pets.Add(new Pet(Source.ItemID, 0, "", 1, 100, 100, 0, (byte)InventoryType.ItemType.Pet5, chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5), chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5)));
+                chr.Pets.Add(new Pet(Source.ItemID, 0, "", 1, 100, 100, 0, (byte)InventoryType.ItemType.Pet5, chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5)));
                 chr.Items.Remove(Source.Type, Source.Slot);
                 chr.Pets.Save();
                 chr.Items.Save();
@@ -78,15 +111,11 @@ namespace Server.Handler
             CashShopPacket.GuiHonCash(c);
         }
 
-        public static void BuyCommodity_Req(InPacket lea, Client c)
+        public static void CheckName_Req(InPacket lea, Client c)
         {
-            int ItemID = lea.ReadInt();
-            string Name = lea.ReadString(62);
-            var chr = c.Character;
-            chr.Items.Add(new Item(ItemID, true, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash)));
-            chr.Items.Save();
-            CashShopPacket.BuyCommodity(c);
-            InventoryPacket.getInvenCash(c);
+            string Name = lea.ReadString(20);
+            bool IsExist = Database.Exists("Characters", "name = '{0}'", Name);
+            CashShopPacket.CheckName(c, IsExist ? 1 : 0);
         }
     }
 }
