@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-06-17 20:27:17
+Date: 2016-06-23 19:31:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,12 +31,13 @@ CREATE TABLE `accounts` (
   `giftPoints` int(11) NOT NULL,
   `bonusPoints` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
 INSERT INTO `accounts` VALUES ('1', 'admin', 'admin', '2015-04-07 21:11:30', '0', '0', '1', '99999999', '10000', '3000');
+INSERT INTO `accounts` VALUES ('2', 'admin2', 'admin', '0001-01-01 00:00:00', '0', '0', '1', '99999999', '0', '0');
 
 -- ----------------------------
 -- Table structure for `boydresscommodity`
@@ -568,6 +569,7 @@ CREATE TABLE `characters` (
   `magic` int(4) NOT NULL DEFAULT '0',
   `maxMagic` int(4) NOT NULL DEFAULT '0',
   `upgradeMagic` int(4) NOT NULL DEFAULT '0',
+  `avoid` int(4) NOT NULL DEFAULT '0',
   `defense` int(4) NOT NULL DEFAULT '0',
   `upgradeDefense` int(4) NOT NULL DEFAULT '0',
   `abilityBonus` int(4) NOT NULL DEFAULT '0',
@@ -580,7 +582,7 @@ CREATE TABLE `characters` (
   `direction` int(4) NOT NULL,
   `position` int(4) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of characters
@@ -1021,6 +1023,23 @@ INSERT INTO `face2commodity` VALUES ('55', '9410403', '100', '100', '-1', '0');
 INSERT INTO `face2commodity` VALUES ('56', '9410413', '100', '100', '-1', '0');
 INSERT INTO `face2commodity` VALUES ('57', '9410423', '100', '100', '-1', '0');
 INSERT INTO `face2commodity` VALUES ('58', '9410573', '100', '100', '-1', '0');
+
+-- ----------------------------
+-- Table structure for `gifts`
+-- ----------------------------
+DROP TABLE IF EXISTS `gifts`;
+CREATE TABLE `gifts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) CHARACTER SET big5 NOT NULL,
+  `itemID` int(11) NOT NULL,
+  `itemName` varchar(62) CHARACTER SET big5 NOT NULL,
+  `receive` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of gifts
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `girldresscommodity`
@@ -1553,243 +1572,242 @@ CREATE TABLE `hatcommodity` (
   `term` int(11) NOT NULL DEFAULT '-1',
   `flag` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of hatcommodity
 -- ----------------------------
 INSERT INTO `hatcommodity` VALUES ('1', '8610011', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('2', '8610011', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('3', '8610012', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('4', '8610013', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('5', '8610021', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('6', '8610022', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('7', '8610023', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('8', '8610031', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('9', '8610032', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('10', '8610033', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('11', '8610041', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('12', '8610042', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('13', '8610043', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('14', '8610051', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('15', '8610052', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('16', '8610053', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('17', '8610061', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('18', '8610062', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('19', '8610063', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('20', '8610064', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('21', '8610071', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('22', '8610072', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('23', '8610073', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('24', '8610074', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('25', '8610081', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('26', '8610082', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('27', '8610083', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('28', '8610084', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('29', '8610091', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('30', '8610092', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('31', '8610101', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('32', '8610102', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('33', '8610103', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('34', '8610104', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('35', '8610105', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('36', '8610111', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('37', '8610112', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('38', '8610121', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('39', '8610122', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('40', '8610123', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('41', '8610125', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('42', '8610127', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('43', '8610124', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('44', '8610126', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('45', '8610128', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('46', '8610151', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('47', '8610152', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('48', '8610153', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('49', '8610154', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('50', '8610161', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('51', '8610162', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('52', '8610163', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('53', '8610164', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('54', '8610131', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('55', '8610133', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('56', '8610135', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('57', '8610137', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('58', '8610132', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('59', '8610134', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('60', '8610136', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('61', '8610138', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('62', '8610142', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('63', '8610144', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('64', '8610146', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('65', '8610148', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('66', '8610171', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('67', '8610173', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('68', '8610172', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('69', '8610174', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('70', '8610176', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('71', '8610178', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('72', '8610181', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('73', '8610182', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('74', '8610183', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('75', '8610184', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('76', '8610191', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('77', '8610192', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('78', '8610193', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('79', '8610201', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('80', '8610202', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('81', '8610203', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('82', '8610204', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('83', '8610231', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('84', '8610233', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('85', '8610235', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('86', '8610237', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('87', '8610211', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('88', '8610212', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('89', '8610213', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('90', '8610214', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('91', '8610241', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('92', '8610243', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('93', '8610245', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('94', '8610247', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('95', '8610242', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('96', '8610244', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('97', '8610246', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('98', '8610248', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('99', '8610271', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('100', '8610272', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('101', '8610273', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('102', '8610274', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('103', '8610261', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('104', '8610262', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('105', '8610263', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('106', '8610264', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('107', '8610251', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('108', '8610252', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('109', '8610253', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('110', '8610254', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('111', '8610221', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('112', '8610222', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('113', '8610223', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('114', '8610224', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('115', '8610291', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('116', '8610292', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('117', '8610293', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('118', '8610294', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('119', '8610281', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('120', '8610282', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('121', '8610283', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('122', '8610284', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('123', '8610301', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('124', '8610302', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('125', '8610303', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('126', '8610304', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('127', '8610311', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('128', '8610312', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('129', '8610313', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('130', '8610314', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('131', '8610205', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('132', '8610401', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('133', '8610402', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('134', '8610403', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('135', '8610404', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('136', '8610405', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('137', '8610406', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('138', '8610407', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('139', '8610408', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('140', '8611001', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('141', '8611002', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('142', '8610351', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('143', '8610352', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('144', '8610411', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('145', '8610412', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('146', '8610413', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('147', '8610414', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('148', '8610371', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('149', '8610372', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('150', '8610373', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('151', '8610374', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('152', '8610375', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('153', '8610376', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('154', '8610377', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('155', '8610378', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('156', '8610321', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('157', '8610322', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('158', '8610323', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('159', '8610324', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('160', '8610361', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('161', '8610363', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('162', '8610365', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('163', '8610367', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('164', '8610331', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('165', '8610332', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('166', '8610333', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('167', '8610334', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('168', '8610341', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('169', '8610431', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('170', '8610432', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('171', '8610433', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('172', '8610434', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('173', '8610441', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('174', '8610442', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('175', '8610443', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('176', '8610444', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('177', '8610445', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('178', '8610446', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('179', '8610447', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('180', '8610448', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('181', '8610421', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('182', '8610422', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('183', '8610423', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('184', '8610424', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('185', '8610473', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('186', '8610474', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('187', '8610381', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('188', '8610382', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('189', '8610383', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('190', '8610384', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('191', '8610451', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('192', '8610453', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('193', '8610455', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('194', '8610457', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('195', '8610452', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('196', '8610454', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('197', '8610456', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('198', '8610458', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('199', '8610385', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('200', '8610386', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('201', '8610387', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('202', '8610388', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('203', '8610461', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('204', '8610462', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('205', '8610463', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('206', '8610464', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('207', '8610471', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('208', '8610472', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('209', '8610481', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('210', '8610482', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('211', '8610633', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('212', '8610631', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('213', '8610635', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('214', '8610637', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('215', '8610632', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('216', '8610634', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('217', '8610636', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('218', '8610638', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('219', '8610601', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('220', '8610603', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('221', '8610605', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('222', '8610607', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('223', '8610602', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('224', '8610604', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('225', '8610606', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('226', '8610608', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('227', '8610611', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('228', '8610612', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('229', '8610613', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('230', '8610614', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('231', '8610501', '100', '100', '-1', '0');
-INSERT INTO `hatcommodity` VALUES ('232', '8610502', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('2', '8610012', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('3', '8610013', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('4', '8610021', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('5', '8610022', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('6', '8610023', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('7', '8610031', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('8', '8610032', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('9', '8610033', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('10', '8610041', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('11', '8610042', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('12', '8610043', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('13', '8610051', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('14', '8610052', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('15', '8610053', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('16', '8610061', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('17', '8610062', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('18', '8610063', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('19', '8610064', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('20', '8610071', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('21', '8610072', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('22', '8610073', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('23', '8610074', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('24', '8610081', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('25', '8610082', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('26', '8610083', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('27', '8610084', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('28', '8610091', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('29', '8610092', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('30', '8610101', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('31', '8610102', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('32', '8610103', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('33', '8610104', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('34', '8610105', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('35', '8610111', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('36', '8610112', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('37', '8610121', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('38', '8610122', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('39', '8610123', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('40', '8610125', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('41', '8610127', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('42', '8610124', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('43', '8610126', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('44', '8610128', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('45', '8610151', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('46', '8610152', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('47', '8610153', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('48', '8610154', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('49', '8610161', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('50', '8610162', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('51', '8610163', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('52', '8610164', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('53', '8610131', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('54', '8610133', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('55', '8610135', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('56', '8610137', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('57', '8610132', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('58', '8610134', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('59', '8610136', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('60', '8610138', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('61', '8610142', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('62', '8610144', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('63', '8610146', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('64', '8610148', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('65', '8610171', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('66', '8610173', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('67', '8610172', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('68', '8610174', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('69', '8610176', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('70', '8610178', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('71', '8610181', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('72', '8610182', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('73', '8610183', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('74', '8610184', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('75', '8610191', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('76', '8610192', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('77', '8610193', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('78', '8610201', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('79', '8610202', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('80', '8610203', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('81', '8610204', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('82', '8610231', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('83', '8610233', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('84', '8610235', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('85', '8610237', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('86', '8610211', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('87', '8610212', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('88', '8610213', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('89', '8610214', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('90', '8610241', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('91', '8610243', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('92', '8610245', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('93', '8610247', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('94', '8610242', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('95', '8610244', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('96', '8610246', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('97', '8610248', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('98', '8610271', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('99', '8610272', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('100', '8610273', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('101', '8610274', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('102', '8610261', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('103', '8610262', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('104', '8610263', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('105', '8610264', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('106', '8610251', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('107', '8610252', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('108', '8610253', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('109', '8610254', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('110', '8610221', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('111', '8610222', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('112', '8610223', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('113', '8610224', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('114', '8610291', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('115', '8610292', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('116', '8610293', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('117', '8610294', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('118', '8610281', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('119', '8610282', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('120', '8610283', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('121', '8610284', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('122', '8610301', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('123', '8610302', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('124', '8610303', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('125', '8610304', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('126', '8610311', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('127', '8610312', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('128', '8610313', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('129', '8610314', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('130', '8610205', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('131', '8610401', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('132', '8610402', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('133', '8610403', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('134', '8610404', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('135', '8610405', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('136', '8610406', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('137', '8610407', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('138', '8610408', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('139', '8611001', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('140', '8611002', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('141', '8610351', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('142', '8610352', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('143', '8610411', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('144', '8610412', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('145', '8610413', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('146', '8610414', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('147', '8610371', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('148', '8610372', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('149', '8610373', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('150', '8610374', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('151', '8610375', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('152', '8610376', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('153', '8610377', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('154', '8610378', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('155', '8610321', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('156', '8610322', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('157', '8610323', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('158', '8610324', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('159', '8610361', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('160', '8610363', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('161', '8610365', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('162', '8610367', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('163', '8610331', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('164', '8610332', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('165', '8610333', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('166', '8610334', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('167', '8610341', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('168', '8610431', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('169', '8610432', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('170', '8610433', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('171', '8610434', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('172', '8610441', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('173', '8610442', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('174', '8610443', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('175', '8610444', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('176', '8610445', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('177', '8610446', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('178', '8610447', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('179', '8610448', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('180', '8610421', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('181', '8610422', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('182', '8610423', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('183', '8610424', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('184', '8610473', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('185', '8610474', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('186', '8610381', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('187', '8610382', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('188', '8610383', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('189', '8610384', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('190', '8610451', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('191', '8610453', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('192', '8610455', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('193', '8610457', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('194', '8610452', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('195', '8610454', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('196', '8610456', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('197', '8610458', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('198', '8610385', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('199', '8610386', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('200', '8610387', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('201', '8610388', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('202', '8610461', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('203', '8610462', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('204', '8610463', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('205', '8610464', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('206', '8610471', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('207', '8610472', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('208', '8610481', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('209', '8610482', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('210', '8610633', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('211', '8610631', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('212', '8610635', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('213', '8610637', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('214', '8610632', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('215', '8610634', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('216', '8610636', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('217', '8610638', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('218', '8610601', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('219', '8610603', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('220', '8610605', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('221', '8610607', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('222', '8610602', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('223', '8610604', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('224', '8610606', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('225', '8610608', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('226', '8610611', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('227', '8610612', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('228', '8610613', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('229', '8610614', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('230', '8610501', '100', '100', '-1', '0');
+INSERT INTO `hatcommodity` VALUES ('231', '8610502', '100', '100', '-1', '0');
 
 -- ----------------------------
 -- Table structure for `items`
@@ -1806,7 +1824,7 @@ CREATE TABLE `items` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=630 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=906 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of items
@@ -1987,6 +2005,25 @@ INSERT INTO `mantlecommodity` VALUES ('139', '8493414', '100', '100', '-1', '0')
 INSERT INTO `mantlecommodity` VALUES ('140', '8493415', '100', '100', '-1', '0');
 
 -- ----------------------------
+-- Table structure for `petcommodity`
+-- ----------------------------
+DROP TABLE IF EXISTS `petcommodity`;
+CREATE TABLE `petcommodity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `itemID` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `bargainPrice` int(11) NOT NULL,
+  `term` int(11) NOT NULL DEFAULT '-1',
+  `flag` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of petcommodity
+-- ----------------------------
+INSERT INTO `petcommodity` VALUES ('1', '9212011', '120', '120', '-1', '0');
+
+-- ----------------------------
 -- Table structure for `pets`
 -- ----------------------------
 DROP TABLE IF EXISTS `pets`;
@@ -2002,9 +2039,8 @@ CREATE TABLE `pets` (
   `exp` int(11) NOT NULL,
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
-  `originalSlot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pets
@@ -2020,7 +2056,7 @@ CREATE TABLE `quests` (
   `questId` int(8) NOT NULL,
   `questState` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quests
@@ -2038,7 +2074,7 @@ CREATE TABLE `skills` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of skills
@@ -2057,7 +2093,7 @@ CREATE TABLE `storages` (
   `slot` int(11) NOT NULL DEFAULT '0',
   `money` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of storages
@@ -2073,7 +2109,7 @@ CREATE TABLE `useslot` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=374 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=890 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of useslot
