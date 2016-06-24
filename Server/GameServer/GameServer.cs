@@ -138,11 +138,11 @@ namespace Server
                 CashShopFactory.InitializeGirlEyesCommodity();
                 CashShopFactory.InitializePetCommodity();
 
-                UdpRemoteEndPoint = new IPEndPoint(IPAddress.Any, 14199);
+                UdpRemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), 14199);
                 UdpListener = new UdpClient(UdpRemoteEndPoint);
                 Log.Inform("Initialized clients UDP listener on {0}.", UdpRemoteEndPoint.Address);
 
-                GameServer.Listener = new TcpListener(IPAddress.Any, GameServer.RemoteEndPoint.Port);
+                GameServer.Listener = new TcpListener(IPAddress.Parse(ServerConstants.SERVER_IP), GameServer.RemoteEndPoint.Port);
                 GameServer.Listener.Start();
                 Log.Inform("Initialized clients listener on {0}.", GameServer.Listener.LocalEndpoint);
 

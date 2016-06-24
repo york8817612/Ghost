@@ -131,21 +131,21 @@ namespace Server.Net
                 case ClientOpcode.P_SPEED_C:
                     ActionHandler.p_Speed_c(ip, gc);
                     break;
-                //case ClientOpcode.P_DAMAGE_C:
-                //    ActionHandler.p_Damage_c(ip, gc);
-                //    break;
-                //case ClientOpcode.P_DEAD_C:
-                //    ActionHandler.p_Dead_c(ip, gc);
-                //    break;
+                ////case ClientOpcode.P_DAMAGE_C:
+                ////    ActionHandler.p_Damage_c(ip, gc);
+                ////    break;
+                ////case ClientOpcode.P_DEAD_C:
+                ////    ActionHandler.p_Dead_c(ip, gc);
+                ////    break;
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
                     break;
-                case ClientOpcode.PET_MOVE_C:
-                    ActionHandler.Pet_Move_C(ip, gc);
-                    break;
-                case ClientOpcode.PET_ATTACK_C:
-                    ActionHandler.Pet_Attack_C(ip, gc);
-                    break;
+                //case ClientOpcode.PET_MOVE_C:
+                //    ActionHandler.Pet_Move_C(ip, gc);
+                //    break;
+                //case ClientOpcode.PET_ATTACK_C:
+                //    ActionHandler.Pet_Attack_C(ip, gc);
+                //    break;
                 // Trade
                 case ClientOpcode.TRADE_INVITE_REQ:
                     TradeHandler.TradeInvite(ip, gc);
