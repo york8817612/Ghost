@@ -27,7 +27,7 @@ namespace Server.Ghost
                 var pe = new PasswordEncrypt(encryptKey);
                 string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
 
-
+                
                 if (!password.Equals(encryptPassword))
                 {
                     gc.Dispose();
