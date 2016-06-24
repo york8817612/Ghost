@@ -50,10 +50,10 @@ namespace Server.Packet
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLevel);
                 plew.WriteByte(0xFF);
-                plew.WriteByte(0xFF); // 光圈
-                plew.WriteByte(0xFF); // 透明
-                plew.WriteByte(0xFF); // 憤怒
-                plew.WriteHexString("00 00 00 00");
+                plew.WriteByte(0); // 光圈
+                plew.WriteByte(0); // 透明
+                plew.WriteByte(0); // 憤怒
+                plew.WriteInt(0);
                 plew.WriteInt(chr.Hair);                                                                                        // 頭髮
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);       // 臉上
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);     // 臉下
@@ -81,31 +81,31 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 plew.WriteInt(0);
                 //
+                plew.WriteShort(0); // (byte)
                 plew.WriteShort(0);
                 plew.WriteShort(0);
-                plew.WriteHexString("00 00");
-                plew.WriteByte(chr.IP.GetAddressBytes()[0]);
-                plew.WriteByte(chr.IP.GetAddressBytes()[1]);
-                plew.WriteByte(chr.IP.GetAddressBytes()[2]);
-                plew.WriteByte(chr.IP.GetAddressBytes()[3]);
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[0]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[1]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[2]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[3]));
                 plew.WriteByte(chr.IP.GetAddressBytes()[0]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[1]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[2]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[3]);
                 plew.WriteHexString("1F 40"); // Port
-                plew.WriteShort(0);
+                plew.WriteShort(0); // (byte)
                 plew.WriteShort(0);
                 plew.WriteHexString("00 00 00 00 00 00 00 00");
-                plew.WriteInt(0);
+                plew.WriteInt(-1);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
-                plew.WriteShort(0);
-                plew.WriteByte(0);
-                plew.WriteByte(0);
+                plew.WriteShort(-1);
+                plew.WriteByte(-1);
+                plew.WriteByte(0); // 觀戰
                 plew.WriteByte(0);
                 plew.WriteByte(0);
                 c.Send(plew);
@@ -190,16 +190,16 @@ namespace Server.Packet
                     plew.WriteShort(0);
 
                     // 遠端IP位置
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[0]) : 0);
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[1]) : 0);
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[2]) : 0);
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[3]) : 0);
+                    
+                    // 遠端虛擬IP位置
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[0] : 0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[1] : 0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[2] : 0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[3] : 0);
-
-                    // 本地IP位置
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[0] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[1] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[2] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? myCharacter.IP.GetAddressBytes()[3] : 0);
 
                     plew.WriteHexString(i < map.GetMapCharactersTotal() ? "1F 40" : "00 00");
                     // 個人商店
@@ -221,7 +221,7 @@ namespace Server.Packet
                     plew.WriteByte(0); // 泡泡效果
                     plew.WriteByte(0);
                     plew.WriteShort(0);
-                    plew.WriteShort(-1);// 玩家ID [Map Number]
+                    plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].CharacterID : -1);// 玩家ID [Map Number]
                     plew.WriteByte(-1);
                     plew.WriteByte(0);
                     plew.WriteByte(0);

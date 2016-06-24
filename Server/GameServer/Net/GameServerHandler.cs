@@ -140,12 +140,12 @@ namespace Server.Net
                 case ClientOpcode.P_MOVE:
                     ActionHandler.p_Move(ip, gc);
                     break;
-                case ClientOpcode.PET_MOVE_C:
-                    ActionHandler.Pet_Move_C(ip, gc);
-                    break;
-                case ClientOpcode.PET_ATTACK_C:
-                    ActionHandler.Pet_Attack_C(ip, gc);
-                    break;
+                //case ClientOpcode.PET_MOVE_C:
+                //    ActionHandler.Pet_Move_C(ip, gc);
+                //    break;
+                //case ClientOpcode.PET_ATTACK_C:
+                //    ActionHandler.Pet_Attack_C(ip, gc);
+                //    break;
                 // Trade
                 case ClientOpcode.TRADE_INVITE_REQ:
                     TradeHandler.TradeInvite(ip, gc);
