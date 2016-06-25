@@ -266,8 +266,13 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                int Hp = item.ReadInt32();
-                int Mp = item.ReadInt32();
+                // Type 0 : 恢復鬼力
+                // Type 1 : 恢復體力(%)
+                // Type 2 : 恢復體力
+                // Type 3 : 恢復體力(%)
+                // Type 4 : 解除異常
+                int Type = item.ReadInt32();
+                int Recover = item.ReadInt32();
                 item.ReadInt32();
                 int price = item.ReadInt32();
                 item.ReadInt16();
@@ -277,7 +282,7 @@ namespace Server.Ghost.Provider
                 byte[] itemDescriptionByteArray = item.ReadBytes(256); // 物品敘述 (Byte[])
                 string itemDescriptionString = Encoding.GetEncoding("UTF-16LE").GetString(itemDescriptionByteArray); // 物品敘述 (Byte[] => String)
 
-                useData.Add(itemId, new ItemData(itemId, itemNameString, (short)Hp, (short)Mp, price));
+                useData.Add(itemId, new ItemData(itemId, itemNameString, Type, Recover, price));
             }
             all.Add(useData);
             //==============================================================================

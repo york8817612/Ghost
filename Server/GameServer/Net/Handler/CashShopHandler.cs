@@ -25,6 +25,8 @@ namespace Server.Handler
                 return;
 
             c.Account.GamePoints -= CashShopFactory.GetItemData(ItemID).BargainPrice;
+            c.Account.Save();
+
             chr.Items.Add(new Item(ItemID, (ItemID / 100000) == 92 ? false : true, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash)));
             chr.Items.Save();
             CashShopPacket.BuyCommodity(c);
@@ -44,6 +46,7 @@ namespace Server.Handler
                 return;
 
             c.Account.GamePoints -= CashShopFactory.GetItemData(ItemID).BargainPrice;
+            c.Account.Save();
 
             dynamic datum = new Datum("gifts");
             datum.name = CharacterName;

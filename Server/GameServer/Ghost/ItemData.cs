@@ -19,10 +19,12 @@
         public readonly short AttackRange = -1;
         public readonly byte Speed;
         public readonly byte Refining;
+        public readonly int Type = -1;
+        public readonly int Recover = -1;
         public readonly int Price;
 
         // 消耗品
-        public ItemData(int ItemID, string ItemName, short Hp, short Mp, int Price)
+        public ItemData(int ItemID, string ItemName, int Type, int Recover, int Price)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
@@ -32,8 +34,8 @@
             this.AttackRange = -1;
             this.Defense = -1;
             this.Speed = 0;
-            this.Hp = Hp;
-            this.Mp = Mp;
+            this.Type = Type;
+            this.Recover = Recover;
             this.Price = Price;
         }
 

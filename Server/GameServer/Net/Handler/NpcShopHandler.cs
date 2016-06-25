@@ -72,6 +72,9 @@ namespace Server.Handler
             {
                 byte Type = (byte)InventoryType.getItemType(ItemID);
 
+                if (ItemID >= 8880011 && ItemID <= 8880101) // 飛鏢
+                    Quantity *= 100;
+
                 Item finditem = null;
                 foreach (Item it in gc.Character.Items)
                 {

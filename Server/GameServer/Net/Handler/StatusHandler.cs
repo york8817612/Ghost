@@ -113,9 +113,11 @@ namespace Server.Handler
 
         public static void Char_Fury_Req(InPacket lea, Client c)
         {
+            int Type = lea.ReadInt();
+
             var chr = c.Character;
 
-            if (chr.IsFuring == true || chr.Fury != chr.MaxFury)
+            if (Type == 0 || chr.IsFuring == true || chr.Fury != chr.MaxFury)
                 return;
 
             short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
@@ -132,9 +134,6 @@ namespace Server.Handler
             chr.UpgradeDefense += UpgradeDefense;
 
             StatusPacket.getStatusInfo(c);
-
-            int Type = lea.ReadInt();
-
             StatusPacket.Fury(c, Type);
 
             chr.Fury = 0;

@@ -1,5 +1,6 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
+using Server.Common.Utilities;
 using Server.Ghost;
 using Server.Ghost.Characters;
 using Server.Ghost.Provider;
@@ -190,31 +191,58 @@ namespace Server.Handler
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
                 default:
-                    if (use.Hp != -1)
+                    switch (use.Type)
                     {
-                        if ((chr.MaxHp > chr.Hp + use.Hp))
-                        {
-                            chr.Hp += (short)use.Hp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                        }
-                        else if (chr.MaxHp - chr.Hp < use.Hp)
-                        {
-                            chr.Hp = (short)chr.MaxHp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                        }
-                    }
-                    if (use.Mp != -1)
-                    {
-                        if ((chr.MaxMp > chr.Mp + use.Mp))
-                        {
-                            chr.Mp += (short)use.Mp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                        }
-                        else if (chr.MaxMp - chr.Mp < use.Mp)
-                        {
-                            chr.Mp = (short)chr.MaxMp;
-                            StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                        }
+                        case 0: // 恢復鬼力
+                            if ((chr.MaxMp > chr.Mp + use.Recover))
+                            {
+                                chr.Mp += (short)use.Recover;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            else if (chr.MaxMp - chr.Mp < use.Recover)
+                            {
+                                chr.Mp = chr.MaxMp;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            break;
+                        case 1: // 恢復鬼力(%)
+                            if ((chr.MaxMp > chr.Mp + chr.MaxMp * use.Recover / 100))
+                            {
+                                chr.Mp += (short)(chr.MaxMp * use.Recover / 100);
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            else if (chr.MaxMp - chr.Mp < chr.MaxMp * use.Recover / 100)
+                            {
+                                chr.Mp = chr.MaxMp;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            break;
+                        case 2: // 恢復體力
+                            if ((chr.MaxHp > chr.Hp + use.Recover))
+                            {
+                                chr.Hp += (short)use.Recover;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            else if (chr.MaxHp - chr.Hp < use.Recover)
+                            {
+                                chr.Hp = chr.MaxHp;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            break;
+                        case 3: // 恢復體力(%)
+                            if ((chr.MaxHp > chr.Hp + chr.MaxHp * use.Recover / 100))
+                            {
+                                chr.Hp += (short)(chr.MaxHp * use.Recover / 100);
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            else if (chr.MaxHp - chr.Hp < chr.MaxHp * use.Recover / 100)
+                            {
+                                chr.Hp = chr.MaxHp;
+                                StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                     break;
             }
@@ -282,9 +310,8 @@ namespace Server.Handler
                             chr.Mp = chr.MaxMp;
                         break;
                     case 9900003: // Red
-                        Random rd = new Random();
-                        int number = rd.Next(3, 7); // 範圍：3 ~ 6
-                        chr.Fury += (short)(chr.MaxFury / 100 * number);
+                        int rnd = Randomizer.Next(3, 7);
+                        chr.Fury += (short)(chr.MaxFury / 100 * rnd);
                         if (chr.Fury > chr.MaxFury)
                             chr.Fury = chr.MaxFury;
                         break;

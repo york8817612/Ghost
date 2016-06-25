@@ -45,6 +45,7 @@ namespace Server.Net
             {
                 if (this.Character != null)
                 {
+                    this.Account.Save();
                     this.Character.Save();
                 }
 

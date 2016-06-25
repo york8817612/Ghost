@@ -91,6 +91,18 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8990019, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
+                case 64: // 
+                    chr.Items.Add(new Item(8990020, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 77: // [兩個金塊]
+                    chr.Items.Add(new Item(8990023, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 80: // [薇薇安的腰]
+                    chr.Items.Add(new Item(8990026, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
                 // 怪物 x 1
                 case 612:// [神射手轉職]
                     Quest.RequireMonster = 1;
@@ -111,6 +123,7 @@ namespace Server.Handler
                     Quest.RequireMonster = 5;
                     break;
                 // 怪物 x 10
+                // [擊退清野江怪物]
                 case 613: // [恨夜擊弓](射手)
                 case 621: // [舞影走](射手)
                     Quest.RequireMonster = 10;
@@ -129,6 +142,7 @@ namespace Server.Handler
                 case 47: // [矇蔽蝕眼](道士)
                 case 48: // [震退](道士)
                 case 51: // [陰陽幻移](道士)
+                case 79: // [製鹽的石磨]
                 case 358:// [ 壁破力 ](力士)
                 case 359:// [ 真功彈強 ](力士) 
                 case 360:// [ 武月真氣 ](力士)
@@ -137,8 +151,13 @@ namespace Server.Handler
                     Quest.RequireMonster = 20;
                     break;
                 // 怪物 x30
+                case 85: // [少女的眼淚第2階段]
                 case 619: // [鎮水液彈](射手)
                     Quest.RequireMonster = 30;
+                    break;
+                // 怪物 x100
+                case 109: // [遺失的仙女服]
+                    Quest.RequireMonster = 100;
                     break;
                 default:
                     Quest.RequireMonster = 100;

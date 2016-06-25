@@ -107,36 +107,36 @@ namespace Server.Packet
 
                 // ============================================
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 1
+                plew.WriteInt(keymaps.SkillID("1")); // 技能ID
+                plew.WriteShort(keymaps.Type("1")); // 技能類型
+                plew.WriteShort(keymaps.Slot("1")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 2
+                plew.WriteInt(keymaps.SkillID("2")); // 技能ID
+                plew.WriteShort(keymaps.Type("2")); // 技能類型
+                plew.WriteShort(keymaps.Slot("2")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 3
+                plew.WriteInt(keymaps.SkillID("3")); // 技能ID
+                plew.WriteShort(keymaps.Type("3")); // 技能類型
+                plew.WriteShort(keymaps.Slot("3")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 4
+                plew.WriteInt(keymaps.SkillID("4")); // 技能ID
+                plew.WriteShort(keymaps.Type("4")); // 技能類型
+                plew.WriteShort(keymaps.Slot("4")); // 技能欄位
 
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 5
+                plew.WriteInt(keymaps.SkillID("5")); // 技能ID
+                plew.WriteShort(keymaps.Type("5")); // 技能類型
+                plew.WriteShort(keymaps.Slot("5")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 6
+                plew.WriteInt(keymaps.SkillID("6")); // 技能ID
+                plew.WriteShort(keymaps.Type("6")); // 技能類型
+                plew.WriteShort(keymaps.Slot("6")); // 技能欄位
 
                 // ============================================
 
@@ -173,36 +173,36 @@ namespace Server.Packet
 
                 // ============================================
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 7
+                plew.WriteInt(keymaps.SkillID("7")); // 技能ID
+                plew.WriteShort(keymaps.Type("7")); // 技能類型
+                plew.WriteShort(keymaps.Slot("7")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 8
+                plew.WriteInt(keymaps.SkillID("8")); // 技能ID
+                plew.WriteShort(keymaps.Type("8")); // 技能類型
+                plew.WriteShort(keymaps.Slot("8")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 9
+                plew.WriteInt(keymaps.SkillID("9")); // 技能ID
+                plew.WriteShort(keymaps.Type("9")); // 技能類型
+                plew.WriteShort(keymaps.Slot("9")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // 0
+                plew.WriteInt(keymaps.SkillID("0")); // 技能ID
+                plew.WriteShort(keymaps.Type("0")); // 技能類型
+                plew.WriteShort(keymaps.Slot("0")); // 技能欄位
 
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // -
+                plew.WriteInt(keymaps.SkillID("-")); // 技能ID
+                plew.WriteShort(keymaps.Type("-")); // 技能類型
+                plew.WriteShort(keymaps.Slot("-")); // 技能欄位
 
-                // 
-                plew.WriteInt(-1); // 技能ID
-                plew.WriteShort(-1); // 技能類型
-                plew.WriteShort(-1); // 技能欄位
+                // =
+                plew.WriteInt(keymaps.SkillID("=")); // 技能ID
+                plew.WriteShort(keymaps.Type("=")); // 技能類型
+                plew.WriteShort(keymaps.Slot("=")); // 技能欄位
                 c.Send(plew);
             }
         }

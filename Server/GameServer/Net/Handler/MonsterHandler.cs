@@ -53,7 +53,7 @@ namespace Server.Handler
                 StatusPacket.UpdateExp(gc);
 
                 // 加入要掉落物品
-                int Max_Count = 3; // 設定最大物品掉落數
+                int Max_Count = 2; // 設定最大物品掉落數
                 int Current_Count = 0;
                 foreach (Loot loot in MobFactory.Drop_Data)
                 {
@@ -75,20 +75,39 @@ namespace Server.Handler
                 //【綠色鬼魂】能恢復40%的鬼力值
                 //【紅色鬼魂】累積憤怒計量值用，當憤怒計滿之後能轉為憤怒狀態，攻防都會*1.2倍
                 //【紫色鬼魂】能吸收到封印裝備，蒐集越多越能增加封印物合成的成功機率
-                int Max_Soul_Count = 1; // 設定最大物品掉落數
-                int Current_Soul_Count = 0;
-                int[] Soul = new int[] { 15000, 250000, 800000, 650000 };
-                for (int i = 1; i < 5; i++)
-                {
-                    if (Max_Soul_Count == Current_Soul_Count)
-                        break;
 
-                    if ((Randomizer.Next(999999) / GameServer.Rates.Loot) < Soul[i-1])
-                    {
-                        Monster.Drops.Add(new Drop(0, 9900001 + (i -1), 20));
-                        Current_Soul_Count++;
-                    }
-                }
+                // 無 : 1%
+                // 9900001 : 20%
+                // 9900002 : 19%
+                // 9900003 : 20%
+                // 9900004 : 40%
+
+                int[] Soul = {
+                    0,
+                    9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, 9900001, // 20%
+                    9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, 9900002, // 19%
+                    9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, 9900003, // 20%
+                    9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004, 9900004 // 40%
+                };
+
+                int rnd = Randomizer.Next(0, 100);
+                if (rnd != 0)
+                    Monster.Drops.Add(new Drop(0, Soul[rnd], 20));
+
+                //int Max_Soul_Count = 1; // 設定最大物品掉落數
+                //int Current_Soul_Count = 0;
+                //int[] Soul = new int[] { 15000, 250000, 800000, 650000 };
+                //for (int i = 1; i < 5; i++)
+                //{
+                //    if (Max_Soul_Count == Current_Soul_Count)
+                //        break;
+
+                //    if ((Randomizer.Next(999999) / GameServer.Rates.Loot) < Soul[i-1])
+                //    {
+                //        Monster.Drops.Add(new Drop(0, 9900001 + (i -1), 20));
+                //        Current_Soul_Count++;
+                //    }
+                //}
 
                 short rndMoney = (short)(Monster.Exp + Randomizer.Next(6));
                 Monster.Drops.Add(new Drop(0, InventoryType.getMoneyStyle(rndMoney), rndMoney)); // 錢
@@ -106,6 +125,7 @@ namespace Server.Handler
                 {
                     MapPacket.MonsterDrop(All.Client, Monster);
                 }
+                Monster.Drops.Clear();
             }
             else
             {

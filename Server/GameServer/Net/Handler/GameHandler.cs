@@ -57,9 +57,9 @@ namespace Server.Handler
             }
             catch (NoAccountException)
             {
-                    gc.Dispose();
-                    Log.Error("Login Fail!");
-                }
+                gc.Dispose();
+                Log.Error("Login Fail!");
+            }
 
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
@@ -150,10 +150,8 @@ namespace Server.Handler
             int SkillID = lea.ReadInt();
             int SkillType = lea.ReadShort();
             int SkillSlot = lea.ReadShort();
-            if (SkillID == -1 && SkillType == -1 && SkillSlot == -1)
-                return;
+
             string QuickSlotName = "";
-            KeyValuePair<string, Shortcut> Skill = chr.Keymap.Skill(SkillType, SkillSlot);
             switch (KeymapType)
             {
                 case 0:
@@ -176,6 +174,29 @@ namespace Server.Handler
                             break;
                         case 5:
                             QuickSlotName = "N";
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (KeymapSlot)
+                    {
+                        case 0:
+                            QuickSlotName = "1";
+                            break;
+                        case 1:
+                            QuickSlotName = "2";
+                            break;
+                        case 2:
+                            QuickSlotName = "3";
+                            break;
+                        case 3:
+                            QuickSlotName = "4";
+                            break;
+                        case 4:
+                            QuickSlotName = "5";
+                            break;
+                        case 5:
+                            QuickSlotName = "6";
                             break;
                     }
                     break;
@@ -202,6 +223,34 @@ namespace Server.Handler
                             break;
                     }
                     break;
+                case 3:
+                    switch (KeymapSlot)
+                    {
+                        case 0:
+                            QuickSlotName = "7";
+                            break;
+                        case 1:
+                            QuickSlotName = "8";
+                            break;
+                        case 2:
+                            QuickSlotName = "9";
+                            break;
+                        case 3:
+                            QuickSlotName = "0";
+                            break;
+                        case 4:
+                            QuickSlotName = "-";
+                            break;
+                        case 5:
+                            QuickSlotName = "=";
+                            break;
+                    }
+                    break;
+            }
+            if (SkillID == -1 && SkillType == -1 && SkillSlot == -1)
+            {
+                chr.Keymap.Remove(QuickSlotName);
+                return;
             }
             chr.Keymap.Remove(QuickSlotName);
             chr.Keymap.Add(QuickSlotName, new Shortcut(SkillID, (byte)SkillType, (byte)SkillSlot));

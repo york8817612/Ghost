@@ -21,6 +21,10 @@ namespace Server.Handler
         {
             string Name = lea.ReadString(40);
             var chr = c.Character;
+
+            if (!(chr.MapX == 1 && chr.MapY == 51) && !(chr.MapX == 1 && chr.MapY == 52) && !(chr.MapX == 1 && chr.MapY == 53) && !(chr.MapX == 1 && chr.MapY == 54) && !(chr.MapX == 1 && chr.MapY == 55))
+                return;
+
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             CharacterShop PlayerShop = new CharacterShop(Name);
             for (int i = 0; i < 12; i++)
