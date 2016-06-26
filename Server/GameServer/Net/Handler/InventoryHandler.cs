@@ -19,26 +19,26 @@ namespace Server.Handler
             byte TargetType = lea.ReadByte();
             byte TargetSlot = lea.ReadByte();
             int Quantity = lea.ReadInt();
-            Item Source = gc.Character.Items.GetItem(SourceType, SourceSlot);
-            Item Target = gc.Character.Items.GetItem(TargetType, TargetSlot);
+            Item Source = gc.Character.Items.getItem(SourceType, SourceSlot);
+            Item Target = gc.Character.Items.getItem(TargetType, TargetSlot);
             var chr = gc.Character;
 
             if (TargetType == 0x63 && TargetSlot == 0x63)
             {
                 if (SourceType == 0xFF && SourceSlot == 0xFF)
                     return;
-                Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-                foreach (Character All in map.Characters)
+                Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+                foreach (Character All in Map.Characters)
                 {
-                    InventoryPacket.charDropItem(All.Client, map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
+                    InventoryPacket.charDropItem(All.Client, Map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
                 }
-                map.CharacterItem.Add(map.ObjectID, Source);
-                map.ObjectID++;
+                Map.CharacterItem.Add(Map.ObjectID, Source);
+                Map.ObjectID++;
                 chr.Items.Remove(SourceType, SourceSlot, Quantity == 0 ? 1 : Quantity);
             }
             else
             {
-                if (chr.Items.GetItem(TargetType, TargetSlot) == null)
+                if (chr.Items.getItem(TargetType, TargetSlot) == null)
                 {
                     if (SourceType != 5 && TargetType != 5)
                     {
@@ -149,7 +149,7 @@ namespace Server.Handler
             var chr = gc.Character;
             byte Type = lea.ReadByte();
             byte Slot = lea.ReadByte();
-            Item Item = chr.Items.GetItem(Type, Slot);
+            Item Item = chr.Items.getItem(Type, Slot);
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             var use = ItemFactory.useData[Item.ItemID];
             // 使用回復HP 跟 MP 的物品
@@ -257,7 +257,7 @@ namespace Server.Handler
             int Slot = lea.ReadInt();
             var chr = c.Character;
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            Item Item = chr.Items.GetItem((byte)InventoryType.ItemType.Spend3, (byte)Slot);
+            Item Item = chr.Items.getItem((byte)InventoryType.ItemType.Spend3, (byte)Slot);
             foreach (Character All in map.Characters)
                 InventoryPacket.UseSpendStart(All.Client, chr, PositionX, PositionY, Item.ItemID, (byte)InventoryType.ItemType.Spend3, Slot);
             chr.Items.Remove((byte)InventoryType.ItemType.Spend3, (byte)Slot, 1);
@@ -297,6 +297,7 @@ namespace Server.Handler
             {
                 if (map.getDropByOriginalID(OriginalID) == null)
                     return;
+
                 switch (ItemID)
                 {
                     case 9900001: // Blue
@@ -316,7 +317,11 @@ namespace Server.Handler
                             chr.Fury = chr.MaxFury;
                         break;
                     case 9900004: // Purple
-                        // TODO: +封印量
+                        if (chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Seal] != null)
+                        {
+                            chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Seal].Spirit++;
+                            InventoryPacket.getInvenEquip(gc);
+                        }
                         break;
                 }
                 StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
@@ -326,6 +331,7 @@ namespace Server.Handler
                 }
                 return;
             }
+
             // 撿取錢
             if (ItemID >= 9800001 && ItemID <= 9800005)
             {

@@ -79,7 +79,7 @@ namespace Server.Handler
         {
             int State = 0;
             var chr = c.Character;
-            Item Item = chr.Items.GetItem((byte)InventoryType.ItemType.Spend3, (byte)chr.UseSlot.Slot(InventoryType.ItemType.Spend3));
+            Item Item = chr.Items.getItem((byte)InventoryType.ItemType.Spend3, (byte)chr.UseSlot.Slot(InventoryType.ItemType.Spend3));
             if (chr.UseSlot.Slot(InventoryType.ItemType.Spend3) == 0xFF || Item == null)
             {
                 State = -2;

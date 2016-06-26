@@ -12,6 +12,7 @@ namespace Server.Ghost
         public int ItemID { get; private set; }
         private short maxPerStack;
         private short quantity;
+        public int Spirit { get; set; }
         public byte IsLocked { get; set; }
         public int Icon { get; set; }
         public int Term { get; set; }
@@ -91,6 +92,7 @@ namespace Server.Ghost
                     break;
             }
             this.Quantity = quantity;
+            this.Spirit = 0;
             this.IsLocked = 0;
             this.Icon = 0;
             this.Term = -1;
@@ -119,6 +121,7 @@ namespace Server.Ghost
                     break;
             }
             this.Quantity = quantity;
+            this.Spirit = 0;
             this.IsLocked = IsLocked ? (byte)1 : (byte)0;
             this.Icon = Icon;
             this.Term = Term;
@@ -147,6 +150,7 @@ namespace Server.Ghost
                     break;
             }
             this.Quantity = (short)datum.quantity;
+            this.Spirit = datum.spirit;
             this.IsLocked = (byte)datum.isLocked;
             this.Icon = datum.icon;
             this.Term = datum.term;
@@ -161,6 +165,7 @@ namespace Server.Ghost
             datum.cid = this.Character.ID;
             datum.itemId = this.ItemID;
             datum.quantity = this.Quantity;
+            datum.spirit = this.Spirit;
             datum.isLocked = this.IsLocked;
             datum.icon = this.Icon;
             datum.term = this.Term;
@@ -175,7 +180,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && quantity = '{2}' && isLocked = '{3}' && icon = '{4}' && term = '{5}' && type = '{6}' && slot = '{7}'", this.Character.ID, this.ItemID, this.quantity, this.IsLocked, this.Icon, this.Term, this.Type, this.Slot);
+                this.ID = Database.Fetch("Items", "id", "cid = '{0}' && itemId = '{1}' && quantity = '{2}' && spirit = '{3}' && isLocked = '{4}' && icon = '{5}' && term = '{6}' && type = '{7}' && slot = '{8}'", this.Character.ID, this.ItemID, this.quantity, this.Spirit, this.IsLocked, this.Icon, this.Term, this.Type, this.Slot);
 
                 this.Assigned = true;
             }

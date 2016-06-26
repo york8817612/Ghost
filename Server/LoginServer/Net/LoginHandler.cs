@@ -36,6 +36,10 @@ namespace Server.Ghost
                     Log.Error("Login Fail!");
                     c.RetryLoginCount += 1;
                 }
+                else if (c.Account.Banned == 1)
+                {
+                    LoginPacket.Login_Ack(c, ServerState.LoginState.USER_LOCK);
+                }
                 else
                 {
                     LoginPacket.Login_Ack(c, ServerState.LoginState.OK, encryptKey, c.Account.Master > 0 ? true : false);

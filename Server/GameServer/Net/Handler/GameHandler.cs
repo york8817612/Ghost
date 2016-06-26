@@ -34,6 +34,7 @@ namespace Server.Handler
                 gc.Account.Load(username);
                 var pe = new PasswordEncrypt(encryptKey);
                 string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
+
                 if (!password.Equals(encryptPassword))
                 {
                     gc.Dispose();
@@ -93,6 +94,7 @@ namespace Server.Handler
             if (gc.Account.Master == 0 || cmd.Length < 1)
                 return;
             var chr = gc.Character;
+            Character victim = null;
 
             switch (cmd[0])
             {
@@ -118,7 +120,7 @@ namespace Server.Handler
                     if (cmd.Length != 2)
                         break;
                     chr.Money = int.Parse(cmd[1]);
-                    InventoryPacket.getCharacterEquip(gc);
+                    InventoryPacket.getInvenMoney(gc, chr.Money, int.Parse(cmd[1]));
                     break;
                 case "//levelup":
                     chr.LevelUp();
@@ -127,6 +129,47 @@ namespace Server.Handler
                     if (cmd.Length != 3)
                         break;
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
+                    break;
+                case "//warp":
+                    if (cmd.Length != 2)
+                        break;
+                    foreach (Character find in MapFactory.AllCharacters)
+                    {
+                        if (find.Name.Equals(cmd[1]))
+                        {
+                            victim = find;
+                        }
+                    }
+                    if (victim != null)
+                    {
+                        chr.MapX = victim.MapX;
+                        chr.MapY = victim.MapY;
+                        chr.PlayerX = victim.PlayerX;
+                        chr.PlayerY = victim.PlayerY;
+                        MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    }
+                    break;
+                case "//ban":
+                    if (cmd.Length != 2)
+                        break;
+                    foreach (Character find in MapFactory.AllCharacters)
+                    {
+                        if (find.Name.Equals(cmd[1]))
+                        {
+                            victim = find;
+                        }
+                    }
+                    if (victim != null)
+                    {
+                        dynamic datum = new Datum("accounts");
+                        victim.Client.Account.Banned = 1;
+                        victim.Client.Dispose();
+                    }
+                    break;
+                case "//save":
+                    for (int i = 0; i < MapFactory.AllCharacters.Count; i++)
+                        MapFactory.AllCharacters[i].Client.Dispose();
+                    //GameServer.IsAlive = false;
                     break;
                 //case "//test":
                 //    PartyPacket.PartyInvite(gc);

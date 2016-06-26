@@ -95,21 +95,35 @@ namespace Server.Handler
 
         public static void SkillLevelUp_Req(InPacket lea, Client gc)
         {
-            byte type = lea.ReadByte();
-            byte slot = lea.ReadByte();
-            List<Skill> s = gc.Character.Skills.getSkills();
+            byte Type = lea.ReadByte();
+            byte Slot = lea.ReadByte();
+
+            var chr = gc.Character;
+            List<Skill> s = chr.Skills.getSkills();
             Skill sl = null;
             foreach (Skill skill in s)
             {
-                if (skill.Type == type && skill.Slot == slot)
+                if (skill.Type == Type && skill.Slot == Slot)
                 {
                     sl = skill;
                     break;
                 }
             }
-            if (sl == null)
+
+            if (sl == null || (sl.SkillID == 1 && sl.SkillLevel + 1 > 5) || (sl.SkillID == 2 && sl.SkillLevel + 1 > 10) || (sl.SkillID == 3 && sl.SkillLevel + 1 > 20) || (sl.SkillID == 4 && sl.SkillLevel + 1 > 20))
                 return;
-            SkillPacket.updateSkillLevel(gc, --gc.Character.SkillBonus, type, slot, ++sl.SkillLevel);
+
+            chr.SkillBonus--;
+
+            if (chr.SkillBonus < 0)
+            {
+                chr.SkillBonus = 0;
+                return;
+            }
+
+            sl.SkillLevel++;
+
+            SkillPacket.updateSkillLevel(gc, chr.SkillBonus, Type, Slot, sl.SkillLevel);
         }
     }
 }

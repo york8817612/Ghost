@@ -17,7 +17,7 @@ namespace Server.Handler
             int Quantity = lea.ReadInt();
             var chr = gc.Character;
             Storage Target = chr.Storages.GetItem((byte)TargetType, (byte)TargetSlot);
-            Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
+            Item Source = chr.Items.getItem((byte)SourceType, (byte)SourceSlot);
 
             if (Target != null)
                 return;
@@ -40,7 +40,7 @@ namespace Server.Handler
 
             Storage Source = chr.Storages.GetItem((byte)SourceType, (byte)SourceSlot);
             int TargetType = InventoryType.getItemType(Source.ItemID);
-            Item Item = chr.Items.GetItem((byte)TargetType, (byte)TargetSlot);
+            Item Item = chr.Items.getItem((byte)TargetType, (byte)TargetSlot);
 
             chr.Storages.Remove((byte)Source.Type, (byte)Source.Slot, Quantity);
 

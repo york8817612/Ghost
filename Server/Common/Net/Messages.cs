@@ -134,6 +134,7 @@ namespace Server.Common.Net
         //
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         //
+        PET_NAME_REQ = 0x101,
         PET_MOVE_C = 0x10B,
         PET_MOVETO_C = 0x10C,
         PET_MOVEBIRD_C = 0x10D,

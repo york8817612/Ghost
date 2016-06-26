@@ -169,9 +169,9 @@ namespace Server.Packet
                     plew.WriteByte(0);
                 }
 
-                for (int i = 0; i < 17; i++)
+                for (byte i = 0; i < 17; i++)
                 {   // 封印量
-                    plew.WriteShort(0);
+                    plew.WriteShort(i == 4 ? chr.Items.Spirit(InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Seal) : 0);
                 }
 
                 for (int i = 0; i < 17; i++)
@@ -225,7 +225,7 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Equip1, i));
+                    plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
@@ -241,15 +241,15 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Equip1, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip1, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Equip1, i));
+                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Equip1, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Equip1, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品標誌
-                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Equip1, i));
+                    plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 480 Bytes
@@ -268,7 +268,7 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Equip2, i));
+                    plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 
@@ -278,21 +278,21 @@ namespace Server.Packet
                 { // 
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 { // 封印量
-                    plew.WriteShort(0);
+                    plew.WriteShort(chr.Items.Spirit(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Equip2, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Equip2, i));
+                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Equip2, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品標誌
-                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Equip2, i));
+                    plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
                 { // 480 Bytes
@@ -311,19 +311,19 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Spend3, i));
+                    plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Spend3, i));
+                    plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Spend3, i));
+                    plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Spend3, i));
+                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Spend3, i));
                 }
                 plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
                 plew.WriteByte(0xFF);
@@ -346,23 +346,23 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
                 { // 物品編號
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Other4, i));
+                    plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品數量
-                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Other4, i));
+                    plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品Lock
-                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Other4, i));
+                    plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Other4, i));
+                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 { // 物品Icon
-                    plew.WriteShort(chr.Items.GetIcon(InventoryType.ItemType.Other4, i));
+                    plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Other4, i));
                 }
                 c.Send(plew);
             }
@@ -478,7 +478,7 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (byte i = 0; i < 20; i++)
                 {
-                    plew.WriteInt(chr.Items.GetItemID(InventoryType.ItemType.Cash, i)); // 物品ID
+                    plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Cash, i)); // 物品ID
                 }
                 for (int i = 0; i < 20; i++)
                 { // 剩餘合成回數
@@ -494,15 +494,15 @@ namespace Server.Packet
                 }
                 for (byte i = 0; i < 20; i++)
                 { // 數量
-                    plew.WriteShort(chr.Items.GetQuantity(InventoryType.ItemType.Cash, i));
+                    plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Cash, i));
                 }
                 for (byte i = 0; i < 20; i++)
                 { // 物品Lock
-                    plew.WriteByte(chr.Items.GetIsLocked(InventoryType.ItemType.Cash, i));
+                    plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Cash, i));
                 }
                 for (byte i = 0; i < 20; i++)
                 { // 截止日期
-                    plew.WriteInt(chr.Items.GetTerm(InventoryType.ItemType.Cash, i) == -1 ? 0 : chr.Items.GetTerm(InventoryType.ItemType.Cash, i));
+                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Cash, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Cash, i));
                 }
                 for (int i = 0; i < 20; i++)
                 { // 400 Bytes

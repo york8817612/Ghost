@@ -174,7 +174,7 @@ namespace Server.Handler
                     Log.Error("未知的物品型態:" + ItemID / 100000);
                     break;
             }
-            Item source = gc.Character.Items.GetItem(Type, Slot);
+            Item source = gc.Character.Items.getItem(Type, Slot);
 
             if (source != null)
             {

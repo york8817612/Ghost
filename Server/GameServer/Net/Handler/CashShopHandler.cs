@@ -64,7 +64,7 @@ namespace Server.Handler
         {
             var chr = c.Character;
             int Slot = lea.ReadInt();
-            Item Source = chr.Items.GetItem((byte)InventoryType.ItemType.Cash, (byte)Slot);
+            Item Source = chr.Items.getItem((byte)InventoryType.ItemType.Cash, (byte)Slot);
 
             if (Source.ItemID / 100000 == 90)
             {   // 頭髮

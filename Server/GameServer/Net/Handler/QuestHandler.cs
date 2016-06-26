@@ -49,8 +49,7 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8990007, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
-                case 33: // [利爪術] [Test]
-                    chr.Items.Add(new Item(8990010, 4, Slot));
+                case 33: // [利爪術]
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
 

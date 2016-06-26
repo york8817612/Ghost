@@ -95,13 +95,13 @@ namespace Server.Ghost.Characters
             return this.Items;
         }
 
-        public Item GetItem(byte type, byte slot)
+        public Item getItem(byte type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == type && i.Slot == slot));
             return item;
         }
 
-        public int GetItemID(InventoryType.ItemType type, byte slot)
+        public int ItemID(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
@@ -109,7 +109,7 @@ namespace Server.Ghost.Characters
             return item.ItemID;
         }
 
-        public int GetQuantity(InventoryType.ItemType type, byte slot)
+        public int Quantity(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
@@ -117,7 +117,74 @@ namespace Server.Ghost.Characters
             return item.Quantity;
         }
 
-        public byte GetIsLocked(InventoryType.ItemType type, byte slot)
+        public int Spirit(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+
+            if (Item == null)
+                return 0;
+
+            double Spirit = 0;
+
+            switch (Item.ItemID)
+            {
+                case 8510011:
+                    Spirit = (double)Item.Spirit / 100 * 100;
+                    if (Spirit > 100)
+                        return 100;
+                    break;
+                case 8510021:
+                    Spirit = (double)Item.Spirit / 130 * 100;
+                    if (Spirit > 130)
+                        return 100;
+                    break;
+                case 8510031:
+                    Spirit = (double)Item.Spirit / 169 * 100;
+                    if (Spirit > 169)
+                        return 100;
+                    break;
+                case 8510041:
+                    Spirit = (double)Item.Spirit / 220 * 100;
+                    if (Spirit > 220)
+                        return 100;
+                    break;
+                case 8510051:
+                    Spirit = (double)Item.Spirit / 286 * 100;
+                    if (Spirit > 286)
+                        return 100;
+                    break;
+                case 8510061:
+                    Spirit = (double)Item.Spirit / 371 * 100;
+                    if (Spirit > 371)
+                        return 100;
+                    break;
+                case 8510071:
+                    Spirit = (double)Item.Spirit / 483 * 100;
+                    if (Spirit > 483)
+                        return 100;
+                    break;
+                case 8510081:
+                    Spirit = (double)Item.Spirit / 627 * 100;
+                    if (Spirit > 627)
+                        return 100;
+                    break;
+                case 8510091:
+                    Spirit = (double)Item.Spirit / 816 * 100;
+                    if (Spirit > 816)
+                        return 100;
+                    break;
+                case 8510101:
+                    Spirit = (double)Item.Spirit / 1060 * 100;
+                    if (Spirit > 1060)
+                        return 100;
+                    break;
+                default:
+                    return 0;
+            }
+            return (int)Spirit;
+        }
+
+        public byte IsLocked(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
@@ -125,7 +192,7 @@ namespace Server.Ghost.Characters
             return item.IsLocked;
         }
 
-        public int GetIcon(InventoryType.ItemType type, byte slot)
+        public int Icon(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)
@@ -133,7 +200,7 @@ namespace Server.Ghost.Characters
             return item.Icon;
         }
 
-        public int GetTerm(InventoryType.ItemType type, byte slot)
+        public int Term(InventoryType.ItemType type, byte slot)
         {
             Item item = this.Items.Find(i => (i.Type == (byte)type && i.Slot == slot));
             if (item == null)

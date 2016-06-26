@@ -26,11 +26,11 @@ namespace Server.Handler
                 {
                     c.Character.PlayerX = ((short)PositionX);
                     c.Character.PlayerY = ((short)PositionY);
-                    Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
+                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
                 }
             }
 
-            Console.WriteLine("Player {0} Move To {1} X:{2}, Y:{3}", Speed == 0 ? "End" : "Start", MoveDirection == 1 ? "Right" : "Left", PositionX, PositionY);
+            //Console.WriteLine("Player {0} Move To {1} X:{2}, Y:{3}", Speed == 0 ? "End" : "Start", MoveDirection == 1 ? "Right" : "Left", PositionX, PositionY);
         }
 
         public static void p_Jump_c(InPacket lea, Client c)
@@ -47,7 +47,7 @@ namespace Server.Handler
                 {
                     c.Character.PlayerX = ((short)PositionX);
                     c.Character.PlayerY = ((short)PositionY);
-                    Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
+                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace Server.Handler
                 {
                     c.Character.PlayerX = ((short)PositionX);
                     c.Character.PlayerY = ((short)PositionY);
-                    Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
+                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace Server.Handler
                 {
                     c.Character.PlayerX = ((short)posX);
                     c.Character.PlayerY = ((short)posY);
-                    Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
+                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
                 }
             }
         }

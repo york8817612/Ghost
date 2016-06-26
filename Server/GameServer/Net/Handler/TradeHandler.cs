@@ -97,7 +97,7 @@ namespace Server.Handler
                 // 個人
                 foreach (Item Item in chr.Trade.Item)
                 {
-                    Item i = chr.Items.GetItem(Item.Type, Item.Slot);
+                    Item i = chr.Items.getItem(Item.Type, Item.Slot);
                     if (i != null)
                     {
                         // 合併消費物品、其他物品
@@ -122,7 +122,7 @@ namespace Server.Handler
                 // 對方
                 foreach (Item Item in chr.Trader.Trade.Item)
                 {
-                    Item i = chr.Trader.Items.GetItem(Item.Type, Item.Slot);
+                    Item i = chr.Trader.Items.getItem(Item.Type, Item.Slot);
                     if (i != null)
                     {
                         // 合併消費物品、其他物品
@@ -170,7 +170,7 @@ namespace Server.Handler
             // 個人
             foreach (Item Item in chr.Trade.Item)
             {
-                Item i = chr.Items.GetItem(Item.Type, Item.Slot);
+                Item i = chr.Items.getItem(Item.Type, Item.Slot);
                 if (i != null)
                 {
                     // 合併消費物品、其他物品
@@ -196,7 +196,7 @@ namespace Server.Handler
             // 對方
             foreach (Item Item in chr.Trader.Trade.Item)
             {
-                Item i = chr.Trader.Items.GetItem(Item.Type, Item.Slot);
+                Item i = chr.Trader.Items.getItem(Item.Type, Item.Slot);
                 if (i != null)
                 {
                     // 合併消費物品、其他物品
@@ -240,7 +240,7 @@ namespace Server.Handler
                 return;
             }
 
-            Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
+            Item Source = chr.Items.getItem((byte)SourceType, (byte)SourceSlot);
             chr.Trade.SourceQuantity.Add(Source.Quantity);
 
             if (Source != null)

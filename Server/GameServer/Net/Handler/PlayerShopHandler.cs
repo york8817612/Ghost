@@ -33,7 +33,7 @@ namespace Server.Handler
                 int SourceSlot = lea.ReadShort();
                 int Quantity = lea.ReadInt();
                 int Price = lea.ReadInt();
-                Item Source = chr.Items.GetItem((byte)SourceType, (byte)SourceSlot);
+                Item Source = chr.Items.getItem((byte)SourceType, (byte)SourceSlot);
                 if (Source != null)
                 {
                     PlayerShop.Add(new ShopData(Source.ItemID, Quantity, SourceType, SourceSlot, (byte)i, Source.IsLocked, Source.Term, Price));

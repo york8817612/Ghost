@@ -221,6 +221,10 @@ namespace Server.Net
                 case ClientOpcode.CASH_CHECKCHARNAME_REQ:
                     CashShopHandler.CheckName_Req(ip, gc);
                     break;
+                // Pet
+                case ClientOpcode.PET_NAME_REQ:
+                    PetHandler.Pet_Name_Req(ip, gc);
+                    break;
             }
         }
     }
