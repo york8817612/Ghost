@@ -77,6 +77,7 @@ namespace Server.Ghost
             chr.Level = 1;
             chr.Class = 0;
             chr.ClassLevel = 0xFF;
+            chr.Guild = 0xFF;
             chr.Gender = (byte)gender;
             chr.Eyes = eyes;
             chr.Hair = hair;

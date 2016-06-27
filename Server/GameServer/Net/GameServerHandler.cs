@@ -137,8 +137,8 @@ namespace Server.Net
                 //case ClientOpcode.P_DEAD_C:
                 //    ActionHandler.p_Dead_c(ip, gc);
                 //    break;
-                case ClientOpcode.P_MOVE:
-                    ActionHandler.p_Move(ip, gc);
+                case ClientOpcode.P_MOVE_C_2:
+                    ActionHandler.p_Move_c_2(ip, gc);
                     break;
                 //case ClientOpcode.PET_MOVE_C:
                 //    ActionHandler.Pet_Move_C(ip, gc);

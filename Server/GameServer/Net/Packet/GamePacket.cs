@@ -8,7 +8,7 @@ namespace Server.Packet
 {
     public static class GamePacket
     {
-        public static void Game_Log_Ack(Client c, int characterID, string[] IP)
+        public static void Game_Log_Ack(Client c, int characterID)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.GAMELOG))
             {
@@ -18,10 +18,10 @@ namespace Server.Packet
                 plew.WriteInt(ServerConstants.CLIENT_VERSION);
                 plew.WriteInt(14199);
                 plew.WriteInt(12615854); // TimeLogin
-                plew.WriteByte(byte.Parse(IP[0]));
-                plew.WriteByte(byte.Parse(IP[1]));
-                plew.WriteByte(byte.Parse(IP[2]));
-                plew.WriteByte(byte.Parse(IP[3]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[0]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[1]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[2]));
+                plew.WriteByte(byte.Parse(c.Title.Split('.')[3]));
                 plew.WriteLong(c.SessionID); // Key
 
                 c.Send(plew);

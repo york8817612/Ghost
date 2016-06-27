@@ -1,11 +1,5 @@
-﻿using Server.Common.Constants;
-using Server.Common.IO.Packet;
-using Server.Common.Utilities;
-using Server.Ghost;
-using Server.Ghost.Characters;
-using Server.Ghost.Provider;
+﻿using Server.Common.IO.Packet;
 using Server.Net;
-using Server.Packet;
 using System;
 
 namespace Server.Handler
@@ -14,20 +8,20 @@ namespace Server.Handler
     {
         public static void p_Move_c(InPacket lea, Client c)
         {
-            int CharacterID = lea.ReadInt();
+            if (c == null || c.Character == null)
+                return;
+
+            lea.ReadInt(); // CharacterID
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             int Speed = lea.ReadInt(); // start = 00 00 40 40 , end = 00 00 00 00
             int MoveDirection = lea.ReadByte(); // right = 01 , left = FF
 
-            if (c != null && Speed == 0)
+            if (Speed == 0)
             {
-                if (c.Character != null)
-                {
-                    c.Character.PlayerX = ((short)PositionX);
-                    c.Character.PlayerY = ((short)PositionY);
-                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
-                }
+                c.Character.PlayerX = ((short)PositionX);
+                c.Character.PlayerY = ((short)PositionY);
+                //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
             }
 
             //Console.WriteLine("Player {0} Move To {1} X:{2}, Y:{3}", Speed == 0 ? "End" : "Start", MoveDirection == 1 ? "Right" : "Left", PositionX, PositionY);
@@ -35,41 +29,33 @@ namespace Server.Handler
 
         public static void p_Jump_c(InPacket lea, Client c)
         {
+            if (c == null || c.Character == null)
+                return;
+
             lea.ReadInt();
             lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
 
-
-            if (c != null)
-            {
-                if (c.Character != null)
-                {
-                    c.Character.PlayerX = ((short)PositionX);
-                    c.Character.PlayerY = ((short)PositionY);
-                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
-                }
-            }
+            c.Character.PlayerX = ((short)PositionX);
+            c.Character.PlayerY = ((short)PositionY);
+            //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
         public static void p_Speed_c(InPacket lea, Client c)
         {
+            if (c == null || c.Character == null)
+                return;
+
             lea.ReadInt();
             lea.ReadInt();
             lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
 
-
-            if (c != null)
-            {
-                if (c.Character != null)
-                {
-                    c.Character.PlayerX = ((short)PositionX);
-                    c.Character.PlayerY = ((short)PositionY);
-                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
-                }
-            }
+            c.Character.PlayerX = ((short)PositionX);
+            c.Character.PlayerY = ((short)PositionY);
+            //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
         public static void p_Damage_c(InPacket lea, Client c)
@@ -89,21 +75,18 @@ namespace Server.Handler
             //chr.Exp -= (int)(chr.Exp * 0.2);
         }
 
-        public static void p_Move(InPacket lea, Client c)
+        public static void p_Move_c_2(InPacket lea, Client c)
         {
-            int CharacterID = lea.ReadInt();
-            float posX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
-            float posY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
+            if (c == null || c.Character == null)
+                return;
 
-            if (c != null)
-            {
-                if (c.Character != null)
-                {
-                    c.Character.PlayerX = ((short)posX);
-                    c.Character.PlayerY = ((short)posY);
-                    //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
-                }
-            }
+            lea.ReadInt(); // ChararcterID
+            float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
+            float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
+
+            c.Character.PlayerX = ((short)PositionX);
+            c.Character.PlayerY = ((short)PositionY);
+            //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
         public static void Pet_Move_C(InPacket lea, Client c)

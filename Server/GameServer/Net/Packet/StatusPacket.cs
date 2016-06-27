@@ -24,7 +24,7 @@ namespace Server.Packet
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLevel);
-                plew.WriteByte(0xFF);
+                plew.WriteByte(chr.Guild);
                 plew.WriteByte(0);
                 plew.WriteShort(chr.MaxHp);
                 plew.WriteShort(chr.Hp);
@@ -34,7 +34,7 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 plew.WriteInt(chr.Exp);
                 plew.WriteInt(0);
-                plew.WriteShort(chr.Fame);
+                plew.WriteShort(chr.Rank);
                 plew.WriteShort(chr.MaxFury); // 憤怒值(Max)
                 plew.WriteShort(chr.Fury);    // 憤怒值
                 plew.WriteByte(3);

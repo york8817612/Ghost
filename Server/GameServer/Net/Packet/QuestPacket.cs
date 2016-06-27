@@ -19,12 +19,12 @@ namespace Server.Packet
                 {
                     if (q.QuestState == 0x20)
                         continue;
-                    plew.WriteInt(0);
+                    plew.WriteInt(q.CompleteMonster);
                     plew.WriteInt(0);
                     plew.WriteInt(0);
                     plew.WriteShort(q.QuestID);
                     plew.WriteByte(1);
-                    plew.WriteByte(0);
+                    plew.WriteByte(q.QuestStage);
                     value++;
                 }
 

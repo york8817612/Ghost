@@ -1,5 +1,4 @@
-﻿using Server.Common.Constants;
-using Server.Common.Data;
+﻿using Server.Common.Data;
 using Server.Common.IO;
 using Server.Ghost;
 
@@ -20,6 +19,7 @@ namespace Server.Characters
         public byte Level { get; set; }
         public byte Class { get; set; }
         public byte ClassLevel { get; set; }
+        public byte Guild { get; set; }
         public short Hp { get; set; }
         public short MaxHp { get; set; }
         public short Mp { get; set; }
@@ -27,9 +27,8 @@ namespace Server.Characters
         public short Fury { get; set; }
         public short MaxFury { get; set; }
         public int Exp { get; set; }
-        public int Fame { get; set; }
-        public int Money { get; set; }
         public int Rank { get; set; }
+        public int Money { get; set; }
         public short MapX { get; set; }
         public short MapY { get; set; }
         public short PlayerX { get; set; }
@@ -95,6 +94,7 @@ namespace Server.Characters
             this.Level = (byte)datum.level;
             this.Class = (byte)datum.classId;
             this.ClassLevel = (byte)datum.classLv;
+            this.Guild = (byte)datum.guild;
             this.Hp = (short)datum.hp;
             this.MaxHp = (short)datum.maxHp;
             this.Mp = (short)datum.mp;
@@ -102,9 +102,8 @@ namespace Server.Characters
             this.Fury = (short)datum.fury;
             this.MaxFury = (short)datum.maxFury;
             this.Exp = datum.exp;
-            this.Fame = datum.fame;
-            this.Money = datum.money;
             this.Rank = datum.rank;
+            this.Money = datum.money;
             this.Str = (short)datum.c_str;
             this.Dex = (short)datum.c_dex;
             this.Vit = (short)datum.c_vit;
@@ -151,6 +150,7 @@ namespace Server.Characters
             datum.level = this.Level;
             datum.classId = this.Class;
             datum.classLv = this.ClassLevel;
+            datum.guild = this.Guild;
             datum.hp = this.Hp;
             datum.maxHp = this.MaxHp;
             datum.mp = this.Mp;
@@ -158,9 +158,8 @@ namespace Server.Characters
             datum.fury = this.Fury;
             datum.maxFury = this.MaxFury;
             datum.exp = this.Exp;
-            datum.fame = this.Fame;
-            datum.money = this.Money;
             datum.rank = this.Rank;
+            datum.money = this.Money;
             datum.c_str = this.Str;
             datum.c_dex = this.Dex;
             datum.c_vit = this.Vit;

@@ -121,7 +121,7 @@ namespace Server.Common.Net
         PSHOP_INFO_REQ = 0xD3,
         PSHOP_BUYACK_REQ = 0xD5,
         //
-        P_MOVE = 0xDD,
+        P_MOVE_C_2 = 0xDD,
         //
         FISH_REQ = 0xE0,
         //

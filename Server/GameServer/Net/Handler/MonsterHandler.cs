@@ -1,5 +1,4 @@
 ﻿using Server.Common.Constants;
-using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Utilities;
 using Server.Ghost;
@@ -23,8 +22,8 @@ namespace Server.Handler
             short HitY = lea.ReadShort();
             short SkillID = lea.ReadShort();
             var chr = gc.Character;
-            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            Monster Monster = map.getMonsterByOriginalID(OriginalID);
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            Monster Monster = Map.getMonsterByOriginalID(OriginalID);
             if (Monster == null)
                 return;
             Monster.HP -= Damage;
@@ -37,7 +36,7 @@ namespace Server.Handler
                         Monster.Effect = 5;
                     break;
                 default:
-                    Log.Inform("[攻擊怪物] SkillID = {0}", SkillID);
+                    //Log.Inform("[Attack Monster] SkillID = {0}", SkillID);
                     break;
             }
             if (Monster.HP <= 0)
@@ -116,12 +115,12 @@ namespace Server.Handler
                 {
                     Monster.Drops[i].PositionX = Monster.PositionX;
                     Monster.Drops[i].PositionY = Monster.PositionY - 50;
-                    Item it = new Item(Monster.Drops[i].ItemID, 0x63, 0x63, Monster.Drops[i].Quantity);
-                    Monster.Drops[i].ID = map.ObjectID;
-                    map.CharacterItem.Add(map.ObjectID, it);
-                    map.ObjectID++;
+                    //Item it = new Item(Monster.Drops[i].ItemID, 0x63, 0x63, Monster.Drops[i].Quantity);
+                    Monster.Drops[i].ID = Map.ObjectID;
+                    Map.Item.Add(Map.ObjectID, new Drop(Map.ObjectID, Monster.Drops[i].ItemID, Monster.Drops[i].Quantity));
+                    Map.ObjectID++;
                 }
-                foreach (Character All in map.Characters)
+                foreach (Character All in Map.Characters)
                 {
                     MapPacket.MonsterDrop(All.Client, Monster);
                 }
@@ -135,7 +134,7 @@ namespace Server.Handler
                 else if (chr.PlayerX > HitX && Monster.Direction == 0xFF)
                     Monster.Direction = 1;
             }
-            foreach (Character All in map.Characters)
+            foreach (Character All in Map.Characters)
                 MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, Damage, HitX, HitY);
         }
     }

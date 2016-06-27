@@ -30,9 +30,9 @@ namespace Server.Handler
                 Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
                 foreach (Character All in Map.Characters)
                 {
-                    InventoryPacket.charDropItem(All.Client, Map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
+                    InventoryPacket.CharDropItem(All.Client, Map.ObjectID, Source.ItemID, chr.PlayerX, (short)(chr.PlayerY - 50), Quantity == 0 ? 1 : Quantity);
                 }
-                Map.CharacterItem.Add(Map.ObjectID, Source);
+                Map.Item.Add(Map.ObjectID, new Drop(Map.ObjectID, Source.ItemID, Quantity == 0 ? (short)1 : (short)Quantity));
                 Map.ObjectID++;
                 chr.Items.Remove(SourceType, SourceSlot, Quantity == 0 ? 1 : Quantity);
             }
@@ -290,12 +290,12 @@ namespace Server.Handler
             int ItemID = lea.ReadInt();
             lea.ReadInt();
             var chr = gc.Character;
-            Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
 
             // 撿取靈魂
             if (ItemID >= 9900001 && ItemID <= 9900004)
             {
-                if (map.getDropByOriginalID(OriginalID) == null)
+                if (Map.getDropByOriginalID(OriginalID) == null)
                     return;
 
                 switch (ItemID)
@@ -325,9 +325,9 @@ namespace Server.Handler
                         break;
                 }
                 StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-                foreach (Character All in map.Characters)
+                foreach (Character All in Map.Characters)
                 {
-                    InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+                    InventoryPacket.ClearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
                 }
                 return;
             }
@@ -335,18 +335,18 @@ namespace Server.Handler
             // 撿取錢
             if (ItemID >= 9800001 && ItemID <= 9800005)
             {
-                if (map.getDropByOriginalID(OriginalID) == null)
+                if (Map.getDropByOriginalID(OriginalID) == null)
                     return;
-                chr.Money += map.getDropByOriginalID(OriginalID).Quantity;
-                InventoryPacket.getInvenMoney(gc, chr.Money, map.getDropByOriginalID(OriginalID).Quantity);
-                foreach (Character All in map.Characters)
+                chr.Money += Map.getDropByOriginalID(OriginalID).Quantity;
+                InventoryPacket.getInvenMoney(gc, chr.Money, Map.getDropByOriginalID(OriginalID).Quantity);
+                foreach (Character All in Map.Characters)
                 {
-                    InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+                    InventoryPacket.ClearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
                 }
                 return;
             }
 
-            if (!map.CharacterItem.ContainsKey(OriginalID))
+            if (!Map.Item.ContainsKey(OriginalID))
                 return;
 
             byte Type = InventoryType.getItemType(ItemID);
@@ -363,22 +363,22 @@ namespace Server.Handler
             if (((Type == (byte)InventoryType.ItemType.Spend3)
                 || (Type == (byte)InventoryType.ItemType.Other4))
                 && (finditem != null)
-                && (finditem.Quantity + map.getDropByOriginalID(OriginalID).Quantity) <= 100)
+                && (finditem.Quantity + Map.getDropByOriginalID(OriginalID).Quantity) <= 100)
             {
                 // 合併消費物品跟其他物品
-                chr.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity += map.getDropByOriginalID(OriginalID).Quantity;
+                chr.Items[(InventoryType.ItemType)finditem.Type, finditem.Slot].Quantity += Map.getDropByOriginalID(OriginalID).Quantity;
             }
             else
             {
                 byte Slot = gc.Character.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
-                Item oItem = new Item(ItemID, Type, Slot, map.getDropByOriginalID(OriginalID).Quantity);
+                Item oItem = new Item(ItemID, Type, Slot, Map.getDropByOriginalID(OriginalID).Quantity);
                 chr.Items.Add(oItem);
             }
-            foreach (Character All in map.Characters)
+            foreach (Character All in Map.Characters)
             {
-                InventoryPacket.clearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
+                InventoryPacket.ClearDropItem(All.Client, chr.CharacterID, OriginalID, ItemID);
             }
-            map.CharacterItem.Remove(OriginalID);
+            Map.Item.Remove(OriginalID);
             UpdateInventory(gc, Type);
         }
 

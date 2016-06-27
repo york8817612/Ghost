@@ -24,6 +24,7 @@ namespace Server.Ghost.Characters
         public byte Level { get; set; }
         public byte Class { get; set; }
         public byte ClassLevel { get; set; }
+        public byte Guild { get; set; }
         public short Hp { get; set; }
         public short MaxHp { get; set; }
         public short Mp { get; set; }
@@ -31,9 +32,8 @@ namespace Server.Ghost.Characters
         public short Fury { get; set; }
         public short MaxFury { get; set; }
         public int Exp { get; set; }
-        public int Fame { get; set; }
-        public int Money { get; set; }
         public int Rank { get; set; }
+        public int Money { get; set; }
         public short MapX { get; set; }
         public short MapY { get; set; }
         public short PlayerX { get; set; }
@@ -61,6 +61,7 @@ namespace Server.Ghost.Characters
         public byte Position { get; set; }
 
         public bool IsFuring { get; set; }
+        public byte FuringType { get; set; }
         public bool IsAlive { get; set; }
         public bool IsFishing { get; set; }
 
@@ -82,7 +83,7 @@ namespace Server.Ghost.Characters
         public CharacterUseSlot UseSlot { get; private set; }
         public CharacterParty Party { get; set; }
 
-        public Character Trader { get; set;}
+        public Character Trader { get; set; }
         public Character Competitor { get; set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
@@ -125,6 +126,7 @@ namespace Server.Ghost.Characters
             this.Level = (byte)datum.level;
             this.Class = (byte)datum.classId;
             this.ClassLevel = (byte)datum.classLv;
+            this.Guild = (byte)datum.guild;
             this.Hp = (short)datum.hp;
             this.MaxHp = (short)datum.maxHp;
             this.Mp = (short)datum.mp;
@@ -132,9 +134,8 @@ namespace Server.Ghost.Characters
             this.Fury = (short)datum.fury;
             this.MaxFury = (short)datum.maxFury;
             this.Exp = datum.exp;
-            this.Fame = datum.fame;
-            this.Money = datum.money;
             this.Rank = datum.rank;
+            this.Money = datum.money;
             this.Str = (short)datum.c_str;
             this.Dex = (short)datum.c_dex;
             this.Vit = (short)datum.c_vit;
@@ -174,13 +175,6 @@ namespace Server.Ghost.Characters
         {
             dynamic datum = new Datum("Characters");
 
-            if (this.IsFuring)
-            {
-                this.UpgradeAttack -= this.FuryAttack;
-                this.UpgradeMagic -= this.FuryMagic;
-                this.UpgradeDefense -= this.FuryDefense;
-            }
-
             datum.accountId = this.AccountID;
             datum.worldId = this.WorldID;
             datum.name = this.Name;
@@ -191,6 +185,7 @@ namespace Server.Ghost.Characters
             datum.level = this.Level;
             datum.classId = this.Class;
             datum.classLv = this.ClassLevel;
+            datum.guild = this.Guild;
             datum.hp = this.Hp;
             datum.maxHp = this.MaxHp;
             datum.mp = this.Mp;
@@ -198,9 +193,8 @@ namespace Server.Ghost.Characters
             datum.fury = this.Fury;
             datum.maxFury = this.MaxFury;
             datum.exp = this.Exp;
-            datum.fame = this.Fame;
-            datum.money = this.Money;
             datum.rank = this.Rank;
+            datum.money = this.Money;
             datum.c_str = this.Str;
             datum.c_dex = this.Dex;
             datum.c_vit = this.Vit;
@@ -248,12 +242,6 @@ namespace Server.Ghost.Characters
             this.Keymap.Save();
             this.UseSlot.Save();
 
-            Map map = MapFactory.GetMap(this.MapX, this.MapY);
-            MapFactory.AllCharacters.Remove(this);
-            map.Characters.Remove(this);
-            foreach (Character All in map.Characters)
-                MapPacket.removeUser(All.Client, this);
-
             Log.Inform("角色'{0}'的資料已儲存至資料庫。", this.Name);
         }
 
@@ -286,10 +274,7 @@ namespace Server.Ghost.Characters
             else
                 this.AbilityBonus += 8;
 
-            if (this.Level % 5 != 0)
-                this.SkillBonus += 2;
-            else
-                this.SkillBonus += 4;
+            this.SkillBonus += 2;
 
             Map map = MapFactory.GetMap(this.MapX, this.MapY);
             foreach (Character All in map.Characters)

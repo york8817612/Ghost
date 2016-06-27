@@ -124,64 +124,52 @@ namespace Server.Ghost.Characters
             if (Item == null)
                 return 0;
 
-            double Spirit = 0;
-
             switch (Item.ItemID)
             {
                 case 8510011:
-                    Spirit = (double)Item.Spirit / 100 * 100;
-                    if (Spirit > 100)
+                    if (Item.Spirit > 100)
                         return 100;
                     break;
                 case 8510021:
-                    Spirit = (double)Item.Spirit / 130 * 100;
-                    if (Spirit > 130)
-                        return 100;
+                    if (Item.Spirit > 130)
+                        return 130;
                     break;
                 case 8510031:
-                    Spirit = (double)Item.Spirit / 169 * 100;
-                    if (Spirit > 169)
-                        return 100;
+                    if (Item.Spirit > 169)
+                        return 169;
                     break;
                 case 8510041:
-                    Spirit = (double)Item.Spirit / 220 * 100;
-                    if (Spirit > 220)
-                        return 100;
+                    if (Item.Spirit > 220)
+                        return 220;
                     break;
                 case 8510051:
-                    Spirit = (double)Item.Spirit / 286 * 100;
-                    if (Spirit > 286)
-                        return 100;
+                    if (Item.Spirit > 286)
+                        return 286;
                     break;
                 case 8510061:
-                    Spirit = (double)Item.Spirit / 371 * 100;
-                    if (Spirit > 371)
-                        return 100;
+                    if (Item.Spirit > 371)
+                        return 371;
                     break;
                 case 8510071:
-                    Spirit = (double)Item.Spirit / 483 * 100;
-                    if (Spirit > 483)
-                        return 100;
+                    if (Item.Spirit > 483)
+                        return 483;
                     break;
                 case 8510081:
-                    Spirit = (double)Item.Spirit / 627 * 100;
-                    if (Spirit > 627)
-                        return 100;
+                    if (Item.Spirit > 627)
+                        return 627;
                     break;
                 case 8510091:
-                    Spirit = (double)Item.Spirit / 816 * 100;
-                    if (Spirit > 816)
-                        return 100;
+                    if (Item.Spirit > 816)
+                        return 816;
                     break;
                 case 8510101:
-                    Spirit = (double)Item.Spirit / 1060 * 100;
-                    if (Spirit > 1060)
-                        return 100;
+                    if (Item.Spirit > 1060)
+                        return 1060;
                     break;
                 default:
                     return 0;
             }
-            return (int)Spirit;
+            return 0;
         }
 
         public byte IsLocked(InventoryType.ItemType type, byte slot)

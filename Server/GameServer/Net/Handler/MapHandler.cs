@@ -14,17 +14,17 @@ namespace Server.Handler
     {
         public static void WarpToMap_Req(InPacket lea, Client gc)
         {
-            var chr = gc.Character;
-            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            Map.Characters.Remove(chr);
-            foreach (Character All in Map.Characters)
-                MapPacket.removeUser(All.Client, chr);
-
             int CharacterID = lea.ReadInt();
             short MapX = lea.ReadShort();
             short MapY = lea.ReadShort();
             short PositionX = lea.ReadShort();
             short PositionY = lea.ReadShort();
+            var chr = gc.Character;
+
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+            Map.Characters.Remove(chr);
+            foreach (Character All in Map.Characters)
+                MapPacket.removeUser(All.Client, chr);
 
             if (MapX == 77 && MapY == 1)
             {
@@ -108,15 +108,15 @@ namespace Server.Handler
             //{
                 Map.ControlMonster(gc, j);
             //}
-
-            //StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
-            //InventoryPacket.getAvatar(gc, chr);
+            
+            if (chr.IsFuring == true)
+                StatusPacket.Fury(gc, chr.FuringType);
         }
 
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)
         {
             var chr = gc.Character;
-            int MapX = (chr.IsAlive == true ? lea.ReadShort() : lea.ReadInt());
+            short MapX = lea.ReadShort();
             short MapY = lea.ReadShort();
             short PositionX = lea.ReadShort();
             short PositionY = lea.ReadShort();
@@ -125,8 +125,72 @@ namespace Server.Handler
             {
                 StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                 chr.IsAlive = true;
+                switch (MapX)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 22:
+                    case 23:
+                        MapX = 1;
+                        MapY = 1;
+                        break;
+                    case 7:
+                    case 8:
+                    case 9:
+                        MapX = 16;
+                        MapY = 1;
+                        break;
+                    case 10:
+                    case 11:
+                    case 20:
+                        MapX = 10;
+                        MapY = 1;
+                        break;
+                    case 12:
+                    case 13:
+                        MapX = 12;
+                        MapY = 1;
+                        break;
+                    case 14:
+                    case 15:
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 21:
+                        MapX = 15;
+                        MapY = 1;
+                        break;
+                    case 16:
+                        MapX = 16;
+                        MapY = 1;
+                        break;
+                    case 24:
+                    case 25:
+                    case 26:
+                    case 31:
+                    case 32:
+                    case 33:
+                        MapX = 25;
+                        MapY = 1;
+                        break;
+                    case 27:
+                    case 28:
+                        MapX = 27;
+                        MapY = 1;
+                        break;
+                    default:
+                        MapX = 1;
+                        MapY = 1;
+                        break;
+                }
+                PositionX = 0;
+                PositionY = 0;
             }
-            MapPacket.warpToMapAuth(gc, IsAvailableMap, (short)MapX, MapY, PositionX, PositionY);
+            MapPacket.warpToMapAuth(gc, IsAvailableMap, MapX, MapY, PositionX, PositionY);
         }
     }
 }

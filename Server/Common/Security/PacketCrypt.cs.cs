@@ -106,7 +106,7 @@ namespace Server.Common.Security
                     v10 *= 2171;
                 }
             }
-            Log.Hex("Received packet from : ", result);
+            //Log.Hex("Received packet from : ", result);
             result = Decrypt2(result, len);
             return result;
         }

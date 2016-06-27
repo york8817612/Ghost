@@ -49,7 +49,7 @@ namespace Server.Packet
                 plew.WriteByte(chr.Level);
                 plew.WriteByte(chr.Class);
                 plew.WriteByte(chr.ClassLevel);
-                plew.WriteByte(0xFF);
+                plew.WriteByte(chr.Guild);
                 plew.WriteByte(0); // 光圈
                 plew.WriteByte(0); // 透明
                 plew.WriteByte(0); // 憤怒
@@ -153,7 +153,7 @@ namespace Server.Packet
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Level : 0); // 等級
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Class : 0); // 職業
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].ClassLevel : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? -1 : 0);
+                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Guild : 0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteByte(i < map.GetMapCharactersTotal() ? (chr[i].Shop != null ? 1 : 0) : 0);

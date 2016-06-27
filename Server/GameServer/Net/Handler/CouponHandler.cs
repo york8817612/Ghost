@@ -20,7 +20,7 @@ namespace Server.Handler
                     byte Type = InventoryType.getItemType(datum.itemID);
                     chr.Items.Add(new Item(datum.itemID, InventoryType.getItemType(datum.itemID), chr.Items.GetNextFreeSlot((InventoryType.ItemType)Type), (short)datum.quantity));
                     InventoryHandler.UpdateInventory(gc, Type);
-                    InventoryPacket.clearDropItem(gc, chr.CharacterID, -1, datum.itemID);
+                    InventoryPacket.ClearDropItem(gc, chr.CharacterID, -1, datum.itemID);
                     datum.valid = 0;
                     datum.Update("code = '{0}'", Code);
                     break;

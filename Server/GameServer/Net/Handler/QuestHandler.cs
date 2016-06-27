@@ -15,6 +15,10 @@ namespace Server.Handler
             int QuestID = lea.ReadShort();
             byte Slot = chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4);
             Quest Quest = new Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             Quest.QuestState = 0x31;
             chr.Quests.Add(Quest);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
@@ -86,13 +90,25 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8990018, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
-                case 60: // [選擇派系]
+                case 60: // [選擇派系](正派)
                     chr.Items.Add(new Item(8990019, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
-                case 64: // 
+                case 61:
+                case 62:
+                case 63:
+                    chr.Items.Add(new Item(8510051, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 64: // [選擇派系](邪派)
                     chr.Items.Add(new Item(8990020, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 65:
+                case 66:
+                case 67:
+                    chr.Items.Add(new Item(8510051, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
                     break;
                 case 77: // [兩個金塊]
                     chr.Items.Add(new Item(8990023, 4, Slot));
@@ -101,6 +117,13 @@ namespace Server.Handler
                 case 80: // [薇薇安的腰]
                     chr.Items.Add(new Item(8990026, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 379:
+                case 380:
+                case 625:
+                case 629:
+                    chr.Items.Add(new Item(8510051, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
                     break;
                 // 怪物 x 1
                 case 612:// [神射手轉職]
@@ -171,6 +194,10 @@ namespace Server.Handler
             int QuestID = lea.ReadShort();
             int MonsterID = lea.ReadInt();
             Quest Quest = chr.Quests.Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             if (Quest.RequireMonster > 0)
                 Quest.CompleteMonster++;
             QuestPacket.UpdateQuest(gc, Quest.CompleteMonster, QuestID, 1, Quest.QuestStage);
@@ -181,6 +208,10 @@ namespace Server.Handler
             var chr = gc.Character;
             int QuestID = lea.ReadShort();
             Quest Quest = chr.Quests.Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             Quest.QuestState = 0x32;
             QuestCompleteHandler(gc, Quest.QuestID);
             chr.Quests.Save();
@@ -194,6 +225,10 @@ namespace Server.Handler
             int ItemID = lea.ReadInt();
             int QuestID = lea.ReadShort();
             Quest Quest = chr.Quests.Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             Quest.QuestState = 0x32;
             QuestCompleteHandler(gc, Quest.QuestID);
             chr.Quests.Save();
@@ -207,6 +242,10 @@ namespace Server.Handler
             int QuestID = lea.ReadShort();
             int Stage = lea.ReadShort();
             Quest Quest = chr.Quests.Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             Quest.QuestStage = (byte)Stage;
             if (Quest.QuestState == 0x31)
                 QuestPacket.UpdateQuest(gc, Quest.CompleteMonster, QuestID, 1, (byte)Stage);
@@ -217,6 +256,10 @@ namespace Server.Handler
             var chr = gc.Character;
             int QuestID = lea.ReadShort();
             Quest Quest = chr.Quests.Quest(QuestID);
+
+            if (Quest == null)
+                return;
+
             Quest.QuestState = 0x20;
             chr.Quests.Remove(Quest);
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
@@ -250,7 +293,7 @@ namespace Server.Handler
                 case 3: // [委託送書]
                     chr.Money += 300;
                     chr.Exp += 30;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 300);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
@@ -258,7 +301,7 @@ namespace Server.Handler
                 case 4: // [委託送書2]
                     chr.Money += 400;
                     chr.Exp += 30;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 400);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
@@ -266,7 +309,7 @@ namespace Server.Handler
                 case 5: // [農夫的請託]
                     chr.Money += 600;
                     chr.Exp += 50;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 600);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
@@ -274,7 +317,7 @@ namespace Server.Handler
                 case 6: // [金係係武器店的工作服]
                     chr.Money += 1200;
                     chr.Exp += 200;
-                    chr.Fame += 5;
+                    chr.Rank += 5;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 1200);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 5);
@@ -290,7 +333,7 @@ namespace Server.Handler
                     break;
                 case 11: // [守衛的慰勞品]
                     chr.Exp += 100;
-                    chr.Fame += 2;
+                    chr.Rank += 2;
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 2);
                     break;
@@ -303,7 +346,7 @@ namespace Server.Handler
                 case 52: // [送通知單]
                     chr.Money += 500;
                     chr.Exp += 40;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 500);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
@@ -311,7 +354,7 @@ namespace Server.Handler
                 case 53: // [守衛的請託]
                     chr.Money += 500;
                     chr.Exp += 40;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 500);
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
@@ -340,15 +383,49 @@ namespace Server.Handler
                     InventoryPacket.getInvenMoney(gc, chr.Money, 60000);
                     StatusPacket.UpdateExp(gc);
                     break;
+                case 60: // [選擇派系](正派)
+                    chr.Guild = 0;
+                    GamePacket.Message(gc, 14);
+                    StatusPacket.getStatusInfo(gc);
+                    break;
+                case 61: // [正派 武士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(21101, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 62: // [正派 刺客 魂魔遁甲]
+                    chr.Skills.Add(new Skill(21201, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 63: // [正派 道士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(21301, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 64: // [選擇派系](邪派)
+                    chr.Guild = 1;
+                    GamePacket.Message(gc, 15);
+                    StatusPacket.getStatusInfo(gc);
+                    break;
+                case 65: // [邪派 武士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(22101, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 66: // [邪派 刺客 魂魔遁甲]
+                    chr.Skills.Add(new Skill(22201, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 67: // [邪派 道士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(22301, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
                 case 114: // [新外型]
                     chr.Money += 10000;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 10000);
                     StatusPacket.UpdateFame(gc, 1);
                     break;
                 case 115: // [老父親的白內障]
                     chr.Exp += 1000;
-                    chr.Fame += 2;
+                    chr.Rank += 2;
                     chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
                     chr.Items.Add(new Item(8850021, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 3));
                     StatusPacket.UpdateExp(gc);
@@ -357,14 +434,14 @@ namespace Server.Handler
                     break;
                 case 116: // [幫忙家務事1]
                     chr.Exp += 1500;
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 10));
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
                     InventoryHandler.UpdateInventory(gc, 3);
                     break;
                 case 128: // [職務代理]
-                    chr.Fame += 1;
+                    chr.Rank += 1;
                     chr.Items.Add(new Item(8810031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
                     chr.Items.Add(new Item(8310241, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
                     StatusPacket.UpdateFame(gc, 1);
@@ -374,6 +451,22 @@ namespace Server.Handler
                 case 129: // [有去無回]
                     chr.Money += 50000;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 50000);
+                    break;
+                case 379: // [正派 力士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(21401, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 380: // [邪派 力士 魂魔遁甲]
+                    chr.Skills.Add(new Skill(22401, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 625: // [正派 射手 魂魔遁甲]
+                    chr.Skills.Add(new Skill(21501, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 629: // [邪派 射手 魂魔遁甲]
+                    chr.Skills.Add(new Skill(22501, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
                     break;
                 case 675: // [ 往黃泉之路1 ]
                     chr.Exp += 1500;

@@ -1,4 +1,5 @@
-﻿using Server.Ghost.Characters;
+﻿using Server.Common.Threading;
+using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
@@ -19,11 +20,10 @@ namespace Server.Ghost
 
         public List<Character> Characters { get; private set; }
         public List<Monster> Monster { get; set; }
-        public Dictionary<int, Item> CharacterItem { get; set; }
-        public List<Item> MonsterDrop { get; set; }
+        public Dictionary<int, Drop> Item { get; set; }
 
-        private System.Timers.Timer tmr = new System.Timers.Timer(1000);
-        private System.Timers.Timer tmr2 = new System.Timers.Timer(10000);
+        //private System.Timers.Timer tmr = new System.Timers.Timer(1000);
+        //private System.Timers.Timer tmr2 = new System.Timers.Timer(10000);
 
         public Map(short MapX, short MapY)
         {
@@ -31,8 +31,7 @@ namespace Server.Ghost
             this.MapY = MapY;
             Characters = new List<Character>();
             Monster = new List<Monster>();
-            CharacterItem = new Dictionary<int, Item>();
-            MonsterDrop = new List<Item>();
+            Item = new Dictionary<int, Drop>();
         }
 
         public void SetMapHeightWidth(int Height, int Width)
@@ -83,9 +82,9 @@ namespace Server.Ghost
             return null;
         }
 
-        public Item getDropByOriginalID(int OriginalID)
+        public Drop getDropByOriginalID(int OriginalID)
         {
-            return this.CharacterItem[OriginalID];
+            return this.Item[OriginalID];
         }
 
         public void ControlMonster(Client gc, int j)
@@ -97,7 +96,7 @@ namespace Server.Ghost
 
             this.IsControling = true;
 
-            tmr.Elapsed += delegate
+            Delay tmr = new Delay(1000, true, () =>
             {
                 //if (this.GetMapCharactersTotal() < 1)
                 //{
@@ -135,10 +134,10 @@ namespace Server.Ghost
                             MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
                     }
                 }
-            };
-            tmr.Start();
+            });
+            tmr.Execute();
 
-            tmr2.Elapsed += delegate
+            Delay tmr2 = new Delay(10000, true, () =>
             {
                 //if (this.GetMapCharactersTotal() < 1)
                 //{
@@ -164,8 +163,8 @@ namespace Server.Ghost
                         }
                     }
                 }
-            };
-            tmr2.Start();
+            });
+            tmr2.Execute();
         }
 
         public Monster UpdatePosition(Monster monster, int Dest)

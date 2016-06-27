@@ -1,5 +1,7 @@
 ﻿using Server.Common.Constants;
 using Server.Common.IO.Packet;
+using Server.Common.Threading;
+using Server.Ghost;
 using Server.Net;
 using Server.Packet;
 
@@ -62,6 +64,10 @@ namespace Server.Handler
         {
             int stat = lea.ReadInt();
             var chr = gc.Character;
+
+            if (chr.AbilityBonus < 1)
+                return;
+
             switch (stat)
             {
                 case 1: // 力量
@@ -120,36 +126,153 @@ namespace Server.Handler
             if (Type == 0 || chr.IsFuring == true || chr.Fury != chr.MaxFury)
                 return;
 
-            short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
-            short UpgradeMagic = (short)(chr.MaxMagic * 0.2);
-            short UpgradeDefense = (short)(chr.Defense * 0.2);
-
-            chr.IsFuring = true;
-            chr.FuryAttack = UpgradeAttack;
-            chr.FuryMagic = UpgradeMagic;
-            chr.FuryDefense = UpgradeDefense;
-
-            chr.UpgradeAttack += UpgradeAttack;
-            chr.UpgradeMagic += UpgradeMagic;
-            chr.UpgradeDefense += UpgradeDefense;
-
-            StatusPacket.getStatusInfo(c);
-            StatusPacket.Fury(c, Type);
-
-            chr.Fury = 0;
-
-            System.Timers.Timer tmr = new System.Timers.Timer(30000);
-            tmr.Elapsed += delegate
+            if (Type == 1)
             {
-                tmr.Stop();
-                chr.IsFuring = false;
-                chr.UpgradeAttack -= UpgradeAttack;
-                chr.UpgradeMagic -= UpgradeMagic;
-                chr.UpgradeDefense -= UpgradeDefense;
+                short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
+                short UpgradeMagic = (short)(chr.MaxMagic * 0.2);
+                short UpgradeDefense = (short)(chr.Defense * 0.2);
+
+                chr.IsFuring = true;
+                chr.FuryAttack = UpgradeAttack;
+                chr.FuryMagic = UpgradeMagic;
+                chr.FuryDefense = UpgradeDefense;
+
+                chr.MaxAttack += UpgradeAttack;
+                chr.Attack += UpgradeAttack;
+                chr.MaxMagic += UpgradeMagic;
+                chr.Magic += UpgradeMagic;
+                chr.Defense += UpgradeDefense;
+
                 StatusPacket.getStatusInfo(c);
-                StatusPacket.Fury(c, 0);
-            };
-            tmr.Start();
+                StatusPacket.Fury(c, Type);
+
+                chr.Fury = 0;
+                chr.FuringType = 1;
+
+                Delay tmr = null;
+                tmr = new Delay(30000, false, () =>
+                {
+                    chr.IsFuring = false;
+                    chr.MaxAttack -= UpgradeAttack;
+                    chr.Attack -= UpgradeAttack;
+                    chr.MaxMagic -= UpgradeMagic;
+                    chr.Magic -= UpgradeMagic;
+                    chr.Defense -= UpgradeDefense;
+                    StatusPacket.getStatusInfo(c);
+                    StatusPacket.Fury(c, 0);
+                    tmr.Cancel();
+                });
+                tmr.Execute();
+            }
+            else if (Type == 2)
+            {
+                Skill Skill = chr.Skills[2, 0];
+
+                if (Skill == null)
+                    return;
+
+                int time = 1;
+
+                switch (Skill.SkillLevel)
+                {
+                    case 1:
+                        time = 30000;
+                        break;
+                    case 2:
+                        time = 32000;
+                        break;
+                    case 3:
+                        time = 34000;
+                        break;
+                    case 4:
+                        time = 36000;
+                        break;
+                    case 5:
+                        time = 38000;
+                        break;
+                    case 6:
+                        time = 40000;
+                        break;
+                    case 7:
+                        time = 42000;
+                        break;
+                    case 8:
+                        time = 44000;
+                        break;
+                    case 9:
+                        time = 46000;
+                        break;
+                    case 10:
+                        time = 48000;
+                        break;
+                    case 11:
+                        time = 50000;
+                        break;
+                    case 12:
+                        time = 52000;
+                        break;
+                    case 13:
+                        time = 53000;
+                        break;
+                    case 14:
+                        time = 54000;
+                        break;
+                    case 15:
+                        time = 55000;
+                        break;
+                    case 16:
+                        time = 56000;
+                        break;
+                    case 17:
+                        time = 57000;
+                        break;
+                    case 18:
+                        time = 58000;
+                        break;
+                    case 19:
+                        time = 59000;
+                        break;
+                    case 20:
+                        time = 60000;
+                        break;
+                }
+
+                short UpgradeAttack = (short)(chr.MaxAttack * 0.2 * Skill.SkillLevel);
+                short UpgradeMagic = (short)(chr.MaxMagic * 0.2 * Skill.SkillLevel);
+                short UpgradeDefense = (short)(chr.Defense * 0.2 * Skill.SkillLevel);
+
+                chr.IsFuring = true;
+                chr.FuryAttack = UpgradeAttack;
+                chr.FuryMagic = UpgradeMagic;
+                chr.FuryDefense = UpgradeDefense;
+
+                chr.MaxAttack += UpgradeAttack;
+                chr.Attack += UpgradeAttack;
+                chr.MaxMagic += UpgradeMagic;
+                chr.Magic += UpgradeMagic;
+                chr.Defense += UpgradeDefense;
+
+                StatusPacket.getStatusInfo(c);
+                StatusPacket.Fury(c, Type);
+
+                chr.Fury = 0;
+                chr.FuringType = 2;
+
+                Delay tmr = null;
+                tmr = new Delay(time, false, () =>
+                {
+                    chr.IsFuring = false;
+                    chr.MaxAttack -= UpgradeAttack;
+                    chr.Attack -= UpgradeAttack;
+                    chr.MaxMagic -= UpgradeMagic;
+                    chr.Magic -= UpgradeMagic;
+                    chr.Defense -= UpgradeDefense;
+                    StatusPacket.getStatusInfo(c);
+                    StatusPacket.Fury(c, 0);
+                    tmr.Cancel();
+                });
+                tmr.Execute();
+            }
         }
     }
 }

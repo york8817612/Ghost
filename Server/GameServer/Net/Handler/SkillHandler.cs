@@ -1,5 +1,4 @@
-﻿using Server.Common.IO;
-using Server.Common.IO.Packet;
+﻿using Server.Common.IO.Packet;
 using Server.Common.Threading;
 using Server.Ghost;
 using Server.Net;
@@ -87,7 +86,7 @@ namespace Server.Handler
                         StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         break;
                     default:
-                        Log.Inform("[使用技能] SkillID = {0}", skill.SkillID);
+                        //Log.Inform("[Use Skill] SkillID = {0}", skill.SkillID);
                         break;
                 }
             }
@@ -99,6 +98,10 @@ namespace Server.Handler
             byte Slot = lea.ReadByte();
 
             var chr = gc.Character;
+
+            if (chr.SkillBonus < 1)
+                return;
+
             List<Skill> s = chr.Skills.getSkills();
             Skill sl = null;
             foreach (Skill skill in s)
@@ -110,17 +113,10 @@ namespace Server.Handler
                 }
             }
 
-            if (sl == null || (sl.SkillID == 1 && sl.SkillLevel + 1 > 5) || (sl.SkillID == 2 && sl.SkillLevel + 1 > 10) || (sl.SkillID == 3 && sl.SkillLevel + 1 > 20) || (sl.SkillID == 4 && sl.SkillLevel + 1 > 20))
+            if (sl == null)
                 return;
 
             chr.SkillBonus--;
-
-            if (chr.SkillBonus < 0)
-            {
-                chr.SkillBonus = 0;
-                return;
-            }
-
             sl.SkillLevel++;
 
             SkillPacket.updateSkillLevel(gc, chr.SkillBonus, Type, Slot, sl.SkillLevel);

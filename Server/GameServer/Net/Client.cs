@@ -3,8 +3,10 @@ using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Common.Security;
 using Server.Common.Utilities;
+using Server.Ghost;
 using Server.Ghost.Accounts;
 using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Packet;
 using System;
 using System.Net;
@@ -19,7 +21,6 @@ namespace Server.Net
         public Character Character { get; private set; }
         public static int i { get; private set; }
         public int CharacterID { get; private set; }
-        public string[] IP { get; private set; }
         public long SessionID { get; private set; }
         public int RetryLoginCount { get; set; }
 
@@ -31,11 +32,7 @@ namespace Server.Net
             GameServer.Clients.Add(this);
             this.CharacterID = ++i;
             this.SessionID = Randomizer.NextLong();
-            //
-            string[] IP = base.Title.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries);
-            this.IP = IP;
-            //
-            GamePacket.Game_Log_Ack(this, CharacterID, this.IP);
+            GamePacket.Game_Log_Ack(this, CharacterID);
             Log.Inform("Accepted connection from {0}.", this.Title);
         }
 
@@ -45,6 +42,21 @@ namespace Server.Net
             {
                 if (this.Character != null)
                 {
+                    if (this.Character.IsFuring)
+                    {
+                        this.Character.MaxAttack -= this.Character.FuryAttack;
+                        this.Character.Attack -= this.Character.FuryAttack;
+                        this.Character.MaxMagic -= this.Character.FuryMagic;
+                        this.Character.Magic -= this.Character.FuryMagic;
+                        this.Character.Defense -= this.Character.FuryDefense;
+                    }
+
+                    Map Map = MapFactory.GetMap(this.Character.MapX, this.Character.MapY);
+                    MapFactory.AllCharacters.Remove(this.Character);
+                    Map.Characters.Remove(this.Character);
+                    foreach (Character All in Map.Characters)
+                        MapPacket.removeUser(All.Client, this.Character);
+
                     this.Account.Save();
                     this.Character.Save();
                 }

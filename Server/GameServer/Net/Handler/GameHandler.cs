@@ -171,6 +171,20 @@ namespace Server.Handler
                         MapFactory.AllCharacters[i].Client.Dispose();
                     //GameServer.IsAlive = false;
                     break;
+                case "//選擇正派":
+                    Quest Quest = new Quest(60);
+                    Quest.QuestState = 0x31;
+                    chr.Quests.Add(Quest);
+                    QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
+                    chr.Items.Add(new Item(8990019, 4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    break;
+                case "//選擇邪派":
+                    Quest = new Quest(64);
+                    Quest.QuestState = 0x31;
+                    chr.Quests.Add(Quest);
+                    QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
+                    chr.Items.Add(new Item(8990020, 4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    break;
                 //case "//test":
                 //    PartyPacket.PartyInvite(gc);
                 //    break;

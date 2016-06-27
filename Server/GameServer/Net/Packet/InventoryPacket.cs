@@ -10,7 +10,7 @@ namespace Server.Packet
 {
     public static class InventoryPacket
     {
-        public static void clearDropItem(Client c, int cid, int oid, int iid)
+        public static void ClearDropItem(Client c, int cid, int oid, int iid)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CLEAR_DROP_ITEM))
             {
@@ -26,7 +26,7 @@ namespace Server.Packet
             }
         }
 
-        public static void charDropItem(Client c, int oid, int iid, short posX, short posY, int quantity)
+        public static void CharDropItem(Client c, int oid, int iid, short posX, short posY, int quantity)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_DROP_ITEM))
             {
