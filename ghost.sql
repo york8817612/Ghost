@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-06-25 19:18:53
+Date: 2016-06-26 20:20:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `accounts` (
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
-INSERT INTO `accounts` VALUES ('1', 'admin', 'admin', '2015-04-07 21:11:30', '0', '0', '1', '99999999', '10000', '3000');
+INSERT INTO `accounts` VALUES ('1', 'admin', 'admin', '2015-04-07 21:11:30', '0', '0', '1', '99999879', '10000', '3000');
 INSERT INTO `accounts` VALUES ('2', 'admin2', 'admin', '0001-01-01 00:00:00', '0', '0', '1', '99999999', '0', '0');
 
 -- ----------------------------
@@ -421,7 +421,7 @@ CREATE TABLE `characters` (
   `direction` int(4) NOT NULL,
   `position` int(4) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of characters
@@ -1432,13 +1432,14 @@ CREATE TABLE `items` (
   `cid` int(11) NOT NULL,
   `itemId` int(8) NOT NULL,
   `quantity` int(3) NOT NULL,
+  `spirit` int(11) NOT NULL,
   `isLocked` int(1) NOT NULL,
   `icon` int(11) NOT NULL,
   `term` int(11) NOT NULL DEFAULT '-1',
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=964 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of items
@@ -1637,7 +1638,7 @@ CREATE TABLE `pets` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pets
@@ -1656,7 +1657,7 @@ CREATE TABLE `quests` (
   `completeMonster` int(11) NOT NULL,
   `questState` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quests
@@ -1674,7 +1675,7 @@ CREATE TABLE `skills` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=348 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of skills
@@ -1693,7 +1694,7 @@ CREATE TABLE `storages` (
   `slot` int(11) NOT NULL DEFAULT '0',
   `money` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of storages
@@ -1709,7 +1710,7 @@ CREATE TABLE `useslot` (
   `type` int(3) NOT NULL,
   `slot` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=938 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1040 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of useslot
