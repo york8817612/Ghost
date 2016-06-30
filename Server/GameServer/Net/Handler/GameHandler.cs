@@ -65,6 +65,7 @@ namespace Server.Handler
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
             MapFactory.AllCharacters.Add(chr);
+            MapFactory.CharacterID++;
 
             StatusPacket.UpdateHpMp(gc, 0, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
@@ -129,6 +130,12 @@ namespace Server.Handler
                     if (cmd.Length != 3)
                         break;
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
+                    break;
+                case "//heal":
+                    chr.Hp = chr.MaxHp;
+                    chr.Mp = chr.MaxMp;
+                    chr.Fury = chr.MaxFury;
+                    StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                     break;
                 case "//warp":
                     if (cmd.Length != 2)

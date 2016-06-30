@@ -44,6 +44,7 @@ namespace Server.Handler
                 if (Monster.IsAlive == false)
                     return;
                 Monster.State = 9;
+                Monster.Effect = 0;
                 //map.Monster.Remove(Monster);
                 Monster.IsAlive = false;
                 chr.Exp += Monster.Exp;
@@ -109,7 +110,9 @@ namespace Server.Handler
                 //}
 
                 short rndMoney = (short)(Monster.Exp + Randomizer.Next(6));
-                Monster.Drops.Add(new Drop(0, InventoryType.getMoneyStyle(rndMoney), rndMoney)); // 錢
+
+                if (rndMoney != 0) // 少數怪物未寫入經驗值
+                    Monster.Drops.Add(new Drop(0, InventoryType.getMoneyStyle(rndMoney), rndMoney)); // 錢
 
                 for (int i = 0; i < Monster.Drops.Count; i++)
                 {

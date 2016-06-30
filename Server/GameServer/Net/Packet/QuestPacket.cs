@@ -17,6 +17,8 @@ namespace Server.Packet
                 int value = 0;
                 foreach (Quest q in quest)
                 {
+                    if (value >= 15)
+                        break;
                     if (q.QuestState == 0x20)
                         continue;
                     plew.WriteInt(q.CompleteMonster);

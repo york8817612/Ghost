@@ -155,6 +155,73 @@ namespace Server.Handler
             // 使用回復HP 跟 MP 的物品
             switch (Item.ItemID)
             {
+                case 8850011: // 回城符
+                    switch (chr.MapX)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 22:
+                        case 23:
+                            chr.MapX = 1;
+                            chr.MapY = 1;
+                            break;
+                        case 7:
+                        case 8:
+                        case 9:
+                            chr.MapX = 16;
+                            chr.MapY = 1;
+                            break;
+                        case 10:
+                        case 11:
+                        case 20:
+                            chr.MapX = 10;
+                            chr.MapY = 1;
+                            break;
+                        case 12:
+                        case 13:
+                            chr.MapX = 12;
+                            chr.MapY = 1;
+                            break;
+                        case 14:
+                        case 15:
+                        case 17:
+                        case 18:
+                        case 19:
+                        case 21:
+                            chr.MapX = 15;
+                            chr.MapY = 1;
+                            break;
+                        case 16:
+                            chr.MapX = 16;
+                            chr.MapY = 1;
+                            break;
+                        case 24:
+                        case 25:
+                        case 26:
+                        case 31:
+                        case 32:
+                        case 33:
+                            chr.MapX = 25;
+                            chr.MapY = 1;
+                            break;
+                        case 27:
+                        case 28:
+                            chr.MapX = 27;
+                            chr.MapY = 1;
+                            break;
+                        default:
+                            chr.MapX = 1;
+                            chr.MapY = 1;
+                            break;
+                    }
+                    chr.PlayerX = 0;
+                    chr.PlayerY = 0;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
                 case 8850021: // 清陰符
                     chr.MapX = 1;
                     chr.MapY = 2;
@@ -162,18 +229,18 @@ namespace Server.Handler
                     chr.PlayerY = 1116;
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
+                case 8850031: // 龍林符(龍林城)
+                    chr.MapX = 15;
+                    chr.MapY = 2;
+                    chr.PlayerX = 3600;
+                    chr.PlayerY = 1041;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
                 case 8850041: // 冥珠符
                     chr.MapX = 10;
                     chr.MapY = 3;
                     chr.PlayerX = 1645;
                     chr.PlayerY = 899;
-                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
-                    break;
-                case 8850031: // 龍林符
-                    chr.MapX = 15;
-                    chr.MapY = 2;
-                    chr.PlayerX = 3600;
-                    chr.PlayerY = 1041;
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
                 case 8850051: // 古樂符
@@ -188,6 +255,20 @@ namespace Server.Handler
                     chr.MapY = 1;
                     chr.PlayerX = 2005;
                     chr.PlayerY = 1101;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                case 8850071: // 龍林符(龍林客棧)
+                    chr.MapX = 12;
+                    chr.MapY = 1;
+                    chr.PlayerX = 1040;
+                    chr.PlayerY = 782;
+                    MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
+                    break;
+                case 8899017: // 逮巴符
+                    chr.MapX = 27;
+                    chr.MapY = 1;
+                    chr.PlayerX = 2070;
+                    chr.PlayerY = 1330;
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
                 default:

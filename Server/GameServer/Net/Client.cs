@@ -19,7 +19,6 @@ namespace Server.Net
     {
         public Account Account { get; private set; }
         public Character Character { get; private set; }
-        public static int i { get; private set; }
         public int CharacterID { get; private set; }
         public long SessionID { get; private set; }
         public int RetryLoginCount { get; set; }
@@ -30,7 +29,7 @@ namespace Server.Net
         {
             this.RetryLoginCount = 0;
             GameServer.Clients.Add(this);
-            this.CharacterID = ++i;
+            CharacterID = MapFactory.CharacterID;
             this.SessionID = Randomizer.NextLong();
             GamePacket.Game_Log_Ack(this, CharacterID);
             Log.Inform("Accepted connection from {0}.", this.Title);
@@ -52,10 +51,34 @@ namespace Server.Net
                     }
 
                     Map Map = MapFactory.GetMap(this.Character.MapX, this.Character.MapY);
-                    MapFactory.AllCharacters.Remove(this.Character);
-                    Map.Characters.Remove(this.Character);
-                    foreach (Character All in Map.Characters)
-                        MapPacket.removeUser(All.Client, this.Character);
+
+                    Character find = null;
+                    foreach (Character findCharacter in MapFactory.AllCharacters)
+                    {
+                        if (this.Character.CharacterID == findCharacter.CharacterID)
+                        {
+                            find = findCharacter;
+                            break;
+                        }
+                    }
+                    if (find != null)
+                        MapFactory.AllCharacters.Remove(find);
+
+                    Character find2 = null;
+                    foreach (Character findCharacter in Map.Characters)
+                    {
+                        if (this.Character.CharacterID == findCharacter.CharacterID)
+                        {
+                            find2 = findCharacter;
+                            break;
+                        }
+                    }
+                    if (find2 != null)
+                    {
+                        Map.Characters.Remove(find2);
+                        foreach (Character All in Map.Characters)
+                            MapPacket.removeUser(All.Client, this.Character.CharacterID);
+                    }
 
                     this.Account.Save();
                     this.Character.Save();

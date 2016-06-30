@@ -154,24 +154,22 @@ namespace Server.Packet
             }
         }
 
-        public static void Hide(Client c)
+        public static void Hide(Client c, Character chr)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HIDE))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(chr.CharacterID);
-                plew.WriteInt(10207); // 技能ID(霧影術)
+                plew.WriteShort(chr.CharacterID);
+                plew.WriteShort(10207); // 技能ID(霧影術)
                 c.Send(plew);
             }
         }
 
-        public static void Fury(Client c, int Type)
+        public static void Fury(Client c, Character chr, int Type)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_USERSP_ACK))
             {
-                var chr = c.Character;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteShort(chr.CharacterID);

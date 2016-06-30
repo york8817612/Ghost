@@ -2,6 +2,8 @@
 using Server.Common.IO.Packet;
 using Server.Common.Threading;
 using Server.Ghost;
+using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 
@@ -126,6 +128,8 @@ namespace Server.Handler
             if (Type == 0 || chr.IsFuring == true || chr.Fury != chr.MaxFury)
                 return;
 
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
+
             if (Type == 1)
             {
                 short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
@@ -144,7 +148,10 @@ namespace Server.Handler
                 chr.Defense += UpgradeDefense;
 
                 StatusPacket.getStatusInfo(c);
-                StatusPacket.Fury(c, Type);
+                foreach (Character All in Map.Characters)
+                {
+                    StatusPacket.Fury(All.Client, chr, Type);
+                }
 
                 chr.Fury = 0;
                 chr.FuringType = 1;
@@ -159,7 +166,10 @@ namespace Server.Handler
                     chr.Magic -= UpgradeMagic;
                     chr.Defense -= UpgradeDefense;
                     StatusPacket.getStatusInfo(c);
-                    StatusPacket.Fury(c, 0);
+                    foreach (Character All in Map.Characters)
+                    {
+                        StatusPacket.Fury(All.Client, chr, 0);
+                    }
                     tmr.Cancel();
                 });
                 tmr.Execute();
@@ -253,7 +263,10 @@ namespace Server.Handler
                 chr.Defense += UpgradeDefense;
 
                 StatusPacket.getStatusInfo(c);
-                StatusPacket.Fury(c, Type);
+                foreach (Character All in Map.Characters)
+                {
+                    StatusPacket.Fury(All.Client, chr, Type);
+                }
 
                 chr.Fury = 0;
                 chr.FuringType = 2;
@@ -268,7 +281,10 @@ namespace Server.Handler
                     chr.Magic -= UpgradeMagic;
                     chr.Defense -= UpgradeDefense;
                     StatusPacket.getStatusInfo(c);
-                    StatusPacket.Fury(c, 0);
+                    foreach (Character All in Map.Characters)
+                    {
+                        StatusPacket.Fury(All.Client, chr, 0);
+                    }
                     tmr.Cancel();
                 });
                 tmr.Execute();

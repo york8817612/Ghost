@@ -1,4 +1,7 @@
 ﻿using Server.Common.IO.Packet;
+using Server.Ghost;
+using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using System;
 
@@ -8,19 +11,29 @@ namespace Server.Handler
     {
         public static void p_Move_c(InPacket lea, Client c)
         {
-            if (c == null || c.Character == null)
+            if (c == null)
                 return;
 
-            lea.ReadInt(); // CharacterID
+            int CharacterID = lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             int Speed = lea.ReadInt(); // start = 00 00 40 40 , end = 00 00 00 00
-            int MoveDirection = lea.ReadByte(); // right = 01 , left = FF
+            int Direction = lea.ReadByte(); // right = 01 , left = FF
 
-            if (Speed == 0)
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
             {
-                c.Character.PlayerX = ((short)PositionX);
-                c.Character.PlayerY = ((short)PositionY);
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null && Speed == 0)
+            {
+                find.PlayerX = ((short)PositionX);
+                find.PlayerY = ((short)PositionY);
                 //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
             }
 
@@ -29,32 +42,58 @@ namespace Server.Handler
 
         public static void p_Jump_c(InPacket lea, Client c)
         {
-            if (c == null || c.Character == null)
+            if (c == null)
                 return;
 
-            lea.ReadInt();
+            int CharacterID = lea.ReadInt();
             lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
 
-            c.Character.PlayerX = ((short)PositionX);
-            c.Character.PlayerY = ((short)PositionY);
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null)
+            {
+                find.PlayerX = ((short)PositionX);
+                find.PlayerY = ((short)PositionY);
+            }
             //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
         public static void p_Speed_c(InPacket lea, Client c)
         {
-            if (c == null || c.Character == null)
+            if (c == null)
                 return;
 
-            lea.ReadInt();
+            int CharacterID = lea.ReadInt();
             lea.ReadInt();
             lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
 
-            c.Character.PlayerX = ((short)PositionX);
-            c.Character.PlayerY = ((short)PositionY);
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null)
+            {
+                find.PlayerX = ((short)PositionX);
+                find.PlayerY = ((short)PositionY);
+            }
             //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
@@ -77,15 +116,28 @@ namespace Server.Handler
 
         public static void p_Move_c_2(InPacket lea, Client c)
         {
-            if (c == null || c.Character == null)
+            if (c == null)
                 return;
 
-            lea.ReadInt(); // ChararcterID
+            int CharacterID = lea.ReadInt();
             float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
             float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
 
-            c.Character.PlayerX = ((short)PositionX);
-            c.Character.PlayerY = ((short)PositionY);
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null)
+            {
+                find.PlayerX = ((short)PositionX);
+                find.PlayerY = ((short)PositionY);
+            }
             //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 

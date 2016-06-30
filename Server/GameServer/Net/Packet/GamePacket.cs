@@ -17,7 +17,7 @@ namespace Server.Packet
                 plew.WriteInt(characterID);
                 plew.WriteInt(ServerConstants.CLIENT_VERSION);
                 plew.WriteInt(14199);
-                plew.WriteInt(12615854); // TimeLogin
+                plew.WriteInt(57429138); // TimeLogin
                 plew.WriteByte(byte.Parse(c.Title.Split('.')[0]));
                 plew.WriteByte(byte.Parse(c.Title.Split('.')[1]));
                 plew.WriteByte(byte.Parse(c.Title.Split('.')[2]));
@@ -35,7 +35,8 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteByte(type);
-                plew.WriteString(message, 67);
+                plew.WriteString(message, 60);
+                plew.WriteHexString("00 00 00 00 00 00 00");
 
                 c.Send(plew);
             }

@@ -1,6 +1,8 @@
 ﻿using Server.Common.IO.Packet;
 using Server.Common.Threading;
 using Server.Ghost;
+using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System.Collections.Generic;
@@ -16,10 +18,12 @@ namespace Server.Handler
             byte Level = lea.ReadByte();
             byte NumOfTargets = lea.ReadByte();
             int Active = lea.ReadInt();
+            var chr = gc.Character;
+            
+            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
 
             if (Type == 0 || Type == 1 || Type == 2 || Type == 3 || Type == 4)
             {
-                var chr = gc.Character;
                 Skill skill = null;
                 foreach (Skill sl in chr.Skills.getSkills())
                 {
@@ -85,6 +89,11 @@ namespace Server.Handler
                         chr.Mp -= (short)5;
                         StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         break;
+                    case 10207: // 霧影術
+                        chr.IsHiding = true;
+                        foreach (Character All in Map.Characters)
+                            StatusPacket.Hide(All.Client, chr);
+                        break;
                     default:
                         //Log.Inform("[Use Skill] SkillID = {0}", skill.SkillID);
                         break;
@@ -113,7 +122,7 @@ namespace Server.Handler
                 }
             }
 
-            if (sl == null)
+            if (sl == null || (sl.SkillID == 1 && sl.SkillLevel + 1 > 5) || (sl.SkillID == 2 && sl.SkillLevel + 1 > 10) || (sl.SkillID == 3 && sl.SkillLevel + 1 > 20) || (sl.SkillID == 4 && sl.SkillLevel + 1 > 20) || sl.SkillLevel + 1 > 20)
                 return;
 
             chr.SkillBonus--;

@@ -5,7 +5,7 @@ using Server.Ghost;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
-using System.Collections.Generic;
+using System;
 
 namespace Server.Handler
 {
@@ -18,16 +18,32 @@ namespace Server.Handler
         public static void BuyCommodity_Req(InPacket lea, Client c)
         {
             int ItemID = lea.ReadInt();
-            string Name = lea.ReadString(62);
+            string ItemName = lea.ReadString(62);
+            short Quantity = 1;
+            bool IsLocked = true;
+
             var chr = c.Character;
 
             if (CashShopFactory.GetItemData(ItemID) == null)
                 return;
 
+            if (ItemID == 8842002 || ItemID == 8890031 || ItemID == 8890037) // 伺服器傳音秘笈 + 鞭炮 + 心花怒放
+                Quantity = 100;
+
+            if (ItemID / 100000 == 92 || ItemID == 8890031 || ItemID == 8890037) // 寵物 + 鞭炮 + 心花怒放
+                IsLocked = false;
+
+            // 購買日誌
+            dynamic datum = new Datum("BuyCommodityLog");
+            datum.name = chr.Name;
+            datum.itemID = ItemID;
+            datum.itemName = ItemName;
+            datum.Insert();
+
             c.Account.GamePoints -= CashShopFactory.GetItemData(ItemID).BargainPrice;
             c.Account.Save();
 
-            chr.Items.Add(new Item(ItemID, (ItemID / 100000) == 92 ? false : true, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash)));
+            chr.Items.Add(new Item(ItemID, IsLocked, 0, -1, (byte)InventoryType.ItemType.Cash, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Cash), Quantity));
             chr.Items.Save();
             CashShopPacket.BuyCommodity(c);
             CashShopPacket.MgameCash(c);

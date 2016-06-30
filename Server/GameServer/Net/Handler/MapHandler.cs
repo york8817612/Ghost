@@ -1,5 +1,6 @@
 ﻿using Server.Common.Constants;
 using Server.Common.Data;
+using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;
@@ -22,9 +23,22 @@ namespace Server.Handler
             var chr = gc.Character;
 
             Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            Map.Characters.Remove(chr);
-            foreach (Character All in Map.Characters)
-                MapPacket.removeUser(All.Client, chr);
+
+            Character find = null;
+            foreach (Character findCharacter in Map.Characters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+            if (find != null)
+            {
+                Map.Characters.Remove(find);
+                foreach (Character All in Map.Characters)
+                    MapPacket.removeUser(All.Client, CharacterID);
+            }
 
             if (MapX == 77 && MapY == 1)
             {
@@ -42,7 +56,7 @@ namespace Server.Handler
 
                 // 接收禮物
                 List<int> Gifts = new List<int>();
-                
+
                 foreach (dynamic datum in new Datums("Gifts").Populate())
                 {
                     if (chr.Name.Equals(datum.name) && datum.receive == 0)
@@ -67,22 +81,20 @@ namespace Server.Handler
             chr.PlayerX = PositionX;
             chr.PlayerY = PositionY;
 
-            Map = MapFactory.GetMap(chr.MapX, chr.MapY);
-            Map.Characters.Add(chr);
+            Map = MapFactory.GetMap(MapX, MapY);
+
+            MapPacket.warpToMap(gc, chr, CharacterID, MapX, MapY, PositionX, PositionY);
             foreach (Character All in Map.Characters)
                 MapPacket.warpToMap(All.Client, chr, CharacterID, MapX, MapY, PositionX, PositionY);
 
-            if (Map.GetMapCharactersTotal() > 1)
-            {
-                foreach (Character All in Map.Characters)
-                {
-                    MapPacket.createUser(All.Client, chr, Map);
-                }
-            }
+            if (Map.GetMapCharactersTotal() > 0)
+                MapPacket.createUser(gc, Map);
 
-            if ((Map.MapX == 1 && Map.MapY == 53) || (Map.MapX == 1 && Map.MapY == 54) || (Map.MapX == 1 && Map.MapY == 55))
+            Map.Characters.Add(chr);
+
+            if ((MapX == 1 && MapY == 53) || (MapX == 1 && MapY == 54) || (MapX == 1 && MapY == 55))
                 return;
-            
+
             MonsterPacket.createAllMonster(gc, Map, Map.Monster);
 
             int j = 0;
@@ -106,11 +118,16 @@ namespace Server.Handler
 
             //if (map.GetMapCharactersTotal() < 1)
             //{
-                Map.ControlMonster(gc, j);
+            Map.ControlMonster(gc, j);
             //}
-            
-            if (chr.IsFuring == true)
-                StatusPacket.Fury(gc, chr.FuringType);
+
+            //if (chr.IsFuring == true)
+            //{
+            //    foreach (Character All in Map.Characters)
+            //    {
+            //        StatusPacket.Fury(All.Client, chr, chr.FuringType);
+            //    }
+            //}
         }
 
         public static void WarpToMapAuth_Req(InPacket lea, Client gc)

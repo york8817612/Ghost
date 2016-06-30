@@ -96,13 +96,15 @@ namespace Server.Ghost
 
             this.IsControling = true;
 
-            Delay tmr = new Delay(1000, true, () =>
+            Delay tmr = null;
+            tmr = new Delay(1000, true, () =>
             {
-                //if (this.GetMapCharactersTotal() < 1)
-                //{
-                //    tmr.Stop();
-                //    return;
-                //}
+                if (this.GetMapCharactersTotal() < 1)
+                {
+                    tmr.Cancel();
+                    this.IsControling = false;
+                    return;
+                }
                 for (int i = 0; i < j; i++)
                 {
                     if (this.Monster[i].IsAlive == false)
@@ -137,13 +139,15 @@ namespace Server.Ghost
             });
             tmr.Execute();
 
-            Delay tmr2 = new Delay(10000, true, () =>
+            Delay tmr2 = null;
+            tmr2 = new Delay(20000, true, () =>
             {
-                //if (this.GetMapCharactersTotal() < 1)
-                //{
-                //    tmr2.Stop();
-                //    return;
-                //}
+                if (this.GetMapCharactersTotal() < 1)
+                {
+                    tmr2.Cancel();
+                    this.IsControling = false;
+                    return;
+                }
                 for (int i = 0; i < j; i++)
                 {
                     if (this.Monster[i].IsAlive == false)

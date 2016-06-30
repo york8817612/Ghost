@@ -60,6 +60,7 @@ namespace Server.Ghost.Characters
         public byte JumpHeight { get; set; }
         public byte Position { get; set; }
 
+        public bool IsHiding { get; set; }
         public bool IsFuring { get; set; }
         public byte FuringType { get; set; }
         public bool IsAlive { get; set; }

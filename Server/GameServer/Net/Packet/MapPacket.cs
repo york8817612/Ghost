@@ -1,4 +1,5 @@
 ﻿using Server.Common.Constants;
+using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Common.Net;
 using Server.Ghost;
@@ -51,9 +52,9 @@ namespace Server.Packet
                 plew.WriteByte(chr.ClassLevel);
                 plew.WriteByte(chr.Guild);
                 plew.WriteByte(0); // 光圈
-                plew.WriteByte(0); // 透明
-                plew.WriteByte(0); // 憤怒
-                plew.WriteInt(0);
+                plew.WriteByte(chr.IsHiding == false ? 0 : 1);
+                plew.WriteByte(chr.IsFuring == false ? 0 : chr.FuringType);
+                plew.WriteInt(0); // (byte)
                 plew.WriteInt(chr.Hair);                                                                                        // 頭髮
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0);       // 臉上
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);     // 臉下
@@ -64,7 +65,6 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);   // 武器
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);   // 披風
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);         // 靈物
-                //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);         // 玩物
                 // 寵物
                 plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
@@ -84,10 +84,10 @@ namespace Server.Packet
                 plew.WriteShort(0); // (byte)
                 plew.WriteShort(0);
                 plew.WriteShort(0);
-                plew.WriteByte(byte.Parse(c.Title.Split('.')[0]));
-                plew.WriteByte(byte.Parse(c.Title.Split('.')[1]));
-                plew.WriteByte(byte.Parse(c.Title.Split('.')[2]));
-                plew.WriteByte(byte.Parse(c.Title.Split('.')[3]));
+                plew.WriteByte(int.Parse(chr.Client.Title.Split('.')[0]));
+                plew.WriteByte(int.Parse(chr.Client.Title.Split('.')[1]));
+                plew.WriteByte(int.Parse(chr.Client.Title.Split('.')[2]));
+                plew.WriteByte(int.Parse(chr.Client.Title.Split('.')[3]));
                 plew.WriteByte(chr.IP.GetAddressBytes()[0]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[1]);
                 plew.WriteByte(chr.IP.GetAddressBytes()[2]);
@@ -108,76 +108,78 @@ namespace Server.Packet
                 plew.WriteByte(0); // 觀戰
                 plew.WriteByte(0);
                 plew.WriteByte(0);
+                Log.Inform("(1) CharacterID = {0} 遠端IP = {1}.{2}.{3}.{4}", chr.CharacterID, int.Parse(chr.Client.Title.Split('.')[0]), int.Parse(chr.Client.Title.Split('.')[1]), int.Parse(chr.Client.Title.Split('.')[2]), int.Parse(chr.Client.Title.Split('.')[3]));
+                Log.Inform("(1) CharacterID = {0} 虛擬IP = {1}.{2}.{3}.{4}", chr.CharacterID, chr.IP.GetAddressBytes()[0], chr.IP.GetAddressBytes()[1], chr.IP.GetAddressBytes()[2], chr.IP.GetAddressBytes()[3]);
                 c.Send(plew);
             }
         }
 
-        public static void removeUser(Client c, Character chr)
+        public static void removeUser(Client c, int CharacterID)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.LEAVE_WARP_ACK))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(chr.CharacterID); // 玩家ID
+                plew.WriteInt(CharacterID); // 玩家ID
                 c.Send(plew);
             }
         }
 
-        public static void createUser(Client c, Character myCharacter, Map map)
+        public static void createUser(Client c, Map Map)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.USER_CREATE))
             {
-                var chr = map.Characters;
+                var chr = Map.Characters;
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
-                plew.WriteInt(map.GetMapCharactersTotal() - 1); // 玩家數量 - 1
-                for (int i = 0; i < map.GetMapCharactersTotal(); i++)
+                plew.WriteInt(Map.GetMapCharactersTotal()); // 玩家數量
+                for (int i = 0; i < Map.GetMapCharactersTotal(); i++)
                 {
                     Dictionary<InventoryType.EquipType, int> equip = null;
                     try
                     {
-                        if (chr[i].CharacterID == c.Character.CharacterID)
-                            continue;
+                        //if (chr[i].CharacterID == c.Character.CharacterID)
+                        //    continue;
                         equip = InventoryPacket.getEquip(chr[i]);
                     }
                     catch
                     {
                         equip = null;
                     }
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].CharacterID : -1); // 玩家ID(-1)
-                    plew.WriteString(i < map.GetMapCharactersTotal() ? chr[i].Name : "", 20); // 玩家名稱
-                    plew.WriteString(i < map.GetMapCharactersTotal() ? chr[i].Title : "", 20); // 玩家稱號
-                    plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].PlayerX : 0); // 玩家 PositionX
-                    plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].PlayerY : 0); // 玩家 PositionY
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Gender : 1); // 性別(1)
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Level : 0); // 等級
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Class : 0); // 職業
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].ClassLevel : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].Guild : 0);
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].CharacterID : -1); // 玩家ID(-1)
+                    plew.WriteString(i < Map.GetMapCharactersTotal() ? chr[i].Name : "", 20); // 玩家名稱
+                    plew.WriteString(i < Map.GetMapCharactersTotal() ? chr[i].Title : "", 20); // 玩家稱號
+                    plew.WriteShort(i < Map.GetMapCharactersTotal() ? chr[i].PlayerX : 0); // 玩家 PositionX
+                    plew.WriteShort(i < Map.GetMapCharactersTotal() ? chr[i].PlayerY : 0); // 玩家 PositionY
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].Gender : 1); // 性別(1)
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].Level : 0); // 等級
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].Class : 0); // 職業
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].ClassLevel : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].Guild : 0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? (chr[i].Shop != null ? 1 : 0) : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? (chr[i].Shop != null ? 1 : 0) : 0);
                     plew.WriteByte(0);
                     plew.WriteHexString("00 00 00");
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Hair : 0);                                                                                   // 頭髮[Hair]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0 : 0);     // 臉上[Face]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0 : 0);   // 臉下[Face2]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0 : 0);       // 頭部[Hat]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Eyes : 0);                                                                                   // 眼睛[Eyes]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0 : 0); // 衣服[Outfit]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0 : 0);   // 服裝[Dress]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0 : 0); // 武器[Weapon]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0 : 0); // 披風[Mantle]
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0 : 0);       // 靈物[Pet]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Hair : 0);                                                                                   // 頭髮[Hair]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Face) ? equip[InventoryType.EquipType.Face] : 0 : 0);     // 臉上[Face]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0 : 0);   // 臉下[Face2]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Hat) ? equip[InventoryType.EquipType.Hat] : 0 : 0);       // 頭部[Hat]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Eyes : 0);                                                                                   // 眼睛[Eyes]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Outfit) ? equip[InventoryType.EquipType.Outfit] : 0 : 0); // 衣服[Outfit]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0 : 0);   // 服裝[Dress]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0 : 0); // 武器[Weapon]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0 : 0); // 披風[Mantle]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0 : 0);       // 靈物[Pet]
                     //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0 : 0);       // 玩物[Toy]
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0 : 0);       // 玩物[Toy]
 
                     // 寵物
-                    plew.WriteString(i < map.GetMapCharactersTotal() ? chr[i].Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : "", 20); // PetName
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
-                    plew.WriteInt(i < map.GetMapCharactersTotal() ? chr[i].Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
+                    plew.WriteString(i < Map.GetMapCharactersTotal() ? chr[i].Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : "", 20); // PetName
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Pets.Level((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Pets.Hp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Pets.Mp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
+                    plew.WriteInt(i < Map.GetMapCharactersTotal() ? chr[i].Pets.Exp((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet) : 0);
                     plew.WriteInt(0);
 
                     // 玩物
@@ -190,20 +192,20 @@ namespace Server.Packet
                     plew.WriteShort(0);
 
                     // 遠端IP位置
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[0]) : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[1]) : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[2]) : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? byte.Parse(chr[i].Client.Title.Split('.')[3]) : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? int.Parse(chr[i].Client.Title.Split('.')[0]) : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? int.Parse(chr[i].Client.Title.Split('.')[1]) : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? int.Parse(chr[i].Client.Title.Split('.')[2]) : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? int.Parse(chr[i].Client.Title.Split('.')[3]) : 0);
                     
                     // 遠端虛擬IP位置
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[0] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[1] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[2] : 0);
-                    plew.WriteByte(i < map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[3] : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[0] : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[1] : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[2] : 0);
+                    plew.WriteByte(i < Map.GetMapCharactersTotal() ? chr[i].IP.GetAddressBytes()[3] : 0);
 
-                    plew.WriteHexString(i < map.GetMapCharactersTotal() ? "1F 40" : "00 00");
+                    plew.WriteHexString(i < Map.GetMapCharactersTotal() ? "1F 40" : "00 00");
                     // 個人商店
-                    plew.WriteString(i < map.GetMapCharactersTotal() ? (chr[i].Shop != null ? chr[i].Shop.Name : "") : "", 40); // 個人商店名稱
+                    plew.WriteString(i < Map.GetMapCharactersTotal() ? (chr[i].Shop != null ? chr[i].Shop.Name : "") : "", 40); // 個人商店名稱
 
                     plew.WriteShort(0);
                     plew.WriteShort(-1);
@@ -221,12 +223,14 @@ namespace Server.Packet
                     plew.WriteByte(0); // 泡泡效果
                     plew.WriteByte(0);
                     plew.WriteShort(0);
-                    plew.WriteShort(i < map.GetMapCharactersTotal() ? chr[i].CharacterID : -1);// 玩家ID [Map Number]
+                    plew.WriteShort(i < Map.GetMapCharactersTotal() ? chr[i].CharacterID : -1);// 玩家ID [Map Number]
                     plew.WriteByte(-1);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteShort(0);
+                    Log.Inform("(User) CharacterID = {0} 遠端IP = {1}.{2}.{3}.{4}", chr[i].CharacterID, int.Parse(chr[i].Client.Title.Split('.')[0]), int.Parse(chr[i].Client.Title.Split('.')[1]), int.Parse(chr[i].Client.Title.Split('.')[2]), int.Parse(chr[i].Client.Title.Split('.')[3]));
+                    Log.Inform("(User) CharacterID = {0} 虛擬IP = {1}.{2}.{3}.{4}", chr[i].CharacterID, chr[i].IP.GetAddressBytes()[0], chr[i].IP.GetAddressBytes()[1], chr[i].IP.GetAddressBytes()[2], chr[i].IP.GetAddressBytes()[3]);
                 }
                 c.Send(plew);
             }

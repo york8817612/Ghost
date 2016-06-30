@@ -156,12 +156,12 @@ namespace Server.Packet
                 plew.WriteInt(0); // 21
 
                 for (int i = 0; i < 17; i++)
-                {
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
+                {   // 武器強化
+                    plew.WriteByte(0); // * 5
+                    plew.WriteByte(0); // * 4
+                    plew.WriteByte(0); // * 3
+                    plew.WriteByte(0); // * 2
+                    plew.WriteByte(0); // * 1
                     plew.WriteByte(0);
                     plew.WriteByte(0);
                     plew.WriteByte(0);
@@ -224,35 +224,44 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
-                { // 物品編號
+                {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
-                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
+                {   // 武器強化 
+                    plew.WriteByte(0); // * 20
+                    plew.WriteByte(0); // * 18
+                    plew.WriteByte(0); // * 16
+                    plew.WriteByte(0); // * 14
+                    plew.WriteByte(0); // * 12
+                    plew.WriteByte(0); // * 10
+                    plew.WriteByte(0); // * 8
+                    plew.WriteByte(0); // * 6
+                    plew.WriteByte(0); // * 4
+                    plew.WriteByte(0); // * 2
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteShort(0);
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品Lock
+                {   // 物品Lock
                     plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Equip1, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 截止日期
+                {   // 截止日期
                     plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Equip1, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Equip1, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品標誌
+                {   // 物品標誌
                     plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 480 Bytes
+                {   // 480 Bytes
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
                 c.Send(plew);
@@ -267,35 +276,44 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
-                { // 物品編號
+                {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
-                    plew.WriteHexString("00 00 00 00 00 00 00 00 00 00");
+                {   // 武器強化
+                    plew.WriteByte(0); // * 5
+                    plew.WriteByte(0); // * 4
+                    plew.WriteByte(0); // * 3
+                    plew.WriteByte(0); // * 2
+                    plew.WriteByte(0); // * 1
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 封印量
+                {   // 封印量
                     plew.WriteShort(chr.Items.Spirit(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品Lock
+                {   // 物品Lock
                     plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 截止日期
+                {   // 截止日期
                     plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Equip2, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品標誌
+                {   // 物品標誌
                     plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Equip2, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 480 Bytes
+                {   // 480 Bytes
                     plew.WriteHexString("00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00");
                 }
                 c.Send(plew);
@@ -310,19 +328,19 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
-                { // 物品編號
+                {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品數量
+                {   // 物品數量
                     plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品Lock
+                {   // 物品Lock
                     plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 截止日期
+                {   // 截止日期
                     plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Spend3, i));
                 }
                 plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
@@ -345,23 +363,23 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
-                { // 物品編號
+                {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品數量
+                {   // 物品數量
                     plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品Lock
+                {   // 物品Lock
                     plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 截止日期
+                {   // 截止日期
                     plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Other4, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 物品Icon
+                {   // 物品Icon
                     plew.WriteShort(chr.Items.Icon(InventoryType.ItemType.Other4, i));
                 }
                 c.Send(plew);
@@ -376,51 +394,51 @@ namespace Server.Packet
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 for (byte i = 0; i < 24; i++)
-                { // 寵物編號
+                {   // 寵物編號
                     plew.WriteInt(chr.Pets.ItemID((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 寵物名稱
+                {   // 寵物名稱
                     plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Pet5, i), 20);
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 寵物等級
+                {   // 寵物等級
                     plew.WriteByte(chr.Pets.Level((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 寵物血量
+                {   // 寵物血量
                     plew.WriteInt(chr.Pets.Hp((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 寵物經驗值
+                {    // 寵物經驗值
                     plew.WriteInt(chr.Pets.Exp((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {    // 
                     plew.WriteInt(chr.Pets.Mp((byte)InventoryType.ItemType.Pet5, i));
                 }
                 for (int i = 0; i < 24; i++)
-                { // 截止日期
+                {    // 截止日期
                     plew.WriteInt(-1);
                 }
                 for (byte i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteShort(chr.Pets.ItemID((byte)InventoryType.ItemType.Pet5, i) == 0 ? 0 : 1);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteInt(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 物品Lock
+                {   // 物品Lock
                     plew.WriteByte(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 
+                {   // 
                     plew.WriteInt(0);
                 }
                 for (int i = 0; i < 24; i++)
-                { // 物品Icon
+                {   // 物品Icon
                     plew.WriteShort(0);
                 }
 

@@ -74,7 +74,6 @@ namespace Server.Ghost
         public Item(int itemID, byte type, byte slot, short quantity = 1)
         {
             this.ItemID = itemID;
-            this.MaxPerStack = 1;
             switch (type)
             {
                 case 0:
@@ -85,10 +84,14 @@ namespace Server.Ghost
                     break;
                 case 3:
                 case 4:
+                case 6:
                     this.MaxPerStack = 100;
                     break;
                 case 0x63:
                     this.MaxPerStack = Int16.MaxValue;
+                    break;
+                default:
+                    this.MaxPerStack = 1;
                     break;
             }
             this.Quantity = quantity;
@@ -103,7 +106,6 @@ namespace Server.Ghost
         public Item(int itemID, bool IsLocked, byte Icon, int Term, byte type, byte slot, short quantity = 1)
         {
             this.ItemID = itemID;
-            this.MaxPerStack = 1;
             switch (type)
             {
                 case 0:
@@ -114,10 +116,14 @@ namespace Server.Ghost
                     break;
                 case 3:
                 case 4:
+                case 6:
                     this.MaxPerStack = 100;
                     break;
                 case 0x63:
                     this.MaxPerStack = Int16.MaxValue;
+                    break;
+                default:
+                    this.MaxPerStack = 1;
                     break;
             }
             this.Quantity = quantity;
@@ -135,7 +141,6 @@ namespace Server.Ghost
             this.Assigned = true;
 
             this.ItemID = datum.itemId;
-            this.MaxPerStack = 1;
             switch ((byte)(datum.type))
             {
                 case 0:
@@ -146,7 +151,11 @@ namespace Server.Ghost
                     break;
                 case 3:
                 case 4:
+                case 6:
                     this.MaxPerStack = 100;
+                    break;
+                default:
+                    this.MaxPerStack = 1;
                     break;
             }
             this.Quantity = (short)datum.quantity;

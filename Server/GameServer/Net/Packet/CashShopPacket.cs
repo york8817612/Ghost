@@ -241,12 +241,12 @@ namespace Server.Packet
                 // 符咒
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.AmuletList.Count ? CashShopFactory.AmuletList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(0); // 售價
-                    plew.WriteInt(-1); // 期限
-                    plew.WriteInt(0); // 原價
-                    plew.WriteInt(0);
+                    plew.WriteInt(i < CashShopFactory.AmuletList.Count ? CashShopFactory.AmuletList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.AmuletList.Count ? CashShopFactory.AmuletList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.AmuletList.Count ? CashShopFactory.AmuletList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.AmuletList.Count ? CashShopFactory.AmuletList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 // 靈丹
@@ -263,12 +263,12 @@ namespace Server.Packet
                 // 法寶
                 for (int i = 0; i < 300; i++)
                 {
-                    plew.WriteInt(0); // 物品ID
+                    plew.WriteInt(i < CashShopFactory.TalismanList.Count ? CashShopFactory.TalismanList[i].ItemID : 0); // 物品ID
                     plew.WriteInt(1);
-                    plew.WriteInt(0); // 售價
-                    plew.WriteInt(-1); // 期限
-                    plew.WriteInt(0); // 原價
-                    plew.WriteInt(0);
+                    plew.WriteInt(i < CashShopFactory.TalismanList.Count ? CashShopFactory.TalismanList[i].BargainPrice : 0); // 售價
+                    plew.WriteInt(i < CashShopFactory.TalismanList.Count ? CashShopFactory.TalismanList[i].Term : 0); // 期限
+                    plew.WriteInt(i < CashShopFactory.TalismanList.Count ? CashShopFactory.TalismanList[i].Price : 0); // 原價
+                    plew.WriteInt(i < CashShopFactory.TalismanList.Count ? CashShopFactory.TalismanList[i].Flag : 0);
                     plew.WriteInt(0);
                 }
                 c.Send(plew);

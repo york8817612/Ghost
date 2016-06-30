@@ -118,6 +118,14 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8990026, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
+                case 570: // [食糧物資(1)]
+                    chr.Items.Add(new Item(8990095, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 590: // [高級食材(1)]
+                    chr.Items.Add(new Item(8990096, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
                 case 379:
                 case 380:
                 case 625:
@@ -168,6 +176,8 @@ namespace Server.Handler
                 case 358:// [ 壁破力 ](力士)
                 case 359:// [ 真功彈強 ](力士) 
                 case 360:// [ 武月真氣 ](力士)
+                case 567: // [工頭領班的憂慮]
+                case 574: // [突變]
                 case 620:// [觀首真眼](射手)
                 case 622:// [飛鳥壁護](射手)
                     Quest.RequireMonster = 20;
@@ -440,6 +450,54 @@ namespace Server.Handler
                     StatusPacket.UpdateFame(gc, 1);
                     InventoryHandler.UpdateInventory(gc, 3);
                     break;
+                case 118: // [飛龍掌]
+                    chr.Skills.Add(new Skill(21102, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 119: // [飛龍掌]
+                    chr.Skills.Add(new Skill(21202, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 120: // [飛龍掌]
+                    chr.Skills.Add(new Skill(21302, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 121: // [俠義心1]
+                    chr.Items.Add(new Item(8990042, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    chr.Rank += 2;
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 122: // [俠義心2]
+                    chr.Items.Add(new Item(8990043, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    chr.Rank += 2;
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 123: // [飛龍掌]
+                    chr.Skills.Add(new Skill(22102, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 124: // [飛龍掌]
+                    chr.Skills.Add(new Skill(22202, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 125: // [飛龍掌]
+                    chr.Skills.Add(new Skill(22302, 1, 2, chr.Skills.GetNextFreeSlot(2)));
+                    LearnSkill(gc);
+                    break;
+                case 126: // [憤怒的管理1]
+                    chr.Items.Add(new Item(8990042, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    chr.Rank += 2;
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 127: // [憤怒的管理2]
+                    chr.Items.Add(new Item(8990043, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    chr.Rank += 2;
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
                 case 128: // [職務代理]
                     chr.Rank += 1;
                     chr.Items.Add(new Item(8810031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
@@ -459,6 +517,50 @@ namespace Server.Handler
                 case 380: // [邪派 力士 魂魔遁甲]
                     chr.Skills.Add(new Skill(22401, 1, 2, chr.Skills.GetNextFreeSlot(2)));
                     LearnSkill(gc);
+                    break;
+                case 566: // [伸出援手]
+                    chr.Exp += 5;
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 567: // [工頭領班的憂慮]
+                    chr.Money += 300;
+                    chr.Exp += 20;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 300);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 568: // [沒用的東西]
+                    chr.Money += 500;
+                    chr.Exp += 50;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 500);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 569: // [父親與兒子]
+                    chr.Exp += 120;
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 570: // [食糧物資(1)]
+                    chr.Money += 300;
+                    chr.Exp += 150;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 300);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 571: // [食糧物資(2)]
+                    chr.Money += 300;
+                    chr.Exp += 150;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 300);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 573: // [準備過冬]
+                    chr.Money += 1000;
+                    chr.Exp += 350;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1000);
+                    StatusPacket.UpdateExp(gc);
+                    break;
+                case 574: // [突變]
+                    chr.Money += 1000;
+                    chr.Exp += 500;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1000);
+                    StatusPacket.UpdateExp(gc);
                     break;
                 case 625: // [正派 射手 魂魔遁甲]
                     chr.Skills.Add(new Skill(21501, 1, 2, chr.Skills.GetNextFreeSlot(2)));
@@ -756,6 +858,8 @@ namespace Server.Handler
                 default:
                     break;
             }
+            if (chr.Exp >= GameConstants.getExpNeededForLevel(chr.Level))
+                chr.LevelUp();
         }
     }
 }

@@ -169,7 +169,7 @@ namespace Server.Ghost.Characters
                 default:
                     return 0;
             }
-            return 0;
+            return Item.Spirit;
         }
 
         public byte IsLocked(InventoryType.ItemType type, byte slot)

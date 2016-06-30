@@ -1,4 +1,5 @@
-﻿using Server.Common.IO;
+﻿using Server.Common.Constants;
+using Server.Common.IO;
 using Server.Common.IO.Packet;
 using System;
 using System.Net;
@@ -183,7 +184,7 @@ namespace Server.Common.Net
             try
             {
                 UdpClient client = (UdpClient)t.AsyncState;
-                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 14199);
+                IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), 14199);
                 byte[] packet = client.EndReceive(t, ref RemoteIpEndPoint);
                 this.Dispatch(new InPacket(packet));
                 UdpReceive();
