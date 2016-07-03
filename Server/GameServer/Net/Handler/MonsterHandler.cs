@@ -137,8 +137,16 @@ namespace Server.Handler
                 else if (chr.PlayerX > HitX && Monster.Direction == 0xFF)
                     Monster.Direction = 1;
             }
+
             foreach (Character All in Map.Characters)
                 MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, Damage, HitX, HitY);
+
+            if (Monster.State == 7 && Monster.AttackType > 0)
+            {
+                Monster.State = 3;
+                foreach (Character All in Map.Characters)
+                    MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, 0, HitX, HitY);
+            }
         }
     }
 }

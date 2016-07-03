@@ -19,8 +19,10 @@
         public readonly short AttackRange = -1;
         public readonly byte Speed;
         public readonly byte Refining;
+        public readonly byte Fusion;
         public readonly int Type = -1;
         public readonly int Recover = -1;
+        public readonly int Spirit = -1;
         public readonly int Price;
 
         // 消耗品
@@ -56,7 +58,7 @@
         }
 
         // 武器
-        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, int Price)
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Attack, short MagicAttack, short AttackRange, byte Speed, int Price, byte Fusion)
         {
             this.ItemID = ItemID;
             this.ItemName = ItemName;
@@ -69,6 +71,54 @@
             this.Speed = Speed;
             this.Hp = -1;
             this.Mp = -1;
+            this.Price = Price;
+            this.Fusion = Fusion;
+        }
+
+        // 衣服
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Defense, int Price, byte Fusion)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Job = Job;
+            this.Level = Level;
+            this.Attack = -1;
+            this.AttackRange = -1;
+            this.Defense = Defense;
+            this.Speed = 0;
+            this.Hp = -1;
+            this.Mp = -1;
+            this.Price = Price;
+            this.Fusion = Fusion;
+        }
+
+        // 服裝
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Defense, short Str, short Dex, short Vit, short Int, int Price, byte Fusion)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Job = Job;
+            this.Level = Level;
+            this.Defense = Defense;
+            this.Str = Str;
+            this.Dex = Dex;
+            this.Vit = Vit;
+            this.Int = Int;
+            this.Price = Price;
+            this.Fusion = Fusion;
+        }
+
+        // 帽子
+        public ItemData(int ItemID, string ItemName, short Str, short Dex, short Vit, short Int, short Hp, short Mp, int Price)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Str = Str;
+            this.Dex = Dex;
+            this.Vit = Vit;
+            this.Int = Int;
+            this.Hp = Hp;
+            this.Mp = Mp;
             this.Price = Price;
         }
 
@@ -108,6 +158,29 @@
             this.Speed = 0;
             this.Hp = Hp;
             this.Mp = Mp;
+            this.Price = Price;
+        }
+
+        // 披風
+        public ItemData(int ItemID, string ItemName, byte Job, byte Level, short Str, short Dex, short Vit, short Int, int Price)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Job = Job;
+            this.Level = Level;
+            this.Str = Str;
+            this.Dex = Dex;
+            this.Vit = Vit;
+            this.Int = Int;
+            this.Price = Price;
+        }
+
+        // 封印箱
+        public ItemData(int ItemID, string ItemName, int Spirit, int Price)
+        {
+            this.ItemID = ItemID;
+            this.ItemName = ItemName;
+            this.Spirit = Spirit;
             this.Price = Price;
         }
 

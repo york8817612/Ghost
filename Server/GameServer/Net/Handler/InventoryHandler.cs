@@ -120,7 +120,12 @@ namespace Server.Handler
                         chr.Items.Add(Source);
                         chr.Items.Add(Target);
                     }
-                    if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
+                    if (SourceType == (byte)InventoryType.ItemType.Equip && TargetType == (byte)InventoryType.ItemType.Equip1)
+                    {
+                        UpdateCharacterInventoryStatus(gc, Source.ItemID, false);
+                        UpdateCharacterInventoryStatus(gc, Target.ItemID, true);
+                    }
+                    else if (SourceType == (byte)InventoryType.ItemType.Equip || TargetType == (byte)InventoryType.ItemType.Equip)
                     {
                         UpdateCharacterInventoryStatus(gc, Target.ItemID, false);
                         UpdateCharacterInventoryStatus(gc, Source.ItemID, true);

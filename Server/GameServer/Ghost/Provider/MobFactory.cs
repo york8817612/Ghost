@@ -10,7 +10,7 @@ namespace Server.Ghost.Provider
 
         public static int MonsterMaxHP(int MonsterLevel)
         {
-            int MonsterHP = int.MaxValue;
+            int MonsterHP = short.MaxValue;
             switch (MonsterLevel)
             {
                 case 1: // 賴打
@@ -43,18 +43,33 @@ namespace Server.Ghost.Provider
                 case 10: // 毛毛(Boss)
                     MonsterHP = 700;
                     break;
+
+                // 11
+
                 case 12:
                     MonsterHP = 590;
+                    break;
+                case 13:
+                    MonsterHP = 640;
                     break;
                 case 14:
                     MonsterHP = 690;
                     break;
+                case 15:
+                    MonsterHP = 735;
+                    break;
                 case 16:
                     MonsterHP = 780;
+                    break;
+                case 17:
+                    MonsterHP = 830;
                     break;
                 case 18:
                     MonsterHP = 880;
                     break;
+
+                // 19
+
                 case 20: // 銅鈴眼(Boss)
                     MonsterHP = 2900;
                     break;
@@ -64,20 +79,35 @@ namespace Server.Ghost.Provider
                 case 22:
                     MonsterHP = 2600;
                     break;
+                case 23:
+                    MonsterHP = 2700;
+                    break;
                 case 24:
                     MonsterHP = 2800;
+                    break;
+                case 25:
+                    MonsterHP = 3050;
                     break;
                 case 26:
                     MonsterHP = 3300;
                     break;
+                case 27:
+                    MonsterHP = 3450;
+                    break;
                 case 28:
                     MonsterHP = 3600;
                     break;
+
+                // 29
+
                 case 30: // 豬大長(Boss)
                     MonsterHP = 29200;
                     break;
                 case 32:
                     MonsterHP = 4700;
+                    break;
+                case 33:
+                    MonsterHP = 4900;
                     break;
                 case 34:
                     MonsterHP = 5100;
@@ -169,6 +199,9 @@ namespace Server.Ghost.Provider
                 case 3: // 美人魚
                     MonsterExp = 8;
                     break;
+                case 4:
+                    MonsterExp = 11;
+                    break;
                 case 5: // 蘆花
                     MonsterExp = 14;
                     break;
@@ -181,21 +214,39 @@ namespace Server.Ghost.Provider
                 case 8:
                     MonsterExp = 22;
                     break;
+                case 9:
+                    MonsterExp = 32;
+                    break;
                 case 10: // 毛毛(Boss)
                     MonsterExp = 42;
                     break;
+
+                // 11
+
                 case 12:
                     MonsterExp = 36;
+                    break;
+                case 13:
+                    MonsterExp = 39;
                     break;
                 case 14:
                     MonsterExp = 42;
                     break;
+                case 15:
+                    MonsterExp = 45;
+                    break;
                 case 16:
                     MonsterExp = 48;
+                    break;
+                case 17:
+                    MonsterExp = 51;
                     break;
                 case 18:
                     MonsterExp = 54;
                     break;
+
+                // 19
+
                 case 20: // 銅鈴眼(Boss)
                     MonsterExp = 90;
                     break;
@@ -205,20 +256,35 @@ namespace Server.Ghost.Provider
                 case 22:
                     MonsterExp = 153;
                     break;
+                case 23:
+                    MonsterExp = 161;
+                    break;
                 case 24:
                     MonsterExp = 169;
+                    break;
+                case 25:
+                    MonsterExp = 177;
                     break;
                 case 26:
                     MonsterExp = 185;
                     break;
+                case 27:
+                    MonsterExp = 193;
+                    break;
                 case 28:
                     MonsterExp = 201;
                     break;
+
+                // 29
+
                 case 30: // 豬大長(Boss)
                     MonsterExp = 217;
                     break;
                 case 32:
                     MonsterExp = 233;
+                    break;
+                case 33:
+                    MonsterExp = 241;
                     break;
                 case 34:
                     MonsterExp = 249;
@@ -318,6 +384,9 @@ namespace Server.Ghost.Provider
                     MoveType = 1;
                     break;
                 case 1000701:
+                    MoveType = 1;
+                    break;
+                case 1000702:
                     MoveType = 1;
                     break;
                 case 1000801:
@@ -515,6 +584,9 @@ namespace Server.Ghost.Provider
                 case 1000701:
                     AttackType = 1;
                     break;
+                case 1000702:
+                    AttackType = 1;
+                    break;
                 case 1000801:
                     AttackType = 1;
                     break;
@@ -686,7 +758,7 @@ namespace Server.Ghost.Provider
 
         public static int Attack1(int MonsterID)
         {
-            int Attack = int.MaxValue;
+            int Attack = short.MaxValue;
             switch (MonsterID)
             {
                 case 1000101: // 賴打
@@ -708,6 +780,9 @@ namespace Server.Ghost.Provider
                     Attack = 14;
                     break;
                 case 1000701:
+                    Attack = 18;
+                    break;
+                case 1000702:
                     Attack = 18;
                     break;
                 case 1000801:
@@ -881,7 +956,7 @@ namespace Server.Ghost.Provider
 
         public static int Attack2(int MonsterID)
         {
-            int Attack = int.MaxValue;
+            int Attack = short.MaxValue;
             switch (MonsterID)
             {
                 case 1000101: // 賴打
@@ -903,6 +978,9 @@ namespace Server.Ghost.Provider
                     Attack = 40;
                     break;
                 case 1000701:
+                    Attack = 39;
+                    break;
+                case 1000702:
                     Attack = 39;
                     break;
                 case 1000801:
@@ -1076,7 +1154,7 @@ namespace Server.Ghost.Provider
 
         public static int CrashAttack(int MonsterID)
         {
-            int Attack = int.MaxValue;
+            int Attack = short.MaxValue;
             switch (MonsterID)
             {
                 case 1000101: // 賴打
@@ -1099,6 +1177,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1000701:
                     Attack = 12;
+                    break;
+                case 1000702:
+                    Attack = 18;
                     break;
                 case 1000801:
                     Attack = 14;
@@ -1271,7 +1352,7 @@ namespace Server.Ghost.Provider
 
         public static int Defense(int MonsterID)
         {
-            int Defense = int.MaxValue;
+            int Defense = short.MaxValue;
             switch (MonsterID)
             {
                 case 1000101: // 賴打
@@ -1294,6 +1375,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1000701:
                     Defense = 4;
+                    break;
+                case 1000702:
+                    Defense = 6;
                     break;
                 case 1000801:
                     Defense = 7;
@@ -1490,6 +1574,9 @@ namespace Server.Ghost.Provider
                 case 1000701:
                     Effect = 2;
                     break;
+                case 1000702:
+                    Effect = 0;
+                    break;
                 case 1000801:
                     Effect = 0;
                     break;
@@ -1503,7 +1590,7 @@ namespace Server.Ghost.Provider
                     Effect = 0;
                     break;
                 case 1001201:
-                    Effect = 0;
+                    Effect = 1;
                     break;
                 case 1001301:
                     Effect = 0;

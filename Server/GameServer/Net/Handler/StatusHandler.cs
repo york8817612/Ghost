@@ -15,12 +15,14 @@ namespace Server.Handler
         {
             short Damage = lea.ReadShort();
             var chr = c.Character;
+
+            if (Damage < 0)
+                Damage = short.MaxValue;
+
             chr.Hp -= Damage;
             if (chr.Hp <= 0)
             {
                 chr.IsAlive = false;
-                chr.Hp = 1;
-                chr.Mp = 1;
                 chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
                 if (chr.Exp < 0)
                     chr.Exp = 0;
@@ -33,33 +35,34 @@ namespace Server.Handler
                     chr.Competitor = null;
                     chr.Competitor.Competitor = null;
                 }
-                return;
+                chr.Hp = 1;
+                chr.Mp = 1;
             }
             StatusPacket.UpdateHpMp(c, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
         }
 
         public static void Char_Dead_Req(InPacket lea, Client c)
         {
-            var chr = c.Character;
-            if (chr.IsAlive == true)
-            {
-                chr.IsAlive = false;
-                chr.Hp = 1;
-                chr.Mp = 1;
-                chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
-                if (chr.Exp < 0)
-                    chr.Exp = 0;
-                MapPacket.userDead(c);
-                StatusPacket.UpdateExp(c);
-                if (chr.Competitor != null)
-                {
-                    PvPPacket.PvPEnd(c, chr.Competitor.CharacterID);
-                    PvPPacket.PvPEnd(chr.Competitor.Client, chr.Competitor.CharacterID);
-                    chr.Competitor = null;
-                    chr.Competitor.Competitor = null;
-                }
-            }
-            StatusPacket.getStatusInfo(c);
+            //var chr = c.Character;
+            //if (chr.IsAlive == true)
+            //{
+            //    chr.IsAlive = false;
+            //    chr.Hp = 1;
+            //    chr.Mp = 1;
+            //    chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
+            //    if (chr.Exp < 0)
+            //        chr.Exp = 0;
+            //    MapPacket.userDead(c);
+            //    StatusPacket.UpdateExp(c);
+            //    if (chr.Competitor != null)
+            //    {
+            //        PvPPacket.PvPEnd(c, chr.Competitor.CharacterID);
+            //        PvPPacket.PvPEnd(chr.Competitor.Client, chr.Competitor.CharacterID);
+            //        chr.Competitor = null;
+            //        chr.Competitor.Competitor = null;
+            //    }
+            //}
+            //StatusPacket.getStatusInfo(c);
         }
 
         public static void Char_Statup_Req(InPacket lea, Client gc)

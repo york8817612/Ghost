@@ -62,7 +62,6 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Weapon) ? equip[InventoryType.EquipType.Weapon] : 0);  // 武器
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Mantle) ? equip[InventoryType.EquipType.Mantle] : 0);  // 披風
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Pet) ? equip[InventoryType.EquipType.Pet] : 0);// 靈物
-                //plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);// HairAcc
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);// 玩物
 
                 // 寵物
@@ -146,32 +145,34 @@ namespace Server.Packet
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Dress) ? equip[InventoryType.EquipType.Dress] : 0);      // 服裝[Dress]
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Face2) ? equip[InventoryType.EquipType.Face2] : 0);      // 臉下[Face2]
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Earing) ? equip[InventoryType.EquipType.Earing] : 0);    // 耳環[Earing]
-                plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.HairAcc) ? equip[InventoryType.EquipType.HairAcc] : 0);  // [HairAcc] 
                 plew.WriteInt(equip.ContainsKey(InventoryType.EquipType.Toy) ? equip[InventoryType.EquipType.Toy] : 0);          // 玩物[Toy]
                 plew.WriteInt(0); // 16
                 plew.WriteInt(0); // 17
-                plew.WriteInt(0); // 18
-                plew.WriteInt(0); // 19
-                plew.WriteInt(0); // 20
-                plew.WriteInt(0); // 21
 
-                for (int i = 0; i < 17; i++)
-                {   // 武器強化
-                    plew.WriteByte(0); // * 5
-                    plew.WriteByte(0); // * 4
-                    plew.WriteByte(0); // * 3
-                    plew.WriteByte(0); // * 2
-                    plew.WriteByte(0); // * 1
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
+                for (byte i = 0; i < 17; i++)
+                {
+                    plew.WriteByte(chr.Items.Fusion(InventoryType.ItemType.Equip, i)); // 合成所剩回數
                 }
 
                 for (byte i = 0; i < 17; i++)
+                {   // 武器強化
+                    plew.WriteByte(chr.Items.Level1(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level2(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level3(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level4(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level5(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level6(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level7(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level8(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level9(InventoryType.ItemType.Equip, i));
+                    plew.WriteByte(chr.Items.Level10(InventoryType.ItemType.Equip, i));
+                }
+
+                plew.WriteByte(0);
+
+                for (byte i = 0; i < 17; i++)
                 {   // 封印量
-                    plew.WriteShort(i == 4 ? chr.Items.Spirit(InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Seal) : 0);
+                    plew.WriteShort(i == 5 ? chr.Items.Spirit(InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Seal) : 0);
                 }
 
                 for (int i = 0; i < 17; i++)
@@ -188,6 +189,8 @@ namespace Server.Packet
                 {
                     plew.WriteShort(0);
                 }
+
+                plew.WriteShort(0);
 
                 //寵物
                 plew.WriteString(chr.Pets.Name((byte)InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Pet), 20); // PetName
@@ -227,22 +230,22 @@ namespace Server.Packet
                 {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip1, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 {   // 
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.Fusion(InventoryType.ItemType.Equip1, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 {   // 武器強化 
-                    plew.WriteByte(0); // * 20
-                    plew.WriteByte(0); // * 18
-                    plew.WriteByte(0); // * 16
-                    plew.WriteByte(0); // * 14
-                    plew.WriteByte(0); // * 12
-                    plew.WriteByte(0); // * 10
-                    plew.WriteByte(0); // * 8
-                    plew.WriteByte(0); // * 6
-                    plew.WriteByte(0); // * 4
-                    plew.WriteByte(0); // * 2
+                    plew.WriteByte(chr.Items.Level1(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level2(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level3(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level4(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level5(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level6(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level7(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level8(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level9(InventoryType.ItemType.Equip1, i));
+                    plew.WriteByte(chr.Items.Level10(InventoryType.ItemType.Equip1, i));
                 }
                 for (int i = 0; i < 24; i++)
                 {   // 
@@ -279,22 +282,22 @@ namespace Server.Packet
                 {   // 物品編號
                     plew.WriteInt(chr.Items.ItemID(InventoryType.ItemType.Equip2, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 {   // 
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.Fusion(InventoryType.ItemType.Equip2, i));
                 }
-                for (int i = 0; i < 24; i++)
+                for (byte i = 0; i < 24; i++)
                 {   // 武器強化
-                    plew.WriteByte(0); // * 5
-                    plew.WriteByte(0); // * 4
-                    plew.WriteByte(0); // * 3
-                    plew.WriteByte(0); // * 2
-                    plew.WriteByte(0); // * 1
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
-                    plew.WriteByte(0);
+                    plew.WriteByte(chr.Items.Level1(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level2(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level3(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level4(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level5(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level6(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level7(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level8(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level9(InventoryType.ItemType.Equip2, i));
+                    plew.WriteByte(chr.Items.Level10(InventoryType.ItemType.Equip2, i));
                 }
                 for (byte i = 0; i < 24; i++)
                 {   // 封印量

@@ -111,16 +111,16 @@ namespace Server.Ghost
                         continue;
                     if (this.Monster[i].State == 7 || this.Monster[i].State == 9)
                     {
-                        if (this.Monster[i].AttackType > 0)
-                        {
-                            this.Monster[i].State = 3;
-                            foreach (Character All in this.Characters)
-                            {
-                                if (All.MapX == this.MapX && All.MapY == this.MapY)
-                                    MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
-                            }
-                        }
-                        this.Monster[i].State = 1;
+                        //if (this.Monster[i].AttackType > 0)
+                        //{
+                        //    this.Monster[i].State = 3;
+                        //    foreach (Character All in this.Characters)
+                        //    {
+                        //        if (All.MapX == this.MapX && All.MapY == this.MapY)
+                        //            MonsterPacket.spawnMonster(All.Client, this.Monster[i], 0, 0, 0, 0);
+                        //    }
+                        //}
+                        this.Monster[i].State = (this.Monster[i].MoveType == 0 ? (byte)0 : (byte)1);
                         foreach (Character All in this.Characters)
                         {
                             if (All.MapX == this.MapX && All.MapY == this.MapY)
@@ -159,7 +159,7 @@ namespace Server.Ghost
                                 MonsterPacket.regenrMonster(All.Client, this.Monster[i]);
                         }
                         this.Monster[i].IsAlive = true;
-                        this.Monster[i].State = 1;
+                        this.Monster[i].State = (this.Monster[i].MoveType == 0 ? (byte)0 : (byte)1);
                         foreach (Character All in this.Characters)
                         {
                             if (All.MapX == this.MapX && All.MapY == this.MapY)

@@ -13,7 +13,7 @@ namespace Server.Net
             ip.ReadInt(); // 原始長度 + CRC
             ip.ReadInt();
 
-            //Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
+            Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
 
             switch ((ClientOpcode)Header)
             {
@@ -224,6 +224,12 @@ namespace Server.Net
                 // Pet
                 case ClientOpcode.PET_NAME_REQ:
                     PetHandler.Pet_Name_Req(ip, gc);
+                    break;
+                case ClientOpcode.SPIRIT_MOVE_REQ:
+                    SpiritHandler.SpiritMove(ip, gc);
+                    break;
+                case ClientOpcode.EQUIPMENT_COMPOUND_REQ:
+                    SpiritHandler.EquipmentCompound(ip, gc);
                     break;
             }
         }

@@ -86,6 +86,7 @@
     <Compile Include="Net\Handler\PvPHandler.cs" />
     <Compile Include="Net\Handler\QuestHandler.cs" />
     <Compile Include="Net\Handler\SkillHandler.cs" />
+    <Compile Include="Net\Handler\SpiritHandler.cs" />
     <Compile Include="Net\Handler\StatusHandler.cs" />
     <Compile Include="Net\Handler\StorageHandler.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />

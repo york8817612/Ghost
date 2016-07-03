@@ -91,6 +91,9 @@ namespace Server.Common.Net
         QUEST_DONE2_REQ = 0x7E,
         QUEST_UPDATE_REQ = 0x7F,
         //
+        SPIRIT_MOVE_REQ = 0x82,
+        EQUIPMENT_COMPOUND_REQ = 0x83,
+        //
         CAN_WARP_ACK_REQ = 0x85,
         //
         TRADE_INVITE_REQ = 0x92,

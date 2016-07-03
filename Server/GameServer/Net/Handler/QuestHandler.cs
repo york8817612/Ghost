@@ -118,6 +118,22 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8990026, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
                     break;
+                case 87: // [尋找太和老君的第12弟子]
+                    chr.Items.Add(new Item(8990031, 4, Slot));
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 88: // [北瓶押的試驗 1階段]
+                    chr.Items.Add(new Item(8510011, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 89: // [北瓶押的試驗 2階段]
+                    chr.Items.Add(new Item(8510021, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 90: // [北瓶押的試驗 最後階段]
+                    chr.Items.Add(new Item(8510031, 2, Slot));
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
                 case 570: // [食糧物資(1)]
                     chr.Items.Add(new Item(8990095, 4, Slot));
                     InventoryHandler.UpdateInventory(gc, 4);
@@ -347,6 +363,14 @@ namespace Server.Handler
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 2);
                     break;
+                case 12: // [守衛的慰勞品2]
+                    chr.Exp += 100;
+                    chr.Rank += 2;
+                    chr.Items.Add(new Item(8990004, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
                 case 14: // [封印豬大長]
                     chr.Money += 54000;
                     chr.Exp += 5000;
@@ -426,6 +450,28 @@ namespace Server.Handler
                 case 67: // [邪派 道士 魂魔遁甲]
                     chr.Skills.Add(new Skill(22301, 1, 2, chr.Skills.GetNextFreeSlot(2)));
                     LearnSkill(gc);
+                    break;
+                case 87: // [尋找太和老君的第12弟子]
+                    chr.Rank += 1;
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 88: // [北瓶押的試驗 1階段]
+                    chr.Rank += 1;
+                    chr.Items.Add(new Item(8510041, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    StatusPacket.UpdateFame(gc, 1);
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 89: // [北瓶押的試驗 2階段]
+                    chr.Rank += 2;
+                    chr.Items.Add(new Item(8510051, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 90: // [北瓶押的試驗 最後階段]
+                    chr.Rank += 3;
+                    chr.Items.Add(new Item(8510061, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    StatusPacket.UpdateFame(gc, 3);
+                    InventoryHandler.UpdateInventory(gc, 2);
                     break;
                 case 114: // [新外型]
                     chr.Money += 10000;

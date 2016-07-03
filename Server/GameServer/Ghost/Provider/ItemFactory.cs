@@ -99,13 +99,13 @@ namespace Server.Ghost.Provider
                 item.ReadInt16();
                 item.ReadInt16();
                 int price = item.ReadInt32(); // 購買價格
-                item.ReadByte();
+                byte Fusion = item.ReadByte();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, MagicAttack, attackRange, Speed, price));
+                weaponData.Add(itemId, new ItemData(itemId, itemNameString, job, level, attack, MagicAttack, attackRange, Speed, price, Fusion));
             }
             all.Add(weaponData);
             //==============================================================================
@@ -134,7 +134,7 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(16);
                 item.ReadBytes(20);
 
-                topData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
+                topData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price, fusion));
             }
             all.Add(topData);
             //==============================================================================
@@ -145,25 +145,24 @@ namespace Server.Ghost.Provider
                 int itemId = item.ReadInt32(); // 物品編號
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
-                item.ReadByte();
+                byte Gender = item.ReadByte();
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
                 short defense = item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
+                short Str = item.ReadInt16();
+                short Dex = item.ReadInt16();
+                short Vit = item.ReadInt16();
+                short Int = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 int price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
-                item.ReadByte();
+                byte Fusion = item.ReadByte();
                 item.ReadBytes(3);
                 item.ReadBytes(12);
-
-                clothingData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
+                clothingData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, Str, Dex, Vit, Int, price, Fusion));
             }
             all.Add(clothingData);
             //==============================================================================
@@ -237,10 +236,10 @@ namespace Server.Ghost.Provider
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 byte job = item.ReadByte();
                 byte level = item.ReadByte();
-                short defense = item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
+                short Str = item.ReadInt16();
+                short Dex = item.ReadInt16();
+                short Vit = item.ReadInt16();
+                short Int = item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadInt16();
@@ -254,8 +253,8 @@ namespace Server.Ghost.Provider
                 item.ReadBytes(3);
                 item.ReadBytes(12);
 
-                capeData.Add(itemId, new ItemData(itemId, itemNameString, job, level, defense, price));
-        }
+                capeData.Add(itemId, new ItemData(itemId, itemNameString, job, level, Str, Dex, Vit, Int, price));
+            }
             all.Add(capeData);
             //==============================================================================
             // 消耗類型開始
@@ -294,14 +293,14 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                item.ReadInt32();
+                int Spirit = item.ReadInt32();
                 item.ReadInt32();
                 int price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadBytes(16);
 
-                soulData.Add(itemId, new ItemData(itemId, itemNameString, price));
+                soulData.Add(itemId, new ItemData(itemId, itemNameString, Spirit, price));
             }
             all.Add(soulData);
             //==============================================================================
@@ -313,21 +312,20 @@ namespace Server.Ghost.Provider
                 byte[] itemNameByteArray = item.ReadBytes(62); // 物品名稱 (Byte[])
                 string itemNameString = Encoding.GetEncoding("UTF-16LE").GetString(itemNameByteArray); // 物品名稱 (Byte[] => String)
                 item.ReadByte();
-                short defense = item.ReadInt16();
+                short Str = item.ReadInt16();
+                short Dex = item.ReadInt16();
+                short Vit = item.ReadInt16();
+                short Int = item.ReadInt16();
                 item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
-                item.ReadInt16();
+                short Hp = item.ReadInt16();
+                short Mp = item.ReadInt16();
                 int price = item.ReadInt32();
                 item.ReadInt16();
                 item.ReadInt16();
                 item.ReadByte();
                 item.ReadBytes(3);
                 item.ReadBytes(12);
-
-                hatData.Add(itemId, new ItemData(itemId, itemNameString, 0xFF, 0xFF, defense, price));
+                hatData.Add(itemId, new ItemData(itemId, itemNameString, Str, Dex, Vit, Int, Hp, Mp, price));
             }
             all.Add(hatData);
             //==============================================================================

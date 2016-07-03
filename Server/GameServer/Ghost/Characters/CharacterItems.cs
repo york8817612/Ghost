@@ -1,5 +1,6 @@
 ﻿using Server.Common.Constants;
 using Server.Common.Data;
+using Server.Ghost.Provider;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -124,52 +125,103 @@ namespace Server.Ghost.Characters
             if (Item == null)
                 return 0;
 
-            switch (Item.ItemID)
-            {
-                case 8510011:
-                    if (Item.Spirit > 100)
-                        return 100;
-                    break;
-                case 8510021:
-                    if (Item.Spirit > 130)
-                        return 130;
-                    break;
-                case 8510031:
-                    if (Item.Spirit > 169)
-                        return 169;
-                    break;
-                case 8510041:
-                    if (Item.Spirit > 220)
-                        return 220;
-                    break;
-                case 8510051:
-                    if (Item.Spirit > 286)
-                        return 286;
-                    break;
-                case 8510061:
-                    if (Item.Spirit > 371)
-                        return 371;
-                    break;
-                case 8510071:
-                    if (Item.Spirit > 483)
-                        return 483;
-                    break;
-                case 8510081:
-                    if (Item.Spirit > 627)
-                        return 627;
-                    break;
-                case 8510091:
-                    if (Item.Spirit > 816)
-                        return 816;
-                    break;
-                case 8510101:
-                    if (Item.Spirit > 1060)
-                        return 1060;
-                    break;
-                default:
-                    return 0;
-            }
+            ItemData Data = ItemFactory.GetItemData(Item.ItemID);
+
+            if (Data == null)
+                return 0;
+
+            if (Item.Spirit > Data.Spirit)
+                return Data.Spirit;
+
             return Item.Spirit;
+        }
+
+        public byte Level1(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level1;
+        }
+
+        public byte Level2(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level2;
+        }
+
+        public byte Level3(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level3;
+        }
+
+        public byte Level4(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level4;
+        }
+
+        public byte Level5(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level5;
+        }
+
+        public byte Level6(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level6;
+        }
+
+        public byte Level7(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level7;
+        }
+
+        public byte Level8(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level8;
+        }
+
+        public byte Level9(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level9;
+        }
+
+        public byte Level10(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level10;
+        }
+
+        public byte Fusion(InventoryType.ItemType Type, byte Slot)
+        {
+            Item Item = this.Items.Find(i => (i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Fusion;
         }
 
         public byte IsLocked(InventoryType.ItemType type, byte slot)

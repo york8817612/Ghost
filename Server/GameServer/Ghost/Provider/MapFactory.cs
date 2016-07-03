@@ -907,13 +907,21 @@ namespace Server.Ghost.Provider
                             var Direction = reader.ReadByte();
                             var Speed = BitConverter.ToSingle(reader.ReadBytes(4), 0);
                             var PosX = reader.ReadInt32();
-                            var PosY = reader.ReadInt32() + 40;
+                            var PosY = reader.ReadInt32();
                             int ss = reader.ReadInt32();
                             int ss2 = 0;
                             do
                             {
-                                reader.ReadInt32();
-                                reader.ReadInt32();
+                                if (ss2 == 1)
+                                {
+                                    PosX = reader.ReadInt32();
+                                    PosY = reader.ReadInt32() + 30;
+                                }
+                                else
+                                {
+                                    reader.ReadInt32();
+                                    reader.ReadInt32();
+                                }
                                 ++ss2;
                             } while (ss2 < ss);
 
@@ -927,18 +935,13 @@ namespace Server.Ghost.Provider
                             int MaxHP = MobFactory.MonsterMaxHP(MonsterLevel);
                             int Exp = MobFactory.MonsterExp(MonsterLevel);
                             byte MoveType = MobFactory.MoveType(MonsterID);
-                            byte AttackType = MobFactory.MoveType(MonsterID);
+                            byte AttackType = MobFactory.AttackType(MonsterID);
                             int Attack1 = MobFactory.Attack1(MonsterID);
                             int Attack2 = MobFactory.Attack2(MonsterID);
                             int CrashAttack = MobFactory.CrashAttack(MonsterID);
                             int Defense = MobFactory.Defense(MonsterID);
                             byte AddEffect = MobFactory.AddEffect(MonsterID);
-                            Monster m = new Monster(i, MonsterID, MonsterLevel, MaxHP, MaxHP, 0, Exp, Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, 1, 0, AddEffect, PosX, PosY, true);
-                            //if (m.MoveType == 0)
-                            //{
-                            //    m.Speed = 0;
-                            //    m.State = 0;
-                            //}
+                            Monster m = new Monster(i, MonsterID, MonsterLevel, MaxHP, MaxHP, 0, Exp, MoveType == 0 ? 0 : Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, MoveType == 0 ? (byte)0 : (byte)1, 0, AddEffect, PosX, PosY, true);
                             map.Monster.Add(m);
                             map.UpdatePosition(m, (int)(40 * map.Monster[i].Speed));
                         }
