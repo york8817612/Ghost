@@ -13,205 +13,219 @@ namespace Server.Handler
         {
             var chr = gc.Character;
             int QuestID = lea.ReadShort();
-            byte Slot = chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4);
-            Quest Quest = new Quest(QuestID);
 
-            if (Quest == null)
-                return;
+            try
+            {
+                byte Slot = chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4);
+                Quest Quest = new Quest(QuestID);
 
-            Quest.QuestState = 0x31;
-            chr.Quests.Add(Quest);
-            QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
-            switch (Quest.QuestID)
+                if (Quest == null)
+                    return;
+
+                Quest.QuestState = 0x31;
+                chr.Quests.Add(Quest);
+                QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
+                switch (Quest.QuestID)
+                {
+                    // 
+                    case 3: // [委託送書]
+                        chr.Items.Add(new Item(8990002, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 4: // [委託送書2]
+                        chr.Items.Add(new Item(8990003, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 18: // [守衛的慰勞品2]
+                        chr.Items.Add(new Item(8990004, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+
+                    // 技能任務(武士)
+                    case 22: // [利刃術]
+                        chr.Items.Add(new Item(8990006, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 23: // [霸刀術]
+                        chr.Items.Add(new Item(8990009, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+
+                    // 技能任務(刺客)
+                    case 32: // [鬼手術]
+                        chr.Items.Add(new Item(8990007, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 33: // [利爪術]
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+
+                    // 技能任務(道士)
+                    case 42: // [扇魂術]
+                        chr.Items.Add(new Item(8990008, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 43: // [杖擊術]
+                        chr.Items.Add(new Item(8990011, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+
+                    // 技能任務(力士)
+                    case 352: // [ 光熱地斧 ]
+                        chr.Items.Add(new Item(8990076, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 353: // [ 光熱地斧 ]
+                        chr.Items.Add(new Item(8990077, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+
+                    // 
+                    case 52: // [送通知單]
+                        chr.Items.Add(new Item(8990012, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 53: // [守衛的請託]
+                        chr.Items.Add(new Item(8990013, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 59: // [遞送中藥材]
+                        chr.Items.Add(new Item(8990018, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 60: // [選擇派系](正派)
+                        chr.Items.Add(new Item(8990019, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 61:
+                    case 62:
+                    case 63:
+                        chr.Items.Add(new Item(8510051, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    case 64: // [選擇派系](邪派)
+                        chr.Items.Add(new Item(8990020, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 65:
+                    case 66:
+                    case 67:
+                        chr.Items.Add(new Item(8510051, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    case 77: // [兩個金塊]
+                        chr.Items.Add(new Item(8990023, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 80: // [薇薇安的腰]
+                        chr.Items.Add(new Item(8990026, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 87: // [尋找太和老君的第12弟子]
+                        chr.Items.Add(new Item(8990031, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 88: // [北瓶押的試驗 1階段]
+                        chr.Items.Add(new Item(8510011, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    case 89: // [北瓶押的試驗 2階段]
+                        chr.Items.Add(new Item(8510021, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    case 90: // [北瓶押的試驗 最後階段]
+                        chr.Items.Add(new Item(8510031, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    case 570: // [食糧物資(1)]
+                        chr.Items.Add(new Item(8990095, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 590: // [高級食材(1)]
+                        chr.Items.Add(new Item(8990096, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 379:
+                    case 380:
+                    case 625:
+                    case 629:
+                        chr.Items.Add(new Item(8510051, 2, Slot));
+                        InventoryHandler.UpdateInventory(gc, 2);
+                        break;
+                    // 怪物 x 1
+                    case 612:// [神射手轉職]
+                        Quest.RequireMonster = 1;
+                        break;
+                    // 怪物 x 2
+                    case 361:// [ 猛龍承招 ]
+                        Quest.RequireMonster = 2;
+                        break;
+                    // 怪物 x 3
+                    case 16: // [武士 轉職]
+                    case 19: // [刺客 轉職]
+                    case 21: // [道士 轉職]
+                    case 351:// [力士 轉職]
+                        Quest.RequireMonster = 3;
+                        break;
+                    // 怪物 x 5
+                    case 614: // [崩天擊砲](射手)
+                        Quest.RequireMonster = 5;
+                        break;
+                    // 怪物 x 10
+                    // [擊退清野江怪物]
+                    case 613: // [恨夜擊弓](射手)
+                    case 621: // [舞影走](射手)
+                        Quest.RequireMonster = 10;
+                        break;
+                    // 怪物 x20
+                    case 28: // [狂暴怒氣](武士)
+                    case 29: // [氣力轉換](武士)
+                    case 30: // [強氣護體](武士)
+                    case 31: // [強化格擋](武士)
+                    case 38: // [餵毒術](刺客)
+                    case 39: // [解毒術](刺客)
+                    case 40: // [霧影術](刺客)
+                    case 41: // [閃擊技](刺客)
+                    case 44: // [玄冰擊](道士)
+                    case 46: // [冰凍大地](道士)
+                    case 47: // [矇蔽蝕眼](道士)
+                    case 48: // [震退](道士)
+                    case 51: // [陰陽幻移](道士)
+                    case 57: // [路邊攤的請託]
+                    case 79: // [製鹽的石磨]
+                    case 358:// [ 壁破力 ](力士)
+                    case 359:// [ 真功彈強 ](力士) 
+                    case 360:// [ 武月真氣 ](力士)
+                    case 567: // [工頭領班的憂慮]
+                    case 574: // [突變]
+                    case 620:// [觀首真眼](射手)
+                    case 622:// [飛鳥壁護](射手)
+                        Quest.RequireMonster = 20;
+                        break;
+                    // 怪物 x30
+                    case 85: // [少女的眼淚第2階段]
+                    case 619: // [鎮水液彈](射手)
+                        Quest.RequireMonster = 30;
+                        break;
+                    // 怪物 x50
+                    case 128: // [職務代理]
+                        Quest.RequireMonster = 50;
+                        break;
+                    // 怪物 x100
+                    case 109: // [遺失的仙女服]
+                    case 131: // [與狼牙棒叔叔摔角]
+                        Quest.RequireMonster = 100;
+                        break;
+                    default:
+                        Quest.RequireMonster = 100;
+                        break;
+                }
+                Log.Inform("QuestID = {0}", QuestID);
+            }
+            catch
             {
                 // 
-                case 3: // [委託送書]
-                    chr.Items.Add(new Item(8990002, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 4: // [委託送書2]
-                    chr.Items.Add(new Item(8990003, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 18: // [守衛的慰勞品2]
-                    chr.Items.Add(new Item(8990004, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-
-                // 技能任務(武士)
-                case 22: // [利刃術]
-                    chr.Items.Add(new Item(8990006, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 23: // [霸刀術]
-                    chr.Items.Add(new Item(8990009, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-
-                // 技能任務(刺客)
-                case 32: // [鬼手術]
-                    chr.Items.Add(new Item(8990007, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 33: // [利爪術]
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-
-                // 技能任務(道士)
-                case 42: // [扇魂術]
-                    chr.Items.Add(new Item(8990008, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 43: // [杖擊術]
-                    chr.Items.Add(new Item(8990011, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-
-                // 技能任務(力士)
-                case 352: // [ 光熱地斧 ]
-                    chr.Items.Add(new Item(8990076, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 353: // [ 光熱地斧 ]
-                    chr.Items.Add(new Item(8990077, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-
-                // 
-                case 52: // [送通知單]
-                    chr.Items.Add(new Item(8990012, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 53: // [守衛的請託]
-                    chr.Items.Add(new Item(8990013, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 59: // [遞送中藥材]
-                    chr.Items.Add(new Item(8990018, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 60: // [選擇派系](正派)
-                    chr.Items.Add(new Item(8990019, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 61:
-                case 62:
-                case 63:
-                    chr.Items.Add(new Item(8510051, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                case 64: // [選擇派系](邪派)
-                    chr.Items.Add(new Item(8990020, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 65:
-                case 66:
-                case 67:
-                    chr.Items.Add(new Item(8510051, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                case 77: // [兩個金塊]
-                    chr.Items.Add(new Item(8990023, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 80: // [薇薇安的腰]
-                    chr.Items.Add(new Item(8990026, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 87: // [尋找太和老君的第12弟子]
-                    chr.Items.Add(new Item(8990031, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 88: // [北瓶押的試驗 1階段]
-                    chr.Items.Add(new Item(8510011, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                case 89: // [北瓶押的試驗 2階段]
-                    chr.Items.Add(new Item(8510021, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                case 90: // [北瓶押的試驗 最後階段]
-                    chr.Items.Add(new Item(8510031, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                case 570: // [食糧物資(1)]
-                    chr.Items.Add(new Item(8990095, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 590: // [高級食材(1)]
-                    chr.Items.Add(new Item(8990096, 4, Slot));
-                    InventoryHandler.UpdateInventory(gc, 4);
-                    break;
-                case 379:
-                case 380:
-                case 625:
-                case 629:
-                    chr.Items.Add(new Item(8510051, 2, Slot));
-                    InventoryHandler.UpdateInventory(gc, 2);
-                    break;
-                // 怪物 x 1
-                case 612:// [神射手轉職]
-                    Quest.RequireMonster = 1;
-                    break;
-                // 怪物 x 2
-                case 361:// [ 猛龍承招 ]
-                    Quest.RequireMonster = 2;
-                    break;
-                // 怪物 x 3
-                case 16: // [武士 轉職]
-                case 19: // [刺客 轉職]
-                case 21: // [道士 轉職]
-                case 351:// [力士 轉職]
-                    Quest.RequireMonster = 3;
-                    break;
-                // 怪物 x 5
-                case 614: // [崩天擊砲](射手)
-                    Quest.RequireMonster = 5;
-                    break;
-                // 怪物 x 10
-                // [擊退清野江怪物]
-                case 613: // [恨夜擊弓](射手)
-                case 621: // [舞影走](射手)
-                    Quest.RequireMonster = 10;
-                    break;
-                // 怪物 x20
-                case 28: // [狂暴怒氣](武士)
-                case 29: // [氣力轉換](武士)
-                case 30: // [強氣護體](武士)
-                case 31: // [強化格擋](武士)
-                case 38: // [餵毒術](刺客)
-                case 39: // [解毒術](刺客)
-                case 40: // [霧影術](刺客)
-                case 41: // [閃擊技](刺客)
-                case 44: // [玄冰擊](道士)
-                case 46: // [冰凍大地](道士)
-                case 47: // [矇蔽蝕眼](道士)
-                case 48: // [震退](道士)
-                case 51: // [陰陽幻移](道士)
-                case 79: // [製鹽的石磨]
-                case 358:// [ 壁破力 ](力士)
-                case 359:// [ 真功彈強 ](力士) 
-                case 360:// [ 武月真氣 ](力士)
-                case 567: // [工頭領班的憂慮]
-                case 574: // [突變]
-                case 620:// [觀首真眼](射手)
-                case 622:// [飛鳥壁護](射手)
-                    Quest.RequireMonster = 20;
-                    break;
-                // 怪物 x30
-                case 85: // [少女的眼淚第2階段]
-                case 619: // [鎮水液彈](射手)
-                    Quest.RequireMonster = 30;
-                    break;
-                // 怪物 x100
-                case 109: // [遺失的仙女服]
-                    Quest.RequireMonster = 100;
-                    break;
-                default:
-                    Quest.RequireMonster = 100;
-                    break;
             }
-            Log.Inform("QuestID = {0}", QuestID);
         }
 
         public static void Quest_Update_Req(InPacket lea, Client gc)
@@ -301,12 +315,12 @@ namespace Server.Handler
         public static void QuestCompleteHandler(Client gc, int QuestID)
         {
             var chr = gc.Character;
-            int WeaponID = 0;
+            Item Item = null;
             foreach (Item item in chr.Items)
             {
                 if (item.Type == (byte)InventoryType.ItemType.Equip && item.Slot == (byte)InventoryType.EquipType.Weapon)
                 {
-                    WeaponID = item.ItemID;
+                    Item = item;
                     break;
                 }
             }
@@ -405,6 +419,12 @@ namespace Server.Handler
                     InventoryPacket.getInvenMoney(gc, chr.Money, 30000);
                     StatusPacket.UpdateExp(gc);
                     break;
+                case 57: // [路邊攤的請託]
+                    chr.Money += 32000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 32000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
                 case 58: // [封印狗骨頭]
                     chr.Money += 270000;
                     chr.Exp += 15000;
@@ -451,6 +471,66 @@ namespace Server.Handler
                     chr.Skills.Add(new Skill(22301, 1, 2, chr.Skills.GetNextFreeSlot(2)));
                     LearnSkill(gc);
                     break;
+                case 68: // [蛇腹窟 蠟燭]
+                    chr.Items.Add(new Item(8890011, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 69: // [蛇腹窟 火把]
+                    chr.Items.Add(new Item(8890021, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 76: // [材料不足]
+                    chr.Money += 65000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 65000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 77: // [兩個金塊]
+                    chr.Money += 40000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 40000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 78: // [少女的眼淚第1階段]
+                    chr.Rank += 2;
+                    chr.Items.Add(new Item(8990025, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 79: // [製鹽的石磨]
+                    chr.Money += 80000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 80000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 80: // [薇薇安的腰]
+                    chr.Money += 70000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 70000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 81: // [道名寺的秘密]
+                    chr.Rank += 3;
+                    StatusPacket.UpdateFame(gc, 3);
+                    break;
+                case 82: // [中計的獨角阿魯巴巴]
+                    chr.Money += 2000000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 2000000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 83: // [斷裂的鐵鍊]
+                    chr.Money += 100000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 100000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
+                case 84: // [寶芝林的禮物]
+                    chr.Money += 85000;
+                    chr.Rank += 2;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 85000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    break;
                 case 87: // [尋找太和老君的第12弟子]
                     chr.Rank += 1;
                     StatusPacket.UpdateFame(gc, 1);
@@ -473,6 +553,49 @@ namespace Server.Handler
                     StatusPacket.UpdateFame(gc, 3);
                     InventoryHandler.UpdateInventory(gc, 2);
                     break;
+                case 93: // [消失的傳家寶]
+                    chr.Money += 40000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 40000);
+                    break;
+                case 94: // [不安的哞讀冊]
+                    chr.Items.Add(new Item(8810031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 50));
+                    chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 100));
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 95: // [遭竊的名田瞧]
+                    chr.Rank += 1;
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 105: // [貍貓圍巾]
+                    chr.Money += 80000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 80000);
+                    break;
+                case 106: // [收取賒帳]
+                    chr.Rank += 5;
+                    StatusPacket.UpdateFame(gc, 5);
+                    break;
+                case 107: // [龍林山的隱藏地區]
+                    chr.Rank += 1;
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 108: // [幫助受傷的工人]
+                    chr.Rank += 1;
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 109: // [遺失的仙女服]
+                    chr.Rank += 3;
+                    StatusPacket.UpdateFame(gc, 3);
+                    break;
+                case 110: // [夜半怪聲]
+                    chr.Rank += 1;
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 111: // [腳受傷的鹿]
+                    chr.Money += 150000;
+                    chr.Rank += 3;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 150000);
+                    StatusPacket.UpdateFame(gc, 3);
+                    break;
                 case 114: // [新外型]
                     chr.Money += 10000;
                     chr.Rank += 1;
@@ -494,6 +617,10 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 10));
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 1);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 117: // [幫忙家務事2]
+                    chr.Items.Add(new Item(8820031, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 35));
                     InventoryHandler.UpdateInventory(gc, 3);
                     break;
                 case 118: // [飛龍掌]
@@ -554,7 +681,27 @@ namespace Server.Handler
                     break;
                 case 129: // [有去無回]
                     chr.Money += 50000;
+                    chr.Rank += 3;
                     InventoryPacket.getInvenMoney(gc, chr.Money, 50000);
+                    StatusPacket.UpdateFame(gc, 3);
+                    break;
+                case 130: // [不當的買賣]
+                    chr.Money += 20000;
+                    chr.Rank += 2;
+                    chr.Items.Add(new Item(8090011, (byte)InventoryType.ItemType.Equip1, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip1)));
+                    chr.Items.Add(new Item(8881081, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 100));
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 20000);
+                    StatusPacket.UpdateFame(gc, 2);
+                    InventoryHandler.UpdateInventory(gc, 1);
+                    InventoryHandler.UpdateInventory(gc, 3);
+                    break;
+                case 131: // [與狼牙棒叔叔摔角]
+                    chr.Money += 40000;
+                    chr.Rank += 3;
+                    chr.Items.Add(new Item(8210241, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 40000);
+                    StatusPacket.UpdateFame(gc, 3);
+                    InventoryHandler.UpdateInventory(gc, 2);
                     break;
                 case 379: // [正派 力士 魂魔遁甲]
                     chr.Skills.Add(new Skill(21401, 1, 2, chr.Skills.GetNextFreeSlot(2)));
@@ -640,8 +787,8 @@ namespace Server.Handler
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 1;
-                            if (WeaponID != 0)
-                                 InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
+                            if (Item != null)
+                                 InventoryHandler.UpdateCharacterInventoryStatus(gc, Item, true);
                             GamePacket.Message(gc, 11);
                             break;
                         case 19: // 刺客(2)
@@ -651,8 +798,8 @@ namespace Server.Handler
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 2;
-                            if (WeaponID != 0)
-                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
+                            if (Item != null)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, Item, true);
                             GamePacket.Message(gc, 12);
                             break;
                         case 21: // 道士(3)
@@ -662,8 +809,8 @@ namespace Server.Handler
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 3;
-                            if (WeaponID != 0)
-                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
+                            if (Item != null)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, Item, true);
                             GamePacket.Message(gc, 13);
                             break;
                         case 351: // 力士(4)
@@ -673,8 +820,8 @@ namespace Server.Handler
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 4;
-                            if (WeaponID != 0)
-                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
+                            if (Item != null)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, Item, true);
                             GamePacket.Message(gc, 58);
                             break;
                         case 612: // 射手(5)
@@ -684,8 +831,8 @@ namespace Server.Handler
                             chr.MaxMagic = 4;
                             chr.Defense = 12;
                             chr.Class = 5;
-                            if (WeaponID != 0)
-                                InventoryHandler.UpdateCharacterInventoryStatus(gc, WeaponID, true);
+                            if (Item != null)
+                                InventoryHandler.UpdateCharacterInventoryStatus(gc, Item, true);
                             GamePacket.Message(gc, 136);
                             break;
                     }

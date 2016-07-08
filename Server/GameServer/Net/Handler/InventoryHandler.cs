@@ -23,6 +23,11 @@ namespace Server.Handler
             Item Target = gc.Character.Items.getItem(TargetType, TargetSlot);
             var chr = gc.Character;
 
+            if (SourceType != (byte)InventoryType.ItemType.Pet5 && Source.IsLocked == 1 && TargetType == (byte)InventoryType.ItemType.Equip)
+            {
+                Source.IsLocked = 0;
+            }
+
             if (TargetType == 0x63 && TargetSlot == 0x63)
             {
                 if (SourceType == 0xFF && SourceSlot == 0xFF)
@@ -46,7 +51,7 @@ namespace Server.Handler
                         Source.Type = TargetType;
                         Source.Slot = TargetSlot;
                         if (TargetType == (byte)InventoryType.ItemType.Equip || SourceType == (byte)InventoryType.ItemType.Equip)
-                            UpdateCharacterInventoryStatus(gc, Source.ItemID, SourceType > 0);
+                            UpdateCharacterInventoryStatus(gc, Source, SourceType > 0);
                     }
                     else
                     {
@@ -122,20 +127,15 @@ namespace Server.Handler
                     }
                     if (SourceType == (byte)InventoryType.ItemType.Equip && TargetType == (byte)InventoryType.ItemType.Equip1)
                     {
-                        UpdateCharacterInventoryStatus(gc, Source.ItemID, false);
-                        UpdateCharacterInventoryStatus(gc, Target.ItemID, true);
+                        UpdateCharacterInventoryStatus(gc, Source, false);
+                        UpdateCharacterInventoryStatus(gc, Target, true);
                     }
                     else if (SourceType == (byte)InventoryType.ItemType.Equip || TargetType == (byte)InventoryType.ItemType.Equip)
                     {
-                        UpdateCharacterInventoryStatus(gc, Target.ItemID, false);
-                        UpdateCharacterInventoryStatus(gc, Source.ItemID, true);
+                        UpdateCharacterInventoryStatus(gc, Target, false);
+                        UpdateCharacterInventoryStatus(gc, Source, true);
                     }
                 }
-            }
-            if (SourceType != 5 && TargetType != 5)
-            {
-                if (Source.IsLocked == 1)
-                    Source.IsLocked = 0;
             }
             UpdateInventory(gc, SourceType, TargetType);
         }
@@ -160,6 +160,19 @@ namespace Server.Handler
             // 使用回復HP 跟 MP 的物品
             switch (Item.ItemID)
             {
+                case 8841006: // 全部還原本
+                    int Recover = 0;
+                    Recover = Recover + (chr.Str - 3);
+                    Recover = Recover + (chr.Dex - 3);
+                    Recover = Recover + (chr.Vit - 3);
+                    Recover = Recover + (chr.Int - 3);
+                    chr.Str = 3;
+                    chr.Dex = 3;
+                    chr.Vit = 3;
+                    chr.Int = 3;
+                    chr.AbilityBonus += (short)Recover;
+                    StatusPacket.getStatusInfo(gc);
+                    break;
                 case 8850011: // 回城符
                     switch (chr.MapX)
                     {
@@ -361,7 +374,7 @@ namespace Server.Handler
 
             if (Slot >= 0 && Slot < 24 && Message.Length <= 60)
             {
-                gc.Character.Items.Remove(InventoryType.ItemType.Spend3, Slot);
+                gc.Character.Items.Remove((byte)InventoryType.ItemType.Spend3, Slot, 1);
                 foreach (Character All in MapFactory.AllCharacters)
                 {
                     GamePacket.InvenUseSpendShout(All.Client, chr, Message);
@@ -468,72 +481,112 @@ namespace Server.Handler
             UpdateInventory(gc, Type);
         }
 
-        public static void UpdateCharacterInventoryStatus(Client gc, int itemID, bool equiped)
+        public static void UpdateCharacterInventoryStatus(Client gc, Item Source, bool Equiped)
         {
-            ItemData idata = ItemFactory.GetItemData(itemID);
+            ItemData idata = ItemFactory.GetItemData(Source.ItemID);
             Character chr = gc.Character;
             // Hp
             if (idata.Hp != -1)
             {
-                if (equiped)
+                if (Equiped)
                 {
                     chr.MaxHp += idata.Hp;
                 }
                 else
                 {
                     chr.MaxHp -= idata.Hp;
-                    chr.Hp = chr.MaxHp;
                 }
             }
             // Mp
             if (idata.Mp != -1)
             {
-                if (equiped)
+                if (Equiped)
                 {
                     chr.MaxMp += idata.Mp;
                 }
                 else
                 {
                     chr.MaxMp -= idata.Mp;
-                    chr.Mp = chr.MaxMp;
                 }
             }
             // 力量
             if (idata.Str != -1)
             {
-                if (equiped)
+                if (Equiped)
+                {
+                    chr.Str += idata.Str;
                     chr.UpgradeStr += idata.Str;
+                    chr.MaxHp += (short)(3 * idata.Str);
+                    chr.MaxAttack += (short)(2 * idata.Str);
+                }
                 else
+                {
+                    chr.Str -= idata.Str;
                     chr.UpgradeStr -= idata.Str;
+                    chr.MaxHp -= (short)(3 * idata.Str);
+                    chr.MaxAttack -= (short)(2 * idata.Str);
+                }
             }
             // 精力
             if (idata.Dex != -1)
             {
-                if (equiped)
+                if (Equiped)
+                {
+                    chr.Dex += idata.Dex;
                     chr.UpgradeDex += idata.Dex;
+                    chr.Attack += (short)(1 * idata.Dex);
+                    chr.MaxAttack += (short)(2 * idata.Dex);
+                }
                 else
+                {
+                    chr.Dex -= idata.Dex;
                     chr.UpgradeDex -= idata.Dex;
+                    chr.Attack -= (short)(1 * idata.Dex);
+                    chr.MaxAttack -= (short)(2 * idata.Dex);
+                }
             }
             // 氣力
             if (idata.Vit != -1)
             {
-                if (equiped)
+                if (Equiped)
+                {
+                    chr.Vit += idata.Vit;
                     chr.UpgradeVit += idata.Vit;
+                    chr.Defense += (short)(5 * idata.Vit);
+                    chr.MaxHp += (short)(20 * idata.Vit);
+                }
                 else
+                {
+                    chr.Vit -= idata.Vit;
                     chr.UpgradeVit -= idata.Vit;
+                    chr.Defense -= (short)(5 * idata.Vit);
+                    chr.MaxHp -= (short)(20 * idata.Vit);
+                }
             }
             // 智力
             if (idata.Int != -1)
             {
-                if (equiped)
+                if (Equiped)
+                {
+                    chr.Int += idata.Int;
                     chr.UpgradeInt += idata.Int;
+                    chr.MaxMp += (short)(3 * idata.Int);
+                    chr.Magic += (short)(2 * idata.Int);
+                    chr.MaxMagic += (short)(2 * idata.Int);
+                }
                 else
+                {
+                    chr.Int -= idata.Int;
                     chr.UpgradeInt -= idata.Int;
+                    chr.MaxMp -= (short)(3 * idata.Int);
+                    chr.Magic -= (short)(2 * idata.Int);
+                    chr.MaxMagic -= (short)(2 * idata.Int);
+                }
             }
             // 物理攻擊力
             if (idata.Attack != -1)
             {
-                if (equiped)
+                if (Equiped)
                 {
                     chr.Attack += idata.Attack;
                     chr.MaxAttack += idata.Attack;
@@ -547,7 +600,7 @@ namespace Server.Handler
             // 魔法攻擊力
             if (idata.Magic != -1)
             {
-                if (equiped)
+                if (Equiped)
                 {
                     chr.Magic += idata.Magic;
                     chr.MaxMagic += idata.Magic;
@@ -561,7 +614,7 @@ namespace Server.Handler
             // 迴避率
             if (idata.Avoid != -1)
             {
-                if (equiped)
+                if (Equiped)
                     chr.Avoid += idata.Avoid;
                 else
                     chr.Avoid -= idata.Avoid;
@@ -569,11 +622,72 @@ namespace Server.Handler
             // 防禦力
             if (idata.Defense != -1)
             {
-                if (equiped)
+                if (Equiped)
                     chr.Defense += idata.Defense;
                 else
                     chr.Defense -= idata.Defense;
             }
+
+
+            // 武器
+            if (Source.ItemID / 100000 == 79 || Source.ItemID / 100000 == 80)
+            {
+                int Attack = 0;
+                Attack += Source.Level1 * 10;
+                Attack += Source.Level2 * 9;
+                Attack += Source.Level3 * 8;
+                Attack += Source.Level4 * 7;
+                Attack += Source.Level5 * 6;
+                Attack += Source.Level6 * 5;
+                Attack += Source.Level7 * 4;
+                Attack += Source.Level8 * 3;
+                Attack += Source.Level9 * 2;
+                Attack += Source.Level10 * 1;
+                if (Equiped)
+                {
+                    chr.Attack += (short)Attack;
+                    chr.MaxAttack += (short)Attack;
+                    chr.UpgradeAttack += (short)Attack;
+                }
+                else
+                {
+                    chr.Attack -= (short)Attack;
+                    chr.MaxAttack -= (short)Attack;
+                    chr.UpgradeAttack -= (short)Attack;
+                }
+            }
+
+            // 衣服
+            if (Source.ItemID / 100000 == 81 || Source.ItemID / 100000 == 95)
+            {
+                int Defense = 0;
+                Defense += Source.Level1 * 20;
+                Defense += Source.Level2 * 18;
+                Defense += Source.Level3 * 16;
+                Defense += Source.Level4 * 14;
+                Defense += Source.Level5 * 12;
+                Defense += Source.Level6 * 10;
+                Defense += Source.Level7 * 8;
+                Defense += Source.Level8 * 6;
+                Defense += Source.Level9 * 4;
+                Defense += Source.Level10 * 2;
+                if (Equiped)
+                {
+                    chr.Defense += (short)Defense;
+                    chr.UpgradeDefense += (short)Defense;
+                }
+                else
+                {
+                    chr.Defense -= (short)Defense;
+                    chr.UpgradeDefense -= (short)Defense;
+                }
+            }
+
+            if (chr.Hp > chr.MaxHp)
+                chr.Hp = chr.MaxHp;
+            if (chr.Mp > chr.MaxMp)
+                chr.Mp = chr.MaxMp;
+
             StatusPacket.UpdateStat(gc);
         }
 

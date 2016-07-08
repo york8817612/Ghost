@@ -92,7 +92,7 @@ namespace Server.Handler
                     case 10207: // 霧影術
                         chr.IsHiding = true;
                         foreach (Character All in Map.Characters)
-                            StatusPacket.Hide(All.Client, chr);
+                            StatusPacket.Hide(All.Client, chr, 1);
                         break;
                     default:
                         //Log.Inform("[Use Skill] SkillID = {0}", skill.SkillID);

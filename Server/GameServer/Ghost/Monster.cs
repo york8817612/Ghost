@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Server.Common.Threading;
+using System.Collections.Generic;
 
 namespace Server.Ghost
 {
@@ -28,6 +29,9 @@ namespace Server.Ghost
         public bool IsAlive { get; set; }
 
         public List<Drop> Drops { get; set; }
+
+        public Delay tmr1 { get; set; }
+        public Delay tmr2 { get; set; }
 
         /* Speed
         00 00 00 00 // Stop

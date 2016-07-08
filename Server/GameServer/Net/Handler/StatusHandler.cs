@@ -173,7 +173,6 @@ namespace Server.Handler
                     {
                         StatusPacket.Fury(All.Client, chr, 0);
                     }
-                    tmr.Cancel();
                 });
                 tmr.Execute();
             }
@@ -288,7 +287,6 @@ namespace Server.Handler
                     {
                         StatusPacket.Fury(All.Client, chr, 0);
                     }
-                    tmr.Cancel();
                 });
                 tmr.Execute();
             }

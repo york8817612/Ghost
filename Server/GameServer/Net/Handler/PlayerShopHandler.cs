@@ -1,5 +1,4 @@
 ﻿using Server.Common.Constants;
-using Server.Common.IO;
 using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;

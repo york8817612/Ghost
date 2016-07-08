@@ -154,14 +154,14 @@ namespace Server.Packet
             }
         }
 
-        public static void Hide(Client c, Character chr)
+        public static void Hide(Client c, Character chr, int Active)
         {
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_HIDE))
             {
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteShort(chr.CharacterID);
-                plew.WriteShort(10207); // 技能ID(霧影術)
+                plew.WriteShort(Active);
                 c.Send(plew);
             }
         }

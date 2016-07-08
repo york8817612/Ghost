@@ -5,7 +5,6 @@ using Server.Ghost;
 using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
-using System;
 
 namespace Server.Handler
 {
@@ -27,7 +26,13 @@ namespace Server.Handler
             if (CashShopFactory.GetItemData(ItemID) == null)
                 return;
 
-            if (ItemID == 8842002 || ItemID == 8890031 || ItemID == 8890037) // 伺服器傳音秘笈 + 鞭炮 + 心花怒放
+            if (ItemID == 8842002)
+                Quantity = 10;
+
+            if (ItemID == 8841001 || ItemID == 8841002 || ItemID == 8841003 || ItemID == 8841004 || ItemID == 8841005)
+                Quantity = 20;
+
+            if (ItemID == 8890031 || ItemID == 8890037) // 鞭炮 + 心花怒放
                 Quantity = 100;
 
             if (ItemID / 100000 == 92 || ItemID == 8890031 || ItemID == 8890037) // 寵物 + 鞭炮 + 心花怒放
@@ -101,7 +106,8 @@ namespace Server.Handler
                 InventoryPacket.getInvenCash(c);
                 InventoryHandler.UpdateInventory(c, (byte)InventoryType.ItemType.Equip);
                 return;
-            } else if (Source.ItemID / 100000 == 92)
+            }
+            else if (Source.ItemID / 100000 == 92 || Source.ItemID == 7820501)
             {
                 // 寵物
                 chr.Pets.Add(new Pet(Source.ItemID, 0, "", 1, 100, 100, 0, (byte)InventoryType.ItemType.Pet5, chr.Pets.GetNextFreeSlot(InventoryType.ItemType.Pet5)));
@@ -130,11 +136,62 @@ namespace Server.Handler
             CashShopPacket.GuiHonCash(c);
         }
 
+        public static void AbilityRecover_Req(InPacket lea, Client c)
+        {
+            short Slot = lea.ReadShort();
+            short Type = lea.ReadShort();
+            var chr = c.Character;
+
+            switch (Type)
+            {
+                case 0: // 力量還原本
+                    if (chr.Str < 4)
+                        return;
+                    chr.Str--;
+                    chr.AbilityBonus++;
+                    chr.Items.Remove(3, (byte)Slot, 1);
+                    break;
+                case 1: // 精力還原本
+                    if (chr.Dex < 4)
+                        return;
+                    chr.Dex--;
+                    chr.AbilityBonus++;
+                    chr.Items.Remove(3, (byte)Slot, 1);
+                    break;
+                case 2: // 氣力還原本
+                    if (chr.Vit < 4)
+                        return;
+                    chr.Vit--;
+                    chr.AbilityBonus++;
+                    chr.Items.Remove(3, (byte)Slot, 1);
+                    break;
+                case 3: // 智力還原本
+                    if (chr.Int < 4)
+                        return;
+                    chr.Int--;
+                    chr.AbilityBonus++;
+                    chr.Items.Remove(3, (byte)Slot, 1);
+                    break;
+            }
+            InventoryHandler.UpdateInventory(c, 3);
+            StatusPacket.getStatusInfo(c);
+        }
+
         public static void CheckName_Req(InPacket lea, Client c)
         {
             string Name = lea.ReadString(20);
             bool IsExist = Database.Exists("Characters", "name = '{0}'", Name);
             CashShopPacket.CheckName(c, IsExist ? 1 : 0);
+        }
+
+        public static void Dismantle_Req(InPacket lea, Client c)
+        {
+            int Type = lea.ReadInt();
+            int Slot = lea.ReadInt();
+            var chr = c.Character;
+            Item Item = chr.Items.getItem((byte)Type, (byte)Slot);
+            Item.IsLocked = 0;
+            InventoryHandler.UpdateInventory(c, (byte)Type);
         }
     }
 }

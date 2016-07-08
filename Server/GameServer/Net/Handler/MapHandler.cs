@@ -22,23 +22,10 @@ namespace Server.Handler
             short PositionY = lea.ReadShort();
             var chr = gc.Character;
 
-            Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
-
-            Character find = null;
-            foreach (Character findCharacter in Map.Characters)
-            {
-                if (CharacterID == findCharacter.CharacterID)
-                {
-                    find = findCharacter;
-                    break;
-                }
-            }
-            if (find != null)
-            {
-                Map.Characters.Remove(find);
-                foreach (Character All in Map.Characters)
-                    MapPacket.removeUser(All.Client, CharacterID);
-            }
+            chr.MapX = MapX;
+            chr.MapY = MapY;
+            chr.PlayerX = PositionX;
+            chr.PlayerY = PositionY;
 
             if (MapX == 77 && MapY == 1)
             {
@@ -76,19 +63,17 @@ namespace Server.Handler
                 return;
             }
 
-            chr.MapX = MapX;
-            chr.MapY = MapY;
-            chr.PlayerX = PositionX;
-            chr.PlayerY = PositionY;
-
-            Map = MapFactory.GetMap(MapX, MapY);
+            Map Map = MapFactory.GetMap(MapX, MapY);
 
             MapPacket.warpToMap(gc, chr, CharacterID, MapX, MapY, PositionX, PositionY);
-            foreach (Character All in Map.Characters)
-                MapPacket.warpToMap(All.Client, chr, CharacterID, MapX, MapY, PositionX, PositionY);
 
             if (Map.GetMapCharactersTotal() > 0)
+            {
+                foreach (Character All in Map.Characters)
+                    MapPacket.warpToMap(All.Client, chr, CharacterID, MapX, MapY, PositionX, PositionY);
+
                 MapPacket.createUser(gc, Map);
+            }
 
             Map.Characters.Add(chr);
 

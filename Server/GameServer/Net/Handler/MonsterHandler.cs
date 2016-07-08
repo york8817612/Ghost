@@ -1,5 +1,7 @@
 ﻿using Server.Common.Constants;
+using Server.Common.IO;
 using Server.Common.IO.Packet;
+using Server.Common.Threading;
 using Server.Common.Utilities;
 using Server.Ghost;
 using Server.Ghost.Characters;
@@ -41,8 +43,8 @@ namespace Server.Handler
             }
             if (Monster.HP <= 0)
             {
-                if (Monster.IsAlive == false)
-                    return;
+                //if (Monster.IsAlive == false)
+                //    return;
                 Monster.State = 9;
                 Monster.Effect = 0;
                 //map.Monster.Remove(Monster);
@@ -141,11 +143,71 @@ namespace Server.Handler
             foreach (Character All in Map.Characters)
                 MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, Damage, HitX, HitY);
 
-            if (Monster.State == 7 && Monster.AttackType > 0)
+            if (Monster.State == 9 && Monster.tmr1 != null)
             {
-                Monster.State = 3;
-                foreach (Character All in Map.Characters)
-                    MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, 0, HitX, HitY);
+                Monster.tmr1.Cancel();
+                Monster.tmr1 = null;
+                return;
+            }
+
+            if (Monster.State == 9 && Monster.tmr2 != null)
+            {
+                Monster.tmr2.Cancel();
+                Monster.tmr2 = null;
+                return;
+            }
+
+            if (Monster.State == 7 && Monster.AttackType != 0 && Monster.tmr1 == null)
+            {
+                Monster.tmr1 = new Delay(300, false, () =>
+                {
+                    if (Monster.State == 9)
+                    {
+                        Monster.tmr1.Cancel();
+                        Monster.tmr2.Cancel();
+                        Monster.tmr1 = null;
+                        Monster.tmr2 = null;
+                        return;
+                    }
+                    Monster.State = 3;
+                    foreach (Character All in Map.Characters)
+                        MonsterPacket.spawnMonster(All.Client, Monster, CharacterID, 0, HitX, HitY);
+                    Monster.tmr1 = null;
+
+                    if (Monster.State == 3 && Monster.tmr2 == null)
+                    {
+                        Monster.tmr2 = new Delay(500, false, () =>
+                        {
+                            if (Monster.State == 9)
+                            {
+                                Monster.tmr1.Cancel();
+                                Monster.tmr2.Cancel();
+                                Monster.tmr1 = null;
+                                Monster.tmr2 = null;
+                                return;
+                            }
+                            Monster.State = (Monster.MoveType == 0 ? (byte)0 : (byte)1);
+                            foreach (Character All in Map.Characters)
+                                MonsterPacket.spawnMonster(All.Client, Monster, 0, 0, 0, 0);
+                            Monster.tmr2 = null;
+                        });
+                        Monster.tmr2.Execute();
+                    }
+
+                });
+                Monster.tmr1.Execute();
+            }
+
+            if (Monster.State != 9 && Monster.AttackType == 0)
+            {
+                Monster.tmr2 = new Delay(500, false, () =>
+                {
+                    Monster.State = (Monster.MoveType == 0 ? (byte)0 : (byte)1);
+                    foreach (Character All in Map.Characters)
+                        MonsterPacket.spawnMonster(All.Client, Monster, 0, 0, 0, 0);
+                    Monster.tmr2 = null;
+                });
+                Monster.tmr2.Execute();
             }
         }
     }

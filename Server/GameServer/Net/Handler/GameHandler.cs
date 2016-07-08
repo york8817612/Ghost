@@ -32,10 +32,10 @@ namespace Server.Handler
             try
             {
                 gc.Account.Load(username);
-                var pe = new PasswordEncrypt(encryptKey);
-                string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
+                //var pe = new PasswordEncrypt(encryptKey);
+                //string encryptPassword = pe.encrypt(gc.Account.Password, gc.RetryLoginCount > 0 ? password.ToCharArray() : null);
 
-                if (!password.Equals(encryptPassword))
+                if (!password.Equals(gc.Account.Password))
                 {
                     gc.Dispose();
                     Log.Error("Login Fail!");
@@ -65,7 +65,6 @@ namespace Server.Handler
             Character chr = gc.Character;
             chr.CharacterID = gc.CharacterID;
             MapFactory.AllCharacters.Add(chr);
-            MapFactory.CharacterID++;
 
             StatusPacket.UpdateHpMp(gc, 0, 0, 0, 0);
             GamePacket.FW_DISCOUNTFACTION(gc);
@@ -99,6 +98,8 @@ namespace Server.Handler
 
             switch (cmd[0])
             {
+                case "//1":
+                case "//公告":
                 case "//notice":
                     if (cmd.Length != 2)
                         break;
@@ -108,14 +109,27 @@ namespace Server.Handler
                     }
                     break;
                 case "//item":
-                    if (cmd.Length != 2)
+                    if (cmd.Length != 2 && cmd.Length != 3)
                         break;
-                    chr.Items.Add(new Item(int.Parse(cmd[1]), InventoryType.getItemType(int.Parse(cmd[1])), chr.Items.GetNextFreeSlot((InventoryType.ItemType)InventoryType.getItemType(int.Parse(cmd[1])))));
-                    InventoryPacket.getInvenEquip1(gc);
-                    InventoryPacket.getInvenEquip2(gc);
-                    InventoryPacket.getInvenSpend3(gc);
-                    InventoryPacket.getInvenOther4(gc);
-                    InventoryPacket.getInvenPet5(gc);
+
+                    short Quantity = 1;
+
+                    if (cmd.Length == 3)
+                    {
+                        if (int.Parse(cmd[2]) > 100)
+                            Quantity = 100;
+                        else 
+                            Quantity = short.Parse(cmd[2]);
+                    }
+
+                    if (InventoryType.getItemType(int.Parse(cmd[1])) == 1 || InventoryType.getItemType(int.Parse(cmd[1])) == 2)
+                        Quantity = 1;
+
+                    if (InventoryType.getItemType(int.Parse(cmd[1])) == 5)
+                        return;
+
+                    chr.Items.Add(new Item(int.Parse(cmd[1]), InventoryType.getItemType(int.Parse(cmd[1])), chr.Items.GetNextFreeSlot((InventoryType.ItemType)InventoryType.getItemType(int.Parse(cmd[1]))), Quantity));
+                    InventoryHandler.UpdateInventory(gc, InventoryType.getItemType(int.Parse(cmd[1])));
                     break;
                 case "//money":
                     if (cmd.Length != 2)
@@ -130,6 +144,29 @@ namespace Server.Handler
                     if (cmd.Length != 3)
                         break;
                     MapPacket.warpToMapAuth(gc, true, short.Parse(cmd[1]), short.Parse(cmd[2]), -1, -1);
+                    break;
+                case "//hp":
+                    if (cmd.Length != 2)
+                        break;
+
+                    short Hp = short.Parse(cmd[1]);
+
+                    if (Hp > short.MaxValue)
+                        Hp = short.MaxValue;
+
+                    chr.MaxHp = Hp;
+                    chr.Hp = Hp;
+                    StatusPacket.getStatusInfo(gc);
+                    break;
+                case "//mp":
+                    short Mp = short.Parse(cmd[1]);
+
+                    if (Mp > short.MaxValue)
+                        Mp = short.MaxValue;
+
+                    chr.MaxMp = Mp;
+                    chr.Mp = Mp;
+                    StatusPacket.getStatusInfo(gc);
                     break;
                 case "//heal":
                     chr.Hp = chr.MaxHp;
@@ -175,7 +212,11 @@ namespace Server.Handler
                     break;
                 case "//save":
                     for (int i = 0; i < MapFactory.AllCharacters.Count; i++)
+                    {
+                        if (chr.CharacterID == MapFactory.AllCharacters[i].CharacterID)
+                            continue;
                         MapFactory.AllCharacters[i].Client.Dispose();
+                    }
                     //GameServer.IsAlive = false;
                     break;
                 case "//選擇正派":

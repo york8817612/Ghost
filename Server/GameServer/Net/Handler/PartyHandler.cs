@@ -65,7 +65,7 @@ namespace Server.Handler
                 if (Member.Character.CharacterID != c.Character.CharacterID)
                 {
                     Member.Character.Party.getMembers().Remove(MyCharacter);
-                    Log.Error("Value2 = {0}", Member.Character.Party.getMembers().Count);
+                    //Log.Error("Value2 = {0}", Member.Character.Party.getMembers().Count);
                     PartyPacket.PartyUpdate(Member.Character.Client);
                 }
             }

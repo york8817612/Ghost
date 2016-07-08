@@ -72,6 +72,7 @@ namespace Server.Common.IO.Packet
 
         public OutPacket(ServerOpcode operationCode) : this((ushort)operationCode) { }
         public OutPacket(LoginServerOpcode operationCode) : this((byte)operationCode) { }
+        public OutPacket(MessengerServerOpcode operationCode) : this((ushort)operationCode) { }
         public OutPacket(InteroperabilityMessage operationCode) : this((ushort)operationCode) { }
 
         private void Append(long value, int count)

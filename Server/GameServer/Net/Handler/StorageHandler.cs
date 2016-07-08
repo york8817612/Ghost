@@ -8,7 +8,7 @@ namespace Server.Handler
 {
     public static class StorageHandler
     {
-        public static void moveItemToStorage(InPacket lea, Client gc)
+        public static void MoveItemToStorage(InPacket lea, Client gc)
         {
             int SourceType = lea.ReadShort();
             int SourceSlot = lea.ReadShort();
@@ -19,7 +19,7 @@ namespace Server.Handler
             Storage Target = chr.Storages.GetItem((byte)TargetType, (byte)TargetSlot);
             Item Source = chr.Items.getItem((byte)SourceType, (byte)SourceSlot);
 
-            if (Target != null)
+            if (Target != null || Source.ItemID / 100000 == 86 || Source.ItemID / 100000 == 87 || Source.ItemID / 100000 == 92 || Source.ItemID / 100000 == 94 || Source.ItemID / 100000 == 95)
                 return;
 
             chr.Storages.Add(new Storage(Source.ItemID, Quantity, TargetType, TargetSlot, 0));
@@ -29,7 +29,7 @@ namespace Server.Handler
             InventoryHandler.UpdateInventory(gc, (byte)SourceType);
         }
 
-        public static void moveItemToBag(InPacket lea, Client gc)
+        public static void MoveItemToBag(InPacket lea, Client gc)
         {
             int SourceType = lea.ReadShort();
             int SourceSlot = lea.ReadShort();
@@ -60,7 +60,7 @@ namespace Server.Handler
             InventoryHandler.UpdateInventory(gc, (byte)TargetType);
         }
 
-        public static void saveStorageMoney(InPacket lea, Client gc)
+        public static void SaveStorageMoney(InPacket lea, Client gc)
         {
             var chr = gc.Character;
             int money = lea.ReadInt();
@@ -74,7 +74,7 @@ namespace Server.Handler
             StoragePacket.getStoreMoney(gc);
         }
 
-        public static void giveStorageMoney(InPacket lea, Client gc)
+        public static void GiveStorageMoney(InPacket lea, Client gc)
         {
             var chr = gc.Character;
             int money = lea.ReadInt();

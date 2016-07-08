@@ -121,77 +121,94 @@ namespace Server.Handler
             if (Quantity > 100)
                 return;
 
-            int money = 0;
+            int Money = 0;
             switch (ItemID / 100000)
             {
                 case 75: // 耳環
-                    money = ItemFactory.earringData[ItemID].Price;
+                    Money = ItemFactory.earringData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 79: // 武器
                 case 80: // 武器
-                    money = ItemFactory.weaponData[ItemID].Price;
+                    Money = ItemFactory.weaponData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 81: // 衣服
-                    money = ItemFactory.topData[ItemID].Price;
+                    Money = ItemFactory.topData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 84: // 披風
-                    money = ItemFactory.capeData[ItemID].Price;
+                    Money = ItemFactory.capeData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 86: // 帽子
-                    money = ItemFactory.hatData[ItemID].Price;
+                    Money = ItemFactory.hatData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 87: // 面具
-                    money = ItemFactory.maskData[ItemID].Price;
+                    Money = ItemFactory.maskData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 93: // 武器
-                    money = ItemFactory.weaponData[ItemID].Price;
+                    Money = ItemFactory.weaponData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 94: // 鬍子
-                    money = ItemFactory.beardData[ItemID].Price;
+                    Money = ItemFactory.beardData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 95: // 服裝
-                    money = ItemFactory.clothingData[ItemID].Price;
+                    Money = ItemFactory.clothingData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 82: // 戒指
-                    money = ItemFactory.ringData[ItemID].Price;
+                    Money = ItemFactory.ringData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 83: // 項鍊
-                    money = ItemFactory.necklaceData[ItemID].Price;
+                    Money = ItemFactory.necklaceData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 85: // 封印箱
-                    money = ItemFactory.soulData[ItemID].Price;
+                    Money = ItemFactory.soulData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 11: // 拼圖
-                    money = ItemFactory.jigsawData[ItemID].Price;
+                    Money = ItemFactory.jigsawData[ItemID].Price;
                     break;
                 case 88: // 消耗
-                    money = ItemFactory.useData[ItemID].Price;
+                    Money = ItemFactory.useData[ItemID].Price;
+                    Money /= 5;
                     break;
                 case 89: // 其他
-                    money = ItemFactory.etcData[ItemID].Price;
+                    Money = ItemFactory.etcData[ItemID].Price;
                     break;
                 default:
                     Log.Error("未知的物品型態:" + ItemID / 100000);
                     break;
             }
-            Item source = gc.Character.Items.getItem(Type, Slot);
 
-            if (source != null)
+            if (ItemID == 8880011 || ItemID == 8880021 || ItemID == 8880031 || ItemID == 8880041 || ItemID == 8880051 || ItemID == 8880061 || ItemID == 8880071 || ItemID == 8880081 || ItemID == 8880091 || ItemID == 8880101)
+                Money = 0;
+
+            Item Source = gc.Character.Items.getItem(Type, Slot);
+
+            if (Source != null)
             {
-                if (source.Quantity > Quantity)
+                if (Source.Quantity > Quantity)
                 {
                     if (Quantity <= 0)
                         return;
-                    gc.Character.Items[(InventoryType.ItemType)source.Type, source.Slot].Quantity -= Quantity;
+                    gc.Character.Items[(InventoryType.ItemType)Source.Type, Source.Slot].Quantity -= Quantity;
                 }
                 else
                 {
-                    if (Quantity > source.Quantity)
+                    if (Quantity > Source.Quantity)
                         return;
                     gc.Character.Items.Remove(Type, Slot);
                 }
-                gc.Character.Money += ((money / 5) * Quantity);
-                InventoryPacket.getInvenMoney(gc, gc.Character.Money, money);
+                gc.Character.Money += (Money * Quantity);
+                InventoryPacket.getInvenMoney(gc, gc.Character.Money, Money);
                 InventoryHandler.UpdateInventory(gc, Type);
             }
         }

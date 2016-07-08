@@ -53,7 +53,7 @@ namespace Server.Handler
 
             int rnd = Randomizer.Next(1, Data.Spirit);
 
-            if (rnd < Source.Spirit)
+            if (rnd < Source.Spirit || (Use.ItemID == 8844011 && (rnd < Source.Spirit * 2)) || (Use.ItemID == 8844012 && (rnd < Source.Spirit * 2)))
             {
                 switch (Source.ItemID)
                 {
@@ -91,7 +91,7 @@ namespace Server.Handler
             }
             Target.Fusion++;
             chr.Items.Remove(SourceType, SourceSlot);
-            chr.Items.Remove(UseType, UseSlot);
+            chr.Items.Remove(UseType, UseSlot, 1);
             InventoryHandler.UpdateInventory(c, SourceType);
             InventoryHandler.UpdateInventory(c, TargetType);
             InventoryHandler.UpdateInventory(c, UseType);

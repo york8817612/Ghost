@@ -19,6 +19,7 @@ namespace Server.Ghost.Provider
         public static List<Commodity> PetList = new List<Commodity>();
         public static List<Commodity> AmuletList = new List<Commodity>();
         public static List<Commodity> TalismanList = new List<Commodity>();
+        public static List<Commodity> ProduceList = new List<Commodity>();
 
         public static Dictionary<int, Commodity> Hat = new Dictionary<int, Commodity>();
         public static Dictionary<int, Commodity> BoyDress = new Dictionary<int, Commodity>();
@@ -33,6 +34,7 @@ namespace Server.Ghost.Provider
         public static Dictionary<int, Commodity> Pet = new Dictionary<int, Commodity>();
         public static Dictionary<int, Commodity> Amulet = new Dictionary<int, Commodity>();
         public static Dictionary<int, Commodity> Talisman = new Dictionary<int, Commodity>();
+        public static Dictionary<int, Commodity> Produce = new Dictionary<int, Commodity>();
         public static List<Dictionary<int, Commodity>> All = new List<Dictionary<int, Commodity>>();
 
         public static void InitializeHatCommodity()
@@ -201,6 +203,19 @@ namespace Server.Ghost.Provider
                     Talisman.Add(datum.itemID, new Commodity(datum));
                 }
                 All.Add(Talisman);
+            }
+        }
+
+        public static void InitializeProduceCommodity()
+        {
+            using (Log.Load("Loading ProduceCommodity"))
+            {
+                foreach (dynamic datum in new Datums("ProduceCommodity").Populate())
+                {
+                    ProduceList.Add(new Commodity(datum));
+                    Produce.Add(datum.itemID, new Commodity(datum));
+                }
+                All.Add(Produce);
             }
         }
 

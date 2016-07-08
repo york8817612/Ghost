@@ -10,8 +10,6 @@ namespace Server.Ghost.Provider
 {
     public static class MapFactory
     {
-        public static int CharacterID = 1;
-
         private static List<Map> Maps { get; set; }
         public static List<Character> AllCharacters = new List<Character>();
 
@@ -593,9 +591,9 @@ namespace Server.Ghost.Provider
             br.Close();
         }
 
-        public static void ParsePrjFile(Map map)
+        public static void ParsePrjFile(Map Map)
         {
-            string FileName = Application.LaunchPath + @"\Data\Project\t" + map.MapX + "_s" + map.MapY + ".prj";
+            string FileName = Application.LaunchPath + @"\Data\Project\t" + Map.MapX + "_s" + Map.MapY + ".prj";
             using (FileStream stream = new FileStream(FileName, FileMode.Open))
             {
                 BinaryReader reader = new BinaryReader(stream);
@@ -912,28 +910,21 @@ namespace Server.Ghost.Provider
                             int ss2 = 0;
                             do
                             {
-                                if (ss2 == 1)
-                                {
-                                    PosX = reader.ReadInt32();
-                                    PosY = reader.ReadInt32() + 30;
-                                }
-                                else
-                                {
-                                    reader.ReadInt32();
-                                    reader.ReadInt32();
-                                }
+                                reader.ReadInt32();
+                                reader.ReadInt32();
                                 ++ss2;
                             } while (ss2 < ss);
-
+                            //
                             char[] Value = MonsterID.ToString().ToCharArray();
-                            char[] Level = new char[4];
-                            Level[0] = Value[1];
-                            Level[1] = Value[2];
-                            Level[2] = Value[3];
-                            Level[3] = Value[4];
-                            int MonsterLevel = int.Parse(new string(Level));
-                            int MaxHP = MobFactory.MonsterMaxHP(MonsterLevel);
-                            int Exp = MobFactory.MonsterExp(MonsterLevel);
+                            char[] MonsterLevel = new char[4];
+                            MonsterLevel[0] = Value[1];
+                            MonsterLevel[1] = Value[2];
+                            MonsterLevel[2] = Value[3];
+                            MonsterLevel[3] = Value[4];
+                            //
+                            int Level = int.Parse(new string(MonsterLevel));
+                            int MaxHP = MobFactory.MonsterMaxHP(Level);
+                            int Exp = MobFactory.MonsterExp(Level);
                             byte MoveType = MobFactory.MoveType(MonsterID);
                             byte AttackType = MobFactory.AttackType(MonsterID);
                             int Attack1 = MobFactory.Attack1(MonsterID);
@@ -941,13 +932,24 @@ namespace Server.Ghost.Provider
                             int CrashAttack = MobFactory.CrashAttack(MonsterID);
                             int Defense = MobFactory.Defense(MonsterID);
                             byte AddEffect = MobFactory.AddEffect(MonsterID);
-                            Monster m = new Monster(i, MonsterID, MonsterLevel, MaxHP, MaxHP, 0, Exp, MoveType == 0 ? 0 : Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, MoveType == 0 ? (byte)0 : (byte)1, 0, AddEffect, PosX, PosY, true);
-                            map.Monster.Add(m);
-                            map.UpdatePosition(m, (int)(40 * map.Monster[i].Speed));
+                            Monster Monster = new Monster(i, MonsterID, Level, MaxHP, MaxHP, 0, Exp, MoveType == 0 ? 0 : Speed, Direction, MoveType, AttackType, Attack1, Attack2, CrashAttack, Defense, MoveType == 0 ? (byte)0 : (byte)1, 0, AddEffect, PosX, PosY, true);
+                            Map.Monster.Add(Monster);
+
+                            // 修正怪物座標
+                            sbyte NextPosition = Map.GetMapPexel(Monster.PositionX, Monster.PositionY);
+                            while (NextPosition == -1)
+                            {
+                                Monster.PositionY = (Monster.PositionY / 32);
+                                Monster.PositionY += 1;
+                                Monster.PositionY *= 32;
+                                sbyte Next = Map.GetMapPexel(Monster.PositionX, Monster.PositionY);
+                                if (Next != -1)
+                                    break;
+                            }
                         }
                     }
-                    for (int j = map.Monster.Count; j < 50; j++)
-                        map.Monster.Add(null);
+                    for (int j = Map.Monster.Count; j < 50; j++)
+                        Map.Monster.Add(null);
                     //=========================================(14)sub_653F60
                     strCount = reader.ReadInt32();
                     if (strCount > 0)

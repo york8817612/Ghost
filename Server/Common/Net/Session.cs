@@ -114,6 +114,7 @@ namespace Server.Common.Net
             if (errorCode != SocketError.Success)
                 Dispose();
         }
+
         private void EndReceive(IAsyncResult ar)
         {
             if (!m_disposed)
@@ -129,7 +130,7 @@ namespace Server.Common.Net
                 else
                 {
                     Append(length);
-                    ManipulateBuffer();                    
+                    ManipulateBuffer();
                     Receive();
                 }
             }
@@ -151,6 +152,7 @@ namespace Server.Common.Net
 
             m_offset += length;
         }
+
         private void ManipulateBuffer()
         {
             while (m_offset >= 4 && m_disposed == false)
@@ -241,6 +243,7 @@ namespace Server.Common.Net
                 SendRaw(ret);
             }
         }
+
         private bool SendRaw(byte[] final)
         {
             int offset = 0;

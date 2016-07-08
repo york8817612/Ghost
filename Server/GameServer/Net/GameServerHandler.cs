@@ -13,7 +13,7 @@ namespace Server.Net
             ip.ReadInt(); // 原始長度 + CRC
             ip.ReadInt();
 
-            Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
+            //Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
 
             switch ((ClientOpcode)Header)
             {
@@ -106,22 +106,25 @@ namespace Server.Net
                     break;
                 // Storage
                 case ClientOpcode.MOVE_ITEM_STORAGE_REQ:
-                    StorageHandler.moveItemToStorage(ip, gc);
+                    StorageHandler.MoveItemToStorage(ip, gc);
                     break;
                 case ClientOpcode.MOVE_ITEM_TO_BAG_REQ:
-                    StorageHandler.moveItemToBag(ip, gc);
+                    StorageHandler.MoveItemToBag(ip, gc);
                     break;
                 case ClientOpcode.SAVE_MONEY_REQ:
-                    StorageHandler.saveStorageMoney(ip, gc);
+                    StorageHandler.SaveStorageMoney(ip, gc);
                     break;
                 case ClientOpcode.GIVE_MONEY_REQ:
-                    StorageHandler.giveStorageMoney(ip, gc);
+                    StorageHandler.GiveStorageMoney(ip, gc);
                     break;
                 // Coupon
                 case ClientOpcode.CASH_SN:
                     CouponHandler.Use_Coupon_Req(ip, gc);
                     break;
                 // Action
+                case ClientOpcode.P_WARP_C:
+                    ActionHandler.p_Warp_c(ip, gc);
+                    break;
                 case ClientOpcode.P_MOVE_C:
                     ActionHandler.p_Move_c(ip, gc);
                     break;
@@ -130,6 +133,9 @@ namespace Server.Net
                     break;
                 case ClientOpcode.P_SPEED_C:
                     ActionHandler.p_Speed_c(ip, gc);
+                    break;
+                case ClientOpcode.P_ATTACK_C:
+                    ActionHandler.p_Attack_c(ip, gc);
                     break;
                 //case ClientOpcode.P_DAMAGE_C:
                 //    ActionHandler.p_Damage_c(ip, gc);
@@ -218,8 +224,14 @@ namespace Server.Net
                 case ClientOpcode.CASH_TO_INVEN_REQ:
                     CashShopHandler.CommodityToInventory_Req(ip, gc);
                     break;
+                case ClientOpcode.ABILITY_RECOVER_REQ:
+                    CashShopHandler.AbilityRecover_Req(ip, gc);
+                    break;
                 case ClientOpcode.CASH_CHECKCHARNAME_REQ:
                     CashShopHandler.CheckName_Req(ip, gc);
+                    break;
+                case ClientOpcode.DISMANTLE_REQ:
+                    CashShopHandler.Dismantle_Req(ip, gc);
                     break;
                 // Pet
                 case ClientOpcode.PET_NAME_REQ:

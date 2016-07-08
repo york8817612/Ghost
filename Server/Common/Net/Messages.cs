@@ -62,6 +62,7 @@ namespace Server.Common.Net
         ENTER_WARP_ACK_REQ = 0x1D,
         NPC_SHOP_BUY_REQ = 0x22,
         NPC_SHOP_SELL_REQ = 0x23,
+        P_WARP_C = 0x24,
         P_MOVE_C = 0x27,
         P_SPEED_C = 0x29,
         P_JUMP_C = 0x2A,
@@ -134,7 +135,7 @@ namespace Server.Common.Net
         CASH_GIFT_REQ = 0xE9,
         CASH_TO_INVEN_REQ = 0xEF,
         CASH_CHECKCHARNAME_REQ = 0xFC,
-        //
+        ABILITY_RECOVER_REQ = 0xF8,
         INVEN_USESPEND_SHOUT_REQ = 0xFA,
         //
         PET_NAME_REQ = 0x101,
@@ -153,6 +154,9 @@ namespace Server.Common.Net
         PET_SAY_C = 0x118,
         //
         CASH_SN = 0x11D,
+
+        DISMANTLE_REQ = 0x140,
+
         //
         INVEN_USESPEND_SHOUT_ALL_REQ = 0x16B,
         //
@@ -559,5 +563,13 @@ namespace Server.Common.Net
         SOULSTACKWAR_RANKING_ACK = 0x20C,
 
         SOULSTACKWAR_READY = 0x212,
+    }
+
+    public enum MessengerServerOpcode : ushort
+    {
+        MSG_GAMELOG = 0x0B,
+        FRIEND_LIST = 0x49,
+        FRIEND_ADD = 0x4C,
+        FRIEND_ONLINE = 0x4F,
     }
 }

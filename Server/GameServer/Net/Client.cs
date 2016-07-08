@@ -9,7 +9,7 @@ using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Packet;
 using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using static Server.Common.Constants.ServerUtilities;
 
@@ -19,7 +19,8 @@ namespace Server.Net
     {
         public Account Account { get; private set; }
         public Character Character { get; private set; }
-        public int CharacterID { get; private set; }
+        public int CharacterID = 1;
+        public static List<int> CharacterID_List = new List<int>();
         public long SessionID { get; private set; }
         public int RetryLoginCount { get; set; }
 
@@ -29,9 +30,17 @@ namespace Server.Net
         {
             this.RetryLoginCount = 0;
             GameServer.Clients.Add(this);
-            CharacterID = MapFactory.CharacterID;
+            for (int i = 1; i < 3000; i++)
+            {
+                if (!CharacterID_List.Contains(i))
+                {
+                    this.CharacterID = i;
+                    CharacterID_List.Add(this.CharacterID);
+                    break;
+                }
+            }
             this.SessionID = Randomizer.NextLong();
-            GamePacket.Game_Log_Ack(this, CharacterID);
+            GamePacket.Game_Log_Ack(this, this.CharacterID);
             Log.Inform("Accepted connection from {0}.", this.Title);
         }
 
@@ -49,6 +58,8 @@ namespace Server.Net
                         this.Character.Magic -= this.Character.FuryMagic;
                         this.Character.Defense -= this.Character.FuryDefense;
                     }
+
+                    CharacterID_List.Remove(this.Character.CharacterID);
 
                     Map Map = MapFactory.GetMap(this.Character.MapX, this.Character.MapY);
 

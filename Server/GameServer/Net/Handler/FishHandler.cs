@@ -48,10 +48,19 @@ namespace Server.Handler
                     byte Slot = chr.Items.GetNextFreeSlot((InventoryType.ItemType)Type);
                     chr.Items.Add(new Item(reward[r], Type, Slot));
                     chr.Items.Remove((byte)InventoryType.ItemType.Spend3, (byte)chr.UseSlot.Slot(InventoryType.ItemType.Spend3), 1);
+                    chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Fusion++;
                     InventoryHandler.UpdateInventory(c, Type);
+                    InventoryHandler.UpdateInventory(c, (byte)InventoryType.ItemType.Equip);
                     if (Type != 3)
                         InventoryHandler.UpdateInventory(c, (byte)InventoryType.ItemType.Spend3);
                     State = CheckBait(c);
+
+                    if (chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Fusion == 30)
+                    {
+                        chr.IsFishing = false;
+                        State = -1;
+                    }
+
                     if (State != 0)
                     {
                         foreach (Character All in map.Characters)

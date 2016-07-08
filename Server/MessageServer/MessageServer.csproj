@@ -44,6 +44,8 @@
     <Compile Include="MessageServer.cs" />
     <Compile Include="Interoperability\InteroperabilityClient.cs" />
     <Compile Include="Net\Client.cs" />
+    <Compile Include="Net\FriendPacket.cs" />
+    <Compile Include="Net\MessengerPacket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

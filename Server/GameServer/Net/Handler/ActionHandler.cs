@@ -1,17 +1,49 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.IO;
+using Server.Common.IO.Packet;
 using Server.Ghost;
 using Server.Ghost.Characters;
 using Server.Ghost.Provider;
 using Server.Net;
+using Server.Packet;
 using System;
 
 namespace Server.Handler
 {
     public static class ActionHandler
     {
+        public static void p_Warp_c(InPacket lea, Client c)
+        {
+            if (/*c == null || */lea.Available < 4)
+                return;
+
+            int CharacterID = lea.ReadInt();
+
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null)
+            {
+                Map Map = MapFactory.GetMap(find.MapX, find.MapY);
+                if (Map.Characters.Contains(find))
+                {
+                    Map.Characters.Remove(find);
+                    foreach (Character All in Map.Characters)
+                        MapPacket.removeUser(All.Client, CharacterID);
+                    Log.Inform("(P_WARP_C) CharacterID = {0} , MapX = {1} , MapY = {2}", CharacterID, find.MapX, find.MapY);
+                }
+            }
+        }
+
         public static void p_Move_c(InPacket lea, Client c)
         {
-            if (c == null)
+            if (c == null || lea.Available < 17)
                 return;
 
             int CharacterID = lea.ReadInt();
@@ -42,7 +74,7 @@ namespace Server.Handler
 
         public static void p_Jump_c(InPacket lea, Client c)
         {
-            if (c == null)
+            if (c == null || lea.Available < 16)
                 return;
 
             int CharacterID = lea.ReadInt();
@@ -68,9 +100,35 @@ namespace Server.Handler
             //Console.WriteLine("Player New Pos X:{0}, Y:{1}", c.Character.PlayerX, c.Character.PlayerY);
         }
 
+        public static void p_Attack_c(InPacket lea, Client c)
+        {
+            if (c == null || lea.Available < 4)
+                return;
+
+            int CharacterID = lea.ReadInt();
+
+            Character find = null;
+            foreach (Character findCharacter in MapFactory.AllCharacters)
+            {
+                if (CharacterID == findCharacter.CharacterID)
+                {
+                    find = findCharacter;
+                    break;
+                }
+            }
+
+            if (find != null && find.IsHiding == true)
+            {
+                Map Map = MapFactory.GetMap(find.MapX, find.MapY);
+                find.IsHiding = false;
+                foreach (Character All in Map.Characters)
+                    StatusPacket.Hide(All.Client, find, 0);
+            }
+        }
+
         public static void p_Speed_c(InPacket lea, Client c)
         {
-            if (c == null)
+            if (c == null || lea.Available < 20)
                 return;
 
             int CharacterID = lea.ReadInt();
@@ -116,7 +174,7 @@ namespace Server.Handler
 
         public static void p_Move_c_2(InPacket lea, Client c)
         {
-            if (c == null)
+            if (c == null || lea.Available < 12)
                 return;
 
             int CharacterID = lea.ReadInt();

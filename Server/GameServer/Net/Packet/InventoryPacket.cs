@@ -49,6 +49,22 @@ namespace Server.Packet
             using (OutPacket plew = new OutPacket(ServerOpcode.CHAR_SET_AVATAR))
             {
                 Dictionary<InventoryType.EquipType, int> equip = getEquip(chr);
+
+                int WeaponUpgradeAttack = 0;
+                if (equip.ContainsKey(InventoryType.EquipType.Weapon))
+                {
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level1 * 10;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level2 * 9;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level3 * 8;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level4 * 7;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level5 * 6;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level6 * 5;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level7 * 4;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level8 * 3;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level9 * 2;
+                    WeaponUpgradeAttack += chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].Level10 * 1;
+                }
+
                 plew.WriteInt(0); // length + CRC
                 plew.WriteInt(0);
                 plew.WriteInt(chr.CharacterID);
@@ -81,7 +97,7 @@ namespace Server.Packet
 
                 //
                 plew.WriteShort(0);
-                plew.WriteShort(0);
+                plew.WriteShort(WeaponUpgradeAttack);
                 plew.WriteShort(0);
                 plew.WriteByte(0);
                 plew.WriteByte(0);
@@ -339,13 +355,17 @@ namespace Server.Packet
                     plew.WriteShort(chr.Items.Quantity(InventoryType.ItemType.Spend3, i));
                 }
                 for (byte i = 0; i < 24; i++)
+                {   
+                    plew.WriteInt(0);
+                }
+                for (byte i = 0; i < 24; i++)
                 {   // 物品Lock
                     plew.WriteByte(chr.Items.IsLocked(InventoryType.ItemType.Spend3, i));
                 }
-                for (byte i = 0; i < 24; i++)
-                {   // 截止日期
-                    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Spend3, i));
-                }
+                //for (byte i = 0; i < 24; i++)
+                //{   // 截止日期
+                //    plew.WriteInt(chr.Items.Term(InventoryType.ItemType.Spend3, i) == -1 ? 0 : chr.Items.Term(InventoryType.ItemType.Spend3, i));
+                //}
                 plew.WriteByte(chr.UseSlot.Slot(InventoryType.ItemType.Spend3)); // 飛鏢使用欄位
                 plew.WriteByte(0xFF);
                 for (int i = 0; i < 24; i++)
