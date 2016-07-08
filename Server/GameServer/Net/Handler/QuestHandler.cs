@@ -172,7 +172,7 @@ namespace Server.Handler
                         Quest.RequireMonster = 5;
                         break;
                     // 怪物 x 10
-                    // [擊退清野江怪物]
+                    case 8: // [擊退清野江怪物]
                     case 613: // [恨夜擊弓](射手)
                     case 621: // [舞影走](射手)
                         Quest.RequireMonster = 10;
@@ -371,6 +371,26 @@ namespace Server.Handler
                     StatusPacket.UpdateExp(gc);
                     InventoryHandler.UpdateInventory(gc, 3);
                     break;
+                case 8: // [擊退清野江怪物]
+                    chr.Money += 1800;
+                    chr.Exp += 500;
+                    chr.Rank += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 1800);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 9: // [擊退清野江怪物2]
+                    chr.Money += 2000;
+                    chr.Exp += 500;
+                    chr.Rank += 1;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 2000);
+                    StatusPacket.UpdateExp(gc);
+                    StatusPacket.UpdateFame(gc, 1);
+                    break;
+                case 10: // [寶芝林的解毒劑]
+                    chr.Money += 3000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 3000);
+                    break;
                 case 11: // [守衛的慰勞品]
                     chr.Exp += 100;
                     chr.Rank += 2;
@@ -384,6 +404,12 @@ namespace Server.Handler
                     StatusPacket.UpdateExp(gc);
                     StatusPacket.UpdateFame(gc, 2);
                     InventoryHandler.UpdateInventory(gc, 4);
+                    break;
+                case 13: // [金係係武器店的傳家寶]
+                    chr.Money += 9000;
+                    chr.Exp += 2000;
+                    InventoryPacket.getInvenMoney(gc, chr.Money, 9000);
+                    StatusPacket.UpdateExp(gc);
                     break;
                 case 14: // [封印豬大長]
                     chr.Money += 54000;
@@ -552,6 +578,10 @@ namespace Server.Handler
                     chr.Items.Add(new Item(8510061, (byte)InventoryType.ItemType.Equip2, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Equip2)));
                     StatusPacket.UpdateFame(gc, 3);
                     InventoryHandler.UpdateInventory(gc, 2);
+                    break;
+                case 91: // [尋找西米路]
+                    chr.Items.Add(new Item(8990032, (byte)InventoryType.ItemType.Other4, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Other4)));
+                    StatusPacket.UpdateFame(gc, 4);
                     break;
                 case 93: // [消失的傳家寶]
                     chr.Money += 40000;
