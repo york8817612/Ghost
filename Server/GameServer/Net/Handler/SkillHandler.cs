@@ -24,20 +24,20 @@ namespace Server.Handler
 
             if (Type == 0 || Type == 1 || Type == 2 || Type == 3 || Type == 4)
             {
-                Skill skill = null;
+                Skill Skill = null;
                 foreach (Skill sl in chr.Skills.getSkills())
                 {
                     if (sl.Type.Equals(Type) && sl.Slot.Equals(Slot) && sl.SkillLevel.Equals(Level))
                     {
-                        skill = sl;
+                        Skill = sl;
                     }
                 }
-                switch (skill.SkillID)
+                switch (Skill.SkillID)
                 {
                     case 0:
                         break;
                     case 1:
-                        if (skill.SkillLevel < 5)
+                        if (Skill.SkillLevel < 5)
                             chr.Mp -= 2;
                         else
                             chr.Mp -= 4;
@@ -48,8 +48,8 @@ namespace Server.Handler
                         if (Active == 1)
                         {
                             Delay ddl = new Delay(1, false, null);
-                            chr.SkillState.Add(skill.SkillID, ddl);
-                            chr.SkillState[skill.SkillID] = new Delay(8000, true, () =>
+                            chr.SkillState.Add(Skill.SkillID, ddl);
+                            chr.SkillState[Skill.SkillID] = new Delay(8000, true, () =>
                             {
                                 int addHp = 0, addMp = 0;
                                 if ((chr.Hp + 8) < chr.MaxHp)
@@ -77,22 +77,328 @@ namespace Server.Handler
                                 StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                             }
                             );
-                            chr.SkillState[skill.SkillID].Execute();
+                            chr.SkillState[Skill.SkillID].Execute();
                         }
                         else
                         {
-                            chr.SkillState[skill.SkillID].Cancel();
-                            chr.SkillState.Remove(skill.SkillID);
+                            chr.SkillState[Skill.SkillID].Cancel();
+                            chr.SkillState.Remove(Skill.SkillID);
                         }
                         break;
                     case 4:
                         chr.Mp -= (short)5;
                         StatusPacket.UpdateHpMp(gc, chr.Hp, chr.Mp, chr.Fury, chr.MaxFury);
                         break;
+                    case 10104: // 氣力轉換
+                        chr.Hp -= (short)(5 * Skill.SkillLevel);
+                        chr.Mp += (short)(16 * Skill.SkillLevel);
+                        if (chr.Hp < 0)
+                            chr.Hp = 0;
+                        if (chr.Mp > chr.MaxMp)
+                            chr.Mp = chr.MaxMp;
+                        break;
+                    case 10107: // 狂暴怒氣
+                        if (chr.SkillState.ContainsKey(10107))
+                            chr.SkillState[10107].Cancel();
+
+                        short Mp = 26;
+                        short Defense = (short)(chr.Defense * 0.03);
+                        short Attack = (short)(chr.Attack * 0.01);
+                        int Time = 33;
+                        switch (Skill.SkillLevel)
+                        {
+                            case 1:
+                                Mp = 26;
+                                Defense = (short)(chr.Defense * 0.03);
+                                Attack = (short)(chr.Attack * 0.01);
+                                Time = 33;
+                                break;
+                            case 2:
+                                Mp = 26;
+                                Defense = (short)(chr.Defense * 0.06);
+                                Attack = (short)(chr.Attack * 0.02);
+                                Time = 36;
+                                break;
+                            case 3:
+                                Mp = 26;
+                                Defense = (short)(chr.Defense * 0.09);
+                                Attack = (short)(chr.Attack * 0.03);
+                                Time = 39;
+                                break;
+                            case 4:
+                                Mp = 26;
+                                Defense = (short)(chr.Defense * 0.12);
+                                Attack = (short)(chr.Attack * 0.04);
+                                Time = 42;
+                                break;
+                            case 5:
+                                Mp = 26;
+                                Defense = (short)(chr.Defense * 0.15);
+                                Attack = (short)(chr.Attack * 0.05);
+                                Time = 45;
+                                break;
+                            case 6:
+                                Mp = 52;
+                                Defense = (short)(chr.Defense * 0.18);
+                                Attack = (short)(chr.Attack * 0.06);
+                                Time = 48;
+                                break;
+                            case 7:
+                                Mp = 52;
+                                Defense = (short)(chr.Defense * 0.21);
+                                Attack = (short)(chr.Attack * 0.07);
+                                Time = 51;
+                                break;
+                            case 8:
+                                Mp = 52;
+                                Defense = (short)(chr.Defense * 0.24);
+                                Attack = (short)(chr.Attack * 0.08);
+                                Time = 54;
+                                break;
+                            case 9:
+                                Mp = 52;
+                                Defense = (short)(chr.Defense * 0.27);
+                                Attack = (short)(chr.Attack * 0.09);
+                                Time = 57;
+                                break;
+                            case 10:
+                                Mp = 52;
+                                Defense = (short)(chr.Defense * 0.30);
+                                Attack = (short)(chr.Attack * 0.10);
+                                Time = 60;
+                                break;
+                            case 11:
+                                Mp = 78;
+                                Defense = (short)(chr.Defense * 0.33);
+                                Attack = (short)(chr.Attack * 0.11);
+                                Time = 63;
+                                break;
+                            case 12:
+                                Mp = 78;
+                                Defense = (short)(chr.Defense * 0.36);
+                                Attack = (short)(chr.Attack * 0.12);
+                                Time = 66;
+                                break;
+                            case 13:
+                                Mp = 78;
+                                Defense = (short)(chr.Defense * 0.39);
+                                Attack = (short)(chr.Attack * 0.13);
+                                Time = 69;
+                                break;
+                            case 14:
+                                Mp = 78;
+                                Defense = (short)(chr.Defense * 0.42);
+                                Attack = (short)(chr.Attack * 0.14);
+                                Time = 72;
+                                break;
+                            case 15:
+                                Mp = 78;
+                                Defense = (short)(chr.Defense * 0.45);
+                                Attack = (short)(chr.Attack * 0.15);
+                                Time = 75;
+                                break;
+                            case 16:
+                                Mp = 104;
+                                Defense = (short)(chr.Defense * 0.48);
+                                Attack = (short)(chr.Attack * 0.16);
+                                Time = 78;
+                                break;
+                            case 17:
+                                Mp = 104;
+                                Defense = (short)(chr.Defense * 0.51);
+                                Attack = (short)(chr.Attack * 0.17);
+                                Time = 81;
+                                break;
+                            case 18:
+                                Mp = 104;
+                                Defense = (short)(chr.Defense * 0.54);
+                                Attack = (short)(chr.Attack * 0.18);
+                                Time = 84;
+                                break;
+                            case 19:
+                                Mp = 104;
+                                Defense = (short)(chr.Defense * 0.57);
+                                Attack = (short)(chr.Attack * 0.19);
+                                Time = 87;
+                                break;
+                            case 20:
+                                Mp = 104;
+                                Defense = (short)(chr.Defense * 0.60);
+                                Attack = (short)(chr.Attack * 0.20);
+                                Time = 90;
+                                break;
+                        }
+                        chr.Mp -= Mp;
+                        if (chr.Mp < 0)
+                            chr.Mp = 0;
+
+                        if (!chr.SkillState.ContainsKey(10107))
+                        {
+                            chr.Defense -= Defense;
+                            chr.MaxAttack += Attack;
+                            chr.Attack += Attack;
+                            chr.UpgradeAttack += Attack;
+                            if (chr.Defense < 0)
+                                chr.Defense = 0;
+                            chr.SkillAttack_10107 = Attack;
+                            chr.SkillDefense_10107 = Defense;
+                            chr.SkillState.Add(Skill.SkillID, null);
+                            StatusPacket.UpdateStat(gc);
+                        }
+                        chr.SkillState[Skill.SkillID] = new Delay(Time * 1000, false, () =>
+                        {
+                            chr.Defense += Defense;
+                            chr.MaxAttack -= Attack;
+                            chr.Attack -= Attack;
+                            chr.UpgradeAttack -= Attack;
+                            chr.SkillState.Remove(10107);
+                            StatusPacket.UpdateStat(gc);
+                        });
+                        chr.SkillState[Skill.SkillID].Execute();
+                        break;
                     case 10207: // 霧影術
                         chr.IsHiding = true;
                         foreach (Character All in Map.Characters)
                             StatusPacket.Hide(All.Client, chr, 1);
+                        break;
+                    case 10309: // 防護加持
+                        if (chr.SkillState.ContainsKey(10309))
+                            chr.SkillState[10309].Cancel();
+
+                        Mp = 34;
+                        Defense = (short)(chr.Defense * 0.03);
+                        Time = 35;
+                        switch (Skill.SkillLevel)
+                        {
+                            case 1:
+                                Mp = 34;
+                                Defense = (short)(chr.Defense * 0.03);
+                                Time = 35;
+                                break;
+                            case 2:
+                                Mp = 34;
+                                Defense = (short)(chr.Defense * 0.06);
+                                Time = 40;
+                                break;
+                            case 3:
+                                Mp = 34;
+                                Defense = (short)(chr.Defense * 0.09);
+                                Time = 45;
+                                break;
+                            case 4:
+                                Mp = 34;
+                                Defense = (short)(chr.Defense * 0.12);
+                                Time = 50;
+                                break;
+                            case 5:
+                                Mp = 34;
+                                Defense = (short)(chr.Defense * 0.15);
+                                Time = 55;
+                                break;
+                            case 6:
+                                Mp = 68;
+                                Defense = (short)(chr.Defense * 0.18);
+                                Time = 60;
+                                break;
+                            case 7:
+                                Mp = 68;
+                                Defense = (short)(chr.Defense * 0.21);
+                                Time = 65;
+                                break;
+                            case 8:
+                                Mp = 68;
+                                Defense = (short)(chr.Defense * 0.24);
+                                Time = 70;
+                                break;
+                            case 9:
+                                Mp = 68;
+                                Defense = (short)(chr.Defense * 0.27);
+                                Time = 75;
+                                break;
+                            case 10:
+                                Mp = 68;
+                                Defense = (short)(chr.Defense * 0.30);
+                                Time = 80;
+                                break;
+                            case 11:
+                                Mp = 102;
+                                Defense = (short)(chr.Defense * 0.33);
+                                Time = 85;
+                                break;
+                            case 12:
+                                Mp = 102;
+                                Defense = (short)(chr.Defense * 0.36);
+                                Time = 90;
+                                break;
+                            case 13:
+                                Mp = 102;
+                                Defense = (short)(chr.Defense * 0.39);
+                                Time = 95;
+                                break;
+                            case 14:
+                                Mp = 102;
+                                Defense = (short)(chr.Defense * 0.42);
+                                Time = 100;
+                                break;
+                            case 15:
+                                Mp = 102;
+                                Defense = (short)(chr.Defense * 0.45);
+                                Time = 105;
+                                break;
+                            case 16:
+                                Mp = 136;
+                                Defense = (short)(chr.Defense * 0.48);
+                                Time = 110;
+                                break;
+                            case 17:
+                                Mp = 136;
+                                Defense = (short)(chr.Defense * 0.51);
+                                Time = 115;
+                                break;
+                            case 18:
+                                Mp = 136;
+                                Defense = (short)(chr.Defense * 0.54);
+                                Time = 120;
+                                break;
+                            case 19:
+                                Mp = 136;
+                                Defense = (short)(chr.Defense * 0.57);
+                                Time = 125;
+                                break;
+                            case 20:
+                                Mp = 136;
+                                Defense = (short)(chr.Defense * 0.60);
+                                Time = 130;
+                                break;
+                        }
+                        chr.Mp -= Mp;
+                        if (chr.Mp < 0)
+                            chr.Mp = 0;
+
+                        if (!chr.SkillState.ContainsKey(10309))
+                        {
+                            chr.Defense += Defense;
+                            chr.UpgradeDefense += Defense;
+                            chr.SkillDefense_10309 = Defense;
+                            chr.SkillState.Add(Skill.SkillID, null);
+                            StatusPacket.UpdateStat(gc);
+                        }
+                        chr.SkillState[Skill.SkillID] = new Delay(Time * 1000, false, () =>
+                        {
+                            chr.Defense -= Defense;
+                            chr.UpgradeDefense -= Defense;
+                            chr.SkillState.Remove(10309);
+                            StatusPacket.UpdateStat(gc);
+                        });
+                        chr.SkillState[Skill.SkillID].Execute();
+                        break;
+                    case 10310: // 陰陽幻移
+                        chr.Hp += (short)(16 * Skill.SkillLevel);
+                        chr.Mp -= (short)(5 * Skill.SkillLevel);
+                        if (chr.Hp > chr.MaxHp)
+                            chr.Hp = chr.MaxHp;
+                        if (chr.Mp < 0)
+                            chr.Mp = 0;
                         break;
                     default:
                         //Log.Inform("[Use Skill] SkillID = {0}", skill.SkillID);

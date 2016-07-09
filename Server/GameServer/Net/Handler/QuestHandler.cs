@@ -253,6 +253,10 @@ namespace Server.Handler
                 return;
 
             Quest.QuestState = 0x32;
+
+            if (QuestID == 68 || QuestID == 69)
+                Quest.QuestState = 0x31;
+
             QuestCompleteHandler(gc, Quest.QuestID);
             chr.Quests.Save();
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
@@ -270,6 +274,10 @@ namespace Server.Handler
                 return;
 
             Quest.QuestState = 0x32;
+
+            if (QuestID == 68 || QuestID == 69)
+                Quest.QuestState = 0x31;
+
             QuestCompleteHandler(gc, Quest.QuestID);
             chr.Quests.Save();
             QuestPacket.getQuestInfo(gc, chr.Quests.getQuests());
@@ -498,12 +506,74 @@ namespace Server.Handler
                     LearnSkill(gc);
                     break;
                 case 68: // [蛇腹窟 蠟燭]
+                    foreach (Item find in chr.Items.getItems())
+                    {
+                        if (find.ItemID == 8910241)
+                        {   // 艾福好的蛋
+                            if (find.Quantity < 5)
+                                continue;
+                            chr.Items.Remove(find.Type, find.Slot, 5);
+                            break;
+                        }
+                    }
+                    foreach (Item find2 in chr.Items.getItems())
+                    {
+                        if (find2.ItemID == 8910261)
+                        {   // 紅龜貴的殼
+                            if (find2.Quantity < 10)
+                                continue;
+                            chr.Items.Remove(find2.Type, find2.Slot, 10);
+                            break;
+                        }
+                    }
+                    foreach (Item find3 in chr.Items.getItems())
+                    {
+                        if (find3.ItemID == 8910211)
+                        {   // 薑絲男的牙齒
+                            if (find3.Quantity < 10)
+                                continue;
+                            chr.Items.Remove(find3.Type, find3.Slot, 10);
+                            break;
+                        }
+                    }
                     chr.Items.Add(new Item(8890011, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
                     InventoryHandler.UpdateInventory(gc, 3);
+                    InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 69: // [蛇腹窟 火把]
-                    chr.Items.Add(new Item(8890021, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 5));
+                    foreach (Item find in chr.Items.getItems())
+                    {
+                        if (find.ItemID == 8910281)
+                        {   // 背影殺手的鏡子
+                            if (find.Quantity < 5)
+                                continue;
+                            chr.Items.Remove(find.Type, find.Slot, 5);
+                            break;
+                        }
+                    }
+                    foreach (Item find2 in chr.Items.getItems())
+                    {
+                        if (find2.ItemID == 8910321)
+                        {   // 受詛咒的骨頭
+                            if (find2.Quantity < 10)
+                                continue;
+                            chr.Items.Remove(find2.Type, find2.Slot, 10);
+                            break;
+                        }
+                    }
+                    foreach (Item find3 in chr.Items.getItems())
+                    {
+                        if (find3.ItemID == 8910221)
+                        {   // 怪老子的眼珠
+                            if (find3.Quantity < 5)
+                                continue;
+                            chr.Items.Remove(find3.Type, find3.Slot, 5);
+                            break;
+                        }
+                    }
+                    chr.Items.Add(new Item(8890021, (byte)InventoryType.ItemType.Spend3, chr.Items.GetNextFreeSlot(InventoryType.ItemType.Spend3), 3));
                     InventoryHandler.UpdateInventory(gc, 3);
+                    InventoryHandler.UpdateInventory(gc, 4);
                     break;
                 case 76: // [材料不足]
                     chr.Money += 65000;
@@ -911,7 +981,56 @@ namespace Server.Handler
                     LearnSkill(gc);
                     break;
 
+                // 二轉(共用)
+                // 正派
+                case 190: // 體力升合
+                    chr.Skills.Add(new Skill(31001, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+                case 191: // 鬼力升合
+                    chr.Skills.Add(new Skill(31002, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+                // 邪派
+                case 192: // 體力升合
+                    chr.Skills.Add(new Skill(32001, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+                case 193: // 鬼力升合
+                    chr.Skills.Add(new Skill(32002, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+
+                // 二轉
+                // 正派
+                case 204: // 半月氣斬
+                    chr.Skills.Add(new Skill(31101, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 205: // 乾坤無定
+                    chr.Skills.Add(new Skill(31107, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 216: // 強降聚魂
+                    chr.Skills.Add(new Skill(31102, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                // 邪派
+                case 210: // 辟邪劍法
+                    chr.Skills.Add(new Skill(32101, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 211: // 九陰怒斬
+                    chr.Skills.Add(new Skill(32107, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 225: // 鬼道無邊
+                    chr.Skills.Add(new Skill(32102, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+
                 // 技能任務(刺客)
+                // 一轉
                 case 32: // 鬼手術
                     chr.Skills.Add(new Skill(10201, 1, 1, chr.Skills.GetNextFreeSlot(1)));
                     LearnSkill(gc);
@@ -950,6 +1069,42 @@ namespace Server.Handler
                     break;
                 case 41: // 閃擊技
                     chr.Skills.Add(new Skill(10210, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                // 二轉
+                // 正派
+                case 206: // 穿震退擊
+                    chr.Skills.Add(new Skill(31201, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 207: // 飛擊閃雷
+                    chr.Skills.Add(new Skill(31207, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 219: // 移行換影
+                    chr.Skills.Add(new Skill(31202, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 267: // 幻術反衝
+                    chr.Skills.Add(new Skill(31204, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+
+                // 邪派
+                case 212: // 音速飛爪
+                    chr.Skills.Add(new Skill(32201, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 213: // 傲天激射
+                    chr.Skills.Add(new Skill(32207, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+                case 228: // 心魔附體
+                    chr.Skills.Add(new Skill(32202, 1, 3, chr.Skills.GetNextFreeSlot(3)));
+                    LearnSkill(gc);
+                    break;
+                case 271: // 暗影反擊
+                    chr.Skills.Add(new Skill(32204, 1, 3, chr.Skills.GetNextFreeSlot(3)));
                     LearnSkill(gc);
                     break;
 
@@ -992,6 +1147,32 @@ namespace Server.Handler
                     break;
                 case 51: // 陰陽幻移
                     chr.Skills.Add(new Skill(10310, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                // 正派
+                case 208: // 雙崩雨雷
+                    chr.Skills.Add(new Skill(31301, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 209: // 冰霜震擊
+                    chr.Skills.Add(new Skill(31308, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 222: // 聖光靈縛
+                    chr.Skills.Add(new Skill(31302, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                // 邪派
+                case 214: // 天火燎原
+                    chr.Skills.Add(new Skill(32301, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 215: // 墨風破陣
+                    chr.Skills.Add(new Skill(32308, 1, 1, chr.Skills.GetNextFreeSlot(1)));
+                    LearnSkill(gc);
+                    break;
+                case 231: // 邪氣禁錮
+                    chr.Skills.Add(new Skill(32302, 1, 1, chr.Skills.GetNextFreeSlot(1)));
                     LearnSkill(gc);
                     break;
 

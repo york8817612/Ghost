@@ -88,6 +88,9 @@ namespace Server.Ghost.Characters
         public Character Competitor { get; set; }
 
         public Dictionary<int, Common.Threading.Delay> SkillState { get; private set; }
+        public short SkillAttack_10107 { get; set; }
+        public short SkillDefense_10107 { get; set; }
+        public short SkillDefense_10309 { get; set; }
 
         private bool Assigned { get; set; }
 
@@ -265,8 +268,37 @@ namespace Server.Ghost.Characters
         {
             this.Level++;
             this.Exp = 0;
-            this.MaxHp += 10;
-            this.MaxMp += 15;
+
+            switch (this.Class)
+            {
+                case 1: // 武士
+                    this.MaxHp += 13;
+                    this.MaxMp += 7;
+                    break;
+                case 2: // 刺客
+                    this.MaxHp += 9;
+                    this.MaxMp += 12;
+                    break;
+                case 3: // 道士
+                    this.MaxHp += 7;
+                    this.MaxMp += 14;
+                    break;
+                case 4: // 力士
+                    // 未知
+                    this.MaxHp += 13;
+                    this.MaxMp += 7;
+                    break;
+                case 5: // 射手
+                    // 未知
+                    this.MaxHp += 9;
+                    this.MaxMp += 12;
+                    break;
+                default:
+                    this.MaxHp += 10;
+                    this.MaxMp += 15;
+                    break;
+            }
+
             this.Hp = this.MaxHp;
             this.Mp = this.MaxMp;
 
@@ -281,6 +313,24 @@ namespace Server.Ghost.Characters
             foreach (Character All in map.Characters)
                 StatusPacket.LevelUp(All.Client, this, this.Level);
             StatusPacket.getStatusInfo(Client);
+        }
+
+        public void CancelSkill()
+        {
+            // 狂暴怒氣
+            if (SkillState.ContainsKey(10107))
+            {
+                this.Defense += SkillDefense_10107;
+                this.Attack -= SkillAttack_10107;
+                this.MaxAttack -= SkillAttack_10107;
+                this.UpgradeAttack -= SkillAttack_10107;
+            }
+            // 防護加持
+            if (SkillState.ContainsKey(10309))
+            {
+                this.Defense -= SkillDefense_10309;
+                this.UpgradeDefense -= SkillDefense_10309;
+            }
         }
     }
 }

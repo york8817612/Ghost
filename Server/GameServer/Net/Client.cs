@@ -58,6 +58,7 @@ namespace Server.Net
                         this.Character.Magic -= this.Character.FuryMagic;
                         this.Character.Defense -= this.Character.FuryDefense;
                     }
+                    this.Character.CancelSkill();
 
                     CharacterID_List.Remove(this.Character.CharacterID);
 

@@ -135,8 +135,8 @@ namespace Server.Handler
 
             if (Type == 1)
             {
-                short UpgradeAttack = (short)(chr.MaxAttack * 0.2);
-                short UpgradeMagic = (short)(chr.MaxMagic * 0.2);
+                short UpgradeAttack = (short)(chr.Attack * 0.2);
+                short UpgradeMagic = (short)(chr.Magic * 0.2);
                 short UpgradeDefense = (short)(chr.Defense * 0.2);
 
                 chr.IsFuring = true;
@@ -183,74 +183,74 @@ namespace Server.Handler
                 if (Skill == null)
                     return;
 
-                int time = 1;
+                int Time = 1;
 
                 switch (Skill.SkillLevel)
                 {
                     case 1:
-                        time = 30000;
+                        Time = 30000;
                         break;
                     case 2:
-                        time = 32000;
+                        Time = 32000;
                         break;
                     case 3:
-                        time = 34000;
+                        Time = 34000;
                         break;
                     case 4:
-                        time = 36000;
+                        Time = 36000;
                         break;
                     case 5:
-                        time = 38000;
+                        Time = 38000;
                         break;
                     case 6:
-                        time = 40000;
+                        Time = 40000;
                         break;
                     case 7:
-                        time = 42000;
+                        Time = 42000;
                         break;
                     case 8:
-                        time = 44000;
+                        Time = 44000;
                         break;
                     case 9:
-                        time = 46000;
+                        Time = 46000;
                         break;
                     case 10:
-                        time = 48000;
+                        Time = 48000;
                         break;
                     case 11:
-                        time = 50000;
+                        Time = 50000;
                         break;
                     case 12:
-                        time = 52000;
+                        Time = 52000;
                         break;
                     case 13:
-                        time = 53000;
+                        Time = 53000;
                         break;
                     case 14:
-                        time = 54000;
+                        Time = 54000;
                         break;
                     case 15:
-                        time = 55000;
+                        Time = 55000;
                         break;
                     case 16:
-                        time = 56000;
+                        Time = 56000;
                         break;
                     case 17:
-                        time = 57000;
+                        Time = 57000;
                         break;
                     case 18:
-                        time = 58000;
+                        Time = 58000;
                         break;
                     case 19:
-                        time = 59000;
+                        Time = 59000;
                         break;
                     case 20:
-                        time = 60000;
+                        Time = 60000;
                         break;
                 }
 
-                short UpgradeAttack = (short)(chr.MaxAttack * 0.2 * Skill.SkillLevel);
-                short UpgradeMagic = (short)(chr.MaxMagic * 0.2 * Skill.SkillLevel);
+                short UpgradeAttack = (short)(chr.Attack * 0.2 * Skill.SkillLevel);
+                short UpgradeMagic = (short)(chr.Magic * 0.2 * Skill.SkillLevel);
                 short UpgradeDefense = (short)(chr.Defense * 0.2 * Skill.SkillLevel);
 
                 chr.IsFuring = true;
@@ -274,7 +274,7 @@ namespace Server.Handler
                 chr.FuringType = 2;
 
                 Delay tmr = null;
-                tmr = new Delay(time, false, () =>
+                tmr = new Delay(Time, false, () =>
                 {
                     chr.IsFuring = false;
                     chr.MaxAttack -= UpgradeAttack;

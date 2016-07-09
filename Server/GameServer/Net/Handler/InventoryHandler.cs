@@ -282,6 +282,10 @@ namespace Server.Handler
                     chr.PlayerY = 782;
                     MapPacket.warpToMapAuth(gc, true, chr.MapX, chr.MapY, chr.PlayerX, chr.PlayerY);
                     break;
+                case 8890011: // 蠟燭
+                case 8890021: // 火把
+                    InventoryPacket.UseSpendStart(gc, chr, chr.PlayerX, chr.PlayerY, Item.ItemID, (byte)InventoryType.ItemType.Spend3, Slot);
+                    break;
                 case 8899017: // 逮巴符
                     chr.MapX = 27;
                     chr.MapY = 1;

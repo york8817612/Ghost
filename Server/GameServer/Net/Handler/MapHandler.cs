@@ -77,8 +77,14 @@ namespace Server.Handler
 
             Map.Characters.Add(chr);
 
-            if ((MapX == 1 && MapY == 53) || (MapX == 1 && MapY == 54) || (MapX == 1 && MapY == 55))
-                return;
+            //if ((MapX == 1 && MapY == 53) || (MapX == 1 && MapY == 54) || (MapX == 1 && MapY == 55))
+            //    return;
+
+            //if ((MapX == 10 && MapY == 63) || (MapX == 10 && MapY == 64))
+            //{
+            //    Monster Monster = new Monster(0, 1020001, 200, 10000, 10000, 0, 0, 1, 0xFF, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1408, 659, true);
+            //    Map.Monster.Add(Monster);
+            //}
 
             MonsterPacket.createAllMonster(gc, Map, Map.Monster);
 

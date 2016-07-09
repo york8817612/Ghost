@@ -31,11 +31,22 @@ namespace Server.Handler
             Monster.HP -= Damage;
             switch (SkillID)
             {
-                case 10304:
-                case 10305:
-                    Random rnd = new Random();
-                    if (rnd.Next(0, 2) == 0)
+                case 10108: // 點穴定身
+                    if (Randomizer.Next(0, 2) == 0)
+                        Monster.Effect = 1;
+                    break;
+                case 10204: // 餵毒術
+                    if (Randomizer.Next(0, 2) == 0)
+                        Monster.Effect = 2;
+                    break;
+                case 10304: // 玄冰擊
+                case 10305: // 冰凍大地
+                    if (Randomizer.Next(0, 2) == 0)
                         Monster.Effect = 5;
+                    break;
+                case 10306: // 矇蔽蝕眼
+                    if (Randomizer.Next(0, 2) == 0)
+                        Monster.Effect = 3;
                     break;
                 default:
                     //Log.Inform("[Attack Monster] SkillID = {0}", SkillID);
@@ -157,16 +168,27 @@ namespace Server.Handler
                 return;
             }
 
-            if (Monster.State == 7 && Monster.AttackType != 0 && Monster.tmr1 == null)
+            if (Monster.State == 9 && Monster.tmr3 != null)
             {
-                Monster.tmr1 = new Delay(300, false, () =>
+                Monster.tmr3.Cancel();
+                Monster.tmr3 = null;
+                return;
+            }
+
+            int r = Randomizer.Next(0, 2);
+
+            if (r == 0 && Monster.Effect == 0 && Monster.State == 7 && Monster.AttackType != 0 && Monster.tmr1 == null)
+            {
+                Monster.tmr1 = new Delay(600, false, () =>
                 {
                     if (Monster.State == 9)
                     {
                         Monster.tmr1.Cancel();
                         Monster.tmr2.Cancel();
+                        Monster.tmr3.Cancel();
                         Monster.tmr1 = null;
                         Monster.tmr2 = null;
+                        Monster.tmr3 = null;
                         return;
                     }
                     Monster.State = 3;
@@ -182,8 +204,10 @@ namespace Server.Handler
                             {
                                 Monster.tmr1.Cancel();
                                 Monster.tmr2.Cancel();
+                                Monster.tmr3.Cancel();
                                 Monster.tmr1 = null;
                                 Monster.tmr2 = null;
+                                Monster.tmr3 = null;
                                 return;
                             }
                             Monster.State = (Monster.MoveType == 0 ? (byte)0 : (byte)1);
@@ -198,7 +222,7 @@ namespace Server.Handler
                 Monster.tmr1.Execute();
             }
 
-            if (Monster.State != 9 && Monster.AttackType == 0)
+            if ((r == 1 && Monster.Effect == 0 && Monster.State != 9) || (Monster.State != 9 && Monster.Effect == 0 && Monster.AttackType == 0))
             {
                 Monster.tmr2 = new Delay(500, false, () =>
                 {
@@ -208,6 +232,19 @@ namespace Server.Handler
                     Monster.tmr2 = null;
                 });
                 Monster.tmr2.Execute();
+            }
+
+            if (Monster.Effect != 0)
+            {
+                Monster.tmr3 = new Delay(6000, false, () =>
+                {
+                    Monster.Effect = 0;
+                    Monster.State = (Monster.MoveType == 0 ? (byte)0 : (byte)1);
+                    foreach (Character All in Map.Characters)
+                        MonsterPacket.spawnMonster(All.Client, Monster, 0, 0, 0, 0);
+                    Monster.tmr3 = null;
+                });
+                Monster.tmr3.Execute();
             }
         }
     }

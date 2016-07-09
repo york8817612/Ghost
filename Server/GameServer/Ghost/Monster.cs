@@ -32,6 +32,7 @@ namespace Server.Ghost
 
         public Delay tmr1 { get; set; }
         public Delay tmr2 { get; set; }
+        public Delay tmr3 { get; set; }
 
         /* Speed
         00 00 00 00 // Stop

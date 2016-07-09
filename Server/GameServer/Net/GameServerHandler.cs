@@ -13,7 +13,7 @@ namespace Server.Net
             ip.ReadInt(); // 原始長度 + CRC
             ip.ReadInt();
 
-            //Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
+            Log.Hex("Received {0}({1}) packet from {2}: ", ip.Array, ((ClientOpcode)Header).ToString(), Header, gc.Title);
 
             switch ((ClientOpcode)Header)
             {

@@ -85,10 +85,10 @@ namespace Server.Ghost.Provider
             Maps.Add(new Map(10, 4));
             Maps.Add(new Map(10, 5));
             Maps.Add(new Map(10, 60));
-            //maps.Add(new Map(10, 61));
-            //maps.Add(new Map(10, 62));
-            //maps.Add(new Map(10, 63));
-            //maps.Add(new Map(10, 64));
+            Maps.Add(new Map(10, 61));
+            //Maps.Add(new Map(10, 62));
+            Maps.Add(new Map(10, 63));
+            //Maps.Add(new Map(10, 64));
             Maps.Add(new Map(11, 1));
             Maps.Add(new Map(11, 2));
             Maps.Add(new Map(11, 21));
@@ -194,9 +194,9 @@ namespace Server.Ghost.Provider
             Maps.Add(new Map(1, 50));
             Maps.Add(new Map(1, 51));
             Maps.Add(new Map(1, 52));
-            Maps.Add(new Map(1, 53));
-            Maps.Add(new Map(1, 54));
-            Maps.Add(new Map(1, 55));
+            //Maps.Add(new Map(1, 53));
+            //Maps.Add(new Map(1, 54));
+            //Maps.Add(new Map(1, 55));
             Maps.Add(new Map(1, 60));
             Maps.Add(new Map(1, 61));
             Maps.Add(new Map(1, 62));
@@ -524,13 +524,28 @@ namespace Server.Ghost.Provider
             Maps.Add(new Map(9, 7));
             Maps.Add(new Map(9, 8));
             Maps.Add(new Map(9, 9));
-            foreach (Map map in Maps)
+            foreach (Map Map in Maps)
             {
-                if ((map.MapX == 1 && map.MapY == 53) || (map.MapX == 1 && map.MapY == 54) || (map.MapX == 1 && map.MapY == 55))
-                    continue;
-                LoadMapPexelsData(map);
-                ParsePrjFile(map);
+                //if ((Map.MapX == 1 && Map.MapY == 53) || (Map.MapX == 1 && Map.MapY == 54) || (Map.MapX == 1 && Map.MapY == 55))
+                //    continue;
+                LoadMapPexelsData(Map);
+                ParsePrjFile(Map);
             }
+            Maps.Add(new Map(1, 53));
+            Maps.Add(new Map(1, 54));
+            Maps.Add(new Map(1, 55));
+            Maps.Add(new Map(10, 62));
+            Maps.Add(new Map(10, 64));
+            Map M1 = GetMap(1, 53);
+            Map M2 = GetMap(1, 54);
+            Map M3 = GetMap(1, 55);
+            Map M4 = GetMap(10, 62);
+            Map M5 = GetMap(10, 64);
+            M1 = GetMap(1, 52);
+            M1 = GetMap(1, 52);
+            M1 = GetMap(1, 52);
+            M4 = GetMap(10, 61);
+            M5 = GetMap(10, 63);
         }
 
         public static Map GetMap(short mapX, short mapY)
