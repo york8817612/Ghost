@@ -434,6 +434,28 @@ namespace Server.Handler
             chr.SkillBonus--;
             sl.SkillLevel++;
 
+            switch (sl.SkillID)
+            {
+                case 10101: // 利刃術
+                case 10201: // 鬼手術
+                case 10301: // 扇魂術
+                case 10401: // 光熱地斧
+                case 10501: // 恨夜擊弓
+                    chr.MaxAttack += (short)(chr.MaxAttack * 0.02);
+                    chr.Attack += (short)(chr.Attack * 0.02);
+                    StatusPacket.UpdateStat(gc);
+                    break;
+                case 10102: // 霸刀術
+                case 10202: // 利爪術
+                case 10302: // 杖擊術
+                case 10402: // 逆根強輪
+                case 10502: // 崩天擊砲
+                    chr.MaxAttack += (short)(chr.MaxAttack * 0.03);
+                    chr.Attack += (short)(chr.Attack * 0.03);
+                    StatusPacket.UpdateStat(gc);
+                    break;
+            }
+
             SkillPacket.updateSkillLevel(gc, chr.SkillBonus, Type, Slot, sl.SkillLevel);
         }
     }
