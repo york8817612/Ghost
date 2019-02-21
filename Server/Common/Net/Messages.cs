@@ -124,6 +124,8 @@ namespace Server.Common.Net
         PSHOP_SELLEND_REQ = 0xD1,
         PSHOP_INFO_REQ = 0xD3,
         PSHOP_BUYACK_REQ = 0xD5,
+
+        EVENTITEM_ACK = 0xD8,
         //
         P_MOVE_C_2 = 0xDD,
         //

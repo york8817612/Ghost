@@ -21,54 +21,101 @@ namespace Server.Handler
                 if (chr.CharacterID == CharacterID)
                 {
                     Other = chr;
-                    PartyPacket.PartyInvite(chr.Client, c.Character.CharacterID);
+                    if (Other.Party.getMembers().Count == 0)
+                        PartyPacket.PartyInvite(chr.Client, c.Character.CharacterID);
                     break;
                 }
             }
             if (Other != null)
             {
-                c.Character.Party = new CharacterParty(c.Character);
-                Other.Party = new CharacterParty(Other);
-
-                c.Character.Party.getMembers().Add(new Member(c.Character)); // 個人
-                c.Character.Party.getMembers().Add(new Member(Other)); // 他人
-
-                Other.Party.getMembers().Add(new Member(c.Character));
-                Other.Party.getMembers().Add(new Member(Other));
+                if (Other.Party.getMembers().Count == 0)
+                {
+                    // 個人 + 其他隊員
+                    if (c.Character.Party.getMembers().Count == 0)
+                        c.Character.Party.getMembers().Add(new Member(c.Character)); // 隊長
+                    c.Character.Party.getMembers().Add(new Member(Other)); // 對方
+                    foreach (var chr in c.Character.Party.getMembers())
+                    {
+                        if (chr.Character.CharacterID != c.Character.CharacterID && chr.Character.CharacterID != Other.CharacterID)
+                        {
+                            chr.Character.Party.getMembers().Add(new Member(Other));
+                        }
+                    }
+                    // 對方
+                    Other.Party.getMembers().Add(new Member(c.Character)); // 隊長
+                    Other.Party.getMembers().Add(new Member(Other)); // 對方
+                    foreach (var chr in c.Character.Party.getMembers())
+                    {
+                        if (chr.Character.CharacterID != c.Character.CharacterID && chr.Character.CharacterID != Other.CharacterID)
+                        {
+                            chr.Character.Party.getMembers().Add(chr);
+                        }
+                    }
+                }
             }
         }
 
         public static void PartyInviteResponses(InPacket lea, Client c)
         {
             int Respons = lea.ReadInt();
-            foreach (Member Member in c.Character.Party.getMembers())
+
+            if (Respons == 0)
             {
-                if (Member.Character.CharacterID == c.Character.CharacterID)
-                    continue;
-                PartyPacket.PartyInviteResponses(Member.Character.Client, Respons);
-            }
-            if (Respons == 1)
-            {
-                foreach (Member Member in c.Character.Party.getMembers())
+                PartyPacket.PartyInviteResponses(c.Character.Party.getMembers()[0].Character.Client, Respons);
+
+                Member find = null;
+                foreach (var chr in c.Character.Party.getMembers())
                 {
-                    PartyPacket.PartyUpdate(Member.Character.Client);
+                    if (chr.Character.CharacterID == c.Character.CharacterID)
+                    {
+                        find = chr;
+                        break;
+                    }
+                }
+                foreach (var chr in c.Character.Party.getMembers())
+                {
+                    if (chr.Character.CharacterID != c.Character.CharacterID)
+                    {
+                        chr.Character.Party.getMembers().Remove(find);
+                    }
+                }
+                c.Character.Party.getMembers().Clear();
+            }
+            else if (Respons == 1)
+            {
+                PartyPacket.PartyInviteResponses(c, Respons);
+                foreach (var chr in c.Character.Party.getMembers())
+                {
+                    PartyPacket.PartyUpdate(chr.Character.Client);
                 }
             }
         }
 
         public static void PartyLeave(InPacket lea, Client c)
         {
-            // Bug
-            Member MyCharacter = c.Character.Party.getMembers().Find(i => (i.Character.CharacterID == c.Character.CharacterID));
-            foreach (Member Member in c.Character.Party.getMembers())
+            Member find = null;
+            foreach (var chr in c.Character.Party.getMembers())
             {
-                if (Member.Character.CharacterID != c.Character.CharacterID)
+                if (chr.Character.CharacterID == c.Character.CharacterID)
                 {
-                    Member.Character.Party.getMembers().Remove(MyCharacter);
-                    //Log.Error("Value2 = {0}", Member.Character.Party.getMembers().Count);
-                    PartyPacket.PartyUpdate(Member.Character.Client);
+                    find = chr;
+                    break;
                 }
             }
+
+            if (find == null)
+                return;
+
+            foreach (var chr in c.Character.Party.getMembers())
+            {
+                if (chr.Character.CharacterID != c.Character.CharacterID)
+                {
+                    chr.Character.Party.getMembers().Remove(find);
+                    PartyPacket.PartyUpdate(chr.Character.Client);
+                }
+            }
+            c.Character.Party.getMembers().Clear();
+            PartyPacket.PartyUpdate(c);
             c.Character.Party = null;
         }
     }

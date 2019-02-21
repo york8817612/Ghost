@@ -124,7 +124,7 @@ namespace Server.Handler
 
                 short rndMoney = (short)(Monster.Exp + Randomizer.Next(6));
 
-                if (rndMoney != 0) // 少數怪物未寫入經驗值
+                if (rndMoney != 0 && Monster.MonsterID != 1010002) // rndMoney != 0 (少數怪物未寫入經驗值)
                     Monster.Drops.Add(new Drop(0, InventoryType.getMoneyStyle(rndMoney), rndMoney)); // 錢
 
                 for (int i = 0; i < Monster.Drops.Count; i++)

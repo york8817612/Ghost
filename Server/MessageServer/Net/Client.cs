@@ -74,6 +74,7 @@ namespace Server.Net
             catch (HackException e)
             {
                 // TODO: Register offense using the exception's message.
+                Log.Warn("Hack exception from {0}: \n{1}", this.Title, e.ToString());
             }
             catch (Exception e)
             {

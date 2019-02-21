@@ -12,8 +12,8 @@ namespace Server.Handler
     {
         public static void OpenShop_Req(InPacket lea, Client c)
         {
-            int slots = 6;
-            PlayerShopPacket.OpenShop(c, slots);
+            int Slots = 6;
+            PlayerShopPacket.OpenShop(c, Slots);
         }
 
         public static void SellStart_Req(InPacket lea, Client c)
@@ -21,8 +21,8 @@ namespace Server.Handler
             string Name = lea.ReadString(40);
             var chr = c.Character;
 
-            if (!(chr.MapX == 1 && chr.MapY == 51) && !(chr.MapX == 1 && chr.MapY == 52) && !(chr.MapX == 1 && chr.MapY == 53) && !(chr.MapX == 1 && chr.MapY == 54) && !(chr.MapX == 1 && chr.MapY == 55))
-                return;
+            //if (!(chr.MapX == 1 && chr.MapY == 51) && !(chr.MapX == 1 && chr.MapY == 52) && !(chr.MapX == 1 && chr.MapY == 53) && !(chr.MapX == 1 && chr.MapY == 54) && !(chr.MapX == 1 && chr.MapY == 55))
+            //    return;
 
             Map map = MapFactory.GetMap(chr.MapX, chr.MapY);
             CharacterShop PlayerShop = new CharacterShop(Name);
@@ -35,7 +35,7 @@ namespace Server.Handler
                 Item Source = chr.Items.getItem((byte)SourceType, (byte)SourceSlot);
                 if (Source != null)
                 {
-                    PlayerShop.Add(new ShopData(Source.ItemID, Quantity, SourceType, SourceSlot, (byte)i, Source.IsLocked, Source.Term, Price));
+                    PlayerShop.Add(new ShopData(Source.ItemID, Quantity, SourceType, SourceSlot, (byte)i, Source.Spirit, Source.Level1, Source.Level2, Source.Level3, Source.Level4, Source.Level5, Source.Level6, Source.Level7, Source.Level8, Source.Level9, Source.Level10, Source.Fusion, Source.IsLocked, Source.Icon, Source.Term, Price));
                 }
             }
             chr.Shop = PlayerShop;
@@ -99,11 +99,11 @@ namespace Server.Handler
 
                 chr.Money -= (Item.Price * Quantity);
                 InventoryPacket.getInvenMoney(c, chr.Money, -(Item.Price * Quantity));
-                chr.Items.Add(new Item(Item.ItemID, Type, FreeSlot, (short)Quantity));
+                chr.Items.Add(new Item(Item.ItemID, (short)Quantity, Item.Spirit, Item.Level1, Item.Level2, Item.Level3, Item.Level4, Item.Level5, Item.Level6, Item.Level7, Item.Level8, Item.Level9, Item.Level10, Item.Fusion, Item.IsLocked, Item.Icon, Item.Term, Type, FreeSlot));
                 InventoryHandler.UpdateInventory(c, Type);
                 //Seller.Shop.Remove(Item);
                 Seller.Items.Remove((byte)Item.SourceType, (byte)Item.SourceSlot);
-                Seller.Items.Add(new Item(Item.ItemID, (byte)Item.SourceType, (byte)Item.SourceSlot, (short)(Item.Quantity - Quantity)));
+                Seller.Items.Add(new Item(Item.ItemID, (short)(Item.Quantity - Quantity), Item.Spirit, Item.Level1, Item.Level2, Item.Level3, Item.Level4, Item.Level5, Item.Level6, Item.Level7, Item.Level8, Item.Level9, Item.Level10, Item.Fusion, Item.IsLocked, Item.Icon, Item.Term, (byte)Item.SourceType, (byte)Item.SourceSlot));
                 Item.Quantity = Item.Quantity - Quantity;
                 Seller.Shop.Money += (Item.Price * Quantity);
                 Seller.Money += (Item.Price * Quantity);

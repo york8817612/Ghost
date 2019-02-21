@@ -7,6 +7,7 @@ using Server.Ghost.Provider;
 using Server.Net;
 using Server.Packet;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Handler
 {
@@ -489,6 +490,136 @@ namespace Server.Handler
         {
             ItemData idata = ItemFactory.GetItemData(Source.ItemID);
             Character chr = gc.Character;
+
+            int MaxAttack = 5;
+            int Attack = 3;
+            int MaxMagic = 4;
+            int Magic = 4;
+            MaxAttack += ((chr.Str - 3) * 2 + chr.Str / 5);
+            MaxAttack += ((chr.Dex - 3) * 2 + chr.Dex / 5);
+            Attack += ((chr.Dex - 3) * 1 + chr.Dex / 5);
+            MaxMagic += ((chr.Int - 3) * 2 + chr.Int / 5);
+            Magic += ((chr.Int - 3) * 2 + chr.Int / 5);
+
+            // 技能攻擊力+、魔攻力+
+            Dictionary<int, byte> Skill = new Dictionary<int, byte>();
+            foreach (Skill sl in chr.Skills.getSkills())
+            {
+                Skill.Add(sl.SkillID, sl.SkillLevel);
+            }
+            if (InventoryType.Is劍(Source.ItemID) && Skill.ContainsKey(10101))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.02 * Skill[10101]);
+                    chr.Attack += (short)(Attack * 0.02 * Skill[10101]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.02 * Skill[10101]);
+                    chr.Attack -= (short)(Attack * 0.02 * Skill[10101]);
+                }
+            }
+            if (InventoryType.Is刀(Source.ItemID) && Skill.ContainsKey(10102))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.03 * Skill[10102]);
+                    chr.Attack += (short)(Attack * 0.03 * Skill[10102]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.03 * Skill[10102]);
+                    chr.Attack -= (short)(Attack * 0.03 * Skill[10102]);
+                }
+            }
+            if (InventoryType.Is手套(Source.ItemID) && Skill.ContainsKey(10201))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.02 * Skill[10201]);
+                    chr.Attack += (short)(Attack * 0.02 * Skill[10201]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.02 * Skill[10201]);
+                    chr.Attack -= (short)(Attack * 0.02 * Skill[10201]);
+                }
+            }
+            if (InventoryType.Is爪(Source.ItemID) && Skill.ContainsKey(10202))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.03 * Skill[10202]);
+                    chr.Attack += (short)(Attack * 0.03 * Skill[10202]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.03 * Skill[10202]);
+                    chr.Attack -= (short)(Attack * 0.03 * Skill[10202]);
+                }
+            }
+            if (InventoryType.Is扇(Source.ItemID) && Skill.ContainsKey(10301))
+            {
+                if (Equiped)
+                {
+                    chr.MaxMagic += (short)(MaxMagic * 0.02 * Skill[10301]);
+                    chr.Magic += (short)(Magic * 0.02 * Skill[10301]);
+                }
+                else
+                {
+                    chr.MaxMagic -= (short)(MaxMagic * 0.02 * Skill[10301]);
+                    chr.Magic -= (short)(Magic * 0.02 * Skill[10301]);
+                }
+            }
+            if (InventoryType.Is杖(Source.ItemID) && Skill.ContainsKey(10302))
+            {
+                if (Equiped)
+                {
+                    chr.MaxMagic += (short)(MaxMagic * 0.03 * Skill[10302]);
+                    chr.Magic += (short)(Magic * 0.03 * Skill[10302]);
+                }
+                else
+                {
+                    chr.MaxMagic -= (short)(MaxMagic * 0.03 * Skill[10302]);
+                    chr.Magic -= (short)(Magic * 0.03 * Skill[10302]);
+                }
+            }
+            if (InventoryType.Is斧(Source.ItemID) && Skill.ContainsKey(10401))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.02 * Skill[10401]);
+                    chr.Attack += (short)(Attack * 0.02 * Skill[10401]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.02 * Skill[10401]);
+                    chr.Attack -= (short)(Attack * 0.02 * Skill[10401]);
+                }
+            }
+            if (InventoryType.Is輪(Source.ItemID) && Skill.ContainsKey(10402))
+            {
+                if (Equiped)
+                {
+                    chr.MaxAttack += (short)(MaxAttack * 0.03 * Skill[10402]);
+                    chr.Attack += (short)(Attack * 0.03 * Skill[10402]);
+                }
+                else
+                {
+                    chr.MaxAttack -= (short)(MaxAttack * 0.03 * Skill[10402]);
+                    chr.Attack -= (short)(Attack * 0.03 * Skill[10402]);
+                }
+            }
+            //if (Skill.ContainsKey(10501) && InventoryType.Is(chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].ItemID))
+            //{
+
+            //}
+            //if (Skill.ContainsKey(10502) && InventoryType.Is(chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].ItemID))
+            //{
+
+            //}
+
             // Hp
             if (idata.Hp != -1)
             {
@@ -513,6 +644,35 @@ namespace Server.Handler
                     chr.MaxMp -= idata.Mp;
                 }
             }
+            // 物理攻擊力
+            if (idata.Attack != -1)
+            {
+                if (Equiped)
+                {
+                    chr.Attack += idata.Attack;
+                    chr.MaxAttack += idata.Attack;
+                }
+                else
+                {
+                    chr.Attack -= idata.Attack;
+                    chr.MaxAttack -= idata.Attack;
+                }
+            }
+            // 魔法攻擊力
+            if (idata.Magic != -1)
+            {
+                if (Equiped)
+                {
+                    chr.Magic += idata.Magic;
+                    chr.MaxMagic += idata.Magic;
+                }
+                else
+                {
+                    chr.Magic -= idata.Magic;
+                    chr.MaxMagic -= idata.Magic;
+                }
+            }
+
             // 力量
             if (idata.Str != -1)
             {
@@ -587,34 +747,6 @@ namespace Server.Handler
                     chr.MaxMagic -= (short)(2 * idata.Int);
                 }
             }
-            // 物理攻擊力
-            if (idata.Attack != -1)
-            {
-                if (Equiped)
-                {
-                    chr.Attack += idata.Attack;
-                    chr.MaxAttack += idata.Attack;
-                }
-                else
-                {
-                    chr.Attack -= idata.Attack;
-                    chr.MaxAttack -= idata.Attack;
-                }
-            }
-            // 魔法攻擊力
-            if (idata.Magic != -1)
-            {
-                if (Equiped)
-                {
-                    chr.Magic += idata.Magic;
-                    chr.MaxMagic += idata.Magic;
-                }
-                else
-                {
-                    chr.Magic -= idata.Magic;
-                    chr.MaxMagic -= idata.Magic;
-                }
-            }
             // 迴避率
             if (idata.Avoid != -1)
             {
@@ -632,11 +764,10 @@ namespace Server.Handler
                     chr.Defense -= idata.Defense;
             }
 
-
             // 武器
             if (Source.ItemID / 100000 == 79 || Source.ItemID / 100000 == 80)
             {
-                int Attack = 0;
+                Attack = 0;
                 Attack += Source.Level1 * 10;
                 Attack += Source.Level2 * 9;
                 Attack += Source.Level3 * 8;

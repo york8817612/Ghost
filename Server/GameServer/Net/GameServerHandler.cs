@@ -243,6 +243,9 @@ namespace Server.Net
                 case ClientOpcode.EQUIPMENT_COMPOUND_REQ:
                     SpiritHandler.EquipmentCompound(ip, gc);
                     break;
+                case ClientOpcode.EVENTITEM_ACK:
+                    TradeHandler.TradeEventItem(ip, gc);
+                    break;
             }
         }
     }

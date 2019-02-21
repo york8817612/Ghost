@@ -1,4 +1,5 @@
-﻿using Server.Common.IO.Packet;
+﻿using Server.Common.Constants;
+using Server.Common.IO.Packet;
 using Server.Common.Threading;
 using Server.Ghost;
 using Server.Ghost.Characters;
@@ -19,7 +20,7 @@ namespace Server.Handler
             byte NumOfTargets = lea.ReadByte();
             int Active = lea.ReadInt();
             var chr = gc.Character;
-            
+
             Map Map = MapFactory.GetMap(chr.MapX, chr.MapY);
 
             if (Type == 0 || Type == 1 || Type == 2 || Type == 3 || Type == 4)
@@ -434,26 +435,88 @@ namespace Server.Handler
             chr.SkillBonus--;
             sl.SkillLevel++;
 
-            switch (sl.SkillID)
+            if (sl.SkillID == 10101 || sl.SkillID == 10201 || sl.SkillID == 10301 || sl.SkillID == 10401 || sl.SkillID == 10501 || sl.SkillID == 10102 || sl.SkillID == 10202 || sl.SkillID == 10302 || sl.SkillID == 10402 || sl.SkillID == 10502)
             {
-                case 10101: // 利刃術
-                case 10201: // 鬼手術
-                case 10301: // 扇魂術
-                case 10401: // 光熱地斧
-                case 10501: // 恨夜擊弓
-                    chr.MaxAttack += (short)(chr.MaxAttack * 0.02);
-                    chr.Attack += (short)(chr.Attack * 0.02);
+                if (chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon] != null)
+                {
+                    int ItemID = chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].ItemID;
+                    int MaxAttack = 5;
+                    int Attack = 3;
+                    int MaxMagic = 4;
+                    int Magic = 4;
+                    MaxAttack += ((chr.Str - 3) * 2 + chr.Str / 5);
+                    MaxAttack += ((chr.Dex - 3) * 2 + chr.Dex / 5);
+                    Attack += ((chr.Dex - 3) * 1 + chr.Dex / 5);
+                    MaxMagic += ((chr.Int - 3) * 2 + chr.Int / 5);
+                    Magic += ((chr.Int - 3) * 2 + chr.Int / 5);
+
+                    // 技能攻擊力+、魔攻力+
+                    if (InventoryType.Is劍(ItemID) && sl.SkillID == 10101)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.02 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.02 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.02 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.02 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is刀(ItemID) && sl.SkillID == 10102)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.03 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.03 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.03 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.03 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is手套(ItemID) && sl.SkillID == 10201)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.02 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.02 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.02 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.02 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is爪(ItemID) && sl.SkillID == 10202)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.03 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.03 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.03 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.03 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is扇(ItemID) && sl.SkillID == 10301)
+                    {
+                        chr.MaxMagic -= (short)(MaxMagic * 0.02 * (sl.SkillLevel - 1));
+                        chr.Magic -= (short)(Magic * 0.02 * (sl.SkillLevel - 1));
+                        chr.MaxMagic += (short)(MaxMagic * 0.02 * sl.SkillLevel);
+                        chr.Magic += (short)(Magic * 0.02 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is杖(ItemID) && sl.SkillID == 10302)
+                    {
+                        chr.MaxMagic -= (short)(MaxMagic * 0.03 * (sl.SkillLevel - 1));
+                        chr.Magic -= (short)(Magic * 0.03 * (sl.SkillLevel - 1));
+                        chr.MaxMagic += (short)(MaxMagic * 0.03 * sl.SkillLevel);
+                        chr.Magic += (short)(Magic * 0.03 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is斧(ItemID) && sl.SkillID == 10401)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.02 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.02 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.02 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.02 * sl.SkillLevel);
+                    }
+                    if (InventoryType.Is輪(ItemID) && sl.SkillID == 10402)
+                    {
+                        chr.MaxAttack -= (short)(MaxAttack * 0.03 * (sl.SkillLevel - 1));
+                        chr.Attack -= (short)(Attack * 0.03 * (sl.SkillLevel - 1));
+                        chr.MaxAttack += (short)(MaxAttack * 0.03 * sl.SkillLevel);
+                        chr.Attack += (short)(Attack * 0.03 * sl.SkillLevel);
+                    }
+                    //if (Skill.ContainsKey(10501) && InventoryType.Is(chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].ItemID))
+                    //{
+
+                    //}
+                    //if (Skill.ContainsKey(10502) && InventoryType.Is(chr.Items[InventoryType.ItemType.Equip, (byte)InventoryType.EquipType.Weapon].ItemID))
+                    //{
+
+                    //}
                     StatusPacket.UpdateStat(gc);
-                    break;
-                case 10102: // 霸刀術
-                case 10202: // 利爪術
-                case 10302: // 杖擊術
-                case 10402: // 逆根強輪
-                case 10502: // 崩天擊砲
-                    chr.MaxAttack += (short)(chr.MaxAttack * 0.03);
-                    chr.Attack += (short)(chr.Attack * 0.03);
-                    StatusPacket.UpdateStat(gc);
-                    break;
+                }
             }
 
             SkillPacket.updateSkillLevel(gc, chr.SkillBonus, Type, Slot, sl.SkillLevel);

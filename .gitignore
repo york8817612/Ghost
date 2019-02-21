@@ -1,0 +1,7 @@
+/Server/MessageServer/obj
+/Server/bin
+/Server/LoginServer/obj
+/Server/GameServer/obj
+/Server/Common/obj
+/Server/CharServer/obj
+/Server/.vs

@@ -100,12 +100,19 @@ namespace Server.Packet
                 for (int i = 0; i < 12; i++)
                 {
                     plew.WriteInt(i < chr.Trade.Item.Count ? chr.Trade.Item[i].ItemID : 0); // v2
-                    plew.WriteShort(0); // v2 + 4
+                    plew.WriteShort(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Spirit : 0); // v2 + 4
                     plew.WriteShort(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Quantity : 0); // v2 + 6
-                    plew.WriteInt(0); // v4 (v2 + 8)
-                    plew.WriteInt(0); // v4 + 4 (v2 + 12)
-                    plew.WriteShort(0); // v4 + 8 (v2 + 16)
-                    plew.WriteShort(0); // v2 + 18 (byte)
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level1 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level2 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level3 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level4 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level5 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level6 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level7 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level8 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level9 : 0);
+                    plew.WriteByte(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Level10 : 0);
+                    plew.WriteShort(i < chr.Trade.Item.Count ? chr.Trade.Item[i].Fusion : 0); // v2 + 18 (byte)
                     plew.WriteInt(0); // v2 + 20
                     plew.WriteByte(0); // v2 + 24
                     plew.WriteInt(0); // v5 (v2 + 25)
@@ -118,12 +125,19 @@ namespace Server.Packet
                 for (int i = 0; i < 12; i++)
                 {
                     plew.WriteInt(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].ItemID : 0); // v2
-                    plew.WriteShort(0); // v2 + 4
+                    plew.WriteShort(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Spirit : 0); // v2 + 4
                     plew.WriteShort(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Quantity : 0); // v2 + 6
-                    plew.WriteInt(0); // v4 (v2 + 8)
-                    plew.WriteInt(0); // v4 + 4 (v2 + 12)
-                    plew.WriteShort(0); // v4 + 8 (v2 + 16)
-                    plew.WriteShort(0); // v2 + 18 (byte)
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level1 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level2 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level3 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level4 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level5 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level6 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level7 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level8 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level9 : 0);
+                    plew.WriteByte(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Level10 : 0);
+                    plew.WriteShort(i < chr.Trader.Trade.Item.Count ? chr.Trader.Trade.Item[i].Fusion : 0); // v2 + 18 (byte)
                     plew.WriteInt(0); // v2 + 20
                     plew.WriteByte(0); // v2 + 24
                     plew.WriteInt(0); // v5 (v2 + 25)

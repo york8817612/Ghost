@@ -157,10 +157,29 @@ namespace Server.Handler
 
         public static void p_Damage_c(InPacket lea, Client c)
         {
-            //int CharacterID = lea.ReadInt();
-            //short Damage = lea.ReadShort();
-            //var chr = c.Character;
-            //chr.Hp -= Damage;
+            int CharacterID = lea.ReadInt();
+            short Damage = lea.ReadShort();
+            short Unk = lea.ReadShort();
+            float PositionX = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
+            float PositionY = BitConverter.ToSingle(BitConverter.GetBytes(lea.ReadInt()), 0);
+
+            var chr = c.Character;
+            if (chr == null)
+            {
+                if (chr.CharacterID == CharacterID)
+                {
+
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (Damage > 0)
+                chr.Hp -= Damage;
+
+            if (PositionX != 0)
+                chr.PlayerX = ((short)PositionX);
         }
 
         public static void p_Dead_c(InPacket lea, Client c)

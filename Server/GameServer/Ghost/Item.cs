@@ -1,6 +1,7 @@
 ﻿using Server.Ghost.Characters;
 using Server.Common.Data;
 using System;
+using Server.Ghost.Provider;
 
 namespace Server.Ghost
 {
@@ -174,6 +175,51 @@ namespace Server.Ghost
             this.Slot = slot;
         }
 
+        public Item(int ItemID, short Quantity, int Spirit, byte Level1, byte Level2, byte Level3, byte Level4, byte Level5, byte Level6, byte Level7, byte Level8, byte Level9, byte Level10, byte Fusion, byte IsLocked, int Icon, int Term, byte Type, byte Slot)
+        {
+            this.ItemID = ItemID;
+            switch (Type)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 5:
+                    this.MaxPerStack = 1;
+                    break;
+                case 3:
+                case 4:
+                case 6:
+                    this.MaxPerStack = 100;
+                    break;
+                case 0x63:
+                    this.MaxPerStack = Int16.MaxValue;
+                    break;
+                default:
+                    this.MaxPerStack = 1;
+                    break;
+            }
+            this.Quantity = Quantity;
+            this.Spirit = Spirit;
+            // 強化系統
+            this.Level1 = Level1;
+            this.Level2 = Level2;
+            this.Level3 = Level3;
+            this.Level4 = Level4;
+            this.Level5 = Level5;
+            this.Level6 = Level6;
+            this.Level7 = Level7;
+            this.Level8 = Level8;
+            this.Level9 = Level9;
+            this.Level10 = Level10;
+            this.Fusion = Fusion;
+            //
+            this.IsLocked = IsLocked;
+            this.Icon = Icon;
+            this.Term = Term;
+            this.Type = Type;
+            this.Slot = Slot;
+        }
+
         public Item(dynamic datum)
         {
             this.ID = datum.id;
@@ -226,6 +272,12 @@ namespace Server.Ghost
             datum.cid = this.Character.ID;
             datum.itemId = this.ItemID;
             datum.quantity = this.Quantity;
+
+            ItemData Data = ItemFactory.GetItemData(this.ItemID);
+
+            if (this.Spirit > Data.Spirit)
+                this.Spirit = Data.Spirit;
+
             datum.spirit = this.Spirit;
             // 強化系統
             datum.level1 = this.Level1;

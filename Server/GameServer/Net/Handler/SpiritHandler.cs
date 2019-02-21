@@ -29,7 +29,7 @@ namespace Server.Handler
             if (Source.Spirit > Data.Spirit)
                 Source.Spirit = Data.Spirit;
 
-            Target.Spirit = Source.Spirit;
+            Target.Spirit += Source.Spirit;
             chr.Items.Remove(SourceType, SourceSlot);
             InventoryHandler.UpdateInventory(c, SourceType);
         }

@@ -181,6 +181,9 @@ namespace Server.Ghost.Provider
                 case 70: // 羊桃之(Boss)
                     MonsterHP = 189000;
                     break;
+                case 100:
+                    MonsterHP = 420000;
+                    break;
             }
             return MonsterHP;
         }
@@ -503,6 +506,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     MoveType = 1;
                     break;
+                case 1004502: // 閃亮蘆花
+                    MoveType = 0;
+                    break;
                 case 1004601:
                     MoveType = 1;
                     break;
@@ -510,6 +516,9 @@ namespace Server.Ghost.Provider
                     MoveType = 1;
                     break;
                 case 1004801:
+                    MoveType = 1;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     MoveType = 1;
                     break;
                 case 1004901:
@@ -553,6 +562,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     MoveType = 3;
+                    break;
+                case 1010002:
+                    MoveType = 1;
                     break;
             }
             return MoveType;
@@ -701,6 +713,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     AttackType = 1;
                     break;
+                case 1004502: // 閃亮蘆花
+                    AttackType = 2;
+                    break;
                 case 1004601:
                     AttackType = 1;
                     break;
@@ -708,6 +723,9 @@ namespace Server.Ghost.Provider
                     AttackType = 1;
                     break;
                 case 1004801:
+                    AttackType = 1;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     AttackType = 1;
                     break;
                 case 1004901:
@@ -751,6 +769,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     AttackType = 3;
+                    break;
+                case 1010002:
+                    AttackType = 0;
                     break;
             }
             return AttackType;
@@ -899,6 +920,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     Attack = 354;
                     break;
+                case 1004502: // 閃亮蘆花
+                    Attack = 354;
+                    break;
                 case 1004601:
                     Attack = 363;
                     break;
@@ -906,6 +930,9 @@ namespace Server.Ghost.Provider
                     Attack = 370;
                     break;
                 case 1004801:
+                    Attack = 405;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     Attack = 405;
                     break;
                 case 1004901:
@@ -949,6 +976,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     Attack = 1786;
+                    break;
+                case 1010002:
+                    Attack = 0;
                     break;
             }
             return Attack;
@@ -1097,6 +1127,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     Attack = 425;
                     break;
+                case 1004502: // 閃亮蘆花
+                    Attack = 425;
+                    break;
                 case 1004601:
                     Attack = 436;
                     break;
@@ -1104,6 +1137,9 @@ namespace Server.Ghost.Provider
                     Attack = 444;
                     break;
                 case 1004801:
+                    Attack = 486;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     Attack = 486;
                     break;
                 case 1004901:
@@ -1147,6 +1183,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     Attack = 2144;
+                    break;
+                case 1010002:
+                    Attack = 0;
                     break;
             }
             return Attack;
@@ -1295,6 +1334,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     Attack = 296;
                     break;
+                case 1004502: // 閃亮蘆花
+                    Attack = 296;
+                    break;
                 case 1004601:
                     Attack = 302;
                     break;
@@ -1302,6 +1344,9 @@ namespace Server.Ghost.Provider
                     Attack = 309;
                     break;
                 case 1004801:
+                    Attack = 338;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     Attack = 338;
                     break;
                 case 1004901:
@@ -1345,6 +1390,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     Attack = 1142;
+                    break;
+                case 1010002:
+                    Attack = 250;
                     break;
             }
             return Attack;
@@ -1493,6 +1541,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     Defense = 219;
                     break;
+                case 1004502: // 閃亮蘆花
+                    Defense = 219;
+                    break;
                 case 1004601:
                     Defense = 220;
                     break;
@@ -1500,6 +1551,9 @@ namespace Server.Ghost.Provider
                     Defense = 226;
                     break;
                 case 1004801:
+                    Defense = 225;
+                    break;
+                case 1004802: // 藍帶觸目仔
                     Defense = 225;
                     break;
                 case 1004901:
@@ -1543,6 +1597,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     Defense = 750;
+                    break;
+                case 1010002:
+                    Defense = 16;
                     break;
             }
             return Defense;
@@ -1691,6 +1748,9 @@ namespace Server.Ghost.Provider
                 case 1004501:
                     Effect = 2;
                     break;
+                case 1004502: // 閃亮蘆花
+                    Effect = 0;
+                    break;
                 case 1004601:
                     Effect = 0;
                     break;
@@ -1699,6 +1759,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1004801:
                     Effect = 0;
+                    break;
+                case 1004802: // 藍帶觸目仔
+                    Effect = 3;
                     break;
                 case 1004901:
                     Effect = 0;
@@ -1741,6 +1804,9 @@ namespace Server.Ghost.Provider
                     break;
                 case 1008001:
                     Effect = 6;
+                    break;
+                case 1010002:
+                    Effect = 0;
                     break;
             }
             return Effect;

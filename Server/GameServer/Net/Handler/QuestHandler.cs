@@ -137,6 +137,18 @@ namespace Server.Handler
                         chr.Items.Add(new Item(8510031, 2, Slot));
                         InventoryHandler.UpdateInventory(gc, 2);
                         break;
+                    case 137: // [尋找太和老君的第12弟子]
+                        chr.Items.Add(new Item(8990031, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 138: // [尋找太和老君的第12弟子]
+                        chr.Items.Add(new Item(8990031, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
+                    case 362: // [尋找太和老君的第12弟子]
+                        chr.Items.Add(new Item(8990031, 4, Slot));
+                        InventoryHandler.UpdateInventory(gc, 4);
+                        break;
                     case 570: // [食糧物資(1)]
                         chr.Items.Add(new Item(8990095, 4, Slot));
                         InventoryHandler.UpdateInventory(gc, 4);

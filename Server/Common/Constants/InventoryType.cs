@@ -71,6 +71,66 @@
             return type;
         }
 
+        // 武士
+        public static bool Is劍(int ItemID)
+        {
+            if (ItemID >= 8010011 && ItemID <= 8011531)
+                return true;
+            return false;
+        }
+
+        public static bool Is刀(int ItemID)
+        {
+            if (ItemID >= 8020101 && ItemID <= 8021531)
+                return true;
+            return false;
+        }
+
+        // 刺客
+        public static bool Is爪(int ItemID)
+        {
+            if (ItemID >= 8030011 && ItemID <= 8031531)
+                return true;
+            return false;
+        }
+
+        public static bool Is手套(int ItemID)
+        {
+            if (ItemID >= 8040101 && ItemID <= 8041531)
+                return true;
+            return false;
+        }
+
+        // 道士
+        public static bool Is扇(int ItemID)
+        {
+            if (ItemID >= 8050101 && ItemID <= 8051531)
+                return true;
+            return false;
+        }
+
+        public static bool Is杖(int ItemID)
+        {
+            if (ItemID >= 8060011 && ItemID <= 8061531)
+                return true;
+            return false;
+        }
+
+        // 力士
+        public static bool Is斧(int ItemID)
+        {
+            if (ItemID >= 8070011 && ItemID <= 8071531)
+                return true;
+            return false;
+        }
+
+        public static bool Is輪(int ItemID)
+        {
+            if (ItemID >= 8080101 && ItemID <= 8081531)
+                return true;
+            return false;
+        }
+
         public static int getMoneyStyle(int money)
         {
             if (money > 0 && money <= 51)

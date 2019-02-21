@@ -23,11 +23,14 @@ namespace Server.Handler
             if (chr.Hp <= 0)
             {
                 chr.IsAlive = false;
-                chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
-                if (chr.Exp < 0)
-                    chr.Exp = 0;
+                if (!(chr.MapX == 10 && chr.MapY == 60) && !(chr.MapX == 10 && chr.MapY == 61) && !(chr.MapX == 10 && chr.MapY == 62) && !(chr.MapX == 10 && chr.MapY == 63) && !(chr.MapX == 10 && chr.MapY == 64))
+                {
+                    chr.Exp -= (int)(GameConstants.getExpNeededForLevel(chr.Level) * 0.2);
+                    if (chr.Exp < 0)
+                        chr.Exp = 0;
+                    StatusPacket.UpdateExp(c);
+                }
                 MapPacket.userDead(c);
-                StatusPacket.UpdateExp(c);
                 if (chr.Competitor != null)
                 {
                     PvPPacket.PvPEnd(c, chr.Competitor.CharacterID);

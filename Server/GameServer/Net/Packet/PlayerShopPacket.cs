@@ -54,10 +54,10 @@ namespace Server.Packet
                 plew.WriteInt(0);
                 for (int i = 0; i < 12; i++)
                 {
-                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.getSourceType(i) : -1);
-                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.getSourceSlot(i) : -1);
-                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.getQuantity(i) : 0);
-                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.getPrice(i) : 0);
+                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.SourceType(i) : -1);
+                    plew.WriteShort(i < chr.Shop.Count ? chr.Shop.SourceSlot(i) : -1);
+                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.Quantity(i) : 0);
+                    plew.WriteInt(i < chr.Shop.Count ? chr.Shop.Price(i) : 0);
                 }
                 c.Send(plew);
             }
@@ -73,16 +73,30 @@ namespace Server.Packet
                 plew.WriteString(Seller.Shop.Name, 40);
                 for (int i = 0; i < 12; i++)
                 {
-                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.getItemID(i) : 0);
-                    plew.WriteShort(0);
-                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.getQuantity(i) : 0);
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
-                    plew.WriteShort(0);
-                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.getIsLocked(i) : 0);
-                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.getPrice(i) : 0);
-                    plew.WriteInt(0);
-                    plew.WriteInt(0);
+                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.ItemID(i) : 0);
+                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.Spirit(i) : 0);
+                    plew.WriteShort(i < Seller.Shop.Count ? Seller.Shop.Quantity(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level1(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level2(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level3(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level4(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level5(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level6(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level7(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level8(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level9(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Level10(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.Fusion(i) : 0);
+                    plew.WriteByte(i < Seller.Shop.Count ? Seller.Shop.IsLocked(i) : 0);
+                    plew.WriteInt(i < Seller.Shop.Count ? Seller.Shop.Price(i) : 0);
+                    plew.WriteByte(0); // 力量+
+                    plew.WriteByte(0); // 氣力+
+                    plew.WriteByte(0); // 精力+
+                    plew.WriteByte(0); // 智力+
+                    plew.WriteByte(0);
+                    plew.WriteByte(0);
+                    plew.WriteByte(0); // 防禦力+
+                    plew.WriteByte(0); // 物理攻擊力+
                     plew.WriteInt(0);
                     plew.WriteInt(0);
                     plew.WriteInt(0);

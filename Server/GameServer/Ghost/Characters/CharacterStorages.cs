@@ -1,5 +1,7 @@
-﻿using Server.Common.Data;
+﻿using Server.Common.Constants;
+using Server.Common.Data;
 using Server.Ghost.Characters;
+using Server.Ghost.Provider;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,17 +14,17 @@ namespace Server.Ghost
         private List<Storage> Storages { get; set; }
 
 
-        public CharacterStorages(Character parent)
+        public CharacterStorages(Character Parent)
             : base()
         {
-            this.Parent = parent;
+            this.Parent = Parent;
 
             this.Storages = new List<Storage>();
         }
 
         public void Load()
         {
-            foreach (dynamic datum in new Datums("Storages").Populate("cid = '{0}'", this.Parent.ID))
+            foreach (dynamic datum in new Datums("Storages").Populate("accountid = '{0}'", this.Parent.AccountID))
             {
                 this.Add(new Storage(datum));
             }
@@ -30,29 +32,29 @@ namespace Server.Ghost
 
         public void Save()
         {
-            foreach (Storage storage in this)
+            foreach (Storage Storage in this)
             {
-                storage.Save();
+                Storage.Save();
             }
         }
 
         public void Delete()
         {
-            foreach (Storage storage in this)
+            foreach (Storage Storage in this)
             {
-                storage.Delete();
+                Storage.Delete();
             }
         }
 
-        public void Add(Storage storage)
+        public void Add(Storage Storage)
         {
-            storage.Parent = this;
-            this.Storages.Add(storage);
+            Storage.Parent = this;
+            this.Storages.Add(Storage);
         }
 
-        public void Remove(byte type, byte slot)
+        public void Remove(byte Type, byte Slot)
         {
-            Storage item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
+            Storage item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == Type && i.Slot == Slot));
             this.Storages.Remove(item);
             item.Delete();
         }
@@ -64,26 +66,156 @@ namespace Server.Ghost
             this.Add(new Storage(Item.ItemID, (Item.Quantity - Quantity), Type, Slot, 0));
         }
 
-        public Storage GetItem(byte type, byte slot)
+        public Storage GetItem(byte Type, byte Slot)
         {
-            Storage item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
-            return item;
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == Type && i.Slot == Slot));
+            return Item;
         }
 
-        public int GetItemID(byte type, byte slot)
+        public int ItemID(InventoryType.ItemType Type, byte Slot)
         {
-            Storage Storage = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
-            if (Storage == null)
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
                 return 0;
-            return Storage.ItemID;
+            return Item.ItemID;
         }
 
-        public int GetItemQuantity(byte type, byte slot)
+        public int Quantity(InventoryType.ItemType Type, byte Slot)
         {
-            Storage Storage = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == type && i.Slot == slot));
-            if (Storage == null)
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
                 return 0;
-            return Storage.Quantity;
+            return Item.Quantity;
+        }
+
+        public int Spirit(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+
+            if (Item == null)
+                return 0;
+
+            ItemData Data = ItemFactory.GetItemData(Item.ItemID);
+
+            if (Data == null)
+                return 0;
+
+            if (Item.Spirit > Data.Spirit)
+                return Data.Spirit;
+
+            return Item.Spirit;
+        }
+
+        public byte Level1(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level1;
+        }
+
+        public byte Level2(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level2;
+        }
+
+        public byte Level3(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level3;
+        }
+
+        public byte Level4(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level4;
+        }
+
+        public byte Level5(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level5;
+        }
+
+        public byte Level6(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level6;
+        }
+
+        public byte Level7(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level7;
+        }
+
+        public byte Level8(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level8;
+        }
+
+        public byte Level9(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level9;
+        }
+
+        public byte Level10(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Level10;
+        }
+
+        public byte Fusion(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Fusion;
+        }
+
+        public byte IsLocked(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.IsLocked;
+        }
+
+        public int Icon(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Icon;
+        }
+
+        public int Term(InventoryType.ItemType Type, byte Slot)
+        {
+            Storage Item = this.Storages.Find(i => (i.ItemID != 0 && i.Quantity != 0 && i.Type == (byte)Type && i.Slot == Slot));
+            if (Item == null)
+                return 0;
+            return Item.Term;
         }
 
         public List<Storage> getStorages()

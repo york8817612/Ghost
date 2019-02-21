@@ -156,7 +156,10 @@ namespace Server.Handler
                     case 11:
                     case 20:
                         MapX = 10;
-                        MapY = 1;
+                        if ((chr.MapX == 10 && chr.MapY == 60) || (chr.MapX == 10 && chr.MapY == 61) || (chr.MapX == 10 && chr.MapY == 62) || (chr.MapX == 10 && chr.MapY == 63) || (chr.MapX == 10 && chr.MapY == 64))
+                            MapY = 60;
+                        else
+                            MapY = 1;
                         break;
                     case 12:
                     case 13:
