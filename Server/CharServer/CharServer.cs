@@ -75,7 +75,7 @@ namespace Server
                 Log.Inform("Automatic restart time set to {0} seconds.", CharServer.AutoRestartTime);
 
                 Database.Test();
-                Database.Analyze(true); // NOTE: The shop server uses mcdb for information like items, etcetera.
+                Database.Analyze(false); // NOTE: The shop server uses mcdb for information like items, etcetera.
 
                 CharServer.RemoteEndPoint = new IPEndPoint(Settings.GetIPAddress("ExternalIP", "Char"), Settings.GetInt("Port", "Char"));
 

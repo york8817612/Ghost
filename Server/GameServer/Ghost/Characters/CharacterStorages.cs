@@ -24,7 +24,7 @@ namespace Server.Ghost
 
         public void Load()
         {
-            foreach (dynamic datum in new Datums("Storages").Populate("accountid = '{0}'", this.Parent.AccountID))
+            foreach (dynamic datum in new Datums("Storages").Populate("cid = '{0}'", this.Parent.ID))
             {
                 this.Add(new Storage(datum));
             }

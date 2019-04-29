@@ -117,7 +117,7 @@ namespace Server.Ghost
         {
             dynamic datum = new Datum("Storages");
 
-            datum.accountid = this.Character.AccountID;
+            datum.cid = this.Character.ID;
             datum.itemID = this.ItemID;
             datum.quantity = this.Quantity;
             datum.spirit = this.Spirit;
@@ -149,7 +149,7 @@ namespace Server.Ghost
             {
                 datum.Insert();
 
-                this.ID = Database.Fetch("Storages", "id", "accountid = '{0}' && itemID = '{1}' && quantity = '{2}' && spirit = '{3}' && level1 = '{4}' && level2 = '{5}' && level3 = '{6}' && level4 = '{7}' && level5 = '{8}' && level6 = '{9}' && level7 = '{10}' && level8 = '{11}' && level9 = '{12}' && level10 = '{13}' && fusion = '{14}' && isLocked = '{15}' && icon = '{16}' && term = '{17}' && type = '{18}' && slot = '{19}' && money = '{20}'", this.Character.AccountID, this.ItemID, this.Quantity, this.Spirit, this.Level1, this.Level2, this.Level3, this.Level4, this.Level5, this.Level6, this.Level7, this.Level8, this.Level9, this.Level10, this.Fusion, this.IsLocked, this.Icon, this.Term, this.Type, this.Slot, this.Money);
+                this.ID = Database.Fetch("Storages", "id", "cid = '{0}' && itemID = '{1}' && quantity = '{2}' && spirit = '{3}' && level1 = '{4}' && level2 = '{5}' && level3 = '{6}' && level4 = '{7}' && level5 = '{8}' && level6 = '{9}' && level7 = '{10}' && level8 = '{11}' && level9 = '{12}' && level10 = '{13}' && fusion = '{14}' && isLocked = '{15}' && icon = '{16}' && term = '{17}' && type = '{18}' && slot = '{19}' && money = '{20}'", this.Character.ID, this.ItemID, this.Quantity, this.Spirit, this.Level1, this.Level2, this.Level3, this.Level4, this.Level5, this.Level6, this.Level7, this.Level8, this.Level9, this.Level10, this.Fusion, this.IsLocked, this.Icon, this.Term, this.Type, this.Slot, this.Money);
 
                 this.Assigned = true;
             }

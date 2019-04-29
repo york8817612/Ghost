@@ -76,7 +76,7 @@ namespace Server
                 Log.Inform("Automatic restart time set to {0} seconds.", MessageServer.AutoRestartTime);
 
                 Database.Test();
-                Database.Analyze(true); // NOTE: The shop server uses mcdb for information like items, etcetera.
+                Database.Analyze(false); // NOTE: The shop server uses mcdb for information like items, etcetera.
 
                 MessageServer.RemoteEndPoint = new IPEndPoint(Settings.GetIPAddress("ExternalIP", "Message"), Settings.GetInt("Port", "Message"));
 

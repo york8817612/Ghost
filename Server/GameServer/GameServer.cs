@@ -105,7 +105,7 @@ namespace Server
                     }
                     catch
                     {
-                        port = Log.Input("Port: ", 14101);
+                        port = Log.Input("Port[14101]: ", 14101);
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace Server
                 Log.Inform("Automatic restart time set to {0} seconds.", GameServer.AutoRestartTime);
 
                 Database.Test();
-                Database.Analyze(true);
+                Database.Analyze(false);
 
                 GameServer.RemoteEndPoint = new IPEndPoint(IPAddress.Parse(ServerConstants.SERVER_IP), port); // TODO: Get actual host.
 
